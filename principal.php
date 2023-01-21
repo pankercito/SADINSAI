@@ -1,22 +1,12 @@
 <?php 
-  require ("php/head.php")
+  require ("layout/head.php")
 ?>
 <?php
-  include ("php/sesionval.php")
+  require ("php/sesionval.php")
 ?>
-
-  <style> 
-    body{
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover;
-    }   
-    
-  </style>
   
   <?php 
-    require ("php/navbar.php")
+    require ("layout/navbar.php")
   ?>
   
   <marquee class="welcome" behavior="scroll" direction="right" width="600 px"><!--SALUDO DE BIENVENIDA--> 
