@@ -21,23 +21,9 @@
   <div class="containerr">
    <div class="grid-containerr">
     <div class="row">
-      <div class="col-lg-2"> <!--COLUMNA #1/PARA CATEGORIAS-->
-         <p>Categorias<p>
-         <div class="listcatg">
-          <ul>
-            <li><a class="nav-link" href="#">Ofertas y servicios</a></li>
-            <li><a class="nav-link" href="#">Movimientos</a></li>
-            <li><a class="nav-link" href="#">Doc. de eduación y experiencia</a></li>
-            <li><a class="nav-link" href="#">Evaluaciones</a></li>
-            <li><a class="nav-link" href="#">Beneficios</a></li>
-            <li><a class="nav-link" href="#">Permisos</a></li>
-            <li><a class="nav-link" href="#">Control de pasivo laboral</a></li>
-            <li><a class="nav-link" href="#">Varios</a></li>
-            <li><a class="nav-link" href="#">Memorando</a></li>
-            <li><a class="nav-link" href="#">Sanciones y procedimientos administrativos y judiciales</a></li>
-          </ul>      
-        </div>
-      </div>
+      <?php 
+      require ("layout/sidebar.php")
+      ?>
       <div class="col-lg-1"></div>
       <div class="col-lg-5"> <!--COLUMNA #2/PARA PERFIL BÁSICO DEL USUARIO-->
         <p>Perfil<p>

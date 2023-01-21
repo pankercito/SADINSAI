@@ -3,7 +3,7 @@
 <head>
     <!--TITULO DE LA PAGINA-->
         <title>SADINSAI</title>
-    <!--HOJAS DE ESTILO Y BOOTSTRAP-->
+    <!--HOJAS DE ESTILO/BOOTSTRAP-->
     <script src="Bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="Bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/buttomlogin.css">

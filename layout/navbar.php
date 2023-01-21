@@ -1,4 +1,4 @@
-<section class="navmenubar"><!--MENU SUPERIOR-->
+<section class="navmenubar"><!--MENU DE NAVEGACION-->
 
   <div class="sidebar"> 
     <nav class="nav navbar-light">
