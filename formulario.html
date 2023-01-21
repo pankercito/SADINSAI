@@ -1,0 +1,40 @@
+<html>
+<head>
+  <title>Formulario</title>
+    <meta charset="uft-8">  
+
+  <link rel="stylesheet" type="text/css" href="styles/hellokitty.css"> 
+  <link rel="stylesheet" href="Bootstrap/css/bootstrap.min.css">
+
+</head>
+
+<body background="recursos/teahub.io-hello-kitty-pink-wallpaper-2426656.jpg">
+  
+<script src="Bootstrap/js/jquery-3.6.3.min.js"></script> 
+<script src="Bootstrap/js/bootstrap.min.js"></script>
+
+<div class="col-lg-12">
+
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+      Primera columna
+    </div>
+    <form action="php/procesar.php" method="post" class="col col-4">
+      <p>cedula</p><input name="ci" type="text">
+      <p>nivel</p><input name="level" type="text">
+      <p>sede</p><input name="sede" type="text">
+      <p>estado</p><input name="estado" type="text">
+      <p>ubicacion</p><input name="gps" type="text">
+      <p>sexo</p><input name="sexo" type="text">
+      <p>nombre y apellido</p><input name="name" type="text">
+      <button id="log" type="submit" name="registrar" class="btn btn-defaul">Registrar</button>
+    </form>
+    <div class="col-lg-4">
+      tercera columna
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+#cena{ /*ACOMODADOR INTILLO*/
+    bottom: 0;
+    left: 0;
+    border-color: none;
+    background: none;
+    height: 60px;
+    margin-top: calc(50% - 200px);
+    width: 100%;
+    background-color: none;
+  
+ 
+
+}
+.ins img{ /*imagen logo insai*/
+    max-width: 70px;
+    margin-bottom: -5px;
+    margin-top: 0px;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    position: relative;
+    margin-bottom: 3px;
+}
+
+.ins hr{ /*linea de cintillo*/
+    width: 550px;
+    border-color: #d9001b;
+    border-style: dotted;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    margin-bottom: 15px;
+   
+}
+
+.bicent img{ /*cintillo*/
+    width: 600px;
+    margin-left: auto;    
+    margin-right: auto;
+    display: block;
+    margin-top: -10px;
+    
+}

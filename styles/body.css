@@ -1,0 +1,17 @@
+.welcome {/*TITULO DE ENTRADA AL SISTEMA CON EL NOMBRE DEL USUARIO (BIENVENIDO)*/ 
+    text-align: center;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    color: rgba(68, 68, 68, 0.911);
+    margin-top: 70px;
+}
+
+.row{
+    text-align: center;
+    margin-top: 10%;
+}
+
+.container{
+    border-color: black;
+    text-align: justify;
+}

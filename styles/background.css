@@ -1,0 +1,64 @@
+
+body{ /*FONDO DE PANTALLA*/
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+} 
+
+.sadin img{ /*TITULO DEL FONDO*/
+    max-width: 120px;
+    max-height: 120px;
+    color: none;
+    text-align: center;
+    display: block;
+    margin-left: auto;    
+    margin-right: auto;
+    margin-top: 20px;
+
+}
+
+#cena{ /*ACOMODADOR CINTILLO*/
+    position: relative;
+    border-color: none;
+    background: none;
+    height: 60px;
+    left: 0;
+    bottom: 0;
+    margin-top: 10%;
+    width: 100%;
+    
+}
+
+.ins img{ /*imagen logo insai*/
+    max-width: 70px;
+    margin-bottom: -5px;
+    margin-top: 0px;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    position: relative;
+    margin-top: -23px;
+}
+
+.ins hr{ /*linea de Cintillo*/
+    width: 550px;
+    border-color: #d9001b;
+    border-style: dotted;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    display: block;
+    position: relative;
+    margin-bottom: 5px;
+
+}
+
+.bicent img{ /*Cintillo*/
+    width: 600px;
+    margin-left: auto;    
+    margin-right: auto;
+    display: block;
+}

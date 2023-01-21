@@ -1,0 +1,32 @@
+div.perfil{
+    background-color: rgb(196, 255, 226);
+    border-radius: 10px;
+    border: none;
+    padding: 10px 20px 10px 10px;
+    width: 500px;
+    height: 570px;
+    text-align: center;
+    margin: auto;
+}
+
+input#inputAddress{
+    width: 100px;
+}
+
+input#inputCity{
+    width: 100px;
+}
+
+div.perfil p{
+    font-size: 15px;
+}
+
+marquee.welcome{		
+	margin-left: 28%;
+	text-align: center;
+}
+
+.containerr{
+    background-color: rgba(139, 139, 139, 0.151);
+    margin-top: -10%;
+}

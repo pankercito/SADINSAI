@@ -1,0 +1,35 @@
+.containerr{
+    margin-left: 2%;
+    margin-top: -3%;
+   
+}
+.containerr .listcatg ul li{
+    list-style: none; /*quita los puntos de la lista*/
+}
+.containerr .listcatg {
+    text-align: left;
+    background-color: rgb(198, 233, 196);
+    padding: 3%;
+}  
+  .grid-containerr>div {
+    background-color: rgba(250, 250, 250, 0.205);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+  }
+
+  .containerr ul li a {
+    text-decoration: none;
+    color: #312e2e;
+    font-size: 18px;
+    font-family: sans-serif;
+    cursor: pointer;
+  }
+.grid-containerr p{
+    font-size: 22px;
+}
+
+/*segunda columna(datos del perfil)*/
+
+
+

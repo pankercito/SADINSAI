@@ -1,0 +1,23 @@
+.container{
+    text-align: center;
+    margin-top: 7%;
+}
+
+body{ /*FONDO DE PANTALLA*/
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}   
+
+.container div{
+    background-color: rgba(228, 140, 193, 0.589);
+    color: antiquewhite;
+}
+
+#log {
+    background-color: rgb(255, 218, 229);
+    
+}           
