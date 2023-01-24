@@ -34,7 +34,13 @@ a.navbar-brand{ /*logo sadinsai*/
 }
 .navbar-nav{/*lista de navegacion*/
     margin-top: -8px;
-    margin-left: -30%;
+    margin-left: -25%;
+}
+@media (max-width: 1400px) and (orientation: landscape){
+
+    .navbar-nav{/*lista de navegacion*/
+        margin-left: -20%;
+    }
 }
 ul.nav.nav-list.nav-pills.navbar-right {/*lista*/
     margin: 0;

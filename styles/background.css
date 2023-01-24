@@ -22,12 +22,11 @@ body{ /*FONDO DE PANTALLA*/
 
 #cena{ /*ACOMODADOR CINTILLO*/
     position: relative;
-    border-color: none;
     background: none;
     height: 60px;
     left: 0;
     bottom: 0;
-    margin-top: 10%;
+    margin-top: 2%;
     width: 100%;
     
 }
