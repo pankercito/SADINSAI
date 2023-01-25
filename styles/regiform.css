@@ -1,0 +1,17 @@
+legend {
+    display: block;
+    width: 20%;
+    max-width: 100%;
+    margin-bottom: 0.5rem;
+    font-size: 50%;
+    line-height: inherit;
+    white-space: normal;
+    text-align: left;
+}
+
+form.regisform input {
+    font-size: 60%;
+    background-color: none;
+    border: 1px rgb(34, 34, 34);
+    border-radius: 10px;
+}

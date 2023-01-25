@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="styles/background.css">
     <link rel="stylesheet" href="styles/catg-1.css">
     <link rel="stylesheet" href="styles/perfil.css">
+    <link rel="stylesheet" href="styles/regiform.css">
     <link rel="stylesheet" href="styles/body.css">
     <link rel="stylesheet" href="styles/menutop.css">
 </head>
