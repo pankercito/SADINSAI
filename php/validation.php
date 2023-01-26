@@ -24,7 +24,9 @@ if (!isset($_SESSION['nombredelusuario']))
     {
         $dataview= mysqli_fetch_assoc($check);
 
-        $_SESSION['nombredelusuario']=$dataview['nombre'];
+        $_SESSION['nombredelusuario']= $dataview['nombre'];
+        $_SESSION['admincheck']= $dataview['adp'];
+
         // Redirecciono al usuario a la página principal del sitio.
         header("HTTP/1.1 302 Moved Temporarily"); 
 	    header('location:../principal.php');

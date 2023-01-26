@@ -6,7 +6,11 @@
 ?>
   
 <?php 
-  require ("layout/navbar.php")
+  if ($adpval == 1) {
+    require ("layout/navbar-ad.php");
+  } else {
+    require ("layout/navbar.php");
+  }
 ?>
 
 <!--SALUDO DE BIENVENIDA-->
@@ -21,14 +25,18 @@
 <div class="containerr">
   <div class="grid-containerr">
     <div class="row">
-        <?php 
-          require ("layout/sidebar.php")
-        ?>
-      <div class="col-lg-1"></div>
-        <?php 
-          require ("layout/perfil.php")
-        ?>
-      <div class="col-lg-2"></div>
+      <?php 
+        require ("layout/sidebar.php")
+      ?>
+      <?php 
+        if(isset($_GET["registrar"])){
+          include ("layout/registrar.php");
+        } else{
+          include ("layout/perfil.php");
+        }
+      ?>
+      <div class="col-lg-3"></div>
+      </div>
     </div>
   </div>
 </div>
