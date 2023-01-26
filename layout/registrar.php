@@ -1,4 +1,4 @@
-<div class="regisformgroud">
+<div class="col-lg-6">
     <form method="post" action="conect.php" class="regisform"  name="regisform" id="rgt">
         <legend>Cedula</legend>
         <input type="int" name="cedula" placeholder="cedula" maxlength="8">
@@ -11,10 +11,13 @@
     
         <legend>Contraseña</legend>
         <input type="password" name="pass" placeholder="contraseña" maxlength="12">
-    
-        <div class="form-group">
-            <input type="checkbox" class="form-check-input" id="conditions" name="checkadmin" value="1">
-            <label class="form-check-label" for="conditions">Conseder Administración</label>
+
+        <div class="alert alert-danger">
+            <p>Condecer permiso Admin</p>
+            <div class="checkform">
+                <input type="checkbox" class="form-item" id="conditions" name="checkadmin" value="1">
+                <label class="form-item" for="conditions"></label> 
+            </div>
         </div>
         <button type="submit" name="singup" class="btn btn-defaul">Registrar</button>
     </form>

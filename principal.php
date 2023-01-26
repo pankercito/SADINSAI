@@ -28,7 +28,6 @@
       <?php 
         require ("layout/sidebar.php")
       ?>
-      <div class="col-lg-1"></div>
       <?php 
         if(isset($_GET["registrar"])){
           include ("layout/registrar.php");
@@ -36,7 +35,7 @@
           include ("layout/perfil.php");
         }
       ?>
-      <div class="col-lg-1"></div>
+      <div class="col-lg-3"></div>
       </div>
     </div>
   </div>
