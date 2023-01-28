@@ -2,22 +2,22 @@
 
   <div class="sidebar"> 
     <nav class="nav navbar-light">
-      <a class="navbar-brand" href="../sadinsai/principal.php">
+      <a class="navbar-brand" href="../sadinsai/principal.php?perfil">
         <img src="recursos/favsadin.png" width="100" alt="Logo">
       </a>
       <nav class="navbar-nav">
         <ul class="nav nav-list nav-pills navbar-right">
           <li class="nav-item">
-            <a class="nav-link" href="#">Inicio</a>
+            <a class="nav-link" href="?perfil=true">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Estados</a>
+            <a class="nav-link" href="?states=true">Estados</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Formulario</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="?registrar=true">Registrar</a>
+            <a class="nav-link" href="?users=true">Usurarios</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Reportes</a>
