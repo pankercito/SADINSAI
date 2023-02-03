@@ -2,6 +2,9 @@
     <div class="perfil">
         <div class="col-lg">
             <p>Perfil</p>
+            <a href="">
+                <i class="bi bi-person-square" style="font-size: 500%;"></i>
+            </a>
         </div>
         <div class="col-sm">
             <p>Nombre</p>

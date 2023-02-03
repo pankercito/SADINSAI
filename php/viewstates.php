@@ -2,9 +2,9 @@
 
 include ("../sadinsai/php/conect.php");
 
-$registro = 'estados';
+$tabla= 'estados';
 
-$regisview = mysqli_query($connec,"SELECT * FROM $registro");
+$regisview = mysqli_query($connec,"SELECT * FROM $tabla");
     
 $count_results = mysqli_num_rows($regisview);
 

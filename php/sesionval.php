@@ -6,7 +6,8 @@ session_start();
 if(isset($_SESSION['nombredelusuario']))
 {
     // Le doy la bienvenida al usuario.
-    $usuarioingresado = $_SESSION['nombredelusuario'];
+    $wname = $_SESSION['nombredelusuario'];
+    $wlastname= $_SESSION['apellidodelusuario'];
     $adpval= $_SESSION['admincheck'];
 }
 else

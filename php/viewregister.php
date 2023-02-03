@@ -4,7 +4,7 @@ include ("../sadinsai/php/conect.php");
 
 $registro = 'registro';
 
-$regisview = mysqli_query($connec,"SELECT * FROM $registro");
+$regisview = mysqli_query($connec,"SELECT * FROM registro r INNER JOIN perfiles p ON r.ci = p.ci");
     
 $count_results = mysqli_num_rows($regisview);
 

@@ -3,8 +3,7 @@
 ?>
 <?php
   require_once ("php/sesionval.php");
-?>
-  
+?> 
 <?php 
   require("php/adp.php");
 ?>
@@ -13,7 +12,7 @@
 <marquee class="welcome" behavior="scroll" direction="right" width="600 px"> 
   <p>
     <?php
-      echo "Bienvenido ".$usuarioingresado;
+      echo 'Bienvenido '.$wname.' '.$wlastname.'';
     ?>
   </p>
 </marquee>
