@@ -1,3 +1,6 @@
+<?php
+    include("php/adp_1.php");
+?>
 <div class="col-lg-6">
     <table class="table table-light table-striped table-sm w-auto data">
         <thead class="table-light">

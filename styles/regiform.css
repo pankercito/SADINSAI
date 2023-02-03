@@ -6,7 +6,18 @@ form.regisform{
     margin: auto;
     text-align: center;
 }
-
+.progress {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+    height: 1rem;
+    overflow: hidden;
+    font-size: .75rem;
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
+}
 .bg-danger {
     background-color: #ff6776!important;
 }
@@ -33,6 +44,7 @@ form.regisform input {
     border: 1px rgb(34, 34, 34);
     border-radius: 10px;
     padding: 10px;
+    z-index: 1;
 }
 form.regisform p{
     margin-left: 6%;

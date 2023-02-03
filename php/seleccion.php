@@ -9,6 +9,9 @@ if (isset($_GET["users"])){
 if(isset($_GET["users/register"])){
     require_once ("layout/registrar.php");
 }
+if(isset($_GET["users/register-two"])){
+    require_once ("layout/registrar2.php");
+}
 if(isset($_GET["users/viewregister"])){
     require_once ("layout/tablauser.php");
 }
