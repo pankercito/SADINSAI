@@ -3,11 +3,12 @@
 }
 .containerr .listcatg ul li{
     list-style: none; /*quita los puntos de la lista*/
+    margin: 5px;
 }
 .containerr ul li a {
   text-decoration: none;
   color: #202020;
-  font-size: 1px;
+  font-size: .75rem;
   font-family: sans-serif;
   cursor: pointer;
 }

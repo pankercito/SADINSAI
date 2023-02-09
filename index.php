@@ -29,27 +29,14 @@ include ("layout/head.php")
                 <div class="item">
                     <!--SE UTILIZA PARA CASILLAS DE NOMBRE DE USUARIO-->
                     <i class="bi bi-person-fill"></i>
-                    <input type="text" placeholder="Usuario" name="usuario" required>
+                    <input type="text" placeholder="Usuario" name="userlg" required>
                 </div>
                 <div class="item"> 
                     <i class="bi bi-input-cursor"></i>
-                    <input type="password" placeholder="Contrase&ntilde;a" name="password" required>
+                    <input type="password" placeholder="Contrase&ntilde;a" name="passlg" required>
                 </div>
                 <?php 
-                    if(isset($_GET["fallo"])){
-                            echo "<div class='alert alert-danger' style='color:red'>
-                            Usuario y/o contraseña invalido</div>
-                            <style>
-                                .alert {
-                                position: relative;
-                                padding: 0.75rem 1.25rem;
-                                margin-top: 0.5rem;
-                                border: 1px solid transparent;
-                                border-radius: 5px;
-                                margin-bottom: -15px;
-                            }
-                            </style>";
-                    }
+                    require ("php/fallo.php");
                 ?>
                 <button type="submit" name="login" class="btn btn-link btn-default">Iniciar</button>
             </div>
