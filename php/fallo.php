@@ -19,6 +19,7 @@ if (isset($_GET['users/registerfall'])){
                 border-radius: 10px;
                 }
                </style>";
+<<<<<<< HEAD
 }
 if(isset($_GET["fallo"])){
     echo "<div class='alert alert-danger' style='color:red'>
@@ -33,4 +34,6 @@ if(isset($_GET["fallo"])){
         margin-bottom: -15px;
     }
     </style>";
+=======
+>>>>>>> 55d05f745a4f7d3d2e337ea2b3f8c7d9c882ffbe
 }

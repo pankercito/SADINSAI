@@ -9,7 +9,11 @@
         <i class="bi bi-person-plus-fill" style="font-size: 18px;"></i> Registrar nuevo usuario
     </a>        
     <style>
+<<<<<<< HEAD
         a.btn-outline-dark{
+=======
+        a.btn-outline-dark {
+>>>>>>> 55d05f745a4f7d3d2e337ea2b3f8c7d9c882ffbe
             margin:10px;
             margin-top:-50%;
         }

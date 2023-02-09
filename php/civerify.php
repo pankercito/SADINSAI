@@ -6,7 +6,11 @@ if (isset($_POST["cedula"])){
 
     $subcedula = ($_POST['cedula']);
     
+<<<<<<< HEAD
     $cvp = mysqli_query($connec, "SELECT * FROM perfiles WHERE ci = '$subcedula'");
+=======
+    $cvp = mysqli_query($connec, "SELECT * FROM prueba.perfiles WHERE ci = '$subcedula'");
+>>>>>>> 55d05f745a4f7d3d2e337ea2b3f8c7d9c882ffbe
     
     $cv=mysqli_num_rows($cvp);
     
