@@ -14,7 +14,7 @@ if(isset($_POST['login']))
     $usuariolg=$_POST['userlg'];
     $pass=$_POST['passlg'];
 
-    $check = mysqli_query($connec,"SELECT * FROM registro r INNER JOIN perfiles p ON r.ci = p.ci WHERE user = '$usuariolg' AND pass = '$pass;");
+    $check = mysqli_query($connec,"SELECT * FROM registro r INNER JOIN perfiles p ON r.ci = p.ci WHERE user = '$usuariolg' AND pass = '$pass'");
     $nr=mysqli_num_rows($check);
 
 	
