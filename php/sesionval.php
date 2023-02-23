@@ -7,7 +7,8 @@ if(isset($_SESSION['nombredelusuario']))
 {
     // Le doy la bienvenida al usuario.
     $wname = $_SESSION['nombredelusuario'];
-    $wlastname= $_SESSION['apellidodelusuario'];
+    $wlastname = $_SESSION['apellidodelusuario'];
+    $wci = $_SESSION['cidelusuario'];
     $adpval= $_SESSION['admincheck'];
 }
 else

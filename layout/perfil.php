@@ -1,4 +1,4 @@
-<div class="col-lg-5"> <!--COLUMNA #2/PARA PERFIL BÁSICO DEL USUARIO-->
+<!--COLUMNA #2/PARA PERFIL BÁSICO DEL USUARIO-->
     <div class="perfil">
         <div class="col-lg">
             <p>Perfil</p>
@@ -7,20 +7,24 @@
             </a>
         </div>
         <div class="col-sm">
-            <p>Nombre</p>
+            <p>
+                <?php 
+                    echo ''.$pname.' '.$plastname.'';
+                ?>
+            </p>
         </div>
         <div class="row">
             <div class="form-group col-sm">
                 <p>Cedúla</p>
             </div>
             <div class="form-group col-sm">
-                <p>dirección</p>
+                <p>Dirección</p>
             </div>
         </div>
         <div class="col-sm"></div>
         <div class="row">
             <div class="form-group col-sm">
-                <p>Número de teléfono</p>
+                <p>Teléfono</p>
             </div>
             <div class="form-group col-sm">
                 <p>Estado</p>
@@ -33,4 +37,3 @@
             </div>
         </div>          
     </div>
-</div>

@@ -1,8 +1,7 @@
 <?php
     include("php/adp_1.php");
 ?>
-<div class="col-lg-6">
-    <div class="conten-regisform">
+<div class="conten-regisform">
         <div class="progress " style="height: 3px; width: 30%;">
             <div class="progress-bar bg-danger" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
@@ -19,5 +18,4 @@
             ?>
             <button type="submit" name="singup" class="btn btn-defaul">Siguiente</button>
         </form>
-    </div>
 </div>

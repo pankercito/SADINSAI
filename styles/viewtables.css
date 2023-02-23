@@ -1,0 +1,42 @@
+.registersuser{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    align-items: center;
+    align-content: center;
+}
+table.states-table {
+    margin:auto;
+}
+a:not([href]):not([tabindex]) {
+    font-size: large;
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+}
+a#vrname {
+    font-size: large;
+    color: inherit;
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+}
+a.svtate {
+    font-size: large;
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+}
+
+a.idsvtate {
+    font-size: large;
+    color: inherit;
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+}

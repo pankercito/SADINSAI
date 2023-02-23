@@ -1,6 +1,3 @@
-:root{
-    --color-green: rgb(95, 255, 95);
-}
 form.regisform{
     display: block;
     margin: auto;
@@ -23,17 +20,19 @@ form.regisform{
 }
 
 legend {
-    display: block;
+    justify-content: center;
+    display: flex;
     position: relative;
-    width: 20%;
     max-width: 100%;
     font-size: 50%;
     line-height: inherit;
     white-space: normal;
-    margin-left: 250px;
-    margin-bottom: -5px;
-    margin-top: 10px;
-    text-align: left;
+    margin-left: 0rem;
+    margin-top: 1rem;
+    flex-direction: row;
+    align-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
 }
 
 form.regisform input {

@@ -1,4 +1,4 @@
-<section class="col-lg-12"> 
+<section class="footer col-lg-12"> 
  <div id="cena">
     <div class="ins">
         <img src="recursos/ins.png" alt="insailogo">

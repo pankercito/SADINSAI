@@ -1,32 +1,34 @@
-<?php 
-  require ("layout/head.php");
-?>
 <?php
   require_once ("php/sesionval.php");
 ?> 
+
+<?php 
+  require ("layout/head.php");
+?>
+
 <?php 
   require("php/adp.php");
 ?>
-
 <!--SALUDO DE BIENVENIDA-->
-<marquee class="welcome" behavior="scroll" direction="right" width="600 px"> 
-  <p>
+<section name="cromaconten"> 
+  <div class="contencroma">
     <?php
-      echo 'Bienvenido '.$wname.' '.$wlastname.'';
+      include ("layout/sidebar.php");
     ?>
-  </p>
-</marquee>
+  </div>
+</section>
 
-<div class="containerr">
+<div class="estructur-conten">
   <div class="grid-containerr">
     <div class="row">
-      <?php 
-        require ("layout/sidebar.php");
-      ?>
-      <?php 
-        require_once ("php/seleccion.php");
-      ?>
-      <div class="col-lg-3"></div>
+      <div class="col-lg-9">
+        <?php 
+          require_once ("php/seleccion.php");
+        ?>
+      </div>
+      <div class="col-lg-3">
+        <p>Informacion extra</p>
+      </div>
       </div>
     </div>
   </div>

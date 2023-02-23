@@ -13,7 +13,7 @@ if (isset($_POST["user"]) || ($_POST["pass"]) || ($_POST["checkadmin"])){
     
     $proceso = mysqli_query($connec, "INSERT INTO registro (ci, user, pass, adp) VALUES ('$cedula ', '$usuario', '$contrasena', '$admincheck')");
     
-    if (!$proceso) { //verificacion de conexion exitosa en la base de datos
+    if (!$proceso) { //verificacion de registro exitosa en la base de datos
         
         echo "no se pudo registrar por favor intenta de nuevo <a href='?adminregister=true'>click para registrar de nuevo</a>";
     
@@ -24,7 +24,3 @@ if (isset($_POST["user"]) || ($_POST["pass"]) || ($_POST["checkadmin"])){
 } else {
     echo "no se pudo registrar por favor intenta de nuevo <a href='?adminregister=true'>click para registrar de nuevo</a>";
 }
-
-
-
-

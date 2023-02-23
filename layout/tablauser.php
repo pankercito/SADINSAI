@@ -1,13 +1,15 @@
 <?php
     include("php/adp_1.php");
 ?>
-<div class="col-lg-6">
+<div class="registersuser">
     <table class="table table-light table-striped table-sm w-auto data">
         <thead class="table-light">
             <tr>
-                <th class="text-end">Cedula</th>
-                <th class="text-end">Nombre</th>
-                <th class="text-end">usuario</th>
+                <th class="text-end"><a></a></th>
+                <th class="text-end"><a>Cedula</a></th>
+                <th class="text-end"><a>Nombre</a></th>
+                <th class="text-end"><a>Apellido</a></th>
+                <th class="text-end"><a>usuario</a></th>
             </tr>
         </thead>
         <tbody>
