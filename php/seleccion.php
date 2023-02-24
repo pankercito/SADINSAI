@@ -18,6 +18,12 @@ if(isset($_GET["users/viewregister"])){
 if(isset($_GET["states"])){
     require_once ("layout/tablestates.php");
 }
+if(isset($_GET["onlystate"])){
+    require_once ("layout/statesgrid.php");
+}
+if(isset($_GET["onlysede"])){
+    require_once ("layout/sedegrid.php");
+}
 if(isset($_GET["adminregister"])){
     require_once ("adregis.php");
 }

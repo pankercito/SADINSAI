@@ -2,7 +2,8 @@
 <html lang="es">
 <head>
     <!--TITULO DE LA PAGINA-->
-        <title>SADINSAI</title>
+    <title><?php require_once('php/titlehead.php')?></title>
+    
     <!--HOJAS DE ESTILO/BOOTSTRAP-->
     <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
     <script src="Bootstrap/js/bootstrap.min.js"></script>
@@ -16,6 +17,8 @@
     <link rel="stylesheet" href="styles/regiform.css">
     <link rel="stylesheet" href="styles/body.css">
     <link rel="stylesheet" href="styles/menutop.css">
-</head>
+    <link rel="stylesheet" href="styles/croma.1.css">
+    <link rel="stylesheet" href="styles/viewtables.css">
+</head>    
 
-<body background="recursos/fondiu.png">
+<body  class="logged-in env-production page-responsive" style="word-wrap: break-word;background-color: cadetblue;">

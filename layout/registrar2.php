@@ -6,7 +6,7 @@
         <div class="progress " style="height: 3px; width: 30%;">
             <div class="progress-bar bg-danger" role="progressbar"  style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
-        <a href="?users/register=true" class="btn btn-secondary">Atras</a>
+        <a href="javascript:history.back()" class="btn btn-secondary">Atras</a>
         <form method="post" action="?adminregister=true" class="regisform"  name="regisform" id="rgt" require>
             <fieldset>
                 <div class="form-group">
