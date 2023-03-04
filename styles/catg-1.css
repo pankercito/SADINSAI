@@ -5,6 +5,21 @@
   font-size: 30px;
   justify-content: space-between;
 }
+<<<<<<< HEAD
+.edit-scan {
+  font-size: large;
+  width: 600px;
+  height: 300px;
+  overflow: auto;
+  resize: vertical;
+  padding: 2rem;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+=======
+>>>>>>> ef454668b094ed648e94e17d925e51a7f585f6bd
 
 
 

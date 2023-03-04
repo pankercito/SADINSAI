@@ -32,21 +32,37 @@ a.navbar-brand{ /*logo sadinsai*/
     margin-top: -2px;
 }
 .navbar-nav{/*lista de navegacion*/
+<<<<<<< HEAD
+    margin-left: -23%;
+}
+    @media (max-width: 1400px) and (orientation: landscape){
+        .navbar-nav{/*lista de navegacion*/
+            margin-left: -16%;        
+=======
     margin-left: -25%;
 }
     @media (max-width: 1400px) and (orientation: landscape){
         .navbar-nav{/*lista de navegacion*/
             margin-left: -18%;        
+>>>>>>> ef454668b094ed648e94e17d925e51a7f585f6bd
         }      
     }
     @media (max-width: 1300px) and (orientation: landscape){
         .navbar-nav{/*lista de navegacion*/
+<<<<<<< HEAD
+            margin-left: -8%;        
+=======
             margin-left: -10%;        
+>>>>>>> ef454668b094ed648e94e17d925e51a7f585f6bd
         }      
     }
     @media (max-width: 1200px) and (orientation: landscape){
         .navbar-nav{/*lista de navegacion*/
+<<<<<<< HEAD
+            margin-left: -5%;        
+=======
             margin-left: -10%;        
+>>>>>>> ef454668b094ed648e94e17d925e51a7f585f6bd
         }      
     }
 ul.nav.nav-list.nav-pills.navbar-right {/*lista*/
@@ -60,11 +76,18 @@ ul.nav.nav-list.nav-pills.navbar-right {/*lista*/
 .navbar-light .navbar-nav .nav-link {/*listado*/
     color: #00000085;
     text-decoration: none;
+<<<<<<< HEAD
+    margin-left: 10px;
+    margin-right: 10px;
+=======
+>>>>>>> ef454668b094ed648e94e17d925e51a7f585f6bd
     font-size: 17px;
     font-family: sans-serif;
     cursor: pointer;
     padding-top: 15px;
     padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
     border-radius: 10px;
     font-weight: var(--font-style-semibold);
 }
@@ -78,7 +101,6 @@ ul.nav.nav-list.nav-pills.navbar-right {/*lista*/
 }
 .form-inline button{/*botones de toda la barra*/
     border: none;
-    background-color: rgb(209, 209, 209);
     color: #312e2e;
 
 }
@@ -92,6 +114,17 @@ ul.nav.nav-list.nav-pills.navbar-right {/*lista*/
     color: #312e2e;
     border-radius: 10px;
     height: 38px;
+}
+.form-inline #search{/*buscar*/
+    background-color: none;
+    margin-top: 1px;
+    padding-bottom: 6px;
+}
+.form-inline #help{/*Boton ayuda*/
+    background-color: rgb(209, 209, 209);
+}
+.form-inline #help:hover{/*Boton ayuda*/
+    background-color: rgb(113, 218, 209);
 }
 .form-inline #close{/*boton de salida*/
     background-color: rgb(209, 209, 209);

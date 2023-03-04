@@ -5,7 +5,11 @@ session_start();
 // Controlo si el usuario ya está logueado en el sistema.
 if(isset($_SESSION['nombredelusuario']))
 {
+<<<<<<< HEAD
+    // Guardar datos de sesiones en variables
+=======
     // Le doy la bienvenida al usuario.
+>>>>>>> ef454668b094ed648e94e17d925e51a7f585f6bd
     $wname = $_SESSION['nombredelusuario'];
     $wlastname = $_SESSION['apellidodelusuario'];
     $wci = $_SESSION['cidelusuario'];

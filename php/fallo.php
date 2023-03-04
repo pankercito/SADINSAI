@@ -26,7 +26,30 @@ if (isset($_GET['users/registerfall'])){
                 }
                </style>";
 }
+<<<<<<< HEAD
+if (isset($_GET['erroruser'])){
+    echo "<div id='usererror' class='alert alert-danger' style='color:red'>
+               Este usuario ya se encuentra en uso</div>
+               <style>
+               #usererror {
+                background-color: #f8d7da;
+                text-align: center;
+                margin: auto;
+                margin-top: -2.5rem;
+                position: relative;
+                width: 192px;
+                padding-top: 30px;
+                padding-left: 0.2rem;
+                padding-bottom: 10px;
+                padding-right: 0.2rem;
+                font-size: 50%;
+                border-radius: 10px;
+                }
+               </style>";
+}
+=======
 
+>>>>>>> ef454668b094ed648e94e17d925e51a7f585f6bd
 if(isset($_GET["fallo"])){
     echo "<div class='alert alert-danger' style='color:red'>
     Usuario y/o contraseña invalido</div>

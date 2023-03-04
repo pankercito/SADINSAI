@@ -26,4 +26,13 @@ if(isset($_GET["onlysede"])){
 }
 if(isset($_GET["adminregister"])){
     require_once ("adregis.php");
+<<<<<<< HEAD
+}
+if(isset($_GET["scan"])){
+    require_once("tesseract/form-image.php");
+}
+if(isset($_GET["result"])){
+    require_once("tesseract/init.php");
+=======
+>>>>>>> ef454668b094ed648e94e17d925e51a7f585f6bd
 }

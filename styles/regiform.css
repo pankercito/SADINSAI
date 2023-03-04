@@ -78,16 +78,38 @@ div.alert{
     position: relative;
     width: 60px;
     height: 25px;
+<<<<<<< HEAD
+    background-color: none;
+    border: 1px solid var(--color-green);
+    border-radius: 15px;
+    margin-left: 95px;
+    margin-top: 2px;
+    margin-bottom: 10px;
+=======
     background-color: rgb(116 115 115);
     border: none;
     border-radius: 15px;
     margin-left: 95px;
     margin-top: 2px;
     margin-bottom: 10px
+>>>>>>> ef454668b094ed648e94e17d925e51a7f585f6bd
 }
 .checkform input[type=checkbox]{
     visibility: hidden;
 }
+<<<<<<< HEAD
+.checkadmin.alert.alert-danger {
+    font-size: xx-large;
+    display: block;
+    height: 78px;
+    color: black;
+    font-weight: 600;
+    background: snow;
+    border-color: snow;
+    width: 195px;
+}
+=======
+>>>>>>> ef454668b094ed648e94e17d925e51a7f585f6bd
 .checkform label{
     display: block;
     width: 24px;
@@ -96,7 +118,11 @@ div.alert{
     background: var(--color-green);
     cursor: pointer;
     position: absolute;
+<<<<<<< HEAD
+    top: 4px;
+=======
     top: 5px;
+>>>>>>> ef454668b094ed648e94e17d925e51a7f585f6bd
     left: 5px;
     z-index: 1;
     overflow: hidden;
@@ -112,20 +138,36 @@ div.alert{
 .checkform::before{
     content: 'SI';
     font: 12px/30px arial;
+<<<<<<< HEAD
+    color: darkturquoise;
+    position: absolute;
+    left: 8px;
+    margin-top: -3px;
+    z-index: 0;
+    font-weight: bold;  
+=======
     color: var(--color-green);
     position: absolute;
     left: 8px;
     margin-top: -2px;
     z-index: 0;
     font-weight: bold;   
+>>>>>>> ef454668b094ed648e94e17d925e51a7f585f6bd
 }
 .checkform::after{
     content: 'NO';
     font: 12px/30px arial;
+<<<<<<< HEAD
+    color: rgb(98 98 98);
+    position: absolute;
+    right: 8px;
+    margin-top: -3px;
+=======
     color: rgb(223, 223, 223);
     position: absolute;
     right: 8px;
     margin-top: -2px;
+>>>>>>> ef454668b094ed648e94e17d925e51a7f585f6bd
     z-index: 0;
     font-weight: bold;
 }
