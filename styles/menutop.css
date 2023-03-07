@@ -1,0 +1,131 @@
+* {/*cuerpo entero*/
+    margin: 0;
+    padding: 0;
+}
+
+.navbarconten { /*contenedor de la barra de navegacion*/
+    top: 0px;
+    width: 100%;
+    height: 65px;
+    background: var(--narvar-bg-color);
+    box-sizing: content-box;
+    position: fixed;
+    z-index: 999;
+}
+.nav {   /*menu superior*/ 
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    margin-top: 4px;
+    list-style: none;
+    justify-content: space-between;
+    align-content: center;
+    flex-direction: row;
+    align-items: baseline;
+}
+a.navbar-brand{ /*logo sadinsai*/
+    margin-left: 1.5rem;
+}
+.navbar-brand img{/*logo*/
+    margin-top: -2px;
+}
+.navbar-nav{/*lista de navegacion*/
+    margin-left: -25%;
+}
+    @media (max-width: 1400px) and (orientation: landscape){
+        .navbar-nav{/*lista de navegacion*/
+            margin-left: -18%;        
+        }      
+    }
+    @media (max-width: 1300px) and (orientation: landscape){
+        .navbar-nav{/*lista de navegacion*/
+            margin-left: -10%;        
+        }      
+    }
+    @media (max-width: 1200px) and (orientation: landscape){
+        .navbar-nav{/*lista de navegacion*/
+            margin-left: -10%;        
+        }      
+    }
+ul.nav.nav-list.nav-pills.navbar-right {/*lista*/
+    margin: 0;
+}
+.nav-item{/*elementos de navegacion*/
+    margin-right: 3px;
+    margin-left: 0;
+}
+
+.navbar-light .navbar-nav .nav-link {/*listado*/
+    color: #00000085;
+    text-decoration: none;
+    font-size: 17px;
+    font-family: sans-serif;
+    cursor: pointer;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 10px;
+    font-weight: var(--font-style-semibold);
+}
+.nav-link:hover {/*estilo de la barra*/
+    color: #2e2e2eda;
+    background-color: var(--color-hoverbuttom);
+
+}
+.form-inline{/*formulario de busqueda*/
+    margin-right: 0.5rem;
+}
+.form-inline button{/*botones de toda la barra*/
+    border: none;
+    background-color: rgb(209, 209, 209);
+    color: #312e2e;
+
+}
+.form-inline button:hover{/*botones color*/
+    background-color: var(--color-hoverbuttom);
+    color: #2e2e2eda;
+}
+.form-inline #searchbar{/*buscador*/
+    border: none;
+    background-color: rgb(209, 209, 209);
+    color: #312e2e;
+    border-radius: 10px;
+    height: 38px;
+}
+.form-inline #close{/*boton de salida*/
+    background-color: rgb(209, 209, 209);
+    border: none;
+    color: #312e2e;
+}
+.form-inline #close:hover{/*cambio d color del boton de salida*/
+    background-color:#f5c6cb;
+    color: red;
+    border-radius: 10px;
+}
+button.btn.btn-outline-success {/*barra de busqueda*/
+    margin-left: -40px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+}
+.form-inline span {/*separadores*/
+    background-color: rgba(0, 0, 0, 0);
+    border-color: none;
+    border:none;
+}
+.form-inline button i{/*logo boton*/
+    font-family: sans-serif;
+    font-style: normal;
+    font-size: 17px;
+}
+.form-inline a i{/*sepadores*/
+    font-family: sans-serif;
+    font-style: normal;
+    font-size: 17px;
+}
+.form-inline a{/*margen*/
+    font-family: sans-serif;
+    font-style: normal;
+    font-size: 17px;
+}

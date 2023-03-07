@@ -1,0 +1,10 @@
+.grid-containerr>div {
+  background-color: rgba(51, 51, 51, 0.205);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+  justify-content: space-between;
+}
+
+
+

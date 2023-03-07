@@ -1,0 +1,131 @@
+form.regisform{
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+.progress {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+    height: 1rem;
+    overflow: hidden;
+    font-size: .75rem;
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
+}
+.bg-danger {
+    background-color: #ff6776!important;
+}
+
+legend {
+    justify-content: center;
+    display: flex;
+    position: relative;
+    max-width: 100%;
+    font-size: 50%;
+    line-height: inherit;
+    white-space: normal;
+    margin-left: 0rem;
+    margin-top: 1rem;
+    flex-direction: row;
+    align-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+form.regisform input {
+    position: relative;
+    font-size: 50%;
+    margin-top: -5px;
+    background-color: none;
+    border: 1px rgb(34, 34, 34);
+    border-radius: 10px;
+    padding: 10px;
+    z-index: 1;
+}
+form.regisform p{
+    margin-left: 6%;
+    text-align: left;
+    font-size: 45%;
+    margin-top: -5px;
+    margin-bottom: -30%;
+    margin-right: 110px;
+}
+
+form.regisform button{
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+}
+div.alert{
+    background-color: #f8d7da;
+    text-align: center;
+    margin: auto;
+    position: relative;
+    width: 180px;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-left: 0.2rem;
+    padding-bottom: 10px;
+    padding-right: 0.2rem;
+}
+
+.checkform{
+    display: inline-flex;
+    position: relative;
+    width: 60px;
+    height: 25px;
+    background-color: rgb(116 115 115);
+    border: none;
+    border-radius: 15px;
+    margin-left: 95px;
+    margin-top: 2px;
+    margin-bottom: 10px
+}
+.checkform input[type=checkbox]{
+    visibility: hidden;
+}
+.checkform label{
+    display: block;
+    width: 24px;
+    height: 15px;
+    border-radius: 17px;
+    background: var(--color-green);
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    z-index: 1;
+    overflow: hidden;
+    text-indent: 35px;
+}
+.checkform input[type=checkbox]:checked + label{
+    left: auto;
+    transform: translateX(30px);
+    transition: 0.5s ease;
+    background-color: var(--color-green);
+}
+
+.checkform::before{
+    content: 'SI';
+    font: 12px/30px arial;
+    color: var(--color-green);
+    position: absolute;
+    left: 8px;
+    margin-top: -2px;
+    z-index: 0;
+    font-weight: bold;   
+}
+.checkform::after{
+    content: 'NO';
+    font: 12px/30px arial;
+    color: rgb(223, 223, 223);
+    position: absolute;
+    right: 8px;
+    margin-top: -2px;
+    z-index: 0;
+    font-weight: bold;
+}

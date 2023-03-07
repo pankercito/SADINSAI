@@ -1,0 +1,15 @@
+:root{
+    --color-green: #5fff5f;
+    --color-hoverbuttom: #83eb8c;
+    --bg-color-principal: #0d1117e0;
+    --narvar-bg-color: #e2e2e2;
+    --font-color-bg: #e7e7e7;
+    --font-color-sidebar-base: #ffffff8a;
+    --font-style-semibold: 600; 
+    --font-color-hover-base:#2e2e2eda;
+    --centrar-base: translate(50%, -50%);
+    --color-hover-archives: #a4e0ed;
+}
+::-webkit-scrollbar{
+    display: none;
+}

@@ -1,0 +1,41 @@
+body{
+    background: #ddd;
+    font-family: monospace;
+}
+
+.container-table{
+    width:90% auto;
+    background: beige;
+    margin: 50px auto;
+    box-shadow: 0 0 40px #333;
+    display: grid;
+    grid-auto-rows: 50px;
+}
+
+.table__title{
+    grid-column-start: 1;
+    grid-column-end: 8;
+    background: violet;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.9em;
+}
+
+.table__header, .table__item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table__header{
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.table__item{
+    padding: 10px;
+    font-size: 1.2em;
+}

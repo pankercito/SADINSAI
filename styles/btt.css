@@ -1,0 +1,21 @@
+#login-box .buttom input {   
+    font-size:130%; 
+    color:white;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    border-bottom: 0;
+    border-style: solid;
+    border:0;
+    width: 35%;
+    background:#74c37c;
+    cursor: pointer;
+}
+#login-box .buttom input:hover {
+    color: #A6DEB7;
+    background-color: rgb(172, 169, 169);
+}
+#login-box .buttom input:focus {
+    color:white;
+    background-color: rgb(107, 201, 188);
+}
