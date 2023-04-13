@@ -34,24 +34,44 @@
     padding: 2% 1% 0% 1%;
     position: relative;
 }
-    @media (max-width: 1700px) {
+    @media (max-width: 1710px) {
         .croma.col-lg-12.col-ms-12 {
-            margin-top: 8.20%;  
+            margin-top: 7.9%;
         }
     }
-    @media (max-width: 1500px) {
+    @media (max-width: 1680px) {
         .croma.col-lg-12.col-ms-12 {
-            margin-top: 9.25%; 
+            margin-top: 8.1%; 
+        }
+    }
+    @media (max-width: 1550px) {
+        .croma.col-lg-12.col-ms-12 {
+            margin-top: 8.9%; 
+        }
+    }
+    @media (max-width: 1480px) {
+        .croma.col-lg-12.col-ms-12 {
+            margin-top: 9%;
         }
     }
     @media (max-width: 1400px) {
         .croma.col-lg-12.col-ms-12 {
-            margin-top: 10.15%;
+            margin-top: 9.91%;
+        }
+    }
+    @media (max-width: 1350px) {
+        .croma.col-lg-12.col-ms-12 {
+            margin-top: 10.1%;
         }
     }
     @media (max-width: 1300px) {
         .croma.col-lg-12.col-ms-12 {
-            margin-top: 11.2%;
+            margin-top: 10.9%;
+        }
+    }
+    @media (max-width: 1240px) {
+        .croma.col-lg-12.col-ms-12 {
+            margin-top: 11%;
         }
     }
 p.welcome {
@@ -68,24 +88,34 @@ p.welcome {
     z-index: 1;
     margin-top: 0.7%;
 }   
-    @media (max-width: 1700px) {
+    @media (max-width: 1710px) {
         .conten-archives {
-            margin-top: .5%;
+            margin-top: 0.35%;
     }
     }
-    @media (max-width: 1500px) {
+    @media (max-width: 1550px) {
         .conten-archives {
             margin-top: 0.7%;
         }
     }
     @media (max-width: 1400px) {
         .conten-archives {
+            margin-top: 0.9%;
+        }
+    }
+    @media (max-width: 1350px) {
+        .conten-archives {
             margin-top: 1%;
         }
     }
     @media (max-width: 1300px) {
         .conten-archives {
-        margin-top: 1.25%;
+            margin-top: 1.2%;
+        }
+    }
+    @media (max-width: 1240px) {
+        .conten-archives {
+            margin-top: 1.2%;
         }
     }
 p.plistcatg{
@@ -185,10 +215,4 @@ p.plistcatg{
 
 div#drdown2 {
     border-top-right-radius: 0px;
-<<<<<<< HEAD
 }
-=======
-}
-
-
->>>>>>> ef454668b094ed648e94e17d925e51a7f585f6bd

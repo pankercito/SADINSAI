@@ -1,19 +1,24 @@
 <?php
-    sleep(1);
+    $v_tabla = 'registro'; //tabla
+    $v_colum = 'user'; //columna de la tabla   
+    $v_data = $_POST['verificar_usuarios']; //dato a comparar
 
-    include("conect.php");
+    if($v_data == "") { //<-- Verificas que exista el index
+        echo = "";
 
-    if(isset($_REQUEST["user"])) { //<-- Verificas que exista el index "cedula"
+    }else{
 
-        $cedula = $_REQUEST['user'];
-        $query = "select * from registro WHERE user = '".strtolower($cedula)."'";
-        $results = mysql_query( $query) or die(mysql_error());
+        $v_tabla = 'registro'; //tabla
+        $v_colum = 'user'; //columna de la tabla   
+        $v_data = $_POST['verificar_usuarios']; //dato a comparar
+
+        include_once('query.where.php');
+
+        $count_results = mysqli_num_rows($regisview);
     
-        if(mysql_num_rows(@$results) > 0){
+        if ($count_results > 0 ){
             echo '<div id="Error">Cedula ya existente</div>'; 
         }else{
-            echo '<script type="text/javascript">
-                document.getElementById("singup").disabled = false;
-                </script>';
+            echo '<div id="Save">Cachito</div>';
         }
-}
+    }

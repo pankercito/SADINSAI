@@ -5,7 +5,7 @@
     <title><?php require_once('php/titlehead.php')?></title>
     
     <!--HOJAS DE ESTILO/BOOTSTRAP-->
-    <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
     <script src="Bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="Bootstrap/css/bootstrap.min.css">
@@ -21,4 +21,4 @@
     <link rel="stylesheet" href="styles/viewtables.css">
 </head>    
 
-<body  class="logged-in env-production page-responsive" style="word-wrap: break-word;background-color: cadetblue;">
+<body  class="logged-in env-production page-responsive" style="word-wrap: break-word;">

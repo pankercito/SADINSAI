@@ -1,7 +1,7 @@
 <?php 
 
 if ($adpval == 1) {
-    require ("layout/navbar-ad.php");
+    require ("layout/navbar-adm.php");
 } else {
     require ("layout/navbar.php");
 }

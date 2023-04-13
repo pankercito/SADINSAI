@@ -1,0 +1,15 @@
+.archives-structur {
+    margin-top: 10rem;
+}
+p.plistcatg {
+    color: var(--font-color-bg);
+    font-weight: var(--font-style-semibold);
+    z-index: 100;
+    position: absolute;
+    margin-top: -1.4rem;
+    transform: translateX(3.5rem);
+    font-size: small;
+}
+.contencroma {
+    margin-top: 3.3rem;
+}

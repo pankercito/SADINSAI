@@ -26,7 +26,6 @@ if (isset($_GET['users/registerfall'])){
                 }
                </style>";
 }
-<<<<<<< HEAD
 if (isset($_GET['erroruser'])){
     echo "<div id='usererror' class='alert alert-danger' style='color:red'>
                Este usuario ya se encuentra en uso</div>
@@ -47,9 +46,6 @@ if (isset($_GET['erroruser'])){
                 }
                </style>";
 }
-=======
-
->>>>>>> ef454668b094ed648e94e17d925e51a7f585f6bd
 if(isset($_GET["fallo"])){
     echo "<div class='alert alert-danger' style='color:red'>
     Usuario y/o contraseña invalido</div>

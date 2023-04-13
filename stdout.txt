@@ -1,0 +1,14 @@
+Para soludonar este problema, puede fnlentar \o sfguiente:
+
+- Verificar que el programa de OCR Tesseract eslé fnstalado en el
+servidor y que la ruta a! programa sea mrrecta.
+
+- Verificar que el archivo de imagen se esté (argando correctamenle
+y que sea una imagen véﬁda.
+
+- Verificar que el idioma espedﬁcado en e\ comando de OCR esté
+instalado en el servidor.
+
+- umizar una imagen de mejor calidad 0 (on menus ruido para
+asegurarse de que el OCR pueda detectar corredamenle e! lexto.
+

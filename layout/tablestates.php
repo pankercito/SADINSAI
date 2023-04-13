@@ -1,7 +1,4 @@
-<?php
-    include("php/adp_1.php");
-?>
-<div class="stades">
+<div class="states">
     <table class="states-table table-light table-striped table-sm w-auto data">
         <thead class="table-light">
             <tr>

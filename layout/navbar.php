@@ -1,12 +1,9 @@
+<header>
 <section name="navbar"><!--MENU DE NAVEGACION ADMIN-->
 
 <div class="navbarconten"> 
     <nav class="nav navbar-light"><!--BARRA DE NAVEGACION BG-->
-<<<<<<< HEAD
     <a class="navbar-brand" href="../sadinsai/principal.php?perfil=<?php echo $wci?>">
-=======
-      <a class="navbar-brand" href="../sadinsai/principal.php?perfil">
->>>>>>> ef454668b094ed648e94e17d925e51a7f585f6bd
         <img src="recursos/favsadin.png" width="100" alt="Logo"><!--LOGO DE SADINSAI-->
       </a>
       <nav class="navbar-nav">
@@ -14,13 +11,13 @@
         <ul class="nav nav-list nav-pills navbar-right">
           <!--ELEMENTOS DE LA LISTA DE NAVEGACION-->
           <li class="nav-item">
-            <a class="nav-link" href="?perfil=true">Inicio</a>
+            <a class="nav-link" href="principal.php?perfil=<?php echo $wci?>">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="?states=true">Estados</a>
+            <a class="nav-link" href="principal.php?states=true">Estados</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Formulario</a>
+            <a class="nav-link" href="nomina.php?nomina=true">Nomina</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Reportes</a>
@@ -32,20 +29,12 @@
         <input id="searchbar" class="form-control" type="search" placeholder="Buscar...">
         </input>
         <!--BOTON DE BUSQUEDA-->
-<<<<<<< HEAD
         <button id="search" class="btn btn-outline-success" type="submit" name="keyworks">
-=======
-        <button class="btn btn-outline-success" type="submit" name="keyworks">
->>>>>>> ef454668b094ed648e94e17d925e51a7f585f6bd
           <i class="bi bi-search"></i><!--ICONO-->
         </button>
         <span class="input-group-text" id="basic-addon1"></span><!--SEPARADOR--> 
         <!--BOTON DE AYUDA--> 
-<<<<<<< HEAD
         <button id="help" class="btn btn-info btn-default" href="#">
-=======
-        <button  class="btn btn-info btn-default" href="#">
->>>>>>> ef454668b094ed648e94e17d925e51a7f585f6bd
           <i class="bi bi-question-lg"></i><!--ICONO-->
         </button>
         <span class="input-group-text" id="basic-addon1"></span><!--SERPARADOR-->
@@ -62,3 +51,4 @@
     margin-left: -25%;
   }
 </style>
+</header>

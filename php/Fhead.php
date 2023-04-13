@@ -4,6 +4,6 @@ function encabezado($titulo) {
 
     $encabezado = $titulo;
 
-    echo $encabezado;   
+    echo ' | ' .$encabezado;   
 
 }

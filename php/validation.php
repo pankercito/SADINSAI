@@ -13,14 +13,15 @@ if(isset($_POST['login'])){
     $nr = mysqli_num_rows($check);
 
 	
-    if (!isset($_SESSION['nombredelusuario'])){
+    if(!isset($_SESSION['sesioninit'])){
 
         if($nr == 1){
         
-            $dataview= mysqli_fetch_assoc($check);
-
-            $_SESSION['nombredelusuario'] = $dataview['nombre'];
-            $_SESSION['apellidodelusuario'] = $dataview['apellido'];
+            $dataview= mysqli_fetch_array($check);
+            $n1 = $dataview['nombre'];
+            $n2 = $dataview['apellido'];
+            
+            $_SESSION['sesioninit'] = ''.$n1.' '.$n2.'';
             $_SESSION['cidelusuario'] = $dataview['ci'];
             $_SESSION['admincheck'] = $dataview['adp'];
 
@@ -31,5 +32,9 @@ if(isset($_POST['login'])){
             header("HTTP/1.1 302 Moved Temporarily"); 
 	        header('location:../index.php?fallo=true');
         }
+    }else{
+        session_destroy();
+        header("HTTP/1.1 302 Moved Temporarily"); 
+	    header('location:../index.php?session.dup=true');
     }
 }

@@ -3,24 +3,40 @@ div.perfil{
     border-radius: 10px;
     border: none;
     padding: 10px 20px 10px 10px;
-    width: 500px;
-    height: 570px;
+    width: 80%;
+    height: 300px;
     text-align: center;
     margin: auto;
 }
 
-input#inputAddress{
-    width: 100px;
-}
-
-input#inputCity{
-    width: 100px;
+.labperfil {
+    margin: 1rem;
+    position: relative;
+    display: block;
+    font-size: large;
+    font-weight: var(--font-style-semibold);
+    margin-top: -1rem;
 }
 
 div.perfil p{
-    font-size: 15px;
+    font-size: smaller;
+    font-weight: 400;
 }
 
+.plist1.row {
+    margin-left: 20%;
+    margin-top: 6%;
+    margin-bottom: 8%;
+}
+.plist2.row {
+    margin-left: 0%;
+}
+
+i.bi.bi-person-square {
+    position: absolute;
+    margin-left: 2%;
+    font-size: 500%;
+}
 marquee.welcome{
     display: block;
 	margin-left: auto;

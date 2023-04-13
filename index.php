@@ -2,26 +2,15 @@
 include ("layout/head.php")
 ?>
 
-<style>
-    #cena { /*ACOMODADOR CINTILLO*/
-    position: fixed;
-    border-color: none;
-    background: none;
-    height: 60px;
-    left: 0;
-    bottom: 0;
-    margin-top: 10%;
-    width: 100%;}
-</style>
+<link rel="stylesheet" href="styles/login.css">
 
-
-    <div class="col-lg-12">
-        <div class="sadin"> 
+<div class="col-lg-12">
+    <div class="sadin"> 
         <img src="recursos/sadinverde.png">
-        </div>
     </div>
+</div>
     
-  <section class="col-lg-12 "><!--seccion de login-->
+<section class="col-lg-12 "><!--seccion de login-->
     <form action="../sadinsai/php/validation.php" method="post"> <!---ACCION DEL FORMULADIO-->
         <div id="login-box">
             <p>INICIO DE SESI&Oacute;N</p>
@@ -46,7 +35,7 @@ include ("layout/head.php")
             </div>-->
         </div>
     </form>
-  </section>
+</section>
   
 <?php 
 include ("layout/footer.php")

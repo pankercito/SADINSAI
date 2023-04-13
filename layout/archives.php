@@ -6,7 +6,7 @@
                 <div class="dropdown">
                     <button class="dropbtn">Ofertas y servicios</button>
                     <div id="drdown" class="dropdown-content">
-                        <a class="nav-link2" href="#">Ofertas de servicio</a>
+                        <a class="nav-link2" href="archives.php?10001=true">Ofertas de servicio</a>
                         <a class="nav-link2" href="#">Resumen curricular</a>
                         <a class="nav-link2" href="#">C.I</a>
                         <a class="nav-link2" href="#">Solvencia de I.S.R</a>
@@ -104,7 +104,7 @@
                 </div>
             </li>
             <li>
-                <a class="nav-link1" href="#">Memorando</a>
+                <a class="nav-link1" href="?scan=true">Memorando</a>
             </li>
         </ul>
     </div>

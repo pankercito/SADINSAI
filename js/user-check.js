@@ -1,18 +1,35 @@
-$(document).ready(function() {    
-    $('#user').blur(function(){
+function verify_user()
+{
+    let v_user = document.getElementById('user').value;
     
-    $('#Info').html('<img src="loader.gif" alt="" />').fadeOut(1000);
-
-    var cedula = $(this).val();        
-    var dataString = 'cedula='+cedula;
+    $('#singup').attr('disabled','true');
+    
+    var parametros = {
+        
+        "verificar_usuarios": v_user
+    
+    };
 
     $.ajax({
-        type: "POST",
-        url: "?users/register-two=true",
-        data: dataString,
-        success: function(data) {
-            $('#singup').fadeIn(1000).html(data);
+        data: parametros,
+        url:"php/user-check.php",
+        type:"POST",
+
+        beforeSend: function(){
+
+            $('#singup').attr('disabled','false');
+            
+            $('#msjverify').html("Verificando...");
+            
+        },
+        
+        succes: function(msjv){
+            $('#msjverify').html(msjv);
+        },
+        
+        error: function(){
+            $('#msjverify').html("Error al consultar datos");
         }
+
     });
-});                       
-});    
+}
