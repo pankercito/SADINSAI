@@ -1,0 +1,31 @@
+title Formulario
+meta(charset="uft-8")
+link(rel="stylesheet", type="text/css", href="styles/hellokitty.css")
+link(rel="stylesheet", href="Bootstrap/css/bootstrap.min.css")
+script(src="Bootstrap/js/jquery-3.6.3.min.js")
+script(src="Bootstrap/js/bootstrap.min.js")
+.col-lg-12.
+  
+  
+.container
+  .row
+    .col-lg-4.
+      
+      Primera columna
+      
+    form.col.col-4(action="php/procesar.php", method="post")
+      p cedula
+      input(name="ci", type="text")
+      p ubicacion
+      input(name="ubicacion", type="text")
+      p telefono
+      input(name="telefono", type="text")
+      p nombre
+      input(name="name", type="text")
+      p apellido
+      input(name="apellido", type="text")
+      button#log.btn.btn-defaul(type="submit", name="registrar") Registrar
+    .col-lg-4.
+      
+      tercera columna
+      

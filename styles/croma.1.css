@@ -179,7 +179,7 @@ p.plistcatg{
 .dropdown-content{
     display: none;
     position: absolute;
-    z-index: 1;
+    z-index: 1000;
     min-width: 160px;
     background-color: rgba(255, 255, 255, 0.836);
     flex-direction: column;

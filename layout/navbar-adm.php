@@ -11,19 +11,19 @@
         <ul class="nav nav-list nav-pills navbar-right">
           <!--ELEMENTOS DE LA LISTA DE NAVEGACION-->
           <li class="nav-item">
-            <a class="nav-link" href="principal.php?perfil=<?php echo $wci?>">Inicio</a>
+            <a data-position="1" class="nav-link" href="principal.php?perfil=<?php echo $wci?>">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="principal.php?states=true">Estados</a>
+            <a data-position="2" class="nav-link" href="principal.php?states=true">Estados</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="nomina.php?nomina=true">Nomina</a>
+            <a data-position="3" class="nav-link" href="nomina.php?nomina=true">Nomina</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="principal.php?users=true">Usuarios</a>
+            <a data-position="4" class="nav-link" href="principal.php?users=true">Usuarios</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Reportes</a>
+            <a data-position="5"class="nav-link" href="#">Reportes</a>
           </li>
         </ul>
       </nav>

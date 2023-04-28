@@ -12,3 +12,15 @@ instalado en el servidor.
 - umizar una imagen de mejor calidad 0 (on menus ruido para
 asegurarse de que el OCR pueda detectar corredamenle e! lexto.
 
+COMBERTIR TEXTO A mayúsculas
+
+<?php
+// Para pasar a minúsculas
+$texto = strtolower($texto)
+// Para pasar a mayúsculas
+$texto = strtoupper($texto)
+// Para pasar a mayúsculas solo la primera letra de cada palabra
+$texto = ucwords($texto)
+// Para pasar a mayúsculas solo la primera letra de toda la cadena
+$texto = ucfirst($texto)
+?>

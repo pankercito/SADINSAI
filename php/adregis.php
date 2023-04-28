@@ -5,7 +5,7 @@ if (isset($_POST["user"]) || ($_POST["pass"]) || ($_POST["checkadmin"])){
     require ("conect.php");
 
     $cedula = $_SESSION['subcedula'];
-    $usuario = ($_POST['user']);
+    $usuario = strtoupper($_POST['user']);
     $contrasena = ($_POST['pass']);
     $admincheck = ($_POST['checkadmin']) ?? null;
     

@@ -9,6 +9,10 @@ if(isset($_POST['login'])){
     $usuariolg = $_POST['userlg'];
     $pass = $_POST['passlg'];
 
+    $usuariolg = mysqli_real_escape_string($connec, $usuariolg);
+    $pass =  mysqli_real_escape_string($connec, $pass);
+    
+
     $check = mysqli_query($connec,"SELECT * FROM registro r INNER JOIN perfiles p ON r.ci = p.ci WHERE user = '$usuariolg' AND pass = '$pass'");
     $nr = mysqli_num_rows($check);
 
@@ -34,6 +38,7 @@ if(isset($_POST['login'])){
         }
     }else{
         session_destroy();
+        
         header("HTTP/1.1 302 Moved Temporarily"); 
 	    header('location:../index.php?session.dup=true');
     }
