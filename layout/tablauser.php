@@ -1,6 +1,10 @@
-<?php
-    include("php/adp_1.php");
-?>
+<style>
+.estructur-conten {
+    margin: 2%;
+    margin-top: 2rem;
+}
+</style>
+
 <div class="registersuser">
     <table class="table table-light table-striped table-sm w-auto data">
         <thead class="table-light">
@@ -14,7 +18,7 @@
         </thead>
         <tbody>
             <?php 
-            include('php/viewregister.php')
+            include('../php/viewRegister.php')
             ?>
         </tbody>
     </table>

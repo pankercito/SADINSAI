@@ -11,7 +11,7 @@
         </thead>
         <tbody>
             <?php 
-            include('php/grid-sede.php')
+            include('../php/grid-sede.php')
             ?>
         </tbody>
     </table>

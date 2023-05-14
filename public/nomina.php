@@ -1,15 +1,15 @@
 <?php
-  require_once ("php/sesionval.php");
+  require_once ("../php/sesionval.php");
 ?> 
 
 <?php
-    require("layout/head.php");
+    require("../layout/head.php");
 ?>
 
-<link rel="stylesheet" href="styles/nomina.css">
+<link rel="stylesheet" href="../styles/nomina.css">
 
 <?php
-    include("php/adp.php");
+    include("../layout/navbar.php");
 ?>
 
 <div class="estructur-nomina">
@@ -67,7 +67,7 @@
 		  		<div class='pagination-container'>
 					<nav>
 				  	<ul class="pagination">
-				   		<script src="js/nomina.js"></script>
+				   		<script src="../js/nomina.js"></script>
 				  	</ul>
 					</nav>
 				</div>
@@ -82,5 +82,5 @@
 </div>
 
 <?php 
-  require ("layout/footer.php");
+  require ("../layout/footer.php");
 ?>

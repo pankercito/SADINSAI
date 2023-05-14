@@ -1,6 +1,7 @@
 <?php
-    include("php/adp_1.php");
+    require("../php/adp.php");
 ?>
+<link rel="stylesheet" href="../styles/regiform.css">
 <div class="col-lg-6">
     <div class="conten-regisform">
         <div class="progress " style="height: 3px; width: 30%;">
@@ -28,7 +29,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" name="singup" class="btn btn-defaul" disabled>Registrar</button>
+            <button type="submit" name="singup" class="btn btn-defaul">Registrar</button>
         </form>
     </div>
 </div>

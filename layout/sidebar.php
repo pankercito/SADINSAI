@@ -4,7 +4,7 @@
     ?>
     <?php
         if (isset($_GET["perfil"])){
-            include('archives.php');
+            include('../layout/archives.php');
         }
     ?>
 </div>

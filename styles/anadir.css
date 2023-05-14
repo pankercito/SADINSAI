@@ -1,0 +1,61 @@
+.first.row {
+    text-align: center;
+    justify-content: center;
+}
+.structur-conten {
+    background-color: #20242833;
+    margin: 1.5rem 1rem;
+}
+.contenido1 form input{
+    height: 1.9rem;
+    border: none;
+    padding: 0.2rem;
+    border-radius: 3px;
+}
+.lmao.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.lmao.row p {
+    margin: 0.5rem 0;
+}
+.selects.row {
+    margin: 0 1rem;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+}
+.selects select{
+    height: 1.9rem;
+    border: none;
+    padding: 0.2rem;
+    border-radius: 3px;
+}
+.sel1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 1.5rem;
+}
+.sel2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 1.5rem;
+}
+.one.row {
+    display: flex;
+    margin: 1.5rem;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+.two.row {
+    display: flex;
+    margin: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}

@@ -1,17 +1,17 @@
 <?php
-    $v_tabla = 'perfiles'; //tabla
-    $v_colum = 'ci'; //columna de la tabla    
+
+    include('conect.php');
+
     $v_data = $_GET['perfil']; //dato a comparar
 
-    include_once('query.where.php');
+    $cnce = mysqli_query($connec, "SELECT * FROM personal WHERE ci = $v_data ");
 
-    $count_results = mysqli_num_rows($regisview);
+    $count_results = mysqli_num_rows($cnce);
     
     if ($count_results > 0 ){
-        $perfils = mysqli_fetch_array($regisview);
+        $perfils = mysqli_fetch_array($cnce);
 
-        $n1 = ''.$perfils['nombre'].' '.$perfils['apellido'].'';
-        $pname = $n1;
+        $pname = ucwords(strtolower(''.$perfils['nombre'].' '.$perfils['apellido'].''));
         $pci = $perfils['ci'];
         $pphone = $perfils['telefono'];
 

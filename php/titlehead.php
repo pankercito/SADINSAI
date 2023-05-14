@@ -1,12 +1,12 @@
 <?php
 
-include('Fhead.php');
+include('fHead.php');
 
 echo "SADINSAI";
 
 if(isset($_GET['perfil'])){
     
-    include('perfilcheck.php');
+    include('perfilCheck.php');
     encabezado('Perfil');
 
     if(isset($_GET['parce'])){  

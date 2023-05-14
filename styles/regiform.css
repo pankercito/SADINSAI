@@ -19,12 +19,16 @@ form.regisform{
     background-color: #ff6776!important;
 }
 
+.estructur-conten{
+    margin: 2%;
+    margin-top: 1rem;
+}
+
 legend {
     justify-content: center;
     display: flex;
     position: relative;
     max-width: 100%;
-    font-size: 50%;
     line-height: inherit;
     white-space: normal;
     margin-left: 0rem;
@@ -37,7 +41,6 @@ legend {
 
 form.regisform input {
     position: relative;
-    font-size: 50%;
     margin-top: -5px;
     background-color: none;
     border: 1px rgb(34, 34, 34);
@@ -48,12 +51,17 @@ form.regisform input {
 form.regisform p{
     margin-left: 6%;
     text-align: left;
-    font-size: 45%;
     margin-top: -5px;
     margin-bottom: -30%;
     margin-right: 110px;
 }
+
+button#log {
+    margin: 1rem;
+}
+
 .btn-outline-warning {
+    margin: 1rem 0;
     color: #f3de22;
     background-color: transparent;
     background-image: none;
@@ -144,4 +152,9 @@ div.alert{
     margin-top: -3px;
     z-index: 0;
     font-weight: bold;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }

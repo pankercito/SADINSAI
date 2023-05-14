@@ -2,14 +2,16 @@
 
 include "conect.php";
 
-$cedula = ($_POST['ci']);
-$name=  ($_POST['name']);
-$apellido= ($_POST['apellido']);
-$ubicacion = ($_POST['ubicacion']);
-$sexo = ($_POST['telefono']);
+$cedula = mysqli_real_escape_string($connec, strtoupper($_POST['ci']));
+$name=  strtoupper($_POST['name']);
+$apellido= strtoupper($_POST['apellido']);
+$estado = strtoupper($_POST['estado']);
+$ciudad = strtoupper($_POST['ciudad']);
+$ubicacion = strtoupper($_POST['direccion']);
+$phone = strtoupper($_POST['telefono']);
 
 
-$correr = "INSERT INTO perfiles (ci, nombre, apellido, ubicacion, telefono) VALUES ('$cedula','$name','$apellido','$ubicacion','$sexo')";
+$correr = "INSERT INTO personal (ci, nombre, apellido, id_estado, id_ciudad, direccion, telefono) VALUES ('$cedula','$name','$apellido', '$estado', '$ciudad', '$ubicacion','$phone')";
 
 $proceso= mysqli_query($connec, $correr);
 

@@ -1,12 +1,14 @@
 <?php
 
+include("adp.php");
+
 if (isset($_POST["user"]) || ($_POST["pass"]) || ($_POST["checkadmin"])){
     
     require ("conect.php");
 
-    $cedula = $_SESSION['subcedula'];
+    $cedula = mysqli_real_escape_string($connec, $_SESSION['subcedula']);
     $usuario = strtoupper($_POST['user']);
-    $contrasena = ($_POST['pass']);
+    $contrasena = password_hash(mysqli_real_escape_string($connec, $_POST['pass']),PASSWORD_DEFAULT);
     $admincheck = ($_POST['checkadmin']) ?? null;
     
     $admincheck = $admincheck + 0;
@@ -19,7 +21,7 @@ if (isset($_POST["user"]) || ($_POST["pass"]) || ($_POST["checkadmin"])){
     
     } else {
         unset($_SESSION['subcedula']);
-        echo "registro finalizo correctamente <a href='?perfil=true'>click para registrar de nuevo</a>";
+        echo "registro finalizo correctamente <a href='?users/register=true'>click para registrar de nuevo</a>";
     }
 } else {
     echo "no se pudo registrar por favor intenta de nuevo <a href='?adminregister=true'>click para registrar de nuevo</a>";

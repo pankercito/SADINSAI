@@ -1,6 +1,5 @@
 <!--COLUMNA #2/PARA PERFIL BÁSICO DEL USUARIO-->
-
-<script src="js/prestablecer.js"></script>
+<script src="../js/prestablecer.js"></script>
 
     <div class="perfil">
         <div class="col-lg">
@@ -21,14 +20,14 @@
             <div class="ci form-group">
                 <label class="labperfil">Cedúla
                     <?php 
-                        echo '<p>'.$pname.'</p>';
+                        echo '<p>'.$pci.'</p>';
                     ?>
                 </label>
             </div>
             <div class="phone form-group">
                 <label class="labperfil">Tel&eacute;fono
                     <?php 
-                        echo '<p>'.$pname.'</p>';
+                        echo '<p>'.$pphone.'</p>';
                     ?>
                 </label>
             </div>

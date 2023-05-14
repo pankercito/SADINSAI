@@ -3,7 +3,7 @@
 	 font-family: 'Source Sans Pro', sans-serif;
 	 text-rendering: optimizeLegibility;
 }
- a.btn {
+ .cards a.btn {
 	 background: #0096a0;
 	 border-radius: 4px;
 	 box-shadow: 0 2px 0px 0 rgba(0,0,0,0.25);
@@ -27,7 +27,7 @@
 	 transition: all 0.025s 0s ease-out;
 }
  div.cards {
-	 margin: 80px auto;
+	 margin: 2rem auto;
 	 max-width: 960px;
 	 text-align: center;
 }
@@ -41,7 +41,6 @@
 	 text-align: left;
 	 transition: all 0.3s 0s ease-in;
 	 width: 300px;
-	 z-index: 1;
 }
  div.card img {
 	 max-width: 300px;
