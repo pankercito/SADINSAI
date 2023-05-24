@@ -5,6 +5,8 @@
 }
 </style>
 
+<?php include('../php/adp.php')?>
+
 <div class="registersuser">
     <table class="table table-light table-striped table-sm w-auto data">
         <thead class="table-light">
@@ -17,9 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php 
-            include('../php/viewRegister.php')
-            ?>
+            <?php include('../php/viewRegister.php')?>
         </tbody>
     </table>
 </div>

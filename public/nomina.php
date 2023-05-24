@@ -1,10 +1,6 @@
-<?php
-  require_once ("../php/sesionval.php");
-?> 
+<?php require_once ("../php/sesionval.php"); ?> 
 
-<?php
-    require("../layout/head.php");
-?>
+<?php require ("../layout/head.php"); ?>
 
 <link rel="stylesheet" href="../styles/nomina.css">
 
@@ -62,8 +58,8 @@
 							$i++ ;
 						}
 					?>
-    <tbody>
-</table>
+    			</tbody>
+				</table>
 		  		<div class='pagination-container'>
 					<nav>
 				  	<ul class="pagination">
@@ -81,6 +77,4 @@
   </div>
 </div>
 
-<?php 
-  require ("../layout/footer.php");
-?>
+<?php require ("../layout/footer.php"); ?>

@@ -1,9 +1,7 @@
-<?php
-  require_once ("../php/sesionval.php");
-?> 
-<?php
-    require("../layout/head.php");
-?>
+<?php require_once ("../php/sesionval.php"); ?> 
+
+<?php require ("../layout/head.php"); ?>
+
 <link rel="stylesheet" href="../styles/regiform.css">
 <link rel="stylesheet" href="../styles/anadir.css">
 <?php
@@ -47,3 +45,5 @@
          </div>
    </div>
 </div>
+
+<?php require ("../layout/footer.php"); ?>

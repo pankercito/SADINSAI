@@ -10,7 +10,7 @@
         </thead>
         <tbody>
             <?php 
-            include('../php/grid-states.php')
+            include('../php/gridEstado.php')
             ?>
         </tbody>
     </table>

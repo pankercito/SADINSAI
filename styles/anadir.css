@@ -12,6 +12,13 @@
     padding: 0.2rem;
     border-radius: 3px;
 }
+.userselect {
+    margin: -1rem 1.4rem 1.5rem;
+}
+a.añadir {
+    margin: 0 1rem 1rem;
+    height: 41px;
+}
 .lmao.row {
     display: flex;
     flex-direction: row;

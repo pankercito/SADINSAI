@@ -9,6 +9,11 @@ div.perfil{
     margin: auto;
 }
 
+.col-lg a {
+    margin: -1.5rem 4rem;
+    position: absolute;
+}
+
 .labperfil {
     margin: 1rem;
     position: relative;

@@ -25,6 +25,7 @@ form.regisform{
 }
 
 legend {
+    margin-bottom: 1rem;
     justify-content: center;
     display: flex;
     position: relative;
@@ -34,7 +35,6 @@ legend {
     margin-left: 0rem;
     margin-top: 1rem;
     flex-direction: row;
-    align-content: flex-start;
     align-items: center;
     flex-wrap: nowrap;
 }
@@ -70,7 +70,7 @@ button#log {
 
 form.regisform button{
     display: block;
-    margin: auto;
+    margin: 1rem auto;
     margin-top: 10px;
     text-align: center;
 }

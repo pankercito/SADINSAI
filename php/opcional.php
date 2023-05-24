@@ -1,6 +1,6 @@
 <?php
 
-if($adpval == 1){
+if($adpval == TRUE){
     echo $opcion1;
 }else{
     echo $opcion2;

@@ -14,11 +14,11 @@
     <link rel="stylesheet" href="../styles/buttomlogin.css">
     <link rel="shorcut icon" href="../recursos/faviconverde.png">
     <link rel="stylesheet" href="../styles/background.css">
-    <link rel="stylesheet" href="../styles/catg-1.css">
+    <link rel="stylesheet" href="../styles/estados.css">
     <link rel="stylesheet" href="../styles/perfil.css">
     <link rel="stylesheet" href="../styles/body.css">
     <link rel="stylesheet" href="../styles/menutop.css">
-    <link rel="stylesheet" href="../styles/croma.1.css">
+    <link rel="stylesheet" href="../styles/croma.css">
     <link rel="stylesheet" href="../styles/viewtables.css">
 </head>    
 

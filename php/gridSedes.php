@@ -13,7 +13,7 @@
         //Lista de los usuarios
         echo '<tr>';
         echo '<td><a></a></td>';
-        echo '<td style="border-left: none;"><a class="idsvtate" href="?perfil='.$row_searched['ci'].'&parce=true">'.$row_searched['ci'].'</a></td>';
+        echo '<td style="border-left: none;"><a class="idsvtate" href="principal.php?perfil='.$row_searched['ci'].'&parce=true">'.$row_searched['ci'].'</a></td>';
         echo '<td style="border-left: none;"><a class="idsvtate" >'.ucwords(strtolower($row_searched['nombre'])).'</a></td>';
         echo '<td style="border-left: 1px solid #dee2e6;"><a class="svtate">'.ucwords(strtolower($row_searched['apellido'])).'</a></td>';
         echo '<td style="border-left: 1px solid #dee2e6;"><a class="svtate">'.$row_searched['telefono'].'</a></td>';

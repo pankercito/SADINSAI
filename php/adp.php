@@ -3,7 +3,7 @@
 //pendiente
 $url = "principal.php?perfil=true";
 
-if ($adpval === 1) {
+if ($adpval == TRUE) {
    
 }else{
    
