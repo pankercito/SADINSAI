@@ -41,7 +41,7 @@ function isValidPassword(password) {
 }
 
 function isValidUsername(username) {
-  constusernameRegex = /^[a-zA-Z0-9_-]{3,16}$/;
+  const usernameRegex = /^[a-zA-Z0-9_-]{3,16}$/;
   return usernameRegex.test(username);
 }
 
