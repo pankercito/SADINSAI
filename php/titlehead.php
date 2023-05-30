@@ -33,7 +33,7 @@ if ($actUrl == '/sadinsai/public/principal.php') {
     include('perfilCheck.php');
     
     //Imprimir tanto perfil como el Nombre si se detecta el GET "parce"
-    encabezado('Perfil' . (isset($params['parce']) ? ' de ' . $pname : ''));
+    encabezado('Perfil' . (isset($params['parce']) ? ' de ' . $pName : ''));
 }else 
 if(isset($params['onlystate'])){
     //Imprimir titulos de estados
