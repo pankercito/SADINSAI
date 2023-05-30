@@ -14,6 +14,14 @@ if(isset($_GET["users/viewregister"])){
 }else
 if(isset($_GET["adminregister"])){
     require_once ("../php/adregis.php");
+}else 
+if(isset($_GET["error"])){
+    echo "El proceso de registro a fallado por favor intente nuevamente <br>";
+    echo '<img src="../recursos/banana-cat.gif" alt="GIF animado">';
+}else
+if(isset($_GET["exito"])){
+    echo "El proceso de registro ha concluido exitosamente <br>";
+    echo '<img src="../recursos/goocat.gif" alt="GIF animado">';
 }else{
     echo "Elija una opcion :)";
 }

@@ -4,7 +4,7 @@
 <script src="../js/activenavbar.js"></script>
 <div class="navbarconten"> 
     <nav class="nav navbar-light"><!--BARRA DE NAVEGACION BG-->
-      <a class="navbar-brand" href="principal.php?perfil=<?php echo $wci?>">
+      <a class="navbar-brand" href="principal.php?perfil=<?php echo base64_encode($wci) ?>">
         <img src="../recursos/favsadin.png" width="100" alt="Logo"><!--LOGO DE SADINSAI-->
       </a>
       <nav class="navbar-nav">
@@ -12,7 +12,7 @@
         <ul class="nav nav-list nav-pills navbar-right">
           <!--ELEMENTOS DE LA LISTA DE NAVEGACION-->
           <li class="nav-item">
-            <a data-position="1" class="nav-link" href="principal.php?perfil=<?php echo $wci?>">Inicio</a>
+            <a data-position="1" class="nav-link" href="principal.php?perfil=<?php echo base64_encode($wci)?>">Inicio</a>
           </li>
           <li class="nav-item">
             <a data-position="2" class="nav-link" href="estados.php">Estados</a>

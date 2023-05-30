@@ -4,6 +4,7 @@
 
 <?php require("../layout/navbar.php"); ?>
 
+<link rel="stylesheet" href="../styles/estados.css">
 
 <!--SALUDO DE BIENVENIDA-->
 <section name="cromaconten"> 
@@ -24,17 +25,7 @@
       </div>
       <div class="col-lg-5">
         <p>Sedes</p>
-        <?php
-          if(isset($_GET["states"])){
-            require_once ("../layout/tablestates.php");
-          }else
-          if(isset($_GET["onlystate"])){
-            require_once ("../layout/oneEstadoGrid.php");
-          }else
-          if(isset($_GET["onlysede"])){
-            require_once ("../layout/onlySedesGrid.php");
-          }
-        ?>
+        <?php include "../php/seleccionStados.php"?>
       </div>
       </div>
     </div>

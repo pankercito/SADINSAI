@@ -16,6 +16,7 @@
   flex-wrap: nowrap;
   justify-content: flex-start;
 }
-
-
-
+.estructur-conten {
+  margin: 2%;
+  margin-top: 1.5rem;
+}

@@ -1,24 +1,24 @@
 <div class="contenido1">
-  <form action="../php/procesar.php" method="post">
+  <form action="../php/registroPersonal.php" method="post">
     <div class="lmao row">
       <div class="one row">
         <p>Nombre </p>
-        <input name="name" type="text">
+        <input id="Name" name="name" type="text">
         <p>Cedula </p>
-        <input name="ci" type="int">
+        <input id="Ci" name="ci" type="int">
       </div>
       <div class="two row">
         <p>Apellido </p>
-        <input name="apellido" type="text">
+        <input id="Apellido" name="apellido" type="text">
         <p>Telefono </p>
-        <input name="telefono" type="text"> 
+        <input id="Phone" name="telefono" type="text"> 
     </div>
     </div>
     <div class="selects row">
       <div class="sel1">
         <label for="Estados">Estado</label>
         <select id="Estados" name="estado">
-          <option value>- seleciona un Estado -</option>
+          <option value="0">- seleciona un Estado -</option>
             <?php 
               include("../php/stadosForm.php")
             ?>
@@ -32,17 +32,27 @@
       </div>
     </div>
     <div class="lmao row">
+      <div class="sel3">
+        <label for="Sede">Sede</label>
+        <select id="Sede" name="sede">
+          <option value="0">- selecione su sede-</option>
+        </select>
+      </div>
+    </div>
+    <div class="lmao row">
       <div class="one row">
         <p>Correo</p>
-        <input name="email" type="text">
+        <input id="Email" name="email" type="text">
       </div>
       <div class="two row">
         <p>Direcci&oacute;n</p>
-        <input name="direccion" type="text">
+        <input id="Direccion" name="direccion" type="text">
       </div>
     </div>
     <br>
-    <button class="btn btn-warning" id="log" type="submit" name="registrar">Registrar</button>
+    <button class="btn btn-warning disabled" id="log" type="submit" name="registrar">Registrar</button>
   </form>
+  <script src="../js/formRegistroValidacion.js"></script>
   <script src="../js/selectorScript.js"></script>
+  <script src="../js/activarInput.js"></script>
 </div>

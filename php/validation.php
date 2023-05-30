@@ -24,7 +24,7 @@ if(isset($_POST['login'])){
 
             // Redirecciono al usuario a la página principal del sitio.
             header("HTTP/1.1 302 Moved Temporarily"); 
-            header('location:../public/principal.php?perfil='.$_SESSION['cidelusuario'].'');
+            header('location:../public/principal.php?perfil='.base64_encode($_SESSION['cidelusuario']).'');
         }else {
             
             header("HTTP/1.1 302 Moved Temporarily"); 

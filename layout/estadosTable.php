@@ -1,10 +1,3 @@
-<style>
-.estructur-conten {
-    margin: 2%;
-    margin-top: 2rem;
-}
-</style>
-
 <div class="states">
     <table class="states-table table-light table-striped table-sm w-auto data">
         <thead class="table-light">

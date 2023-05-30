@@ -13,11 +13,11 @@ if ($count_results > 0) {
     echo '<h2>Se han registrado '.$count_results.' usuarios.</h2>';
     
     while ($row_searched = mysqli_fetch_array($regisview)){
-        
+
         //Lista de los usuarios
         echo '<tr>';
         echo '<td><a></a></td>';
-        echo '<td><a id="vrname" href="principal.php?perfil='.$row_searched['ci'].'&parce=true">'.$row_searched['ci'].'</a></td>';
+        echo '<td><a id="vrname" href="principal.php?perfil='.base64_encode($row_searched['ci']).'&parce=true">'.$row_searched['ci'].'</a></td>';
         echo '<td><a>'.ucwords(strtolower($row_searched['nombre'])).'</a></td>';
         echo '<td><a>'.ucwords(strtolower($row_searched['apellido'])).'</a></td>';
         echo '<td><a>'.strtoupper(strtolower($row_searched['user'])).'</a></td>';

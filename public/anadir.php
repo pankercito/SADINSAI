@@ -2,11 +2,10 @@
 
 <?php require ("../layout/head.php"); ?>
 
+<?php include("../layout/navbar.php"); ?>
+
 <link rel="stylesheet" href="../styles/regiform.css">
 <link rel="stylesheet" href="../styles/anadir.css">
-<?php
-    include("../layout/navbar.php");
-?>
 
 <section name="cromaconten"> 
   <div class="contencroma">
@@ -18,19 +17,24 @@
 
 <div class="structur-conten">
    <div class="first row">
-         <div class="col-2">
-            <div class="contenido"></div>
-            <p>Personal</p>
-            <a class="añadir btn btn-primary" type="button" href="?form=true">Agregar personal</a>
-               <?php
-               if($adpval == 1){
-                  include('../layout/accsadmin.php');
-               }else{
+         <div class="fixed col-3">
+            <div class="fijo contenido">
+               <p>Personal</p>
+               <div class="ations">
+                  <a class="añadir btn btn-primary" type="button" href="?form=true">
+                     <i class="bi bi-person-add"></i> Agregar personal
+                  </a>
+               </div>
+                  <?php
+                     if($adpval == TRUE){
+                        include('../layout/accsadmin.php');
+                     }else{
 
-               }
-            ?>
+                     }
+                  ?>
+            </div>
          </div>
-         <div class="col-7">
+         <div class="conten col-8">
             <div class="contenido">
                <p>Contenido</p>
                <?php
@@ -38,11 +42,11 @@
                ?>
             </div>
          </div>
-         <div class="col-3">
+         <!-- <div class="action col-2">
             <div class="opcions"> 
                <p>Acciones</p>
             </div>
-         </div>
+         </div> -->
    </div>
 </div>
 

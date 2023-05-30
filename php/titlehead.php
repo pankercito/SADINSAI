@@ -1,6 +1,6 @@
 <?php
 
-include('fHead.php');
+include('funtion/fHead.php');
 
 include('statesHead.php');
 
@@ -19,7 +19,7 @@ $titles = array(
 );
 
 // URL actual sin los parámetros GET
-$current_url = strtok($_SERVER['REQUEST_URI'], '?');
+$actUrl = strtok($_SERVER['REQUEST_URI'], '?');
 
 // URL con todo y GETs
 $get = $_SERVER['REQUEST_URI'];
@@ -28,7 +28,7 @@ $get = $_SERVER['REQUEST_URI'];
 parse_str(parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY), $params);
 
 // Obtener el título correspondiente a la URL actual
-if ($current_url == '/sadinsai/public/principal.php') {
+if ($actUrl == '/sadinsai/public/principal.php') {
     //Pagina de inicio o Perfil
     include('perfilCheck.php');
     

@@ -1,7 +1,9 @@
-const inputEmail = document.getElementById('inputEmail');
-const inputPassword = document.getElementById('inputPassword');
-const inputUsername = document.getElementById('inputUsername');
-const inputPhone = document.getElementById('inputPhone');
+const inputName= document.getElementById('Name');
+const inputLastName = document.getElementById('Apellido');
+const inputCi = document.getElementById('Ci');
+const inputDireccion = document.getElementById('Direccion');
+const inputPhone = document.getElementById('Phone');
+const inputEmail = document.getElementById('Email');
 
 inputEmail.addEventListener('focusout', function() {
   if (!isValidEmail(inputEmail.value)) {
@@ -10,17 +12,24 @@ inputEmail.addEventListener('focusout', function() {
   }
 });
 
-inputPassword.addEventListener('focusout', function() {
-  if (!isValidPassword(inputPassword.value)) {
-    alert('Por favor ingresa una contraseña de al menos 8 caracteres');
-    inputPassword.value = '';
+inputDireccion.addEventListener('focusout', function() {
+  if (!isValidDireccion(inputDireccion.value)) {
+    alert('Por favor ingresa una direccion válida');
+    inputDireccion.value = '';
   }
 });
 
-inputUsername.addEventListener('focusout', function() {
-  if (!isValidUsername(inputUsername.value)) {
-    alert('Por favor ingresa un nombre de usuario válido');
-    inputUsername.value = '';
+inputName.addEventListener('focusout', function() {
+  if (!isValidName(inputName.value)) {
+    alert('Por favor ingresa un nombre válido');
+    inputName.value = '';
+  }
+});
+
+inputLastName.addEventListener('focusout', function() {
+  if (!isValidLastName(inputLastName.value)) {
+    alert('Por favor ingresa un apellido válido');
+    inputLastName.value = '';
   }
 });
 
@@ -31,21 +40,35 @@ inputPhone.addEventListener('focusout', function() {
   }
 });
 
+inputCi.addEventListener('focusout', function() {
+  if (!isValidCi(inputCi.value)) {
+    alert('Por favor ingresa un número de cedula valido válido');
+    inputCi.value = '';
+  }
+});
+
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
-
-function isValidPassword(password) {
-  return password.length >= 8;
+function isValidName(name) {
+  const nameRegex = /^([a-zA-ZáéíóúñÁÉÍÓÚüÜ]+\s){0,2}[a-zA-ZáéíóúñÁÉÍÓÚüÜ]{3,15}$/;
+  return nameRegex.test(name);
 }
 
-function isValidUsername(username) {
-  const usernameRegex = /^[a-zA-Z0-9_-]{3,16}$/;
-  return usernameRegex.test(username);
+function isValidLastName(lastname) {
+  const lastnameRegex = /^([a-zA-ZáéíóúñÁÉÍÓÚüÜ]+\s){0,2}[a-zA-ZáéíóúñÁÉÍÓÚüÜ]{3,15}$/;
+  return lastnameRegex.test(lastname);
 }
-
 function isValidPhone(phone) {
   const phoneRegex = /^[0-9]{11}$/;
   return phoneRegex.test(phone);
+}
+function isValidDireccion(direccion) {
+  const direccionRegex = /^[\wáéíóúñÁÉÍÓÚüÜ#,. ]+$/u;
+  return direccionRegex.test(direccion);
+}
+function isValidCi(ci) {
+  const ciRegex = /^[0-9]{7,8}$/;
+  return ciRegex.test(ci);
 }
