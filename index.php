@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <!--TITULO DE LA PAGINA-->
-    <title>Inicio de Sesi&oacute;n</title>
+    <title>SADINSAI | Inicio de Sesi&oacute;n</title>
     
     <!--HOJAS DE ESTILO/BOOTSTRAP-->
     <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
@@ -14,13 +14,7 @@
     <link rel="stylesheet" href="styles/buttomlogin.css">
     <link rel="shorcut icon" href="recursos/faviconverde.png">
     <link rel="stylesheet" href="styles/background.css">
-    <link rel="stylesheet" href="styles/catg-1.css">
-    <link rel="stylesheet" href="styles/perfil.css">
-    <link rel="stylesheet" href="styles/regiform.css">
     <link rel="stylesheet" href="styles/body.css">
-    <link rel="stylesheet" href="styles/menutop.css">
-    <link rel="stylesheet" href="styles/croma.1.css">
-    <link rel="stylesheet" href="styles/viewtables.css">
 </head>    
 
 <body  class="logged-in env-production page-responsive" style="word-wrap: break-word;">
@@ -48,7 +42,7 @@
                     <input type="password" placeholder="Contrase&ntilde;a" name="passlg" required>
                 </div>
                 <?php 
-                    require ("php/fallo.php");
+                    require ("php/preset/fallo.php");
                 ?>
                 <button type="submit" name="login" class="btn btn-link btn-default">Iniciar</button>
             </div>

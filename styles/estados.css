@@ -20,3 +20,12 @@
   margin: 2%;
   margin-top: 1.5rem;
 }
+.conten {
+  margin: 0 0 1rem;
+}
+.sot.col-lg-5 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}

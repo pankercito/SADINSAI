@@ -9,7 +9,6 @@
             </a>
         </div>
         <div class="plist1 row">
-            
             <div class="name form-group">
                 <label class="labperfil" class="labperfil">Nombre
                     <?php 

@@ -19,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php include('../php/viewRegister.php')?>
+            <?php include('../php/preset/viewRegister.php')?>
         </tbody>
     </table>
 </div>

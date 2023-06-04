@@ -4,7 +4,7 @@ if (isset($_POST["cedula"])){
     
     require ("conect.php");
 
-    $subcedula = ($_POST['cedula']);
+$subcedula  = mysqli_real_escape_string($connec, $_POST["cedula"]);
     
     $cvp = mysqli_query($connec, "SELECT * FROM registro WHERE ci = '$subcedula'");
     $cv = mysqli_num_rows($cvp);

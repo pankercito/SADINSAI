@@ -31,10 +31,20 @@ div.perfil p{
 .plist1.row {
     margin-left: 20%;
     margin-top: 6%;
-    margin-bottom: 8%;
+    margin-bottom: 6%;
+    width: 10rem;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    flex-direction: row;
 }
 .plist2.row {
-    margin-left: 0%;
+    width: 12rem;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    flex-wrap: nowrap;
+    margin-left: -3%;
 }
 
 i.bi.bi-person-square {

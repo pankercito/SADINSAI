@@ -1,5 +1,5 @@
 <div class="stades">
-    <table class="states-table table-light table-striped table-sm w-auto data">
+    <table class="sede-table table table-striped table-classtable-sm w-auto data">
         <thead class="table-light">
             <tr>
                 <th class="text-end"><a></a></th>
@@ -10,7 +10,7 @@
         </thead>
         <tbody>
             <?php 
-            include('../php/gridEstado.php')
+            include('../php/preset/gridEstado.php')
             ?>
         </tbody>
     </table>

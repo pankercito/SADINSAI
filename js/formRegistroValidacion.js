@@ -1,4 +1,4 @@
-const inputName= document.getElementById('Name');
+const inputName = document.getElementById('Name');
 const inputLastName = document.getElementById('Apellido');
 const inputCi = document.getElementById('Ci');
 const inputDireccion = document.getElementById('Direccion');

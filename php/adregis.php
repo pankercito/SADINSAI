@@ -7,8 +7,8 @@ if (isset($_POST["user"]) || ($_POST["pass"]) || ($_POST["checkadmin"])){
     require ("conect.php");
 
     $cedula = mysqli_real_escape_string($connec, $_SESSION['subcedula']);
-    $usuario = strtoupper($_POST['user']);
-    $contrasena = password_hash(mysqli_real_escape_string($connec, $_POST['pass']),PASSWORD_DEFAULT);
+    $usuario = mysqli_real_escape_string($connec,strtoupper($_POST['user']));
+    $contrasena = mysqli_real_escape_string($connec, $_POST['pass']);
     $admincheck = ($_POST['checkadmin']) ?? null;
     
     $admincheck = $admincheck + 0;

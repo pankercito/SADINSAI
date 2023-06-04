@@ -5,7 +5,9 @@ body{ /*FONDO DE PANTALLA*/
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-color: rgb(125, 197, 125);
+    background-color: #29d796;/*
+    background-color: #1aefa0; 
+    background-color: rgb(125, 197, 125); */
 }
 
 .estructur-conten{

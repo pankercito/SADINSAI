@@ -4,7 +4,8 @@ session_start();
 
 if(isset($_POST['login'])){
 
-    include ("conect.php");
+    include("conect.php");
+    include("funtion/encriptDesencript.php");
 
     $usuariolg = mysqli_real_escape_string($connec, $_POST['userlg']);
     $pass = mysqli_real_escape_string($connec, $_POST['passlg']);
@@ -24,7 +25,7 @@ if(isset($_POST['login'])){
 
             // Redirecciono al usuario a la página principal del sitio.
             header("HTTP/1.1 302 Moved Temporarily"); 
-            header('location:../public/principal.php?perfil='.base64_encode($_SESSION['cidelusuario']).'');
+            header('location:../public/principal.php?perfil='.encriptar($_SESSION['cidelusuario']).'');
         }else {
             
             header("HTTP/1.1 302 Moved Temporarily"); 

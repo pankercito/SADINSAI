@@ -28,7 +28,7 @@
         <h2>Documentos</h2>
         <div class="cards">
           <?php
-            include_once("../php/cardSelector.php")
+            include_once("../php/preset/cardSelector.php")
           ?>
         </div>
       </div>

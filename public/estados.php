@@ -23,13 +23,20 @@
           require_once ("../layout/estadosTable.php");
         ?>
       </div>
-      <div class="col-lg-5">
-        <p>Sedes</p>
-        <?php include "../php/seleccionStados.php"?>
+      <div class="sot col-lg-5">
+        <div class="conten">
+					<p class="n-inf">busqueda rapida</p>
+					<div class="tb_search">
+						<input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Search.." class="form-control">
+          </div>
+        </div>        
+        <p>sedes</p>
+        <?php include "../php/preset/seleccionStados.php"?>
       </div>
       </div>
     </div>
   </div>
 </div>
+<script src="../js/estadosSearch.js"></script>
 
 <?php require ("../layout/footer.php"); ?>

@@ -32,16 +32,16 @@ a.navbar-brand{ /*logo sadinsai*/
     margin-top: -2px;
 }
 .navbar-nav{/*lista de navegacion*/
-    margin-left: -23%;
+    margin-left: -15%;
 }
     @media (max-width: 1400px) and (orientation: landscape){
         .navbar-nav{/*lista de navegacion*/
-            margin-left: -16%;        
+            margin-left: -10%;        
         }      
     }
     @media (max-width: 1300px) and (orientation: landscape){
         .navbar-nav{/*lista de navegacion*/
-            margin-left: -8%;        
+            margin-left: -2%;;        
         }      
     }
     @media (max-width: 1200px) and (orientation: landscape){
@@ -80,8 +80,11 @@ ul.nav.nav-list.nav-pills.navbar-right {/*lista*/
     background-color: var(--color-hoverbuttom);
 
 }
-.form-inline{/*formulario de busqueda*/
+.form-inline {
     margin-right: 0.5rem;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: baseline;
 }
 .form-inline button{/*botones de toda la barra*/
     border: none;
@@ -98,12 +101,13 @@ ul.nav.nav-list.nav-pills.navbar-right {/*lista*/
     color: #312e2e;
     border-radius: 10px;
     height: 38px;
+    width: 100%;
 }
-.form-inline #search{/*buscar*/
-    background-color: none;
-    margin-top: 1px;
-    padding-bottom: 6px;
+.form-inline #search {
+    padding-bottom: 5px;
+    height: 2.35rem;
 }
+
 .form-inline #help{/*Boton ayuda*/
     background-color: rgb(209, 209, 209);
 }
@@ -114,6 +118,7 @@ ul.nav.nav-list.nav-pills.navbar-right {/*lista*/
     background-color: rgb(209, 209, 209);
     border: none;
     color: #312e2e;
+    width: 8rem;
 }
 .form-inline #close:hover{/*cambio d color del boton de salida*/
     background-color:#f5c6cb;

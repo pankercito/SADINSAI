@@ -10,12 +10,14 @@
             <fieldset>
                 <div class="form-group">
                     <legend>Cedula</legend>
-                    <input type="number" name="cedula" placeholder="cedula" maxlength="8" required>
+                    <input id="ci" type="number" name="cedula" placeholder="cedula" maxlength="8" onblur="verificarCI()" required>
+                    <div id="mensajeCi"></div>
                 </div>
             </fieldset>
             <?php
-               require ("../php/fallo.php");
+               require ("../php/preset/fallo.php");
             ?>
-            <button type="submit" name="singup" class="btn btn-defaul">Siguiente</button>
+            <button id="singup" class="singup btn btn-primary" type="submit" name="singup" disabled>Siguiente</button>
         </form>
+        <script src="../js/ciCheck.js"></script>
 </div>

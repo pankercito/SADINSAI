@@ -6,7 +6,7 @@ $(document).ready(function(){
             // Agregar opción adicional
             $("#Ciudades").html('<option value="0">- Selecciona una ciudad -</option>');
             // Hacer la llamada AJAX
-            $.post("../php/citys.php", { estado: id_estado }, function(data) {
+            $.post("../php/preset/citysForm.php", { estado: id_estado }, function(data) {
                 $("#Ciudades").append(data);
             });			
         });
@@ -21,7 +21,7 @@ $(document).ready(function(){
             // Agregar opción adicional
             $("#Sede").html('<option value="0">- Selecciona una Sede -</option>');
             // Hacer la llamada AJAX
-            $.post("../php/sedesForm.php", { estado: id_estado }, function(data) {
+            $.post("../php/preset/sedesForm.php", { estado: id_estado }, function(data) {
                 $("#Sede").append(data);
             });			
         });

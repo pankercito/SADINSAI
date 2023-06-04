@@ -1,16 +1,9 @@
 <?php
 
-include('php/funtion/encriptData.php');
-include('php/funtion/desencriptData.php');
+function remover_acentos($cadena) {
+    /* Remueve los acentos de una cadena de texto */
+    $no_acentos = strtr(utf8_decode($cadena), utf8_decode('áéíóúÁÉÍÓÚüÜñÑ'), 'aeiouAEIOUuUnN');
+    return utf8_encode($no_acentos);
+}
 
-session_start();
-
-// Texto encriptado
-$_SESSION['culito'] = encriptar('hola mundo');
-// Clave de desencripción
-echo $_SESSION['culito'];
-// Llamada a la función desencriptar()
-$textoDesencriptado = desencriptar($_SESSION['culito']);
-
-// Imprimir el texto desencriptado
-echo '<br>' . $textoDesencriptado ;
+echo remover_acentos("Vérgación");

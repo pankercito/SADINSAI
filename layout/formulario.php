@@ -5,13 +5,14 @@
         <p>Nombre </p>
         <input id="Name" name="name" type="text">
         <p>Cedula </p>
-        <input id="Ci" name="ci" type="int">
+        <input id="Ci" name="ci" type="int" onblur="verificarCI()">
+        <div id="mensajeCi"></div>
       </div>
       <div class="two row">
         <p>Apellido </p>
         <input id="Apellido" name="apellido" type="text">
         <p>Telefono </p>
-        <input id="Phone" name="telefono" type="text"> 
+        <input id="Phone" name="telefono" type="text" maxlength="11">
     </div>
     </div>
     <div class="selects row">
@@ -20,7 +21,7 @@
         <select id="Estados" name="estado">
           <option value="0">- seleciona un Estado -</option>
             <?php 
-              include("../php/stadosForm.php")
+              include("../php/preset/stadosForm.php")
             ?>
         </select>
       </div>
@@ -50,7 +51,7 @@
       </div>
     </div>
     <br>
-    <button class="btn btn-warning disabled" id="log" type="submit" name="registrar">Registrar</button>
+    <button class="btn btn-warning" id="log" type="submit" name="registrar" disabled>Registrar</button>
   </form>
   <script src="../js/formRegistroValidacion.js"></script>
   <script src="../js/selectorScript.js"></script>

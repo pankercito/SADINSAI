@@ -6,6 +6,7 @@
 
 <link rel="stylesheet" href="../styles/regiform.css">
 <link rel="stylesheet" href="../styles/anadir.css">
+<link rel="stylesheet" href="../styles/background.css">
 
 <section name="cromaconten"> 
   <div class="contencroma">
@@ -38,7 +39,7 @@
             <div class="contenido">
                <p>Contenido</p>
                <?php
-                  include('../php/seleccionAnadir.php');
+                  include('../php/preset/seleccionAnadir.php');
                ?>
             </div>
          </div>

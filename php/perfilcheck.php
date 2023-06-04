@@ -4,7 +4,7 @@ include('conect.php');
 
 if (isset($_GET['perfil'])){
 
-    $pCi = base64_decode($_GET['perfil']); //dato a comparar
+    $pCi = desencriptar($_GET['perfil']); //dato a comparar
 
     if (isset($pCi)){
         $cnce = mysqli_query($connec, "SELECT * FROM personal p
@@ -21,8 +21,8 @@ if (isset($_GET['perfil'])){
             $pName = ucwords(strtolower(''.$perfils['nombre'].' '.$perfils['apellido'].''));
             $pCi = $perfils['ci'];
             $pPhone = $perfils['telefono'];
-            $pEmail =  $perfils['email'];
-            $pDireccion = $perfils['direccion'];
+            $pEmail =  strtolower($perfils['email']);
+            $pDireccion = ucfirst($perfils['direccion']);
             $pStado = $perfils['estado'];
             $pCiudad = $perfils['ciudad'];
 

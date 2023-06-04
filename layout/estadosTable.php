@@ -1,5 +1,5 @@
 <div class="states">
-    <table class="states-table table-light table-striped table-sm w-auto data">
+    <table class="states-table table table-striped table-class table-striped table-sm w-auto data">
         <thead class="table-light">
             <tr>
                 <th class="text-end"><a></a></th>
@@ -10,7 +10,7 @@
         </thead>
         <tbody>
             <?php 
-            include('../php/viewAllEstados.php')
+            include('../php/preset/viewAllEstados.php')
             ?>
         </tbody>
     </table>

@@ -10,12 +10,12 @@ table.states-table {
     margin:auto;
 }
 a:not([href]):not([tabindex]) {
-    font-size: large;
+    font-size: 16px;
     color: inherit;
     text-decoration: none;
     display: flex;
     justify-content: center;
-    align-items: baseline;
+    padding: 10px;
 }
 a#vrname {
     font-size: large;
@@ -39,4 +39,11 @@ a.idsvtate {
     display: flex;
     justify-content: center;
     align-items: baseline;
+}
+.lol{
+    color: #212529;
+    text-decoration: none;
+}
+tr{
+    vertical-align: -webkit-baseline-middle;
 }

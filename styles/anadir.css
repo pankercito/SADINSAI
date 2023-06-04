@@ -10,6 +10,7 @@
     border: none;
     padding: 0.2rem;
     border-radius: 3px;
+    width: auto;
 }
 .fixed.col {
     height: 2000px;

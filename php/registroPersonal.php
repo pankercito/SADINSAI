@@ -1,13 +1,15 @@
 <?php
 
-include "conect.php";
+include("conect.php");
+
+include("funtion/removerAcentos.php");
 
 $cedula = mysqli_real_escape_string($connec,$_POST['ci']);
-$name=  mysqli_real_escape_string($connec, strtoupper($_POST['name']));
-$apellido= mysqli_real_escape_string($connec, strtoupper($_POST['apellido']));
-$email = mysqli_real_escape_string($connec, strtoupper($_POST['email']));
-$direccion = mysqli_real_escape_string($connec, strtoupper($_POST['direccion']));
-$phone = mysqli_real_escape_string($connec,strtoupper($_POST['telefono']));
+$name=  mysqli_real_escape_string($connec, strtoupper(remover_acentos($_POST['name'])));
+$apellido= mysqli_real_escape_string($connec, strtoupper(remover_acentos($_POST['apellido'])));
+$email = mysqli_real_escape_string($connec, strtoupper(remover_acentos($_POST['email'])));
+$direccion = mysqli_real_escape_string($connec, strtoupper(remover_acentos($_POST['direccion'])));
+$phone = mysqli_real_escape_string($connec, $_POST['telefono']);
 $estado = $_POST['estado'];
 $ciudad = $_POST['ciudad'];
 $sede = $_POST['sede'];

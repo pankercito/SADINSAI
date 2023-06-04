@@ -16,7 +16,7 @@ form.regisform{
     border-radius: 0.25rem;
 }
 .bg-danger {
-    background-color: #ff6776!important;
+    background-color: #df5967!important;
 }
 
 .estructur-conten{
@@ -60,14 +60,12 @@ button#log {
     margin: 1rem;
 }
 
-.btn-outline-warning {
+a.btn.btn-warning{
     margin: 1rem 0;
-    color: #f3de22;
-    background-color: transparent;
-    background-image: none;
-    border-color: #f3de22;
 }
-
+a.btn.btn-warning:hover {
+    background: #ffd24c;
+}
 form.regisform button{
     display: block;
     margin: 1rem auto;
@@ -103,7 +101,7 @@ div.alert{
     visibility: hidden;
 }
 .checkadmin.alert.alert-danger {
-    font-size: xx-large;
+    font-size: 15px;
     display: block;
     height: 78px;
     color: black;
