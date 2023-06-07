@@ -24,14 +24,13 @@ if(isset($_POST["sCi"])){
     } while ($dan != 0);
 
     $sqlp = mysqli_query($connec,"INSERT INTO solicitudes (ci, ci_solicitada, id_solicitud, fecha, motivo, apr_estado) VALUES ('$ci', '$ciSoli', '$id_solicitud', '$datetime', '$tex', '0')");
-
+    $connec->close();
+    
     if (isset($sqlp)) {
-        $connec->close();
         $_SESSION["noti"] = 1;
         header('location: ../public/solicitudes.php');
     } else {
         echo "Error al registrar el GUID: " . $id_solicitud;
     }
 
-    $connec->close();
 }

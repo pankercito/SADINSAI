@@ -1,11 +1,11 @@
 <?php
 
-include('conect.php');
-
 if (isset($_GET['perfil'])){
-
+    
+    include('conect.php');
+    
     $pCi = desencriptar($_GET['perfil']); //dato a comparar
-
+    
     if (isset($pCi)){
         $cnce = mysqli_query($connec, "SELECT * FROM personal p
                                        INNER JOIN estados e ON p.id_estado = e.id_estado
@@ -47,3 +47,4 @@ if (isset($_GET['perfil'])){
 }else{
     echo 'no llego esa mondaa'; 
 }
+$connec->close();

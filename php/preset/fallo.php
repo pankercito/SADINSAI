@@ -94,13 +94,17 @@ if(isset($_GET["session-dup"])){
               /* Estilos para el botón de cerrar */
             .close{right: 0;
                 position: absolute;
-                width: 2rem;
                 color: #000;
                 float: right;
-                font-size: 28px;
+                font-size: 20px;
                 font-weight: bold;
-                margin: -0.5rem 0.5rem;
-            }      
+                margin: -4% 0 0;
+                width: 100%;
+                height: 100%;
+            }
+            i.bi.bi-x-square {
+                margin: 0 0 0 22rem;
+            }
             .close:hover,
             .close:focus {
                 text-decoration: none;
