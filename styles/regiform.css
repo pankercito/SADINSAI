@@ -16,28 +16,31 @@ form.regisform{
     border-radius: 0.25rem;
 }
 .bg-danger {
-    background-color: #ff6776!important;
+    background-color: #df5967!important;
+}
+
+.estructur-conten{
+    margin: 2%;
+    margin-top: 1rem;
 }
 
 legend {
+    margin-bottom: 1rem;
     justify-content: center;
     display: flex;
     position: relative;
     max-width: 100%;
-    font-size: 50%;
     line-height: inherit;
     white-space: normal;
     margin-left: 0rem;
     margin-top: 1rem;
     flex-direction: row;
-    align-content: flex-start;
     align-items: center;
     flex-wrap: nowrap;
 }
 
 form.regisform input {
     position: relative;
-    font-size: 50%;
     margin-top: -5px;
     background-color: none;
     border: 1px rgb(34, 34, 34);
@@ -48,15 +51,24 @@ form.regisform input {
 form.regisform p{
     margin-left: 6%;
     text-align: left;
-    font-size: 45%;
     margin-top: -5px;
     margin-bottom: -30%;
     margin-right: 110px;
 }
 
+button#log {
+    margin: 1rem;
+}
+
+a.btn.btn-warning{
+    margin: 1rem 0;
+}
+a.btn.btn-warning:hover {
+    background: #ffd24c;
+}
 form.regisform button{
     display: block;
-    margin: auto;
+    margin: 1rem auto;
     margin-top: 10px;
     text-align: center;
 }
@@ -78,15 +90,25 @@ div.alert{
     position: relative;
     width: 60px;
     height: 25px;
-    background-color: rgb(116 115 115);
-    border: none;
+    background-color: none;
+    border: 1px solid var(--color-green);
     border-radius: 15px;
     margin-left: 95px;
     margin-top: 2px;
-    margin-bottom: 10px
+    margin-bottom: 10px;
 }
 .checkform input[type=checkbox]{
     visibility: hidden;
+}
+.checkadmin.alert.alert-danger {
+    font-size: 15px;
+    display: block;
+    height: 78px;
+    color: black;
+    font-weight: 600;
+    background: snow;
+    border-color: snow;
+    width: 195px;
 }
 .checkform label{
     display: block;
@@ -96,7 +118,7 @@ div.alert{
     background: var(--color-green);
     cursor: pointer;
     position: absolute;
-    top: 5px;
+    top: 4px;
     left: 5px;
     z-index: 1;
     overflow: hidden;
@@ -112,20 +134,25 @@ div.alert{
 .checkform::before{
     content: 'SI';
     font: 12px/30px arial;
-    color: var(--color-green);
+    color: darkturquoise;
     position: absolute;
     left: 8px;
-    margin-top: -2px;
+    margin-top: -3px;
     z-index: 0;
-    font-weight: bold;   
+    font-weight: bold;  
 }
 .checkform::after{
     content: 'NO';
     font: 12px/30px arial;
-    color: rgb(223, 223, 223);
+    color: rgb(98 98 98);
     position: absolute;
     right: 8px;
-    margin-top: -2px;
+    margin-top: -3px;
     z-index: 0;
     font-weight: bold;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }

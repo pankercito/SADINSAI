@@ -3,7 +3,7 @@
 $db_host="localhost"; //variables de conexion a base de datos
 $db_user="root";
 $db_password="";
-$db_name="prueba";
+$db_name="sadinsai";
 
 
 $connec = mysqli_connect($db_host, $db_user, $db_password, $db_name) or die(mysql_error()); //conexion a base de datos
