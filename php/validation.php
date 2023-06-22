@@ -37,6 +37,8 @@ if(isset($_POST['login'])){
 
                 $sn = initSesion($dataview['id_usuario']);
 
+                $_SESSION['LAST_ACTIVITY'] = time();
+
                 $connec->close();
 
                 // Redirecciono al usuario a la página principal del sitio.

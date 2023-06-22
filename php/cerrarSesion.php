@@ -12,7 +12,6 @@ if(isset($_SESSION['sesion'])){
         $evento  = $_SESSION['event'];
         echo $evento;
         $delevent = "DROP EVENT IF EXISTS $evento";
-        
         $sql = mysqli_query($connec, $delevent);
         $connec->close();
     }

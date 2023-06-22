@@ -2,12 +2,13 @@
 
 include ("../php/conect.php");
 
-$ciP = $_SESSION['cidelusuario'];
+$idP = $_SESSION['sesion'];
 
-$regisview = mysqli_query($connec,"SELECT * FROM solicitudes s INNER JOIN personal p ON p.ci = s.ci_emisor WHERE s.ci_emisor = $ciP ORDER BY fecha DESC");
+$regisview = mysqli_query($connec,"SELECT * FROM solicitudes s INNER JOIN registro r ON r.id_usuario = s.id_receptor WHERE s.id_receptor = $idP ORDER BY fecha DESC");
 $count_results = mysqli_num_rows($regisview);
 
 //Si ha resultados
+
 if ($count_results > 0) {
     //Muestra la cantidad de usuarios
     $apr = array(
@@ -22,12 +23,13 @@ if ($count_results > 0) {
         "2" => "rechasada",
         "3" => "vencida",
     );
-    echo '<h6>total de solicitudes realizadas '.$count_results.'.</h6>';
+    echo '<h6>total de solicitudes en espera '.$count_results.'.</h6>';
 
     while ($row_searched = mysqli_fetch_array($regisview)){
         //Lista de los usuarios
         echo '<tr>';
         echo '<td><a>'.$row_searched['id_solicitud'].'</a></td>';
+        echo '<td><a class="lol" href="principal.php?perfil='.encriptar($row_searched['ci']).'&parce=true">'.$row_searched['ci'].'</a></td>';
         echo '<td><a class="lol" href="principal.php?perfil='.encriptar($row_searched['ci_solicitada']).'&parce=true">'.$row_searched['ci_solicitada'].'</a></td>';
         echo '<td><a>'.$row_searched['fecha'].'</a></td>';
         echo '<td><a>'.ucfirst(strtolower($row_searched['motivo'])).'</a></td>';        
@@ -35,7 +37,7 @@ if ($count_results > 0) {
         echo '</tr>';
     }
 }else {
-        //Si no hay registros encontrados
-        echo '<h5>no has realizado ninguna solicitud</h5>';
+    //Si no hay registros encontrados
+    echo '<h2>no posee ninguna solicitud</h2>';
 }
 $connec->close();

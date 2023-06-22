@@ -19,13 +19,13 @@
     	<div class="row">
 	    	<div class="action col-lg-3">
     	    	<div class="conten">
-					<p class="n-inf">Acciones</p>
+					<p class="n-inf">Filtrar</p>
 					<div class="tb_search">
-						<input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Search.." class="form-control">
+						<input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Buscar..." class="form-control">
     	    		</div>
 					<div class="num_rows">
 						<div class="form-group"> <!--		Show Numbers Of Rows 		-->
-				 			<select class  ="form-control" name="state" id="maxRows">		 
+				 			<select class  ="form-control" name="state" id="maxRows">
 								<option value="10">10</option>
 								<option value="15">15</option>
 								<option value="20">20</option>
@@ -33,7 +33,8 @@
 								<option value="70">70</option>
 								<option value="100">100</option>
     	        				<option value="5000">Show ALL Rows</option>
-							</select>		 		
+							</select>	
+							<i class="bi bi-arrow-down-short"></i>	 		
 						</div>
     	    		</div>
 				</div>

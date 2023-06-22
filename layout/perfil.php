@@ -1,7 +1,7 @@
 <!--COLUMNA #2/PARA PERFIL BÁSICO DEL USUARIO-->
 <script src="../js/prestablecer.js"></script>
 
-    <div class="perfil">
+    <div class="perfil" id="perfil">
         <div class="col-lg">
             <p class="ptittle">Perfil</p>
             <a>

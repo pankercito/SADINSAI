@@ -13,10 +13,7 @@ if(isset($_GET['onlystate'])){
             $row_searched['id_estado'] => ucwords(strtolower($row_searched['estado']))
         );
     }
-}else{
-
 }
-
 if(isset($_GET['onlysede'])){
     $sdonly = $_GET['onlysede'];
     $sql = mysqli_query($connec,"SELECT * FROM sedes WHERE sede_id = '$sdonly'");
@@ -28,6 +25,5 @@ if(isset($_GET['onlysede'])){
             $row_searched['sede_id'] => ucwords(strtolower($row_searched['nombre_sede']))
         );
     }
-}else{
-
-}   
+}
+$connec->close();

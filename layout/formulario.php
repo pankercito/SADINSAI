@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="../styles/editarUsuarios.css">
 <div class="contenido1">
   <form action="../php/registroPersonal.php" method="post">
     <div class="lmao row">

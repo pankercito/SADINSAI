@@ -15,11 +15,11 @@ if (isset($_SESSION['LAST_ACTIVITY'])) {
     if ($tiempo_transcurrido > $duracion_sesion) {
         session_unset();
         session_destroy();
-        header('Location: login.php');
+        header('Location: cerrarSesion.php');
     } else {
         // Actualizar la última actividad de la sesión
         $_SESSION['LAST_ACTIVITY'] = time();
     }
 } else {
-    header('Location: login.php');
+    header('Location: cerrarSesion.php');
 }

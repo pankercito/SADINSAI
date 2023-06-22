@@ -12,5 +12,5 @@ function hora(){
      // Obtener la nueva hora en el formato "YYYY-MM-DD HH:MM:SS"
     $nueva_hora = $fecha_hora->format('Y-m-d H:i:s');
 
-return $nueva_hora;
+    return $nueva_hora;
 }

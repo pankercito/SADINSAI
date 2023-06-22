@@ -102,4 +102,11 @@ a.alert.alert-dark {
     margin: 0;
     padding: 12px;
 }
+input#adminSearch {
+    width: 420%;
+}
+input#userSearch {
+    width: 400%;
+    margin-left: -9.5em;
+}
 

@@ -2,11 +2,12 @@
 
 include("conect.php");
 include("funtion/idGenerador.php");
+include("funtion/asignarSolicitud.php");
 
 session_start();
 
 $ci = $_SESSION['cidelusuario'];
-
+$recep = asignar();
 $ciSoli = mysqli_real_escape_string($connec, $_POST["sCi"]);
 $tex = strtolower(mysqli_real_escape_string($connec, $_POST["sMotivo"]));
 
@@ -23,7 +24,8 @@ if(isset($_POST["sCi"])){
 
     } while ($dan != 0);
 
-    $sqlp = mysqli_query($connec,"INSERT INTO solicitudes (ci, ci_solicitada, id_solicitud, fecha, motivo, apr_estado) VALUES ('$ci', '$ciSoli', '$id_solicitud', '$datetime', '$tex', '0')");
+    $sqlp = mysqli_query($connec,"INSERT INTO solicitudes (ci_emisor, id_receptor, ci_solicitada, id_solicitud, fecha, motivo, apr_estado) 
+                                  VALUES ('$ci', '$recep', '$ciSoli', '$id_solicitud', '$datetime', '$tex', '0')");
     $connec->close();
     
     if (isset($sqlp)) {

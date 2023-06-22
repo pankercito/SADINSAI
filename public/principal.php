@@ -4,6 +4,8 @@
 
 <?php require("../layout/navbar.php"); ?>
 
+<?php require("../php/funtion/adminSet.php"); ?>
+
 <!--SALUDO DE BIENVENIDA-->
 <section name="cromaconten"> 
   <div class="contencroma">
@@ -14,18 +16,15 @@
 <div class="estructur-conten">
   <div class="grid-containerr">
     <div class="row">
-      <div class="col-lg-9">
+      <div class="centro col-lg-9" id="centro">
         <?php   require_once("../php/preset/seleccionPerfil.php"); ?>
       </div>
-      <div class="col-lg-3">
+      <div class="colunma col-lg-3" id="columna">
         <p>Informacion extra</p>
         <a class="pnomina btn btn-primary" href=''>Nomina de Usuario</a>
         <br>
-        <?php
-          $opcion1 = "<a class='pedit btn btn-warning' href=''>Editar datos</a>";
-          $opcion2 = "";
-          include("../php/opcional.php");
-        ?>
+        <button class='pedit btn btn-warning' id="editar">Editar datos</button>
+        <br>
         <p>Archivos totales = %datos</p>
         <p>Archivos faltantes = %datos</p>
       </div>
@@ -33,5 +32,5 @@
     </div>
   </div>
 </div>
-
+<script src="../js/editUserComplement.js"></script>
 <?php require ("../layout/footer.php"); ?>

@@ -26,7 +26,7 @@ function getPagination (table){
             for (var i = 1; i <= pagenum ;){			// for each page append pagination li 
                 $('.pagination').append(
                     '<li data-page="'+i+'" class="pagselect ">\
-                    <span>'+ i++ +'<span class="sr-only">(current)</span></span>\
+                    <span>'+ i++ +'<span class="sr-only"></span></span>\
                     </li>').show();
             }
             // end for i 
@@ -85,17 +85,6 @@ function showig_rows_count(maxRows, pageNum, totalRows) {
     $('.rows_count').html(string); 
 }
 
-// CREATING INDEX
-function default_index() {
-    $('table tr:eq(0)').prepend('<th> ID </th>')
-        var id = 0;
-
-        $('table tr:gt(0)').each(function(){	
-            id++
-            $(this).prepend('<td>'+id+'</td>');
-        });
-}
-
 // Scrypt para busqueda en las tablas
 function FilterkeyWord_all_table() {
     // Count td if you want to search on all table instead of specific column
@@ -146,3 +135,7 @@ function FilterkeyWord_all_table() {
     $('#maxRows').trigger('change');
     }
 }
+function expandirSelect() {
+    var select = document.getElementById("maxRows");
+    select.size = select.size > 1 ? 1 : select.options.length;
+  }

@@ -6,3 +6,8 @@
         <button class="btn btn-defaul" type="sumbit">ir</button>
     </form>
 </div>
+<?php
+
+if(isset($_GET['result'])){
+    include("init.php");
+}

@@ -27,7 +27,7 @@
         <div class="conten">
 					<p class="n-inf">busqueda rapida</p>
 					<div class="tb_search">
-						<input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Search.." class="form-control">
+						<input type="text" id="estadosSearch" onkeyup="FiltroEstado()" placeholder="Buscar..." class="form-control">
           </div>
         </div>        
         <p>sedes</p>
@@ -37,6 +37,6 @@
     </div>
   </div>
 </div>
-<script src="../js/estadosSearch.js"></script>
+<script src="../js/search.js"></script>
 
 <?php require ("../layout/footer.php"); ?>

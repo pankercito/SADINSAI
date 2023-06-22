@@ -8,12 +8,12 @@ if (!isset($_FILES["image1"])){
     $imagen = $_FILES["image1"];
     $ubicacionimg = $imagen["tmp_name"];
 
-    $comando = "tesseract " . escapeshellarg($ubicacionimg) . " stdout -l spa -c debug_file=/dev/null";
+    $comando = "C:\Program Files\Tesseract-OCR>tesseract " . escapeshellarg($ubicacionimg) . " stdout -l spa -c debug_file=/dev/null";
 
     exec($comando, $textodetectado, $codigosalida);
     var_dump($codigosalida);
 
-    if($codigosalida === 0){
+    if($codigosalida == 0){
 
         echo "<p>El texto detectado es: </p>";
         $textocomocadena = join("\n", $textodetectado);

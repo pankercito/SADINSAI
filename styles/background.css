@@ -48,16 +48,13 @@ body{ /*FONDO DE PANTALLA*/
 }
 
 .ins hr{ /*linea de Cintillo*/
-    width: 550px;
-    border-color: #d9001b;
+    width: 42.6%;
+    border-color: #a3192a;
     border-style: dotted;
-    border-top: none;
     border-left: none;
     border-right: none;
-    display: block;
-    position: relative;
-    margin-bottom: 5px;
-
+    margin: 0.5rem auto 0.2rem;
+    opacity: 1;
 }
 
 .bicent img{ /*Cintillo*/
