@@ -1,3 +1,91 @@
+div#centroEdit{
+    display: none;
+}
+.first.row {
+    text-align: center;
+    justify-content: start;
+}
+
+.structur-conten {
+    margin: 1.5rem 1rem;
+}
+
+.contenido1 form input {
+    height: 1.9rem;
+    border: none;
+    padding: 0.2rem;
+    border-radius: 3px;
+    width: auto;
+}
+.selects.row {
+    display: flex;
+    justify-items: self-end;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: center;
+    width: 110%;
+}
+
+.fixed.col {
+    height: 2000px;
+}
+
+.fijo.contenido {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 5.9rem;
+    padding: 0 0 1rem;
+    background-color: rgba(51, 51, 51, 0.205);
+    text-align: start;
+}
+
+.fijo.contenido p {
+    text-align: center;
+}
+
+.conten.col-8 {
+    background-color: rgba(51, 51, 51, 0.205);
+    margin: 0rem 0rem 0rem 1rem;
+}
+
+.añadir i {
+    font-size: 18px;
+}
+
+.userselect i {
+    font-size: 18px;
+}
+
+.userselect {
+    margin: -1rem 1.4rem 1.5rem;
+}
+
+.ations {
+    margin: 0rem 1.4rem 0rem;
+}
+
+a.añadir {
+    margin: 0rem 0 1rem;
+    height: 41px;
+}
+
+.one.row {
+    display: flex;
+    margin: 1.5rem;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+
+.two.row {
+    display: flex;
+    margin: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
 .sel1 {
     display: flex;
     flex-direction: column;
@@ -41,6 +129,12 @@
     width: 110%;
 }
 .selects select {
+    height: 1.9rem;
+    border: none;
+    padding: 0.2rem;
+    border-radius: 3px;
+}
+.selects select {
     font-size: 18px;
     
 }
@@ -54,4 +148,10 @@ select#Sede {
     flex-direction: row;
     justify-content: center;
     align-items: baseline;
+}
+select#Sede {
+    height: 1.9rem;
+    border: none;
+    padding: 0.2rem;
+    border-radius: 3px;
 }

@@ -24,14 +24,14 @@ $(document).ready(function () {
         }).addClass("show");
       }
 
-      zindex++;
+      zindex = 1;
     } else {
       // no cards in view
       $("div.cards").addClass("showing");
       $(this).css({
         zIndex: zindex
       }).addClass("show");
-      zindex++;
+      zindex = 1;
     }
   });
 });

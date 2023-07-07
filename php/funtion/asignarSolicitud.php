@@ -19,11 +19,9 @@ function asignar(){
 
     if ($count == 1) {
         $initial = $arraySet[0];
-        echo "Uno: ";
     } else {
         $ad = rand(0, $count - 1);
         $initial = $arraySet[$ad];
-        echo "Dos: ";
         print_r($arraySet);
     }
     return $initial;

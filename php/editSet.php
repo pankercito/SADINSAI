@@ -12,7 +12,10 @@ $SetCi = $personal->getCi();
 $SetPhone = $personal->getTelefono();
 $SetEmail =  $personal->getEmail();
 $SetDireccion = $personal->getDireccion();
+$SetEstado = $personal->getEstado();
 $SetIdEstado = $personal->getIdEstado();
+$SetCiudad = $personal->getCiudad();
 $SetIdCiudad = $personal->getIdCiudad();
+$SetSede = $personal->getSede();
 $SetIdSede = $personal->getIdSede();
 

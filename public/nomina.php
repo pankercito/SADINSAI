@@ -24,7 +24,7 @@
 						<input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Buscar..." class="form-control">
     	    		</div>
 					<div class="num_rows">
-						<div class="form-group"> <!--		Show Numbers Of Rows 		-->
+						<div class="form-group"> <!-- Numeros de Paginacion-->
 				 			<select class  ="form-control" name="state" id="maxRows">
 								<option value="10">10</option>
 								<option value="15">15</option>
@@ -45,23 +45,28 @@
 					<table class="table table-striped table-class" id="table-id">	
 						<thead>
 							<tr>
-								<th>Name</th>
-								<th>Email</th>
-								<th>Phone</th>
-								<th>Date</th>
+								<th>Nombre</th>
+								<th>Cedula</th>
+								<th>Telefono</th>
+								<th>Pagos</th>
+								<th>Monto</th>
 							</tr>
   						</thead>
 						<tbody>
-							<?php 
+							<?php
+							///datos randoms para pruebas 
 								$i = 0;
-
 								while($i!=58){
+									$lol = rand(500, 5000);
+									$lmo = rand(1, 31);
+									$ci  = rand(01111111, 99999999);
 									echo "
 									<tr>
 										<td>Rajah Armstrong</td>
-										<td>erat.neque@noncursusnon.ca</td>
-										<td>1-636-140-".$i++."</td>
-										<td>Oct 26, 2023</td>
+										<td>".$ci."</td>
+										<td>041212345".$i++."</td>
+										<td>Oct ".$lmo.", 2023</td>
+										<td>".$lol."</td>
 									</tr>";
 								}
 							?>

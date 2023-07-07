@@ -78,11 +78,9 @@ div#notificacion {
     -o-transition: all 0.8s;
     transition: all 0.8s;
 }
-a.alert.alert-secondary {
-    padding: 12px;
-    margin: 0;
-    font-weight: 700;
-    color: #7e7e7e;
+a.btn.btn-outline-secondary {
+    width: 77%;
+    margin: auto;
 }
 a.alert.alert-success {
     padding: 12px;

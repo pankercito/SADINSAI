@@ -30,3 +30,37 @@
   justify-content: flex-start;
   align-items: center;
 }
+li.stdI a {
+  text-decoration: none;
+  color: currentcolor;
+}
+ul.stdU {
+  display: flex;
+  flex-wrap: wrap;
+}
+li.stdI {
+  list-style: none;
+  margin: 0.1rem;
+}
+.states {
+  margin-top: 1rem;
+  margin-left: -10%;
+}
+.grid-containerr  .row{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+p.n-inf {
+  text-align: start;
+  font-size: 15px;
+  margin: 0px;
+  font-weight: 600;
+  color: #4e4c4c;
+}
+input#estadosSearch {
+    border: none;
+    border-radius: 3px;
+    width: auto;
+}

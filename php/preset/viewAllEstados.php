@@ -15,13 +15,9 @@ if ($count > 0) {
     for($states = 0; $states < $count; $states ++){    
     //Lista de los usuarios
     $row_searched = mysqli_fetch_array($regisview);
-
-        echo '<tr>';
-        echo '<td><a></a></td>';
-        echo '<td style="border-left: none;"><a class="idsvtate">'.$row_searched['id_estado'].'</a></td>';
-        echo '<td style="border-left: 1px solid #dee2e6;"><a class="svtate"  href="?onlystate='.$row_searched['id_estado'].'">'.$row_searched['estado'].'</a></td>';
-        echo '<td style="border-left: 1px solid #dee2e6;"><a class="totalsede">'.$row_searched['total_sedes'].'</a></td>';
-        echo '</tr>';
-        
+        echo '<li class="stdI">
+                <a  class="estado btn btn-light" href="?onlystate='.$row_searched['id_estado'].'">'.$row_searched['estado'].'</a>
+              </li>';
+     
     }
 }

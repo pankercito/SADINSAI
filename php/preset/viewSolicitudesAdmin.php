@@ -8,11 +8,10 @@ $regisview = mysqli_query($connec,"SELECT * FROM solicitudes s INNER JOIN regist
 $count_results = mysqli_num_rows($regisview);
 
 //Si ha resultados
-
 if ($count_results > 0) {
     //Muestra la cantidad de usuarios
     $apr = array(
-            "0" => "alert alert-secondary",
+            "0" => "btn btn-outline-secondary",
             "1" => "alert alert-success",
             "2" => "alert alert-danger",
             "3" => "alert alert-dark",
@@ -27,13 +26,13 @@ if ($count_results > 0) {
 
     while ($row_searched = mysqli_fetch_array($regisview)){
         //Lista de los usuarios
-        echo '<tr>';
+        echo '<tr data-solicitud="'.$row_searched['id_solicitud'].'">';
         echo '<td><a>'.$row_searched['id_solicitud'].'</a></td>';
-        echo '<td><a class="lol" href="principal.php?perfil='.encriptar($row_searched['ci']).'&parce=true">'.$row_searched['ci'].'</a></td>';
+        echo '<td><a class="lol" href="principal.php?perfil='.encriptar($row_searched['ci']).'&parce=true">'.$row_searched['ci_emisor'].'</a></td>';
         echo '<td><a class="lol" href="principal.php?perfil='.encriptar($row_searched['ci_solicitada']).'&parce=true">'.$row_searched['ci_solicitada'].'</a></td>';
         echo '<td><a>'.$row_searched['fecha'].'</a></td>';
-        echo '<td><a>'.ucfirst(strtolower($row_searched['motivo'])).'</a></td>';        
-        echo '<td><a class="'.$apr[$row_searched['apr_estado']].'">'.$aprN[$row_searched['apr_estado']].'</a></td>';
+        echo '<td><a class="viewDetails btn btn"> Ver detalles </a></td>';    
+        echo '<td><a class="'.$apr[$row_searched['apr_estado']].'">'.$aprN[$row_searched['apr_estado']].'<span style="margin:.5rem;"></span><i class="bi bi-arrows-fullscreen"></i></a></td>';
         echo '</tr>';
     }
 }else {

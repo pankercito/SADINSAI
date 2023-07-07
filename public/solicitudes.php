@@ -1,4 +1,4 @@
-<?php require_once ("../php/sesionval.php"); ?> 
+<?php require_once("../php/sesionval.php"); ?> 
 
 <?php require ("../layout/head.php"); ?>
 
@@ -26,16 +26,12 @@
 					<div class="tb_search">
 						<input type="text" id="<?php imprime("adminSearch", "userSearch")?>" onkeyup="<?php imprime("FiltroAdmin()", "FiltroUser()")?>" placeholder="Buscar..." class="form-control">
         			</div>
-					<div class="ramas">
-						<?php imprime("", '<a href="?solicitud=true" class="direccion btn btn-warning">Nueva solicitud</a>') ?>
-					</div>
 				</div>
       		</div>	
 			<div id="notificacion"></div>
 				<?php include("../php/preset/notificacion.php");?>
     		<div class="n-estructure col-lg-9">
     	    	<p class="ttl-dashboard">Solicitudes</p>
-				<?Php include("../php/preset/seleccionSolicitud.php")?>
     	    	<div class="container">	
 					<?php incluir("../layout/solicitudAdmin.php", "../layout/solicitudUser.php")?>
 				</div>
@@ -43,6 +39,7 @@
 		</div>
     </div>
 </div>
+<script src="../js/solicitudDetails.js"></script>
 <script src="../js/search.js"></script>
 
 <?php require ("../layout/footer.php"); ?>

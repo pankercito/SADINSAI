@@ -1,5 +1,6 @@
 <div class="stades">
-    <table class="sede-table table table-striped table-classtable-sm w-auto data">
+    <h4>Sedes</h4>
+    <table class="sede-table table table-striped">
         <thead class="table-light">
             <tr>
                 <th class="text-end"><a></a></th>

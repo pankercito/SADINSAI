@@ -13,4 +13,5 @@
             <?php include('../php/preset/viewSolicitudes.php') ?>
         </tbody>
     </table>
+    <link rel="stylesheet" href="../styles/userSets.css">
 </div>

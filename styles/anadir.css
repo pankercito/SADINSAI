@@ -14,6 +14,15 @@
     border-radius: 3px;
     width: auto;
 }
+.selects.row {
+    display: flex;
+    justify-items: self-end;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: center;
+    width: 110%;
+}
 
 .fixed.col {
     height: 2000px;
@@ -58,58 +67,6 @@ a.añadir {
     height: 41px;
 }
 
-.lmao.row {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.lmao.row p {
-    margin: 0.5rem 0;
-}
-
-.selects.row {
-    margin: 0 1rem;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: space-evenly;
-}
-
-.selects select {
-    height: 1.9rem;
-    border: none;
-    padding: 0.2rem;
-    border-radius: 3px;
-}
-
-.sel1 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.sel2 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.sel3 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 1.5rem 1.5rem;
-}
-
-select#Sede {
-    height: 1.9rem;
-    border: none;
-    padding: 0.2rem;
-    border-radius: 3px;
-    width: 32rem;
-}
-
 .one.row {
     display: flex;
     margin: 1.5rem;
@@ -124,4 +81,74 @@ select#Sede {
     align-items: center;
     flex-wrap: wrap;
     flex-direction: column;
+}
+
+.sel1 {
+    display: flex;
+    flex-direction: column;
+}
+.sel2 {
+    display: flex;
+    flex-direction: column;
+}
+.sel3 {
+    display: flex;
+    flex-direction: column;
+}
+.contenido1 {
+    justify-content: center;
+    display: flex;
+    text-align: center;
+    margin: auto;
+}
+.contenido1 form {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: space-around;
+    font-size: 20px;
+}
+.one.row {
+    display: block;
+}
+.two.row {
+    display: block;
+}
+.selects.row {
+    display: flex;
+    justify-items: self-end;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: center;
+    width: 110%;
+}
+.selects select {
+    height: 1.9rem;
+    border: none;
+    padding: 0.2rem;
+    border-radius: 3px;
+}
+.selects select {
+    font-size: 18px;
+    
+}
+select#Sede {
+    font-size: 18px;
+}
+.lmao.row {
+    width: 80%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+}
+select#Sede {
+    height: 1.9rem;
+    border: none;
+    padding: 0.2rem;
+    border-radius: 3px;
 }

@@ -4,38 +4,54 @@ const editar = document.getElementById("editar");
 editar.addEventListener("click", bue);
 
 //funcion de boton ocultal todo y enjecutar todas la funciones
-function bue(){
-    //donde imprimire la plantilla
-    centro = document.getElementById("centro");
+function bue() {
+  agregarSelectedE(idE);
+  //cambiar titulo y variable para complemento
+  document.title = "SADINSAI | Editar usuario";
 
-    //cambiar titulo y variable para complemento
-    document.title = "SADINSAI | Editar usuario";
+  //ocultar colunmas adicionales para pantalla de editar
+  document.getElementById("centro").style.display = "none";
+  document.getElementById("columna").style.display = "none";
+  document.getElementById("centroEdit").style.display = "unset";
 
-    //ocultar colunmas adicionales para pantalla de editar
-    document.getElementById("perfil").style.display = "none";
-    document.getElementById("columna").style.display = "none";
-    document.getElementById("centro").className = document.getElementById("centro").className.replace("col-lg-9", "col-lg-11");    
-    
-    mostrarPhp();
+  agregarSelectedAll(idC, idS);
 }
-//funcion para mostrar plantilla
-function mostrarPhp(){
-    var xhr = new XMLHttpRequest();
-    
-    //optener el get
-    var get = location.search.substring(1);
 
-    //solicitud al documento
-    xhr.open("GET", "../layout/editarUsuario.php?" + get, true);
+//funcion de preselecion de selectores
+function agregarSelectedE(valor1) {
+  // Obtener los elementos select del DOM
+  var selectE = document.getElementById("Estados");
 
-    xhr.onload = function(){
-        //verificacion de solicitud
-        if(xhr.status === 200){
-            centro.innerHTML = xhr.responseText;
-        }else{
-            centro.innerHTML = "error al mostrar informaci&oacute;n, recargue la pagina";
-        }
-    };
-    //enviar solicitud
-    xhr.send();
+  // Establecer el valor seleccionado en los selectores
+  for (var i = 0; i < selectE.options.length; i++) {
+    var option = selectE.options[i];
+    if (option.value == valor1) {
+      option.selected = true;
+    }
+  }
+  // Llamar al evento change en el selector de Estado
+  $("#Estados").trigger('change');
+
 }
+
+//funcion de preselecion de selectores
+function agregarSelectedAll(valor2, valor3) {
+  setTimeout(() => {
+    var selectC = document.getElementById("Ciudades");
+    var selectS = document.getElementById("Sede");
+    for (var i = 0; i < selectC.options.length; i++) {
+      var option = selectC.options[i];
+      if (option.value == valor2) {
+        option.selected = true;
+      }
+    }
+    for (var i = 0; i < selectS.options.length; i++) {
+      var option = selectS.options[i];
+      if (option.value == valor3) {
+        option.selected = true;
+      }
+    }
+  }, 50);
+}
+
+//************************************************************************************

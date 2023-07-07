@@ -1,6 +1,6 @@
 //filtro de busqueda de estados
-function FiltroEstado(){
-    var input = document.getElementById("estadosSearch");//id del input de busqueda
+function FiltroEstado() {
+    var input = document.getElementById("estadosSearch"); //id del input de busqueda
     var filter = input.value.toLowerCase();
 
     if (filter !== '') {
@@ -36,11 +36,11 @@ function FiltroEstado(){
             rows[i].style.display = "";
         }
     }
-} 
+}
 
 //filtro de busqueda de Solicitudes - admin
-function FiltroAdmin(){
-    var input = document.getElementById("adminSearch");//id del input de busqueda
+function FiltroAdmin() {
+    var input = document.getElementById("adminSearch"); //id del input de busqueda
     var filter = input.value.toLowerCase();
 
     if (filter !== '') {
@@ -56,7 +56,7 @@ function FiltroAdmin(){
             var matchFound = false;
 
             // Iterar sobre celdas de la fila
-            for (var j = 0; j <=5; j++) {
+            for (var j = 0; j <= 5; j++) {
                 var cellText = cells[j].textContent.toLowerCase();
 
                 // Comprobar si el texto de la celda contiene la palabra buscada
@@ -78,8 +78,8 @@ function FiltroAdmin(){
 }
 
 //filtro de busqueda de Solicitudes - User
-function FiltroUser(){
-    var input = document.getElementById("userSearch");//id del input de busqueda
+function FiltroUser() {
+    var input = document.getElementById("userSearch"); //id del input de busqueda
     var filter = input.value.toLowerCase();
 
     if (filter !== '') {
@@ -114,4 +114,4 @@ function FiltroUser(){
             rows[i].style.display = "";
         }
     }
-} 
+}

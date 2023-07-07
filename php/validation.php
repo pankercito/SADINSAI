@@ -18,8 +18,7 @@ if(isset($_POST['login'])){
     $trix = desencriptar($dataview['pass']);
 
     if($nr == 1 && $pass == $trix){ //contraseña correcta
-        echo "furula";
-
+        
         if($dataview['sesion'] == FALSE){//no hay sesion activa         
                 $_SESSION['userdata'] = ''.ucwords(strtolower($dataview['nombre'])).' '.ucwords(strtolower($dataview['apellido'])).'';
                 $_SESSION['cidelusuario'] = $dataview['ci'];
@@ -35,7 +34,7 @@ if(isset($_POST['login'])){
                 $event = "CREATE EVENT $name$id ON SCHEDULE AT '$nueva_hora' DO UPDATE registro r SET sesion = '0' WHERE r.id_usuario = '$id'";        
                 $check = mysqli_query($connec, $event);
 
-                $sn = initSesion($dataview['id_usuario']);
+                $sn = initSesion($dataview['id_usuario']); //variable de inicio de sesion en BD
 
                 $_SESSION['LAST_ACTIVITY'] = time();
 
@@ -50,7 +49,7 @@ if(isset($_POST['login'])){
             header('location:../index.php?session-dup=true');
         }
     }else{
-        //Contraseña herrada
+        //Contraseña errada
         $connec->close();
         header("HTTP/1.1 302 Moved Temporarily"); 
 	    header('location:../index.php?fallo=true');
