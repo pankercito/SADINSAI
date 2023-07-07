@@ -19,6 +19,10 @@ $(document).ready(function () {
         // this card was showing - reset the grid
         $("div.cards")
           .removeClass("showing");
+        $(this)
+          .css({
+            zIndex: 0
+          })
       } else {
         // this card isn't showing - get in with it
         $(this)
@@ -29,7 +33,7 @@ $(document).ready(function () {
 
       }
 
-      zindex = 1;
+      zindex++;
 
     } else {
       // no cards in view
@@ -41,7 +45,7 @@ $(document).ready(function () {
         })
         .addClass("show");
 
-      zindex = 1;
+      zindex++;
     }
 
   });
