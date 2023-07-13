@@ -15,8 +15,8 @@ if ($count > 0) {
     for($states = 0; $states < $count; $states ++){    
     //Lista de los usuarios
     $row_searched = mysqli_fetch_array($regisview);
-        echo '<li class="stdI">
-                <a  class="estado btn btn-light" href="?onlystate='.$row_searched['id_estado'].'">'.$row_searched['estado'].'</a>
+        echo '<li class="stdI d-grid gap-2">
+                <a  class="estado btn btn-sm" href="?onlystate='.$row_searched['id_estado'].'"><i class="bi bi-window-stack"></i> '.$row_searched['estado'].'</a>
               </li>';
      
     }

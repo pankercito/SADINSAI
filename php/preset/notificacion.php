@@ -1,8 +1,10 @@
+<script src=""></script>
 <script>
 // Obtener el mensaje de la notificación desde PHP
 let mensaje = "<?php echo $_SESSION["noti"];?>";
 
 if(mensaje == 1){
+    localStorage.setItem('activeSection', '5');
     // Mostrar el mensaje en el contenedor
 	document.getElementById("notificacion").innerHTML = "Su solicitud a sido procesada con exito";
 	

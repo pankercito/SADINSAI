@@ -78,10 +78,6 @@ div#notificacion {
     -o-transition: all 0.8s;
     transition: all 0.8s;
 }
-a.btn.btn-outline-secondary {
-    width: 77%;
-    margin: auto;
-}
 a.alert.alert-success {
     padding: 12px;
     margin: 0;
@@ -107,4 +103,12 @@ input#userSearch {
     width: 400%;
     margin-left: -9.5em;
 }
-
+span.jconfirm-title {
+    margin: 0 0 0 5%;
+}
+.form-check {
+    margin: 3%;
+}
+a.aprState.alert.alert-secondary {
+    cursor: pointer;
+}

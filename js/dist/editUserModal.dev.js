@@ -24,7 +24,7 @@ form.addEventListener("submit", function (event) {
   var sedeText = sedeOption.textContent; // Crear un objeto con los datos del formulario
 
   var formData = {
-    "cedula": document.getElementById("Ci").value,
+    "cedula": ds,
     "nombre": document.getElementById("Name").value,
     "apellido": document.getElementById("Apellido").value,
     "telefono": document.getElementById("Phone").value,
@@ -70,7 +70,7 @@ form.addEventListener("submit", function (event) {
       enviar: {
         text: "Enviar",
         action: function action() {
-          console.log($(form).serialize()); // Si el usuario hace clic en "Enviar"
+          $(form).serialize(); // Si el usuario hace clic en "Enviar"
           // Enviar el formulario con AJAX
 
           $("#editForm").submit();

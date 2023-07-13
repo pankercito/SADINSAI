@@ -29,7 +29,7 @@ form.addEventListener("submit", function (event) {
 
   // Crear un objeto con los datos del formulario
   const formData = {
-    "cedula": document.getElementById("Ci").value,
+    "cedula": ds,
     "nombre": document.getElementById("Name").value,
     "apellido": document.getElementById("Apellido").value,
     "telefono": document.getElementById("Phone").value,
@@ -87,7 +87,7 @@ form.addEventListener("submit", function (event) {
       enviar: {
         text: "Enviar",
         action: function () {
-          console.log($(form).serialize())
+          $(form).serialize()
           // Si el usuario hace clic en "Enviar"
           // Enviar el formulario con AJAX
           $("#editForm").submit();

@@ -1,6 +1,11 @@
 <div class="centro col-lg-12" id="centroEdit">
-  <?php include_once("../php/editSet.php")?>
+  <?php 
+    include_once("../php/editSet.php");
+
+    $_SESSION['editCI']  = $SetCi;
+  ?>
   <div class="contenido1" id="editSet" display="none">
+    
     <form action="../php/registroSolicitud.php" method="post" id="editForm" name="xdit">
     <h4>Editar perfil</h4>
         <div class="lmao row">
@@ -8,7 +13,7 @@
             <p>Nombre </p>
             <input id="Name" name="name" type="text" value="<?php echo $SetName?>">
             <p>Cedula </p>
-            <input id="Ci" name="ci" type="int" onblur="verificarCI()" value="<?php echo $SetCi?>">
+            <input id="Ci" name="ci" type="int" onblur="verificarCI()" value="<?php echo $SetCi?>" disabled>
             <div id="mensajeCi"></div>
           </div>
           <div class="two row">
@@ -64,6 +69,7 @@
       <link rel="stylesheet" href="../styles/editarUsuarios.css">
   </div>
   <script type="text/javascript">
+    var ds = "<?php echo $SetCi?>";
     // Datos del formulario precargados
     const datosFormularioPre = {
           "nombre": "<?php echo $SetName?>",

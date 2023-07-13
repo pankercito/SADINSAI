@@ -17,17 +17,18 @@
 
 <div class="estructur-conten">
   <div class="grid-containerr">
+        
     <div class="row">
-      <div class="col-lg-4">
-        <p class="n-inf">busqueda rapida</p>
-			  <div class="tb_search">
-				  <input type="text" id="estadosSearch" onkeyup="FiltroEstado()" placeholder="Buscar..." class="form-control">
-        </div>
         <?php 
           require_once ("../layout/estadosTable.php");
         ?>
+      <div class="col-lg-2">
+        <h6 class="n-inf">busqueda rapida</h6>
+			  <div class="tb_search">
+				  <input type="text" id="estadosSearch" onkeyup="FiltroEstado()" placeholder="Buscar..." class="form-control">
+        </div>
       </div>
-      <div class="sot col-lg-7">
+      <div class="sot col-lg-8">
         <div class="conten">
           <?php include "../php/preset/seleccionStados.php"?>
         </div>

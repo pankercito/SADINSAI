@@ -33,7 +33,7 @@ class Personal {
                 $this->telefono = $perfils['telefono'];
                 $this->ci = $perfils['ci'];
                 $this->email = strtolower($perfils['email']);
-                $this->direccion = ucfirst($perfils['direccion']);
+                $this->direccion = ucwords(strtolower($perfils['direccion']));
                 $this->estado = $perfils['estado'];
                 $this->idEstado = $perfils['id_estado'];
                 $this->ciudad = $perfils['ciudad'];

@@ -7,9 +7,10 @@ include("funtion/removerAcentos.php");
 
 session_start();
 //soli
-$ci = $_SESSION['cidelusuario'];
+$ciEm = $_SESSION['cidelusuario'];
 $recep = asignar();
-$ciSoli = mysqli_real_escape_string($connec, $_POST["ci"]);
+$ciRec = $_SESSION['editCI'];
+$ci = mysqli_real_escape_string($connec, $_POST["ci"]);
 
 //precarga
 $name=  mysqli_real_escape_string($connec, strtoupper(remover_acentos($_POST['name'])));
@@ -38,11 +39,12 @@ if($_POST["ci"] !== ""){
     VALUES ('$id_solicitud', '$ci','$name','$apellido', '$estado', '$ciudad', '$sede', '$direccion', '$email', '$phone')");
     
     $sqlsoli = mysqli_query($connec,"INSERT INTO solicitudes (ci_emisor, id_receptor, ci_solicitada, id_solicitud, fecha, apr_estado) 
-                                    VALUES ('$ci', '$recep', '$ciSoli', '$id_solicitud', '$datetime', '0')");
+                                    VALUES ('$ciEm', '$recep', '$ciRec', '$id_solicitud', '$datetime', '0')");
 
     $connec->close();
-    
+
     if (isset($sqlsoli) && isset($correr)) {
+        $_SESSION["editCI"] = 0;
         $_SESSION["noti"] = 1;
         header('location: ../public/solicitudes.php');
     } else {

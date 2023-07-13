@@ -10,6 +10,7 @@
     background: var(--narvar-bg-color);
     box-sizing: content-box;
     position: fixed;
+    box-shadow: 0 1px 5px 0 #1e2022;
     z-index: 999;
 }
 .nav {   /*menu superior*/

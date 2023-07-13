@@ -6,7 +6,7 @@ if (isset($_POST["idSoli"])){
 
     $subId  = mysqli_real_escape_string($connec, $_POST["idSoli"]);
     
-    $svp = mysqli_query($connec, "SELECT * FROM precarga WHERE id_solicitud = '$subId'");
+    $svp = mysqli_query($connec, "SELECT * FROM precarga p INNER JOIN solicitudes s ON p.id_solicitud = s.id_solicitud WHERE p.id_solicitud = '$subId'");
     $sv = mysqli_num_rows($svp);
     
     if($sv == 1){
@@ -16,24 +16,24 @@ if (isset($_POST["idSoli"])){
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                 <div class="ms-2 me-auto">
                     <div class="fw-bold">Cedula</div>
-                    '. $lol['ci'] . '
+                    '. $lol['ci_solicitada'] .'
                 </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                 <div class="ms-2 me-auto">
                     <div class="fw-bold">Nombre</div>
-                    '. $lol['name'] . '
+                    '. ucwords(strtolower($lol['name'])) . '
                 </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                 <div class="ms-2 me-auto">
                     <div class="fw-bold">Apellido</div>
-                    '. $lol['apelido'] . '
+                    '. ucwords(strtolower($lol['apelido'])) . '
                 </div>
                 </li><li class="list-group-item d-flex justify-content-between align-items-start">
                 <div class="ms-2 me-auto">
                     <div class="fw-bold">Direcci&oacute;n</div>
-                    '. $lol['direccion'] . '
+                    '. ucwords(strtolower($lol['direccion'])) . '
                 </div>
                 </li><li class="list-group-item d-flex justify-content-between align-items-start">
                 <div class="ms-2 me-auto">
@@ -43,7 +43,7 @@ if (isset($_POST["idSoli"])){
                 </li><li class="list-group-item d-flex justify-content-between align-items-start">
                 <div class="ms-2 me-auto">
                     <div class="fw-bold">email</div>
-                    '. $lol['email'] . '
+                    '. strtolower($lol['email']) . '
                 </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -54,6 +54,6 @@ if (isset($_POST["idSoli"])){
                 </li>
             </ul>';
     }else{        
-        echo "naonao";
+        echo "Error al consultar datos por favor intente más tarde";
     }    
 }
