@@ -13,7 +13,7 @@ $ciRec = $_SESSION['editCI'];
 $ci = mysqli_real_escape_string($connec, $_POST["ci"]);
 
 //precarga
-$name=  mysqli_real_escape_string($connec, strtoupper(remover_acentos($_POST['name'])));
+$taken=  mysqli_real_escape_string($connec, strtoupper(remover_acentos($_POST['name'])));
 $apellido= mysqli_real_escape_string($connec, strtoupper(remover_acentos($_POST['apellido'])));
 $email = mysqli_real_escape_string($connec, strtoupper(remover_acentos($_POST['email'])));
 $direccion = mysqli_real_escape_string($connec, strtoupper(remover_acentos($_POST['direccion'])));
@@ -36,7 +36,7 @@ if($_POST["ci"] !== ""){
     } while ($dan != 0);
 
     $correr = mysqli_query($connec,"INSERT INTO precarga (id_solicitud, ci, name, apelido, id_estado, id_ciudad, sede_id, direccion, email, telefono) 
-    VALUES ('$id_solicitud', '$ci','$name','$apellido', '$estado', '$ciudad', '$sede', '$direccion', '$email', '$phone')");
+    VALUES ('$id_solicitud', '$ci','$taken','$apellido', '$estado', '$ciudad', '$sede', '$direccion', '$email', '$phone')");
     
     $sqlsoli = mysqli_query($connec,"INSERT INTO solicitudes (ci_emisor, id_receptor, ci_solicitada, id_solicitud, fecha, apr_estado) 
                                     VALUES ('$ciEm', '$recep', '$ciRec', '$id_solicitud', '$datetime', '0')");

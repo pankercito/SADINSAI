@@ -20,29 +20,31 @@ if(isset($_POST['login'])){
     if($nr == 1 && $pass == $trix){ //contraseña correcta
         
         if($dataview['sesion'] == FALSE){//no hay sesion activa         
-                $_SESSION['userdata'] = ''.ucwords(strtolower($dataview['nombre'])).' '.ucwords(strtolower($dataview['apellido'])).'';
-                $_SESSION['cidelusuario'] = $dataview['ci'];
-                $_SESSION['sesion'] = $dataview['id_usuario'];
-                $_SESSION['sesioninit'] = $dataview['sesion'];
-                $_SESSION['admincheck'] = $dataview['adp'];
-                $id = strval($dataview['id_usuario']);
-                $name = str_replace(' ','' ,strtolower($dataview['nombre']));
-                $_SESSION['event'] = $name.$id;
-
-                $nueva_hora = hora();
-
-                $event = "CREATE EVENT $name$id ON SCHEDULE AT '$nueva_hora' DO UPDATE registro r SET sesion = '0' WHERE r.id_usuario = '$id'";        
-                $check = mysqli_query($connec, $event);
-
-                $sn = initSesion($dataview['id_usuario']); //variable de inicio de sesion en BD
-
-                $_SESSION['LAST_ACTIVITY'] = time();
-
-                $connec->close();
-
-                // Redirecciono al usuario a la página principal del sitio.
-                header("HTTP/1.1 302 Moved Temporarily"); 
-                header('location:../public/principal.php?perfil='.encriptar($_SESSION['cidelusuario']).'');
+            $_SESSION['userdata'] = ''.ucwords(strtolower($dataview['nombre'])).' '.ucwords(strtolower($dataview['apellido'])).'';
+            $_SESSION['cidelusuario'] = $dataview['ci'];
+            $_SESSION['sesion'] = $dataview['id_usuario'];
+            $_SESSION['sesioninit'] = $dataview['sesion'];
+            $_SESSION['admincheck'] = $dataview['adp'];
+            
+            $id = strval($dataview['id_usuario']);
+            $taken = str_replace(' ','' ,strtolower($dataview['nombre']));
+            $_SESSION['event'] = $taken.$id;
+            
+            $nueva_hora = hora10();
+            
+            $event = "CREATE EVENT $taken$id ON SCHEDULE AT '$nueva_hora' DO UPDATE registro r SET sesion = '0' WHERE r.id_usuario = '$id'";        
+            $check = mysqli_query($connec, $event);
+            
+            $_SESSION['LAST_ACTIVITY'] = time();
+            
+            $sn = initSesion($dataview['id_usuario']); //variable de inicio de sesion en BD
+            
+            
+            $connec->close();
+            
+            // Redirecciono al usuario a la página principal del sitio.
+            header("HTTP/1.1 302 Moved Temporarily"); 
+            header('location:../public/principal.php?perfil='.encriptar($_SESSION['cidelusuario']).'');
         }else if($dataview['sesion'] == TRUE){
             $connec->close();
             header("HTTP/1.1 302 Moved Temporarily"); 

@@ -11,3 +11,4 @@ for($i = 1001; $i != 1045; $i++ ){
 $direcciones["1002"] = "../layout/cardOnly.php";
 $direcciones["1003"] = "../layout/cardOnly.php";
 $direcciones["1004"] = "../layout/cardOnly.php";
+$direcciones["1005"] = "../layout/cardOnly.php";

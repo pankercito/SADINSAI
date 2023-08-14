@@ -25,7 +25,7 @@ if ($count_results > 0) {
         "1" => 'bi bi-person-fill-check',
         "2" => 'bi bi-person-fill-x'
     );
-    echo '<h6>total de solicitudes en espera '.$count_results.'.</h6>';
+    echo '<h6>total de solicitudes '.$count_results.'.</h6>';
 
     while ($row_searched = mysqli_fetch_array($regisview)){
         //Lista de los usuarios

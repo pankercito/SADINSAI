@@ -1,14 +1,17 @@
 <?php
 
 class Personal {
+    /* 
+    Obtener datos de un perfil mediante hash
+    */
     private $ci;
 
     public function __construct($ci) {
         $this->ci = $ci;
-        $this->loadData();
+        $this->getDatos();
     }   
 
-    private function loadData() {
+    private function getDatos() {
         include('../php/conect.php');
         
         $pCi = $this->ci;

@@ -1,3 +1,12 @@
+/*recolor a footer y croma */
+.croma.col-lg-12.col-ms-12 {
+    background-color: var(--bg-color-principal2);
+}
+#cena {
+    background-color: var(--bg-color-principal2);
+}
+/**************************************************/
+
 .estructur-conten {
     margin: 2%;
     margin-top: 1.5rem;
@@ -10,9 +19,13 @@
     position: sticky;
     top: 5rem;
     padding: 0 0.25rem 1rem 0.25rem;
-    background-color: rgba(51, 51, 51, 0.205);
+    background-color: var(--bg-conten-color2);
     text-align: center;
     height: 11rem;
+}.n-estructure.col-lg-9 {
+    margin-left: 0.5%;
+    background-color: var(--bg-conten-color2);
+    padding: 10px;
 }
 .ramas {
     margin: 4rem 7.5rem 0px 0;
@@ -31,35 +44,12 @@ input#floatingMotiv {
     padding: 7px 0 0 7px;
     height: 78%;
 }
-.nuevasolicitud {
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    font-size: 14px;
-}
+
 .form-floating>label {
     padding: 7px 0 0 7px;
     height: 78%;
 }
-input#sCi{
-    width: 100%;
-    min-height: 1px;
-    height: 0rem;
-    padding-left: 8px;
-    padding-bottom: 14px;
-}
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-p.errormake {
-    margin: -2.8rem -14rem 0rem 14rem;
-    position: absolute;
-}
-hr{
-    border-top: 2px white solid;
-}
+
 div#notificacion {
    position: fixed;
     float: left;

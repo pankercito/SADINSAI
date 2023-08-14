@@ -6,6 +6,7 @@
 
 <?php require("../php/funtion/adminSet.php"); ?>
 
+<link rel="stylesheet" href="../styles/viewtables.css">
 <link rel="stylesheet" href="../styles/nomina.css">
 <link rel="stylesheet" href="../styles/solicitudes.css">
 
@@ -15,7 +16,6 @@
     <?php include ("../layout/sidebar.php");?>
   </div>
 </section>
-
 
 <div class="estructur-solicitudes">
 	<div class="grid-containerr">

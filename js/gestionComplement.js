@@ -1,0 +1,51 @@
+//funcion para optener parametros GET
+function getQueryVariable(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] == variable) {
+            return pair[1];
+        }
+    }
+    return false;
+}
+
+const form = document.getElementById("newDoc");
+
+// Agregar un controlador de eventos para el evento click
+form.addEventListener("click", modalcito);
+
+function modalcito(){
+    var ciUser = getQueryVariable('carga');
+    var tipoDarch = getQueryVariable('gestion');
+    rows = {
+        "gestion": tipoDarch ,
+        "carga": ciUser 
+    }
+
+    $.ajax({
+        data: rows,
+        url: "../layout/documentform.php",
+        type: "get",
+        error: function(error){
+            alert("Hubo un error: " + error); 
+        },
+        success: function (respuesta) {
+            // modal de documentForm
+            $.confirm({
+                title: "nuevo documento",
+                content: respuesta,
+                columnClass: 'col-md-8 col-md-offset-8 col-xs-4 col-xs-offset-8',
+                botton: {
+                    c: {
+                        text: "cerrar",
+                        action: function(){
+
+                        }
+                    }
+                }
+            })
+        }
+    });
+}

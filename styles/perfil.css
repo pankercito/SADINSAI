@@ -19,7 +19,7 @@ div.perfil{
     position: relative;
     display: block;
     font-size: large;
-    font-weight: var(--font-style-semibold);
+    font-weight: var(--font-semibold);
     margin-top: -1rem;
 }
 

@@ -2,10 +2,10 @@ body{ /*FONDO DE PANTALLA*/
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background: url(../recursos/frame03.png) center 0 repeat-y;  
+    background: url(../recursos/frame03.png) repeat-y;  
+    background-size: contain;
     background-color: #29d796;
     /*
     background-color: #1aefa0; 

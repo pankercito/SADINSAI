@@ -5,6 +5,7 @@
 <?php require("../layout/navbar.php"); ?>
 
 <link rel="stylesheet" href="../styles/estados.css">
+<link rel="stylesheet" href="../styles/viewtables.css">
 
 <!--SALUDO DE BIENVENIDA-->
 <section name="cromaconten"> 

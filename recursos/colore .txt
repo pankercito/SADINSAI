@@ -2,5 +2,6 @@
 #f4f2f9
 #7fd386
 #a9faad
-#a8a9ac
+#a8a9ac 
+#102926 - nuevo color de footer y cromas
 logo

@@ -5,7 +5,7 @@
         <p>Nombre </p>
         <input id="Name" name="name" type="text">
         <p>Cedula </p>
-        <input id="Ci" name="ci" type="int" onblur="verificarCI()">
+        <input id="Ci" name="ci" type="num" onblur="verificarCI()">
         <div id="mensajeCi"></div>
       </div>
       <div class="two row">

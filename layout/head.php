@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="../styles/body.css">
     <link rel="stylesheet" href="../styles/menutop.css">
     <link rel="stylesheet" href="../styles/croma.css">
-    <link rel="stylesheet" href="../styles/viewtables.css">
 </head>    
 
 <body  class="logged-in env-production page-responsive" style="word-wrap: break-word;">

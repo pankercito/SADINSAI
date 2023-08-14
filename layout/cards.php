@@ -1,13 +1,13 @@
+<link rel="stylesheet" href="../styles/cards.css">
 <?php
          for($i = 0; $i < 6; $i++){  
             echo '
-            <link rel="stylesheet" href="../styles/cards.css">
             <div class="card">
               <div class="card__image-holder">
-                <img class="card__image" src="https://picsum.photos/298/225?random='.rand(10, 100 ).'" alt="random" />
+                <img class="card__image" src="../data/archives/1001/7309962043825730=localhost 524ec7038464.jpg" alt="fotos" />
               </div>
               <div class="card-title">
-                <a href="#" class="toggle-info btn">
+                <a href="#" class="toggle-info btn btn-success">
                   <span class="left"></span>
                   <span class="right"></span>
                 </a>
@@ -18,11 +18,12 @@
               </div>
                 <div class="card-flap flap1">
                 <div class="card-description">
-                  This grid is an attempt to make something nice that works on touch devices. Ignoring hover states when they re not available etc.
+                  Breve descripcion del archivo.
                 </div>
                 <div class="card-flap flap2">
                   <div class="card-actions">
-                    <a href="#" class="btn">¿Abrir o Editar?</a>
+                    <a href="#" class="btn btn-primary">Abrir</a>
+                    <a href="#" class="btn btn-secondary">Editar</a>
                   </div>
                 </div>
               </div>

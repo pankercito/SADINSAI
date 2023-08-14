@@ -4,6 +4,7 @@
 
 <link rel="stylesheet" href="../styles/archives.css">
 
+
 <?php 
   require("../layout/navbar.php");
 ?>
@@ -21,8 +22,12 @@
 <div class="archives-structur">
   <div class="grid-container">
     <div class="row">
-      <div class="act col-lg-1">
-        <p>Acciones</p>
+      <div class="act col-lg-2">
+        <h5>archivos</h5>
+        <p>total de archivos: %</p>
+        <hr>
+        <button class="btn btn-light" id="newDoc">nuevo documento</button>
+        <script src="../js/gestionComplement.js"></script>
       </div>
       <div class="archives-conten col-lg-10">
         <h2>Documentos</h2>

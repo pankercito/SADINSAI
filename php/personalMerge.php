@@ -8,12 +8,13 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])){
     
     switch ($_POST['radio']) {
         case 1:
-            // Hacer algo para la opción 1
+            // aceptar solicitud 
             $sql = "SELECT * FROM precarga p INNER JOIN solicitudes s ON p.id_solicitud = s.id_solicitud WHERE p.id_solicitud = $id";
 
             $query = mysqli_query($connec, $sql);
             $num = mysqli_num_rows($query);
 
+            // DATOS DE PRECARGA 
             $dat = mysqli_fetch_array($query);
 
             if (!$query && $num > 0) {
@@ -38,16 +39,15 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])){
                 } else{
                     $sql2 = "UPDATE solicitudes SET apr_estado = '1' WHERE id_solicitud = '$id'";
                     $query2 = mysqli_query($connec, $sql2);
-
-                    echo '<h6>se ha actualizado con exito</h6>';
                     
-                    echo '<br><a href="'. encriptar($dat['ci']) .'">Ver perfil</a>';  
+                    echo 'principal.php?perfil='. encriptar($dat['ci']);  
                 }
             }
             $connec->close();
             break;
 
         case 2:
+            // rechazar solicitud
             $sql = "SELECT * FROM solicitudes WHERE id_solicitud = '$id'";
             
             $query = mysqli_query($connec, $sql);
