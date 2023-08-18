@@ -29,14 +29,17 @@ function modalcito() {
   };
   $.ajax({
     data: rows,
-    url: "../layout/documentform.php",
+    url: "../layout/documentForm.php",
     type: "get",
     error: function error(_error) {
-      alert("Hubo un error: " + _error);
+      $.alert({
+        title: "error al cargar datos",
+        content: "Hubo un error: " + _error
+      });
     },
     success: function success(respuesta) {
       // modal de documentForm
-      $.confirm({
+      $.dialog({
         title: "nuevo documento",
         content: respuesta,
         columnClass: 'col-md-8 col-md-offset-8 col-xs-4 col-xs-offset-8',

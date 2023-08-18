@@ -19,26 +19,34 @@ if (!file_exists($folder_des)) {
     echo "creado";
 }
 
-echo $taken;
-
 // id para archivoss
 $id = generarId() . generarId();
 
 // nombre de archivo
 if ($taken == "") {
     $aa = $id . "=" . $carion;
-}else{
+} else {
     $aa = $id . "=" . $taken;
 }
 
 // Guardar la imagen en la carpeta
 if (move_uploaded_file($_FILES["inpArch"]["tmp_name"], $folder_des . "/" . $aa)) {
+    if (file_exists($folder_des . "/" . $aa)) {
+
+        // Variables de archivos
+        $nombre = $aa;
+        $size = $_FILES["inArch"]["size"];
+        $fech = hora();
+        $dirreccion = $folder_des . "/" . $aa;
+
+        // inyeccion a BD
+        $sql = "INSERT TO archidata ";
 
 
-    echo "vacio";
-    echo $aa;
-    echo "lito";
-    echo "<img src='" . $folder_des . "/" . $aa . "' />";
+
+        echo "succcess";
+    }
+
 
 } else {
     echo "error";

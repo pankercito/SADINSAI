@@ -1,22 +1,21 @@
+"use strict";
+
 // Definir la duración de la sesión en segundos
-var duracion_sesion = 600; 
+var duracion_sesion = 600; // Definir la duración del tiempo de advertencia en segundos
 
-// Definir la duración del tiempo de advertencia en segundos
-var duracion_advertencia = 589;
+var duracion_advertencia = 589; // Función para comprobar el estado de la sesión
 
-// Función para comprobar el estado de la sesión
 function comprobarSesion() {
   // Crear una nueva solicitud XMLHttpRequest
-  var xhr = new XMLHttpRequest();
+  var xhr = new XMLHttpRequest(); // Configurar la solicitud
 
-  // Configurar la solicitud
-  xhr.open('GET', '../php/comprobarSesion.php', true);
+  xhr.open('GET', '../php/comprobarSesion.php', true); // Configurar la función de devolución de llamada para manejar la respuesta
 
-  // Configurar la función de devolución de llamada para manejar la respuesta
   xhr.onreadystatechange = function () {
     if (xhr.readyState == 4 && xhr.status == 200) {
       // La solicitud ha sido completada correctamente
       var respuesta = xhr.responseText;
+
       if (respuesta == 'activo') {
         // La sesión está activa, actualizar la última actividad
         actualizarUltimaActividad();
@@ -25,76 +24,73 @@ function comprobarSesion() {
         mostrarAdvertencia();
       }
     }
-  };
+  }; // Enviar la solicitud
 
-  // Enviar la solicitud
+
   xhr.send();
-}
-//funcion cerrar sesion
+} //funcion cerrar sesion
+
+
 function cerrarSesion() {
   fetch('../php/cerrarSesion.php', {
     method: 'POST',
     credentials: 'same-origin' // incluye las cookies en la petición
-  }).then(response => {
+
+  }).then(function (response) {
     // Si la petición es exitosa, redirige al usuario a la página de inicio de sesión
     if (response.redirected) {
       window.location.href = response.url;
     } else {
       console.error('Error al cerrar sesión');
     }
-  }).catch(error => {
+  })["catch"](function (error) {
     console.error(error);
   });
-}
+} // Función para actualizar la última actividad de la sesión
 
-// Función para actualizar la última actividad de la sesión
+
 function actualizarUltimaActividad() {
   // Crear una nueva solicitud XMLHttpRequest
-  var xhr = new XMLHttpRequest();
+  var xhr = new XMLHttpRequest(); // Configurar la solicitud
 
-  // Configurar la solicitud
-  xhr.open('GET', '../php/mantenerSesion.php', true);
+  xhr.open('GET', '../php/mantenerSesion.php', true); // Enviar la solicitud
 
-  // Enviar la solicitud
   xhr.send();
-}
+} // Función para mostrar la advertencia al usuario
 
-// Función para mostrar la advertencia al usuario
+
 function mostrarAdvertencia() {
   // Mostrar la alerta al usuario
   $.confirm({
     title: 'La sesion esta por finalizar',
     content: 'se cerrará la sesión automáticamente en 10 segundos.',
-    autoClose: 'logoutUser|10000', //esto es el tiempo en milisegundos
+    autoClose: 'logoutUser|10000',
+    //esto es el tiempo en milisegundos
     buttons: {
       logoutUser: {
         text: 'Cerrar sesion ',
-        action: function () {
+        action: function action() {
           cerrarSesion();
         }
       },
-      Continuar: function () {
+      Continuar: function Continuar() {
         mantenerSesion();
-
       }
     }
   });
-}
+} // Función para mantener la sesión activa
 
-// Función para mantener la sesión activa
+
 function mantenerSesion() {
   // Crear una nueva solicitud XMLHttpRequest
-  var xhr = new XMLHttpRequest();
+  var xhr = new XMLHttpRequest(); // Configurar la solicitud
 
-  // Configurar la solicitud
-  xhr.open('GET', '../php/actualizarSesion.php', true);
+  xhr.open('GET', '../php/actualizarSesion.php', true); // Enviar la solicitud
 
-  // Enviar la solicitud
   xhr.send();
-}
+} // Comprobar el estado de la sesión cada segundo
 
-// Comprobar el estado de la sesión cada segundo
-setInterval(comprobarSesion, 1000 * duracion_advertencia);
 
-// Actualizar la última actividad de la sesión al cargar la página
+setInterval(comprobarSesion, 1000 * duracion_advertencia); // Actualizar la última actividad de la sesión al cargar la página
+
 actualizarUltimaActividad();

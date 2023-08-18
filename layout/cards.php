@@ -13,12 +13,16 @@
                 </a>
                 <h2>
                   Titulo de tarjeta
-                  <small>Subido el 02 del 92</small>
+                  <small>Subido el 02 del 92 '. @$fecha .'</small>
                 </h2>
               </div>
                 <div class="card-flap flap1">
                 <div class="card-description">
-                  Breve descripcion del archivo.
+                  Breve descripcion del archivo. ' . @$nota . '
+                </div>
+                <div class="subid row">
+                 <p>Subido por:' . @$carga . '</p>
+                 <p>Tamaño:' . @$size . '</p>
                 </div>
                 <div class="card-flap flap2">
                   <div class="card-actions">

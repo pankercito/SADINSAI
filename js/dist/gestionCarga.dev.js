@@ -12,6 +12,7 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
+// funcion general de envio de imagen 
 $(document).ready(function () {
   // Cuando el usuario hace clic en el botón de enviar, enviamos el formulario por Ajax
   $("#caro").submit(function (event) {
@@ -61,7 +62,7 @@ $(document).ready(function () {
                 // Si la respuesta es exitosa, imprimimos el mensaje de éxito 
                 var dataT = data;
 
-                if (dataT = "sucess") {
+                if (dataT == "success") {
                   // MENSAJE SUCCES
                   setTimeout(function () {
                     $.dialog({
@@ -77,8 +78,6 @@ $(document).ready(function () {
                 } else {
                   $.dialog({
                     title: false,
-                    closeIcon: false,
-                    // hides the close icon.
                     content: "<div class=\"grid text-center\" style=\"row-gap: 0; display: flex; flex-direction: column;\">\n                                                        <i class=\"bi-patch-exclamation-fill\" style=\"font-size: 5rem; color: red;\"></i>\n                                                        <h6  style=\"color: red;\"> Error</h6>\n                                                        <span class=\"\" style=\"color: red;\" disabled>\n                                                            por favor intente nuevamente\n                                                        </span>\n                                                    </div>\n                                                    </div>"
                   });
                 }
@@ -102,7 +101,7 @@ var inputText = document.getElementById('nameArchive'); // Nombre del archivo en
 inputFile.addEventListener('change', function (e) {
   var img = document.getElementById('docImg');
   var file = e.target.files[0];
-  var dar = file.name.split('.').pop();
+  var dar = file.name.split('.').pop(); // Preview de la foto antes de subirla
 
   if (file) {
     var read = new FileReader(e);

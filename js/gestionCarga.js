@@ -1,3 +1,4 @@
+// funcion general de envio de imagen 
 $(document).ready(function () {
     // Cuando el usuario hace clic en el botón de enviar, enviamos el formulario por Ajax
     $("#caro").submit(function (event) {
@@ -62,7 +63,7 @@ $(document).ready(function () {
                                 // Si la respuesta es exitosa, imprimimos el mensaje de éxito 
                                 var dataT = data;
 
-                                if (dataT = "sucess") {
+                                if (dataT == "success") {
                                     // MENSAJE SUCCES
                                     setTimeout(() => {
                                         $.dialog({
@@ -85,7 +86,6 @@ $(document).ready(function () {
                                 } else {
                                     $.dialog({
                                         title: false,
-                                        closeIcon: false, // hides the close icon.
                                         content: `<div class="grid text-center" style="row-gap: 0; display: flex; flex-direction: column;">
                                                         <i class="bi-patch-exclamation-fill" style="font-size: 5rem; color: red;"></i>
                                                         <h6  style="color: red;"> Error</h6>
@@ -94,7 +94,6 @@ $(document).ready(function () {
                                                         </span>
                                                     </div>
                                                     </div>`,
-
                                     });
                                 }
                             },
@@ -122,6 +121,7 @@ inputFile.addEventListener('change', (e) => {
     const file = e.target.files[0];
     const dar = file.name.split('.').pop();
 
+    // Preview de la foto antes de subirla
     if(file){
         const read = new FileReader(e);
 
