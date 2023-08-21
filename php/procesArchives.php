@@ -31,20 +31,23 @@ if ($taken == "") {
 
 // Guardar la imagen en la carpeta
 if (move_uploaded_file($_FILES["inpArch"]["tmp_name"], $folder_des . "/" . $aa)) {
+    // si el archivo se movio correctamente
     if (file_exists($folder_des . "/" . $aa)) {
 
         // Variables de archivos
+        session_start();
+        $ciAg = $_SESSION['cidelusuario'];
         $nombre = $aa;
-        $size = $_FILES["inArch"]["size"];
+        $size = $_FILES["inpArch"]["size"];
         $fech = hora();
         $dirreccion = $folder_des . "/" . $aa;
 
         // inyeccion a BD
-        $sql = "INSERT TO archidata ";
+        $sql = "INSERT TO archidata (ci_arch, id_archivo, fecha, archivo, nombre_archivo, size) 
+                VALUES ('$ci', '$id', '$fech',  )";
 
 
-
-        echo "succcess";
+        echo "success";
     }
 
 

@@ -46,9 +46,9 @@ div.perfil p{
     flex-wrap: nowrap;
     margin-left: -3%;
 }
-
 i.bi.bi-person-square {
     position: absolute;
-    margin-left: 2%;
-    font-size: 500%;
+    margin-top: -0.3rem;
+    margin-left: -28rem;
+    font-size: 450%;
 }

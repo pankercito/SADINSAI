@@ -71,10 +71,9 @@ $(document).ready(function () {
                       // hides the close icon.
                       content: "\n                                            <div class=\"grid text-center\" style=\"row-gap: 0; display: flex; flex-direction: column;\">\n                                                                <i class=\"bi-check-circle\" style=\"font-size: 5rem; color: green;\"></i>\n                                                                <span class=\"\" style=\"color: #008000;\" disabled>\n                                                                    <span class=\"spinner-border spinner-border-sm\"  aria-hidden=\"true\"></span>\n                                                                    <span role=\"status\" style=\"color: green\"  >Loading...</span>\n                                                                </span>\n                                            </div>\n                                            </div>"
                     });
-                  }, 500);
-                  setTimeout(function () {
-                    location.reload();
-                  }, 3000);
+                  }, 500); // setTimeout(() => {
+                  //     location.reload();
+                  // }, 2500);
                 } else {
                   $.dialog({
                     title: false,
@@ -100,14 +99,22 @@ var inputText = document.getElementById('nameArchive'); // Nombre del archivo en
 
 inputFile.addEventListener('change', function (e) {
   var img = document.getElementById('docImg');
+  var pdf = document.getElementById('docPdf');
   var file = e.target.files[0];
-  var dar = file.name.split('.').pop(); // Preview de la foto antes de subirla
+  var dar = file.name.split('.').pop();
+  console.log(dar);
 
   if (file) {
     var read = new FileReader(e);
 
     read.onload = function (e) {
-      img.src = e.target.result;
+      if (dar == 'pdf') {
+        pdf.src = e.target.result;
+        img.style.display = "none";
+        pdf.style.display = "unset";
+      } else {
+        img.src = e.target.result;
+      }
     };
 
     read.readAsDataURL(file);

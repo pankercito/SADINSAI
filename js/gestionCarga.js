@@ -80,9 +80,9 @@ $(document).ready(function () {
                                             </div>`,
                                         });
                                     }, 500);
-                                    setTimeout(() => {
-                                        location.reload();
-                                    }, 3000);
+                                    // setTimeout(() => {
+                                    //     location.reload();
+                                    // }, 2500);
                                 } else {
                                     $.dialog({
                                         title: false,
@@ -118,20 +118,29 @@ const inputText = document.getElementById('nameArchive');
 // Nombre del archivo en input name automaticamente
 inputFile.addEventListener('change', (e) => {
     const img = document.getElementById('docImg');
+    const pdf = document.getElementById('docPdf');
     const file = e.target.files[0];
     const dar = file.name.split('.').pop();
 
-    // Preview de la foto antes de subirla
+    console.log(dar);
+    
     if(file){
         const read = new FileReader(e);
-
+      
         read.onload = function(e){
+          if (dar == 'pdf') {
+            pdf.src = e.target.result;
+            img.style.display = "none";
+            pdf.style.display = "unset";
+            
+          } else {
             img.src = e.target.result;
+          }
         }
         read.readAsDataURL(file);
-    }else{
+      }else{
         img.src = defaultFile;
-    }
+      }
 
     inputText.value = file.name;
 

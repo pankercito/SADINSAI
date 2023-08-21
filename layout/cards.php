@@ -4,7 +4,7 @@
             echo '
             <div class="card">
               <div class="card__image-holder">
-                <img class="card__image" src="../data/archives/1001/7309962043825730=localhost 524ec7038464.jpg" alt="fotos" />
+                <img class="card__image" src="' . @$image .'" alt="fotos" />
               </div>
               <div class="card-title">
                 <a href="#" class="toggle-info btn btn-success">
@@ -12,18 +12,23 @@
                   <span class="right"></span>
                 </a>
                 <h2>
-                  Titulo de tarjeta
-                  <small>Subido el 02 del 92 '. @$fecha .'</small>
+                  ' . @$name . ' Titulo
+                  <small>Subido el'. @$fecha .'</small>
                 </h2>
               </div>
                 <div class="card-flap flap1">
-                <div class="card-description">
-                  Breve descripcion del archivo. ' . @$nota . '
-                </div>
-                <div class="subid row">
-                 <p>Subido por:' . @$carga . '</p>
-                 <p>Tamaño:' . @$size . '</p>
-                </div>
+                <iframe src="" width="30%" height="30%" frameborder="0" scrolling="yes"></iframe>
+                  <div class="card-description">
+                    <p>Nota: 
+                      <br>' . @$nota . ' 
+                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s
+                    </p>
+                    <div class="strContent d-flex mx-auto">
+                      <p class="str mx-auto">subido por ' . @$userName . ' EikerR </p>
+                      <span class="c"> | </span>
+                      <p class="str mx-auto text-center">tamaño ' . @$zica . ' 1.3MB </p>
+                    </div>
+                  </div>
                 <div class="card-flap flap2">
                   <div class="card-actions">
                     <a href="#" class="btn btn-primary">Abrir</a>

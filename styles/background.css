@@ -4,7 +4,6 @@ body{ /*FONDO DE PANTALLA*/
     -o-background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background: url(../recursos/frame03.png) repeat-y;  
     background-size: contain;
     background-color: #29d796;
     /*

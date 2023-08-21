@@ -69,12 +69,6 @@ function getPagination(table) {
 
 } // END OF PAGINATION 
 
-// SI SETTING
-$(function () {
-    // Just to append id number for each row  
-    default_index();
-});
-
 //ROWS SHOWING FUNCTION
 function showig_rows_count(maxRows, pageNum, totalRows) {
     //Default rows showing

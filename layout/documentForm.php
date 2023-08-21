@@ -17,7 +17,8 @@
             </div>
         </div>
         <div class="center img">
-            <img src="../recursos/doc.png" alt="doc" id="docImg" />
+            <img src="../recursos/doc.png" alt="doc" id="docImg"/>
+            <iframe id="docPdf" src="" frameborder="0" display="none" scrolling="yes"></iframe>
         </div>
         <button type="submit" class="btn btn-success">subir</button>
     </form>
