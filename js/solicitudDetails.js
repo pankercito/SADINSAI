@@ -158,26 +158,44 @@ $(document).ready(function () {
                                                             success: function (cEc) {
                                                                 let c = cEc;
                                                                 setTimeout(() => {
-                                                                    $.confirm({
-                                                                        title: 'Accion se realizo con exito',
-                                                                        content: false,
-                                                                        buttons: {
-                                                                            d: {
-                                                                                text: 'ver perfil',
-                                                                                action: function () {
-                                                                                    acc;
-                                                                                }
-                                                                            },
-                                                                            da: {
-                                                                                text: 'cerrar',
-                                                                                action: function () {
-                                                                                    location.reload();
+                                                                    if (c == "success-delimit") {
+                                                                        $.confirm({
+                                                                            title: 'se rechazo solicitud con exito',
+                                                                            content: false,
+                                                                            buttons: {
+                                                                                da: {
+                                                                                    text: 'cerrar',
+                                                                                    action: function () {
+                                                                                        location.reload();
+                                                                                    }
                                                                                 }
                                                                             }
-                                                                        }
-                                                                    });
+                                                                        });
+
+                                                                    } else {
+                                                                        $.confirm({
+                                                                            title: 'Se acepto solicitud con exito',
+                                                                            content: false,
+                                                                            buttons: {
+                                                                                d: {
+                                                                                    text: 'ver perfil',
+                                                                                    action: function () {
+                                                                                        location.replace(c);
+                                                                                    }
+                                                                                },
+                                                                                da: {
+                                                                                    text: 'cerrar',
+                                                                                    action: function () {
+                                                                                        location.reload();
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        });
+                                                                    }
                                                                 }, 500);
+
                                                             },
+
                                                             complete: function () {
                                                                 // Ocultar el indicador de carga o spinner
                                                             }

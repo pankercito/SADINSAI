@@ -3,7 +3,7 @@
 
     <div class="perfil" id="perfil">
         <div class="col-lg">
-            <p class="ptittle">Perfil</p>
+            <p id="ptittle">Perfil</p>
             <a>
                 <i class="bi bi-person-square"></i>
             </a>

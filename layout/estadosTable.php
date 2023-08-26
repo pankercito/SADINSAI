@@ -1,10 +1,13 @@
 <div class="states">
     <h4>Estados</h4>
-    <nav>
-        <ul class="stdU">
-            <?php 
+
+    <div class="d-flex">
+        <label for="states" class="form-label" style="font-size: 15px;">select estado</label>
+        <select class="form-select" id="states" style="width: 10rem;">
+            <option selected>Select one</option>
+            <?php
             include('../php/preset/viewAllEstados.php')
-            ?>
-        </ul>
-    </nav>
+                ?>
+        </select>
+    </div>
 </div>

@@ -1,7 +1,7 @@
 <?php
 
 include_once("../php/class/personal.php");
-include_once("../php/funtion/encriptDesencript.php");
+include_once("../php/function/criptCodes.php");
 
  
 $personal = new Personal($_GET['perfil']);

@@ -5,7 +5,7 @@
 <div class="navbarconten"> 
     <nav class="nav navbar-light"><!--BARRA DE NAVEGACION BG-->
       <a class="navbar-brand" href="principal.php?perfil=<?php echo $wci?>">
-        <img src="../recursos/favsadin.png" width="100" alt="Logo"><!--LOGO DE SADINSAI-->
+        <img src="../resources/favsadin.png" width="100" alt="Logo"><!--LOGO DE SADINSAI-->
       </a>
       <nav class="navbar-nav">
         <!--LISTA DE NAVEGACION--> 
@@ -15,7 +15,7 @@
             <a data-position="1" class="nav-link" href="principal.php?perfil=<?php echo $wci?>">Inicio</a>
           </li>
           <li class="nav-item">
-            <a data-position="2" class="nav-link" href="estados.php">Estados</a>
+            <a data-position="2" class="nav-link" href="estados.php">Personal</a>
           </li>
           <li class="nav-item">
             <a data-position="3" class="nav-link" href="nomina.php">Nomina</a>

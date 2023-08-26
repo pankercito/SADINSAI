@@ -1,26 +1,51 @@
 <?php
-
-class Personal {
-    /* 
-    Obtener datos de un perfil mediante hash
-    */
+/**
+ * Obtener datos de personal mediante CI
+ * ----------- _n o t a_ ------------
+ * 
+ * string de entrada debe estar codificado
+ */
+class Personal
+{
     private $ci;
+    private $nombre;
+    private $apellido;
+    private $telefono;
+    private $email;
+    private $direccion;
+    private $estado;
+    private $idEstado;
+    private $ciudad;
+    private $idCiudad;
+    private $sede;
+    private $idSede;
+    private $connec;
 
-    public function __construct($ci) {
+    /**
+     * Summary of __construct
+     * @param mixed $ci
+     */
+    public function __construct($ci)
+    {   
+        $this->connec = new Conexion();
         $this->ci = $ci;
         $this->getDatos();
-    }   
+    }
 
-    private function getDatos() {
-        include('../php/conect.php');
-        
+    /**
+     * Summary of getDatos
+     * @return void
+     */
+    private function getDatos()
+    {
+
         $pCi = $this->ci;
 
         if ($pCi != '') {
-            
+
             $pCi = desencriptar($this->ci);
 
-            $cnce = mysqli_query($connec, "SELECT * FROM personal p
+            $cnce = $this->connec->query("SELECT * FROM personal p
                                            INNER JOIN estados e ON p.id_estado = e.id_estado
                                            INNER JOIN ciudades c ON p.id_ciudad = c.id_ciudad
                                            INNER JOIN sedes s ON p.sede_id = s.sede_id
@@ -29,20 +54,20 @@ class Personal {
             $count_results = mysqli_num_rows($cnce);
 
             if ($count_results > 0) {
-                $perfils = mysqli_fetch_array($cnce);
+                $data = mysqli_fetch_array($cnce);
 
-                $this->nombre = ucwords(strtolower($perfils['nombre']));
-                $this->apellido = ucwords(strtolower($perfils['apellido']));
-                $this->telefono = $perfils['telefono'];
-                $this->ci = $perfils['ci'];
-                $this->email = strtolower($perfils['email']);
-                $this->direccion = ucwords(strtolower($perfils['direccion']));
-                $this->estado = $perfils['estado'];
-                $this->idEstado = $perfils['id_estado'];
-                $this->ciudad = $perfils['ciudad'];
-                $this->idCiudad = $perfils['id_ciudad'];
-                $this->sede = $perfils['nombre_sede'];
-                $this->idSede = $perfils['sede_id'];
+                $this->nombre = ucwords(strtolower($data['nombre']));
+                $this->apellido = ucwords(strtolower($data['apellido']));
+                $this->telefono = $data['telefono'];
+                $this->ci = $data['ci'];
+                $this->email = strtolower($data['email']);
+                $this->direccion = ucwords(strtolower($data['direccion']));
+                $this->estado = $data['estado'];
+                $this->idEstado = $data['id_estado'];
+                $this->ciudad = $data['ciudad'];
+                $this->idCiudad = $data['id_ciudad'];
+                $this->sede = $data['nombre_sede'];
+                $this->idSede = $data['sede_id'];
             } else {
                 $this->nombre = "Sin datos";
                 $this->apellido = "Sin datos";
@@ -56,7 +81,7 @@ class Personal {
                 $this->sede = "Sin datos";
                 $this->idSede = "Sin datos";
             }
-        }else{
+        } else {
             $this->nombre = "Sin datos";
             $this->apellido = "Sin datos";
             $this->telefono = "Sin datos";
@@ -70,44 +95,90 @@ class Personal {
             $this->sede = "Sin datos";
             $this->idSede = "Sin datos";
         }
-
-        $connec->close();
     }
-    
-    public function getNombre(){
+
+    /**
+     * @return string nombre
+     */
+    public function getNombre()
+    {
         return $this->nombre;
     }
-    public function getApellido() {
+    /**
+     * @return string apellido
+     */
+    public function getApellido()
+    {
         return $this->apellido;
     }
-    public function getCi() {
+    /**
+     * @return mixed|string ci desencriptada
+     */
+    public function getCi()
+    {
         return $this->ci;
     }
-    public function getTelefono() {
+    /**
+     * @return mixed|string telefono
+     */
+    public function getTelefono()
+    {
         return $this->telefono;
     }
-    public function getEmail() {
+    /**
+     * @return string email
+     */
+    public function getEmail()
+    {
         return $this->email;
     }
-    public function getDireccion() {
+    /**
+     * @return string direccion
+     */
+    public function getDireccion()
+    {
         return $this->direccion;
     }
-    public function getEstado() {
+    /**
+     * @return mixed|string estado
+     */
+    public function getEstado()
+    {
         return $this->estado;
     }
-    public function getIdEstado() {
-        return  $this->idEstado;
+    /**
+     * @return mixed|string ID estado
+     */
+    public function getIdEstado()
+    {
+        return $this->idEstado;
     }
-    public function getCiudad() {
+    /**
+     * @return mixed|string Ciudad
+     */
+    public function getCiudad()
+    {
         return $this->ciudad;
     }
-    public function getIdCiudad() {
+    /**
+     * @return mixed|string ID Ciudad
+     */
+    public function getIdCiudad()
+    {
         return $this->idCiudad;
     }
-    public function getSede() {
+    /**
+     * @return mixed|string Sede
+     */
+    public function getSede()
+    {
         return $this->sede;
     }
-    public function getIdSede() {
+    /**
+     * @return mixed|string ID Sede
+     */
+    public function getIdSede()
+    {
         return $this->idSede;
     }
 }

@@ -31,7 +31,7 @@
       </div>
       <div class="archives-conten col-lg-10">
         <h2>Documentos</h2>
-        <div class="cards">
+        <div class="cards d-flex" style="flex-wrap: wrap;">
           <?php
             include_once("../php/preset/cardSelector.php")
           ?>

@@ -23,9 +23,9 @@ if (isset($_POST['search'])) {
         echo '<h2>Se han encontrado '.$count_results.' resultados.</h2>';
 
         echo '<ul>';
-        while ($row_searched = mysql_fetch_array($query_searched)) {
+        while ($v = mysql_fetch_array($query_searched)) {
             //En este caso solo mostramos el titulo y fecha de la entrada
-            echo '<li><a href="#">'.$row_searched['titulo'].' ('.$row_searched['fecha'].')</a></li>';
+            echo '<li><a href="#">'.$v['titulo'].' ('.$v['fecha'].')</a></li>';
         }
         echo '</ul>';
     }

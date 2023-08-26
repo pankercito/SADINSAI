@@ -1,8 +1,8 @@
 <?php
 
-include("conect.php");
+include("conx.php");
 
-include("funtion/removerAcentos.php");
+include("function/removerAcentos.php");
 
 $cedula = mysqli_real_escape_string($connec,$_POST['ci']);
 $taken=  mysqli_real_escape_string($connec, strtoupper(remover_acentos($_POST['name'])));

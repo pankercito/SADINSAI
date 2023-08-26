@@ -1,14 +1,14 @@
 <?php
 
-include('conect.php');
+include('conx.php');
 
 if($_POST["ci"] != ""){
   // Verificación de la CI ingresada en la base de datos
-  $com = mysqli_real_escape_string($connec, $_POST["ci"]);
+  $com = $_POST["ci"];
 
   $sql = "SELECT * FROM personal WHERE ci = $com";
 
-  $result = mysqli_query($connec, $sql);
+  $result = $conn->query( $sql);
   if($result->num_rows > 0) {  
     $sql = "SELECT * FROM registro WHERE ci = $com";
     $result = mysqli_query($connec, $sql);

@@ -1,56 +1,59 @@
 <?php
 // Conexión a la base de datos
-include("../php/conect.php");
-include("../php/funtion/removerAcentos.php");
-include("../php/funtion/idGenerador.php");
-include("../php/funtion/sumarHora.php");
+include("../php/conx.php");
+include("../php/function/removerAcentos.php");
+include("../php/function/criptCodes.php");
+include("../php/function/idGenerador.php");
+include("../php/function/sumarHora.php");
+include("../php/function/filesFunctions.php");
 
 // Escapar los caracteres especiales
 $taken = mysqli_real_escape_string($connec, $_POST["nameArchive"]);
 $tipeArch = mysqli_real_escape_string($connec, $_POST["gestionArch"]);
-$ci = mysqli_real_escape_string($connec, $_POST["ciArch"]);
+$ci = desencriptar(mysqli_real_escape_string($connec, $_POST["ciArch"]));
 $note = mysqli_real_escape_string($connec, remover_acentos($_POST["textArchive"]));
-$carion = basename($_FILES["inpArch"]["name"]);
+$carion = $_FILES["inpArch"]["name"];
+$arch = $_FILES["inpArch"]["tmp_name"];
 
 // Obtener la ruta de la carpeta
-$folder_des = '../data/archives/' . $tipeArch;
-if (!file_exists($folder_des)) {
-    mkdir($folder_des, 0777, true);
-    echo "creado";
-}
+$folDestino = '../data/archives/' . $tipeArch;
 
-// id para archivoss
-$id = generarId() . generarId();
+// id para archivoss y Consulta de ID
+do {
+    $id = generarId() . generarId();
+    $sql = mysqli_query($connec, "SELECT id_archivo FROM archidata WHERE id_archivo = $ci");
+    $dan = mysqli_num_rows($sql);
+} while ($dan != 0);
 
 // nombre de archivo
-if ($taken == "") {
-    $aa = $id . "=" . $carion;
-} else {
-    $aa = $id . "=" . $taken;
-}
+$nombreArch = ($taken == "") ? $ci . "=" . $carion : $ci . "=" . $taken;
 
-// Guardar la imagen en la carpeta
-if (move_uploaded_file($_FILES["inpArch"]["tmp_name"], $folder_des . "/" . $aa)) {
-    // si el archivo se movio correctamente
-    if (file_exists($folder_des . "/" . $aa)) {
+// Mover archivos E Inyeccion
+if (moveFile($arch, $folDestino, $nombreArch) == true) {//mover archivos a la ruta espesifica
+    // Variables de archivos
+    @session_start();
 
-        // Variables de archivos
-        session_start();
-        $ciAg = $_SESSION['cidelusuario'];
-        $nombre = $aa;
-        $size = $_FILES["inpArch"]["size"];
-        $fech = hora();
-        $dirreccion = $folder_des . "/" . $aa;
+    $idUserAg = $_SESSION['sesion'];
+    $size = $_FILES["inpArch"]["size"];
+    $fech = hora();
+    $direccion = $folDestino . "/" . $nombreArch;
+    $tipo = extencion($carion);
 
-        // inyeccion a BD
-        $sql = "INSERT TO archidata (ci_arch, id_archivo, fecha, archivo, nombre_archivo, size) 
-                VALUES ('$ci', '$id', '$fech',  )";
+    // Inyección a BD
+    $sql = "INSERT INTO archidata (id_archivo, ci_arch,  archivo, note, nombre_archivo,  size) VALUES ('$id', '$ci', '$tipo', '$note', '$taken', '$size')";
 
+    $sql1 = "INSERT INTO arch_direc (id_arch, id_user_sub, id_tipo, direccion, fecha) VALUES ('$id', '$idUserAg', '$tipeArch', '$direccion', '$fech')";
 
+    if (mysqli_query($connec, $sql) && mysqli_query($connec, $sql1)) {
         echo "success";
-    }
 
+    } else {
+
+        echo "error";
+    }
 
 } else {
     echo "error";
 }
+
+$connec->close();

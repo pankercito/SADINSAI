@@ -4,7 +4,7 @@
 
 <?php require("../layout/navbar.php"); ?>
 
-<?php require("../php/funtion/adminSet.php"); ?>
+<?php require("../php/function/adminSet.php"); ?>
 
 <!--SALUDO DE BIENVENIDA-->
 <section name="cromaconten"> 
@@ -26,8 +26,8 @@
         <br>
         <button class='pedit btn btn-warning' id="editar">Editar datos</button>
         <br>
-        <p>Archivos totales = %datos</p>
-        <p>Archivos faltantes = %datos</p>
+        <p>Archivos totales = <?php echo @$data ?></p>
+        <p>Archivos faltantes = <?php echo @$data ?></p>
       </div>
     </div>
   </div>

@@ -1,8 +1,8 @@
 <?php
 ini_set('session.cookie_lifetime', 600); //tiempo de la sesion en segundos
-include("funtion/encriptDesencript.php");
-include("funtion/dec.php");
 
+include("function/criptCodes.php");
+include("function/dec.php");
 include("actualizarSesion.php");
 
 // Controlo si el usuario ya está logueado en el sistema.

@@ -80,9 +80,9 @@ $(document).ready(function () {
                                             </div>`,
                                         });
                                     }, 500);
-                                    // setTimeout(() => {
-                                    //     location.reload();
-                                    // }, 2500);
+                                    setTimeout(() => {
+                                        location.reload();
+                                    }, 2500);
                                 } else {
                                     $.dialog({
                                         title: false,
@@ -122,18 +122,19 @@ inputFile.addEventListener('change', (e) => {
     const file = e.target.files[0];
     const dar = file.name.split('.').pop();
 
-    console.log(dar);
-    
     if(file){
         const read = new FileReader(e);
       
         read.onload = function(e){
           if (dar == 'pdf') {
+            img.src = "";
             pdf.src = e.target.result;
             img.style.display = "none";
             pdf.style.display = "unset";
-            
           } else {
+            pdf.src = "";
+            pdf.style.display = "none";
+            img.style.display = "unset";
             img.src = e.target.result;
           }
         }

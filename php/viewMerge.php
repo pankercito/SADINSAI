@@ -2,8 +2,9 @@
 
 if (isset($_POST["idSoli"])){
     
-    include("funtion/encriptDesencript.php");
+    include("function/criptCodes.php");
     include("class/personal.php");
+    require ("conx.php");
 
     if (isset($_POST['receptor'])) {
 
@@ -18,11 +19,11 @@ if (isset($_POST["idSoli"])){
         $pStado = $personal->getEstado();
         $pCiudad = $personal->getCiudad();
 
-        require ("conect.php");
+        $conn = new Conexion;
 
-        $subId  = mysqli_real_escape_string($connec, $_POST["idSoli"]);
+        $subId  = $_POST["idSoli"];
         
-        $svp = mysqli_query($connec, "SELECT * FROM precarga WHERE id_solicitud = '$subId'");
+        $svp = $conn->query( "SELECT * FROM precarga WHERE id_solicitud = '$subId'");
         $sv = mysqli_num_rows($svp);
 
         function viewMerge($vma, $vmb, $vmc){

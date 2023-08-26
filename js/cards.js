@@ -2,7 +2,6 @@ $(document).ready(function () {
   var zindex = 10;
 
   $("div.card").click(function (e) {
-    e.preventDefault();
 
     var isShowing = false;
 

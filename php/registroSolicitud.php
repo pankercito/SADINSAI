@@ -1,9 +1,9 @@
 <?php
 
-include("conect.php");
-include("funtion/idGenerador.php");
-include("funtion/asignarSolicitud.php");
-include("funtion/removerAcentos.php");
+include("conx.php");
+include("function/idGenerador.php");
+include("function/asignarSolicitud.php");
+include("function/removerAcentos.php");
 
 session_start();
 //soli

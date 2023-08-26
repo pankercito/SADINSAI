@@ -1,24 +1,24 @@
 <?php
 
 if (isset($_POST['radio']) && isset($_POST['idSoli'])){
-    include ('conect.php');
-    include ("funtion/encriptDesencript.php");
+    include ('conx.php');
+    include ("function/criptCodes.php");
     
-    $id = mysqli_real_escape_string($connec, $_POST['idSoli']);
+    $ci = mysqli_real_escape_string($conn, $_POST['idSoli']);
     
     switch ($_POST['radio']) {
         case 1:
             // aceptar solicitud 
-            $sql = "SELECT * FROM precarga p INNER JOIN solicitudes s ON p.id_solicitud = s.id_solicitud WHERE p.id_solicitud = $id";
+            $sql = "SELECT * FROM precarga p INNER JOIN solicitudes s ON p.id_solicitud = s.id_solicitud WHERE p.id_solicitud = $ci";
 
-            $query = mysqli_query($connec, $sql);
+            $query = mysqli_query($conn, $sql);
             $num = mysqli_num_rows($query);
 
             // DATOS DE PRECARGA 
             $dat = mysqli_fetch_array($query);
 
             if (!$query && $num > 0) {
-                echo "error en leer la solicitud por favor intente mas tarded" . mysqli_error($connec);
+                echo "error en leer la solicitud por favor intente mas tarde" . mysqli_error($connec);
             } else{
                 
                 $sql1 = "UPDATE personal SET nombre = '{$dat['name']}', 
@@ -32,15 +32,15 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])){
                                              cargo = '{$dat['cargo']}'
                         WHERE ci = '{$dat['ci_solicitada']}'";
 
-                $query1 = mysqli_query($connec, $sql1);
                 
-                if (!$query1) {
-                    echo "error en leer la solicitud por favor intente mas tarde" . mysqli_error($connec);
+                
+                if (!mysqli_query($conn, $sql1)) {
+                    echo "error en leer la solicitud por favor intente mas tarde" . mysqli_error($conn);
                 } else{
-                    $sql2 = "UPDATE solicitudes SET apr_estado = '1' WHERE id_solicitud = '$id'";
-                    $query2 = mysqli_query($connec, $sql2);
+                    $sql2 = "UPDATE solicitudes SET apr_estado = '1' WHERE id_solicitud = '$ci'";
+                    $query2 = mysqli_query($conn, $sql2);
                     
-                    echo 'principal.php?perfil='. encriptar($dat['ci']);  
+                    echo 'principal.php?perfil='. encriptar($dat['ci_solicitada']);  
                 }
             }
             $connec->close();
@@ -48,7 +48,7 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])){
 
         case 2:
             // rechazar solicitud
-            $sql = "SELECT * FROM solicitudes WHERE id_solicitud = '$id'";
+            $sql = "SELECT * FROM solicitudes WHERE id_solicitud = '$ci'";
             
             $query = mysqli_query($connec, $sql);
             $num = mysqli_num_rows($query);
@@ -56,11 +56,11 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])){
             if (!$query) {
                 echo "error al rechazar por favor intente mas tarde" . mysqli_error($connec);
             } else{
-                $sql1 = "UPDATE solicitudes SET apr_estado = '2' WHERE id_solicitud = '$id'";
+                $sql1 = "UPDATE solicitudes SET apr_estado = '2' WHERE id_solicitud = '$ci'";
                 $query1 = mysqli_query($connec, $sql1);
             }
             $connec->close();
-            echo '<h6>Se ha rechazado la solicitud correctamente</h6>';
+            echo 'success-delimit';
             
             break;
             

@@ -12,7 +12,7 @@
     margin-top: 1.5rem;
 }
 .estructur-solicitudes {
-    margin: 1%;
+    margin: 1% 0;
 }
 .conten {
     position: -webkit-sticky;
@@ -23,9 +23,9 @@
     text-align: center;
     height: 11rem;
 }.n-estructure.col-lg-9 {
-    margin-left: 0.5%;
     background-color: var(--bg-conten-color2);
-    padding: 10px;
+    /* padding: 10px; */
+    padding: 0 0rem 0  2rem;
 }
 .ramas {
     margin: 4rem 7.5rem 0px 0;
@@ -51,15 +51,15 @@ input#floatingMotiv {
 }
 
 div#notificacion {
-   position: fixed;
+    position: fixed;
     float: left;
-    margin: 12rem -21rem 0rem;
+    margin: -37rem 0rem -1rem -125rem;
     background: #ffc107;
-    font-size: 15px;
+    font-size: 14px;
     padding: 10px;
     font-weight: 600;
     width: 20rem;
-    z-index: 2;
+    z-index: 116;
     height: 3rem;
     border-radius: 0 20px 20px;
     -webkit-transition: all 0.8s;

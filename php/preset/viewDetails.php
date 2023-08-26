@@ -2,11 +2,13 @@
 
 if (isset($_POST["idSoli"])){
     
-    require ("../conect.php");
+include('../conx.php');
 
-    $subId  = mysqli_real_escape_string($connec, $_POST["idSoli"]);
+$conn = new Conexion();
+
+    $subId  = $_POST["idSoli"];
     
-    $svp = mysqli_query($connec, "SELECT * FROM precarga p INNER JOIN solicitudes s ON p.id_solicitud = s.id_solicitud WHERE p.id_solicitud = '$subId'");
+    $svp = $conn->query("SELECT * FROM precarga p INNER JOIN solicitudes s ON p.id_solicitud = s.id_solicitud WHERE p.id_solicitud = '$subId'");
     $sv = mysqli_num_rows($svp);
     
     if($sv == 1){

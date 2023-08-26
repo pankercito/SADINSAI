@@ -4,15 +4,20 @@ session_start();
 
 if(isset($_POST['login'])){
 
-    include("conect.php");
-    include("funtion/encriptDesencript.php");
-    include("funtion/sesion.php");
-    include("funtion/sumarhora.php");
+    include("conx.php");
+    include("function/criptCodes.php");
+    include("function/sesion.php");
+    include("function/sumarhora.php");
+    include("class/auditoria.php");
 
-    $usuariolg = mysqli_real_escape_string($connec, $_POST['userlg']);
-    $pass = mysqli_real_escape_string($connec, $_POST['passlg']);
+    $usuariolg = $_POST['userlg'];
+    $pass = $_POST['passlg'];
 
-    $check = mysqli_query($connec,"SELECT * FROM registro r INNER JOIN personal p ON r.ci = p.ci WHERE user = '$usuariolg'");
+    
+    $auditoria = new auditoria();
+    $conn = new Conexion();
+
+    $check = $conn->query("SELECT * FROM registro r INNER JOIN personal p ON r.ci = p.ci WHERE user = '$usuariolg'");
     $nr = mysqli_num_rows($check);
     $dataview= mysqli_fetch_array($check);
     $trix = desencriptar($dataview['pass']);
@@ -26,21 +31,20 @@ if(isset($_POST['login'])){
             $_SESSION['sesioninit'] = $dataview['sesion'];
             $_SESSION['admincheck'] = $dataview['adp'];
             
-            $id = strval($dataview['id_usuario']);
+            $ci = strval($dataview['id_usuario']);
             $taken = str_replace(' ','' ,strtolower($dataview['nombre']));
-            $_SESSION['event'] = $taken.$id;
+            $_SESSION['event'] = $taken.$ci;
             
             $nueva_hora = hora10();
             
-            $event = "CREATE EVENT $taken$id ON SCHEDULE AT '$nueva_hora' DO UPDATE registro r SET sesion = '0' WHERE r.id_usuario = '$id'";        
-            $check = mysqli_query($connec, $event);
-            
+            if($auditoria->auditoriaSesionInit($dataview['id_usuario'])){
+                $event = "CREATE EVENT $taken$ci ON SCHEDULE AT '$nueva_hora' DO UPDATE registro r SET sesion = '0' WHERE r.id_usuario = '$ci'";        
+                $check = $conn->query($event);
+            }
+
             $_SESSION['LAST_ACTIVITY'] = time();
             
-            $sn = initSesion($dataview['id_usuario']); //variable de inicio de sesion en BD
-            
-            
-            $connec->close();
+            // $sn = initSesion($dataview['id_usuario']); //variable de inicio de sesion en BD
             
             // Redirecciono al usuario a la página principal del sitio.
             header("HTTP/1.1 302 Moved Temporarily"); 

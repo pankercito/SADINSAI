@@ -1,8 +1,14 @@
 <?php
 
+/**
+ * Esta Funcion Asigna segun el ID a un Administrador
+ * -- toma en cuenta adp de BD --
+ * return - ID del Administrador
+ * @return void
+ */
 function asignar(){
 
-    include("conect.php");
+    include("conx.php");
     //consulta preparada
     $stmt = mysqli_prepare($connec, "SELECT id_usuario FROM registro WHERE adp = 1");
     mysqli_stmt_execute($stmt);
