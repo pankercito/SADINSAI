@@ -2,10 +2,10 @@
 
 include('statesHead.php');
 
-include('../php/funtion/fHead.php');
+include('../php/function/fHead.php');
 
 // Guardar el nombre de los URL *Direccion* => *Nombre que tendra*
-$titles = array(
+$titles = [
     'perfil' => 'perfil',
     '/sadinsai/public/principal.php' => 'perfil',
     '/sadinsai/public/estados.php' => 'Estados',
@@ -16,8 +16,8 @@ $titles = array(
     '/sadinsai/public/anadir.php?users/register=true' => 'Registrar Usuarios',
     '/sadinsai/public/anadir.php?users/register-two=true' => 'Registrar Usuarios',
     '/sadinsai/public/anadir.php?form=true' => 'Agregar Personal',
-    '/sadinsai/public/solicitudes.php?solicitud=true' => 'Nueva solicitud'
-);
+    '/sadinsai/public/solicitudes.php?solicitud=true' => 'Nueva solicitud',
+];
 
 // URL actual sin los parámetros GET
 $actUrl = strtok($_SERVER['REQUEST_URI'], '?');

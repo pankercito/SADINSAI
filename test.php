@@ -1,9 +1,17 @@
 <?php
 
-function remover_acentos($cadena) {
-    /* Remueve los acentos de una cadena de texto */
-    $no_acentos = strtr(utf8_decode($cadena), utf8_decode('áéíóúÁÉÍÓÚüÜñÑ'), 'aeiouAEIOUuUnN');
-    return utf8_encode($no_acentos);
-}
+include("php/conx.php");
+include("php/function/criptCodes.php");
+include("php/class/personal.php");
 
-echo remover_acentos("Vérgación");
+$personal = new Personal("xeYwLF-N3YsQpEF0N0jJoQKBopenHcnblmuVQ1XfZUE");
+    
+    $pName = $personal->getNombre() . ' ' . $personal->getApellido();
+    $pCi = $personal->getCi();
+    $pPhone = $personal->getTelefono();
+    $pEmail =  $personal->getEmail();
+    $pDireccion = $personal->getDireccion();
+    $pStado = $personal->getEstado();
+    $pCiudad = $personal->getCiudad();
+
+    echo $pCi;

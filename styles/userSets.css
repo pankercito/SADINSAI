@@ -1,0 +1,91 @@
+input#userSearch {
+  width: 400%;
+  margin-left: 0;
+}
+
+a.direccion.btn.btn-warning {
+  margin-top: -7rem;
+  margin-left: 0.5rem;
+}
+
+.selects.row {
+  z-index: 1;
+  background: none;
+  justify-content: center;
+  margin: 1rem -11rem;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+input {
+  border: none;
+  border-radius: 5px;
+  height: 2rem;
+}
+
+label {
+  height: 2rem;
+  margin: 0.5rem 0 0 1rem;
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 5px 0 0 5px;
+  color: #333;
+  display: inline-block;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 5px 10px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: all 0.2s ease-in-out;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+label.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+select {
+  border: none;
+  border-radius: 0 5px 5px 0;
+  font-size: 14px;
+  height: 2rem;
+  color: #6b6b6b;
+}
+
+select#Ciudad {
+  z-index: 1;
+}
+
+option {
+  color: #000;
+}
+
+button#log {
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 5px;
+  color: #333;
+  cursor: pointer;
+  display: block;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 10px 20px;
+  margin: 15px 0 15px 0;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+}
+
+button#log:hover {
+  background-color: #bdbdbd;
+}
+
+button#log:active {
+  background-color: #a3a3a3;
+}

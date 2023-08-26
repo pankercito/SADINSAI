@@ -1,60 +1,56 @@
-* {/*cuerpo entero*/
-    margin: 0;
-    padding: 0;
-}
-
 .navbarconten { /*contenedor de la barra de navegacion*/
-    top: 0px;
-    width: 100%;
-    height: 65px;
-    background: var(--narvar-bg-color);
-    box-sizing: content-box;
-    position: fixed;
+    top: 0px!important;
+    width: 100%!important;
+    height: 65px!important;
+    background: var(--narvar-bg-color)!important;
+    box-sizing: content-box!important;
+    position: fixed!important;
+    box-shadow: 0 1px 5px 0 #1e2022!important;
     z-index: 999;
 }
 .nav {   /*menu superior*/
     display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
+    -ms-flex-wrap: wrap!important;
+    flex-wrap: wrap!important;
     padding-left: 0;
-    margin-bottom: 0;
-    margin-top: 4px;
+    margin-bottom: 0!important;
+    margin-top: 4px!important;
     list-style: none;
     justify-content: space-between;
-    align-content: center;
-    flex-direction: row;
-    align-items: baseline;
+    align-content: center!important;
+    flex-direction: row!important;
+    align-items: baseline!important;
 }
 a.navbar-brand{ /*logo sadinsai*/
-    margin-left: 1.5rem;
+    margin-left: 1.5rem!important;
 }
 .navbar-brand img{/*logo*/
-    margin-top: -2px;
+    margin-top: -2px!important;
 }
 .navbar-nav{/*lista de navegacion*/
-    margin-left: -15%;
+    margin-left: -15%!important;
 }
     @media (max-width: 1400px) and (orientation: landscape){
         .navbar-nav{/*lista de navegacion*/
-            margin-left: -10%;        
+            margin-left: -10!important        
         }      
     }
     @media (max-width: 1300px) and (orientation: landscape){
         .navbar-nav{/*lista de navegacion*/
-            margin-left: -2%;;        
+            margin-left: -2%!important;      
         }      
     }
     @media (max-width: 1200px) and (orientation: landscape){
         .navbar-nav{/*lista de navegacion*/
-            margin-left: -5%;        
+            margin-left: -5%!important;        
         }      
     }
 ul.nav.nav-list.nav-pills.navbar-right {/*lista*/
-    margin: 0;
+    margin: 0!important;
 }
 .nav-item{/*elementos de navegacion*/
-    margin-right: 3px;
-    margin-left: 0;
+    margin-right: 3px!important;
+    margin-left: 0!important;
 }
 
 .navbar-light .navbar-nav .nav-link {/*listado*/
@@ -73,7 +69,7 @@ ul.nav.nav-list.nav-pills.navbar-right {/*lista*/
     border-top-right-radius: 10px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    font-weight: var(--font-style-semibold);
+    font-weight: var(--font-semibold);
 }
 .nav-link:hover {/*estilo de la barra*/
     color: #2e2e2eda;
@@ -81,10 +77,10 @@ ul.nav.nav-list.nav-pills.navbar-right {/*lista*/
 
 }
 .form-inline {
-    margin-right: 0.5rem;
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: baseline;
+    margin-right: 0.5rem!important;
+    display: flex!important;
+    flex-wrap: nowrap!important;
+    align-items: baseline!important;
 }
 .form-inline button{/*botones de toda la barra*/
     border: none;
@@ -99,7 +95,6 @@ ul.nav.nav-list.nav-pills.navbar-right {/*lista*/
     border: none;
     background-color: rgb(209, 209, 209);
     color: #312e2e;
-    border-radius: 10px;
     height: 38px;
     width: 100%;
 }
@@ -126,9 +121,9 @@ ul.nav.nav-list.nav-pills.navbar-right {/*lista*/
     border-radius: 10px;
 }
 button.btn.btn-outline-success {/*barra de busqueda*/
-    margin-left: -40px;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+    margin-left: -40px!important;
+    border-top-right-radius: 10px!important;
+    border-bottom-right-radius: 10px!important;
 
 }
 .form-inline span {/*separadores*/
@@ -137,14 +132,14 @@ button.btn.btn-outline-success {/*barra de busqueda*/
     border:none;
 }
 .form-inline button i{/*logo boton*/
-    font-family: sans-serif;
-    font-style: normal;
-    font-size: 17px;
+    font-family: sans-serif!important;
+    font-style: normal!important;
+    font-size: 17px!important;
 }
 .form-inline a i{/*sepadores*/
     font-family: sans-serif;
     font-style: normal;
-    font-size: 17px;
+    font-size: 15px;
 }
 .form-inline a{/*margen*/
     font-family: sans-serif;
@@ -158,8 +153,8 @@ button.btn.btn-outline-success {/*barra de busqueda*/
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
     color: #2e2e2eda;
     text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 1.45rem;
+    text-decoration-thickness: 1px!important;
+    text-underline-offset: 1.55rem!important;
     text-decoration-color: #2e2e2eda;
 }
 a.nav-link.active:hover{

@@ -1,73 +1,66 @@
-<?php require_once ("../php/sesionval.php"); ?> 
+<?php require_once("../php/sesionval.php"); ?> 
 
 <?php require ("../layout/head.php"); ?>
 
 <?php require("../layout/navbar.php"); ?>
 
+<?php require("../php/function/adminSet.php"); ?>
+
+<link rel="stylesheet" href="../styles/viewtables.css">
 <link rel="stylesheet" href="../styles/nomina.css">
 <link rel="stylesheet" href="../styles/solicitudes.css">
 
 <!--SALUDO DE BIENVENIDA-->
 <section name="cromaconten"> 
   <div class="contencroma">
-    <?php
-      include ("../layout/sidebar.php");
-    ?>
+    <?php include ("../layout/sidebar.php");?>
   </div>
 </section>
-
 
 <div class="estructur-solicitudes">
 	<div class="grid-containerr">
 		<div class="row">
-			<div class="action col-lg-3">
-        		<div class="conten">
-					<p class="n-inf">Acciones</p>
-					<div class="tb_search">
-						<input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Search.." class="form-control">
-        			</div>
-					<div class="num_rows">
-						<div class="form-group"> <!--		Show Numbers Of Rows 		-->
-				 			<select class  ="form-control" name="state" id="maxRows">		 
-								<option value="10">10</option>
-								<option value="15">15</option>
-								<option value="20">20</option>
-								<option value="50">50</option>
-								<option value="70">70</option>
-								<option value="100">100</option>
-        	    				<option value="5000">Show ALL Rows</option>
-							</select>		 		
-						</div>
-        			</div>
-					<div class="ramas">
-						<a href="?solicitud=true" class="direccion btn btn-warning">Nueva solicitud</a>
-					</div>
-				</div>
-      		</div>	
-			<div id="notificacion"></div>
-			<?php include("../php/preset/notificacion.php");?>
+			<div id="notificacion">
+				<?php include("../php/preset/notificacion.php");?>
+			</div>	
     		<div class="n-estructure col-lg-9">
     	    	<p class="ttl-dashboard">Solicitudes</p>
-				<?Php include("../php/preset/seleccionSolicitud.php")?>
     	    	<div class="container">	
-					<table class="table table-striped table-class" id="table-id">	
-						<thead>
-							<tr>
-					      		<th>Solicitud</th>
-					      		<th>Para</th>
-					      		<th>Fecha</th>
-					    		<th>Motivo</th>
-    	    	    			<th>Estado</th>
-				  			</tr>
-  						</thead>
-		    	  		<tbody>
-				      		<?php include('../php/preset/viewSolicitudes.php') ?>
-		    	 		</tbody>
-					</table>
+					<?php incluir("../layout/solicitudAdmin.php", "../layout/solicitudUser.php")?>
 				</div>
+				<script type="text/javascript">
+						new DataTable('#table-id', {
+							autoWidth: false,
+							order: [
+								[ 3, 'desc' ]
+							],
+							language: {
+								"decimal": "",
+								"emptyTable": "No hay información",
+								"info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+								"infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+								"infoFiltered": "(Filtrado de _MAX_ total entradas)",
+								"infoPostFix": "",
+								"thousands": ",",
+								"lengthMenu": "Mostrar _MENU_ Entradas",
+								"loadingRecords": "Cargando...",
+								"processing": "Procesando...",
+								"search": "Buscar:",
+								"zeroRecords": "Sin resultados encontrados",
+								"paginate": {
+									"first": "Primero",
+									"last": "Ultimo",
+									"next": "Siguiente",
+									"previous": "Anterior"
+								}
+							}
+						});
+					</script>
 			</div>
 		</div>
     </div>
 </div>
+<script src="../js/solicitudDetails.js"></script>
+<script src="../js/search.js"></script>
 
 <?php require ("../layout/footer.php"); ?>

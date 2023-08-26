@@ -1,1 +1,1 @@
-localStorage.setItem('activeSection', '1'); 
+localStorage.setItem('activeSection', '1');

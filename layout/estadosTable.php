@@ -1,17 +1,13 @@
 <div class="states">
-    <table class="states-table table table-striped table-class table-striped table-sm w-auto data">
-        <thead class="table-light">
-            <tr>
-                <th class="text-end"><a></a></th>
-                <th class="text-end" style="border-left: none;"><a>Id</a></th>
-                <th class="text-end" style="border-left: ;"><a>Estado</a></th>
-                <th class="text-end" style="border-left: ;"><a>N° Sedes por estado</a></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php 
+    <h4>Estados</h4>
+
+    <div class="d-flex">
+        <label for="states" class="form-label" style="font-size: 15px;">select estado</label>
+        <select class="form-select" id="states" style="width: 10rem;">
+            <option selected>Select one</option>
+            <?php
             include('../php/preset/viewAllEstados.php')
-            ?>
-        </tbody>
-    </table>
+                ?>
+        </select>
+    </div>
 </div>

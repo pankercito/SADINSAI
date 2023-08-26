@@ -5,7 +5,7 @@
     margin-top: 70px;
     background-color: var(--bg-color-principal);
     font-size: medium;
-    font-weight: var(--font-style-semibold);
+    font-weight: var(--font-semibold);
     display: flex;
     color: #e7e7e7;
     height: 110px;
@@ -27,7 +27,7 @@
     margin-top: 9.25%;
     background-color: var(--bg-color-principal);
     font-size: medium;
-    font-weight: var(--font-style-semibold);
+    font-weight: var(--font-semibold);
     width: 100%;
     color: #e7e7e7;
     height: 40px;
@@ -36,7 +36,7 @@
 }
     @media (max-width: 1710px) {
         .croma.col-lg-12.col-ms-12 {
-            margin-top: 7.9%;
+            margin-top: 7.5%;
         }
     }
     @media (max-width: 1680px) {
@@ -46,7 +46,7 @@
     }
     @media (max-width: 1550px) {
         .croma.col-lg-12.col-ms-12 {
-            margin-top: 8.9%; 
+            margin-top: 8.5%;
         }
     }
     @media (max-width: 1480px) {
@@ -56,17 +56,17 @@
     }
     @media (max-width: 1400px) {
         .croma.col-lg-12.col-ms-12 {
-            margin-top: 9.91%;
+            margin-top: 9.4%;
         }
     }
     @media (max-width: 1350px) {
         .croma.col-lg-12.col-ms-12 {
-            margin-top: 10.1%;
+            margin-top: 10.45%;
         }
     }
     @media (max-width: 1300px) {
         .croma.col-lg-12.col-ms-12 {
-            margin-top: 10.9%;
+            margin-top: 10.45%;
         }
     }
     @media (max-width: 1240px) {
@@ -81,7 +81,7 @@ p.welcome {
     transform: translateX(1rem);
 }
 .conten-archives {
-    background-color: #0d1117e0;
+    background-color: var(--bg-color-principal);
     position: absolute;
     width: 100%;
     left: 0;
@@ -95,7 +95,7 @@ p.welcome {
     }
     @media (max-width: 1550px) {
         .conten-archives {
-            margin-top: 0.7%;
+            margin-top: 0.6%;;
         }
     }
     @media (max-width: 1400px) {
@@ -173,7 +173,7 @@ p.plistcatg{
     border-radius: 5px;
     font-size: 104%;
     border: none;
-    font-weight: var(--font-style-semibold);
+    font-weight: var(--font-semibold);
     cursor: pointer;
 }
 .dropdown-content{

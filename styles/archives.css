@@ -10,9 +10,9 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     margin-top: 7rem;
-    background-color: var(--bg-color-principal);
+    background: var(--bg-color-principal);
     font-size: medium;
-    font-weight: var(--font-style-semibold);
+    font-weight: var(--font-semibold);
     width: 100%;
     color: #e7e7e7;
     height: 40px;
@@ -66,7 +66,7 @@ p.welcome {
     transform: translateX(1rem);
 }
 .conten-archives {
-    background-color: #0d1117e0;
+    background: var(--bg-color-principal);
     position: absolute;
     width: 100%;
     left: 0;
@@ -108,13 +108,13 @@ p.welcome {
         margin-top: 6rem;
     }
 div.archives-structur .row{
-    background-color: rgba(51, 51, 51, 0.205);
+    background: rgba(51, 51, 51, 0.205);
     text-align: center;
     padding: 20px 0;
 }
 p.plistcatg {
     color: var(--font-color-bg);
-    font-weight: var(--font-style-semibold);    
+    font-weight: var(--font-semibold);    
     z-index: 100;
     position: absolute;
     margin-top: -1.4rem;

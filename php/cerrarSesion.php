@@ -2,22 +2,25 @@
 
 session_start();
 
-if(isset($_SESSION['sesion'])){
-    include("funtion/sesion.php");
-    include("conect.php");
+if (isset($_SESSION['sesion'])) {
+    include("conx.php");
+    include("function/sesion.php");
+    include("class/auditoria.php");
 
-    $cerrar = outSesion($_SESSION['sesion']);
+    $s = $_SESSION['sesion'];
+    $conn = new Conexion;
 
-    if(isset($_SESSION['event'])){
-        $evento  = $_SESSION['event'];
-        echo $evento;
-        $delevent = "DROP EVENT IF EXISTS $evento";
-        
-        $sql = mysqli_query($connec, $delevent);
-        $connec->close();
+    if (isset($_SESSION['event'])) {
+        $d = new auditoria();
+        if ($d->auditoriaSesionClose($s) && outSesion($s)) {
+           
+            $evento = $_SESSION['event'];
+            echo $evento;
+            $delevent = "DROP EVENT IF EXISTS $evento";
+            $sql = $conn->query($delevent);
+            session_destroy();
+            session_unset();
+            header("Location: ../index.php");
+        }
     }
 }
-session_destroy();
-session_unset();
-
-header("Location: ../index.php"); // redirige al usuario a la página de inicio de sesión

@@ -3,18 +3,15 @@
 include("adp.php");
 
 if (isset($_POST["user"]) || ($_POST["pass"]) || ($_POST["checkadmin"])){
-    
-    require("conect.php");
 
-    $cedula = mysqli_real_escape_string($connec, $_SESSION['subcedula']);
-    $usuario = mysqli_real_escape_string($connec,strtoupper($_POST['user']));
-    $contrasena = encriptar(mysqli_real_escape_string($connec, $_POST['pass']));
+    $cedula = mysqli_real_escape_string($conn, $_SESSION['subcedula']);
+    $usuario = mysqli_real_escape_string($conn,strtoupper($_POST['user']));
+    $contrasena = encriptar(mysqli_real_escape_string($conn, $_POST['pass']));
     $admincheck = ($_POST['checkadmin']) ?? null;
     
     $admincheck = $admincheck + 0;
     
-    $proceso = mysqli_query($connec, "INSERT INTO registro (ci, user, pass, adp) VALUES ('$cedula ', '$usuario', '$contrasena', '$admincheck')");
-    $connec->close();
+    $proceso = $conn->query("INSERT INTO registro (ci, user, pass, adp) VALUES ('$cedula ', '$usuario', '$contrasena', '$admincheck')");
 
     unset($_SESSION['subcedula']);
 

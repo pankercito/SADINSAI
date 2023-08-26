@@ -43,11 +43,6 @@
                ?>
             </div>
          </div>
-         <!-- <div class="action col-2">
-            <div class="opcions"> 
-               <p>Acciones</p>
-            </div>
-         </div> -->
    </div>
 </div>
 

@@ -1,0 +1,59 @@
+<?php
+// Conexión a la base de datos
+include("../php/conx.php");
+include("../php/function/removerAcentos.php");
+include("../php/function/criptCodes.php");
+include("../php/function/idGenerador.php");
+include("../php/function/sumarHora.php");
+include("../php/function/filesFunctions.php");
+
+// Escapar los caracteres especiales
+$taken = mysqli_real_escape_string($connec, $_POST["nameArchive"]);
+$tipeArch = mysqli_real_escape_string($connec, $_POST["gestionArch"]);
+$ci = desencriptar(mysqli_real_escape_string($connec, $_POST["ciArch"]));
+$note = mysqli_real_escape_string($connec, remover_acentos($_POST["textArchive"]));
+$carion = $_FILES["inpArch"]["name"];
+$arch = $_FILES["inpArch"]["tmp_name"];
+
+// Obtener la ruta de la carpeta
+$folDestino = '../data/archives/' . $tipeArch;
+
+// id para archivoss y Consulta de ID
+do {
+    $id = generarId() . generarId();
+    $sql = mysqli_query($connec, "SELECT id_archivo FROM archidata WHERE id_archivo = $ci");
+    $dan = mysqli_num_rows($sql);
+} while ($dan != 0);
+
+// nombre de archivo
+$nombreArch = ($taken == "") ? $ci . "=" . $carion : $ci . "=" . $taken;
+
+// Mover archivos E Inyeccion
+if (moveFile($arch, $folDestino, $nombreArch) == true) {//mover archivos a la ruta espesifica
+    // Variables de archivos
+    @session_start();
+
+    $idUserAg = $_SESSION['sesion'];
+    $size = $_FILES["inpArch"]["size"];
+    $fech = hora();
+    $direccion = $folDestino . "/" . $nombreArch;
+    $tipo = extencion($carion);
+
+    // Inyección a BD
+    $sql = "INSERT INTO archidata (id_archivo, ci_arch,  archivo, note, nombre_archivo,  size) VALUES ('$id', '$ci', '$tipo', '$note', '$taken', '$size')";
+
+    $sql1 = "INSERT INTO arch_direc (id_arch, id_user_sub, id_tipo, direccion, fecha) VALUES ('$id', '$idUserAg', '$tipeArch', '$direccion', '$fech')";
+
+    if (mysqli_query($connec, $sql) && mysqli_query($connec, $sql1)) {
+        echo "success";
+
+    } else {
+
+        echo "error";
+    }
+
+} else {
+    echo "error";
+}
+
+$connec->close();

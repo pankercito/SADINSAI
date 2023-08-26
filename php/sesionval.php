@@ -1,17 +1,14 @@
 <?php
 ini_set('session.cookie_lifetime', 600); //tiempo de la sesion en segundos
-include("funtion/encriptDesencript.php");
 
-session_start();
+include("function/criptCodes.php");
+include("function/dec.php");
+include("actualizarSesion.php");
 
-// actualizar la última actividad
-if(isset($_SESSION['LAST_ACTIVITY'])){
-    $_SESSION['LAST_ACTIVITY'] = time();
-}
 // Controlo si el usuario ya está logueado en el sistema.
 if(isset($_SESSION['sesioninit']))
 {
-    // Guardar datos de sesioninites en variables
+    // Guardar datos de sesioninit es en variables
     $wname = $_SESSION['userdata'];
     $wci = encriptar($_SESSION['cidelusuario']);
     $adpval= $_SESSION['admincheck'];
