@@ -2,33 +2,28 @@
 
 /**
  * Esta Funcion Asigna segun el ID a un Administrador
- * -- toma en cuenta adp de BD --
- * return - ID del Administrador
- * @return void
+ * _toma en cuenta adp de base de datos_
+ * @return void ID del Administrador
  */
 function asignar(){
+    $conn = new Conexion();
+    $stmt = $conn->query("SELECT id_usuario FROM registro WHERE adp = 1");
 
-    include("conx.php");
-    //consulta preparada
-    $stmt = mysqli_prepare($connec, "SELECT id_usuario FROM registro WHERE adp = 1");
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_store_result($stmt);
-
-    $count = mysqli_stmt_num_rows($stmt);
-    $initial = null;
     $arraySet = array();
-    mysqli_stmt_bind_result($stmt, $id_usuario);
 
-    while (mysqli_stmt_fetch($stmt)) {
-        $arraySet[] = $id_usuario;
+    while ($resultado = $stmt->fetch_array()) {
+        $arraySet = $arraySet + $resultado;
     }
+
+    $count = count($arraySet);
+    $initial = null;
 
     if ($count == 1) {
         $initial = $arraySet[0];
     } else {
         $ad = rand(0, $count - 1);
         $initial = $arraySet[$ad];
-        print_r($arraySet);
     }
+
     return $initial;
 }

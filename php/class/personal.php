@@ -27,8 +27,8 @@ class Personal
      */
     public function __construct($ci)
     {   
-        $this->connec = new Conexion();
         $this->ci = $ci;
+        $this->connec = new Conexion();
         $this->getDatos();
     }
 
@@ -39,11 +39,11 @@ class Personal
     private function getDatos()
     {
 
-        $pCi = $this->ci;
+        $pCi = desencriptar($this->ci);
 
-        if ($pCi != '') {
+        if (ctype_digit($pCi)) {
 
-            $pCi = desencriptar($this->ci);
+            
 
             $cnce = $this->connec->query("SELECT * FROM personal p
                                            INNER JOIN estados e ON p.id_estado = e.id_estado

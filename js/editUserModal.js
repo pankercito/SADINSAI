@@ -29,7 +29,7 @@ form.addEventListener("submit", function (event) {
 
   // Crear un objeto con los datos del formulario
   const formData = {
-    "cedula": ds,
+    "cedula": document.getElementById("Ci").value,
     "nombre": document.getElementById("Name").value,
     "apellido": document.getElementById("Apellido").value,
     "telefono": document.getElementById("Phone").value,
