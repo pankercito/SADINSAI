@@ -165,7 +165,7 @@ $(document).ready(function () {
                                                                             d: {
                                                                                 text: 'ver perfil',
                                                                                 action: function () {
-                                                                                    location.replace(c);
+                                                                                    acc;
                                                                                 }
                                                                             },
                                                                             da: {
