@@ -1,5 +1,5 @@
 <?php
-
+$conn = new Conexion();
 $ciP = $_SESSION['cidelusuario'];
 
 $regisview = $conn->query("SELECT * FROM solicitudes s INNER JOIN personal p ON p.ci = s.ci_emisor WHERE s.ci_emisor = $ciP ORDER BY fecha DESC");
@@ -36,4 +36,3 @@ if ($count_results > 0) {
         //Si no hay registros encontrados
         echo '<h5>no has realizado ninguna solicitud</h5>';
 }
-$connec->close();
