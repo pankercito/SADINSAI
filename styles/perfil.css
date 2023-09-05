@@ -41,18 +41,19 @@ div.perfil.ptittle{
     flex-direction: row;
 }
 .plist2.row {
-    width: 12rem;
+    width: 11rem;
     display: flex;
     flex-direction: row;
     align-items: baseline;
     flex-wrap: nowrap;
-    margin-left: -3%;
+    margin-left: 1%;
+    margin-top: 6rem;
 }
 i.bi.bi-person-square {
     position: absolute;
-    margin-top: 1.4rem;
-    margin-left: -31.5rem;
-    font-size: 8.5rem;
+    margin-top: 1rem;
+    margin-left: -30.5rem;
+    font-size: 8rem;
 }
 button#editar {
     margin: 1rem 0;

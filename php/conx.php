@@ -30,4 +30,13 @@ class Conexion
     {
         return mysqli_real_escape_string($this->connec, $texto);
     }
+
+    /**
+     * cerrar concexion con base de datos 
+     * @param mixed $conn es conexion 
+     * @return bool mysqli_result 
+     */
+    public function close(){
+        return mysqli_close($this->connec);
+    }
 }

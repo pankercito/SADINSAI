@@ -11,11 +11,12 @@ div#centroEdit{
 }
 
 .contenido1 form input {
-    height: 1.9rem;
+    height: 2.2rem;
     border: none;
-    padding: 0.2rem;
+    padding: 0 1.2rem;
     border-radius: 3px;
     width: auto;
+    font-size: 16px;
 }
 .selects.row {
     display: flex;
@@ -95,6 +96,7 @@ a.añadir {
     flex-direction: column;
 }
 .sel3 {
+    margin: 1.5rem 0 .5rem;
     display: flex;
     flex-direction: column;
 }
@@ -113,12 +115,6 @@ a.añadir {
     align-content: space-around;
     font-size: 20px;
 }
-.one.row {
-    display: block;
-}
-.two.row {
-    display: block;
-}
 .selects.row {
     display: flex;
     justify-items: self-end;
@@ -129,18 +125,13 @@ a.añadir {
     width: 110%;
 }
 .selects select {
-    height: 1.9rem;
+    height: 2rem;
     border: none;
-    padding: 0.2rem;
+    padding: 0 1rem;
     border-radius: 3px;
+    font-size: 16px;
 }
-.selects select {
-    font-size: 18px;
-    
-}
-select#Sede {
-    font-size: 18px;
-}
+
 .lmao.row {
     width: 80%;
     display: flex;
@@ -150,8 +141,15 @@ select#Sede {
     align-items: baseline;
 }
 select#Sede {
-    height: 1.9rem;
+    height: 2.2rem;
     border: none;
-    padding: 0.2rem;
+    padding: 0 1rem;
     border-radius: 3px;
+    font-size: 16px;
+}
+input#Name {
+    margin: 0 0 1rem;
+}
+input#Apellido {
+    margin: 0 0 1rem;
 }

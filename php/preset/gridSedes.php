@@ -12,7 +12,7 @@ if($count_results !== 0){
         //Lista de los usuarios
         echo '<tr>';
         echo '<td><a></a></td>';
-        echo '<td style="border-left: none;"><a class="idsvtate" href="principal.php?perfil='.encriptar($v['ci']).'&parce=true">'.$v['ci'].'</a></td>';
+        echo '<td style="border-left: none;"><a class="idsvtate" href="perfil.php?perfil='.encriptar($v['ci']).'&parce=true">'.$v['ci'].'</a></td>';
         echo '<td style="border-left: none;"><a class="idsvtate" >'.ucwords(strtolower($v['nombre'])).'</a></td>';
         echo '<td style="border-left: 1px solid #dee2e6;"><a class="svtate">'.ucwords(strtolower($v['apellido'])).'</a></td>';
         echo '<td style="border-left: 1px solid #dee2e6;"><a class="svtate">'.$v['telefono'].'</a></td>';

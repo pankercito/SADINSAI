@@ -1,17 +1,33 @@
 <?php
+include_once("../php/conx.php");
+$conn = new Conexion();
 
-    $stonly = $_GET['onlystate'];
-    
-    $sql = $conn->query("SELECT * FROM estados e INNER JOIN sedes s ON e.id_estado = s.id_estado WHERE s.id_estado = '$stonly'");
+$est = $conn->real_escape($_POST['estado']);
 
-    $count_results = mysqli_num_rows($sql);
+$sql = $conn->query("SELECT * FROM sedes s
+                    JOIN estados e
+                    JOIN personal p
+                    ON e.id_estado = s.id_estado_sed 
+                    AND p.sede_id = s.sede_id
+                    WHERE p.sede = $est");
 
-    while($v = mysqli_fetch_array($sql)){
-        //Lista de los usuarios
+$count = mysqli_num_rows($sql);
+
+//Si ha resultados
+if ($count > 0) {
+
+    for ($states = 0; $states < $count; $states++) {
+        //Lista del personal
+        $v = mysqli_fetch_array($sql);
         echo '<tr>';
-        echo '<td><a></a></td>';
-        echo '<td style="border-left: none;"><a class="idsvtate" >'.$v['estado'].'</a></td>';
-        echo '<td style="border-left: none;"><a class="idsvtate" href=?onlystate='.$stonly.'&onlysede='.$v['sede_id'].'>'.ucwords(strtolower($v['nombre_sede'])).'</a></td>';
-        echo '<td style="border-left: 1px solid #dee2e6;"><a class="svtate">'.ucwords(strtolower($v['municipio'])).'</a></td>';
+        echo '<td>' . strtoupper(remover_acentos($v['estado'])) . '</td>';
+        echo '<td>' . remover_acentos($v['nombre_sede']) . '</td>';
+        echo '<td><a class="aStates" href="perfil.php?perfil=' . encriptar($v['ci']) . '">' . remover_acentos($v['nombre']) . '</a></td>';
+        echo '<td>' . remover_acentos($v['apellido']) . '</td>';
+        echo '<td>' . remover_acentos($v['ci']) . '</td>';
+        echo '<td>' . remover_acentos($v['telefono']) . '</td>';
+        echo '<td>' . remover_acentos($v['cargo']) . '</td>';
         echo '</tr>';
     }
+
+}

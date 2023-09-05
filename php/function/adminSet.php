@@ -3,16 +3,17 @@
 /**
  * Esta Funcion añade al documento un archivo
  * dependiendo de si es Admin o Usuario
-  * @param string $admin archive Admin
+ * @param string $admin archive Admin
  * @param string $user archive User
  * @return void
  */
-function incluir($admin, $user){
+function incluir($admin, $user)
+{
     $adpval = $_SESSION['admincheck'];
 
-    if ($adpval == TRUE){
+    if ($adpval == TRUE) {
         include($admin);
-    }else{
+    } else {
         include($user);
     }
 }
@@ -24,12 +25,13 @@ function incluir($admin, $user){
  * @param string $user textByUser
  * @return void
  */
-function imprime($admin, $user){
+function imprime($admin, $user)
+{
     $adpval = $_SESSION['admincheck'];
-    
-    if($adpval == TRUE){
+
+    if ($adpval == TRUE) {
         echo $admin;
-    }else{
+    } else {
         echo $user;
-    } 
+    }
 }

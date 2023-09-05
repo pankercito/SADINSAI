@@ -104,7 +104,7 @@
                 </div>
             </li>
             <li>
-                <a class="nav-link1" href="gestion.php?scan">Memorando</a>
+                <a class="nav-link2" href="gestion.php?gestion=1046&carga=<?php echo comprueba()?>">Memorando</a>
             </li>
         </ul>
     </div>

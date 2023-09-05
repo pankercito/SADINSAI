@@ -1,17 +1,23 @@
 <?php
 
 include("php/conx.php");
-include("php/function/criptCodes.php");
-include("php/class/personal.php");
+include("php\class\auditoria.php");
+include("php/function/sumarhora.php");
 
-$personal = new Personal("xeYwLF-N3YsQpEF0N0jJoQKBopenHcnblmuVQ1XfZUE");
-    
-    $pName = $personal->getNombre() . ' ' . $personal->getApellido();
-    $pCi = $personal->getCi();
-    $pPhone = $personal->getTelefono();
-    $pEmail =  $personal->getEmail();
-    $pDireccion = $personal->getDireccion();
-    $pStado = $personal->getEstado();
-    $pCiudad = $personal->getCiudad();
+$new = new auditoria();
 
-    echo $pCi;
+$dat = rangoFechas();
+
+?>
+<p> rangoFechas <?php echo implode(" - ", $dat) . date("w")?></p>
+<br>
+<div class="" style="display:flex;">
+    <?php
+    var_dump($new->solicitudStats($dat['lunes'], $dat['domingo']));
+    ?>
+</div>
+<div class="" style="display:flex;">
+    <?php
+    var_dump($new->userStats($dat['lunes'], $dat['domingo']));
+    ?>
+</div>

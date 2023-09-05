@@ -20,13 +20,12 @@ if ($count_results > 0) {
         "2" => "rechasada",
         "3" => "vencida",
     );
-    echo '<h6>total de solicitudes realizadas '.$count_results.'.</h6>';
 
     while ($v = mysqli_fetch_array($regisview)){
         //Lista de los usuarios
         echo '<tr data-solicitud="'.$v['id_solicitud'].'">';
         echo '<td><a>'.$v['id_solicitud'].'</a></td>';
-        echo '<td><a class="lol" href="principal.php?perfil='.encriptar($v['ci_solicitada']).'&parce=true">'.$v['ci_solicitada'].'</a></td>';
+        echo '<td><a class="lol" href="perfil.php?perfil='.encriptar($v['ci_solicitada']).'&parce=true">'.$v['ci_solicitada'].'</a></td>';
         echo '<td><a>'.$v['fecha'].'</a></td>';
         echo '<td><a class="viewDetails btn btn"> Ver detalles </a></td>';    
         echo '<td><a class="'.$apr[$v['apr_estado']].'">'.$aprN[$v['apr_estado']].'</a></td>';

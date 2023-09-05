@@ -13,6 +13,8 @@
     padding: 0.2rem;
     border-radius: 3px;
     width: auto;
+    margin: 1rem 0;
+    font-size: 15px;
 }
 .selects.row {
     display: flex;
@@ -24,26 +26,33 @@
     width: 110%;
 }
 
-.fixed.col {
-    height: 2000px;
+.fixed {
+    flex: 0 0 auto;
+    width: 24.5%;
 }
-
+.ui.stackable.grid {
+    display: flex;
+    justify-content: center;
+}
 .fijo.contenido {
     position: -webkit-sticky;
     position: sticky;
     top: 5.9rem;
-    padding: 0 0 1rem;
+    padding: 1rem 0 1rem;
     background-color: rgba(51, 51, 51, 0.205);
-    text-align: start;
+    text-align: center;
+    border-radius: 10px;
 }
 
 .fijo.contenido p {
     text-align: center;
 }
 
-.conten.col-8 {
-    background-color: rgba(51, 51, 51, 0.205);
-    margin: 0rem 0rem 0rem 1rem;
+.conten.col-9 {
+    background-color: rgb(43 181 129);
+    margin: 0rem 0rem 0rem 0rem;
+    border-radius: 10px;
+    height: 50%;
 }
 
 .añadir i {
@@ -92,6 +101,7 @@ a.añadir {
     flex-direction: column;
 }
 .sel3 {
+    margin: 2rem 0 0;
     display: flex;
     flex-direction: column;
 }
@@ -132,11 +142,10 @@ a.añadir {
     border-radius: 3px;
 }
 .selects select {
-    font-size: 18px;
-    
+    font-size: 15px;
 }
 select#Sede {
-    font-size: 18px;
+    font-size: 15px;
 }
 .lmao.row {
     width: 80%;
@@ -151,4 +160,15 @@ select#Sede {
     border: none;
     padding: 0.2rem;
     border-radius: 3px;
+}
+.registersuser {
+    text-align: center;
+    display: flex;
+    margin: 1.5rem 3rem;
+    justify-content: center;
+    align-items: baseline;
+}
+
+a.añadir.btn.btn-primary {
+    width: 69.3%;
 }

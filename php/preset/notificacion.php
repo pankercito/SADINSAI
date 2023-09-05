@@ -1,13 +1,13 @@
 <script type="text/javascript">
     // Obtener el mensaje de la notificación desde PHP
     const mensaje = "<?php echo htmlspecialchars($_SESSION["noti"]); ?>";
-    
+
     localStorage.setItem('activeSection', '5');
-    
-    if (window.onload){
+
+    if (window.onload) {
         setTimeout(() => {
             notify(mensaje);
-        }, 2000);
+        }, 800);
     }
 
     function notify(mensaje) {
@@ -19,23 +19,23 @@
 
             // Hacer la animación de entrada de la notificación
             setTimeout(function () {
-                notificacion.style.transform = "translateX(125%)";
+                notificacion.style.transform = "translateX(-126rem)";
             }, 500)
 
             // Hacer la animación de salida de la notificación
             setTimeout(function () {
-                notificacion.style.transform = "translateX(-5%)";
-            }, 3000);
+                notificacion.style.transform = "translateX(125rem)";
+            }, 3500);
 
             // Ocultar la notificación después de la animación de salida
             setTimeout(function () {
                 notificacion.style.display = "none";
-            }, 6000);
-            
+            }, 5000);
+
         } else {
             document.getElementById("notificacion").style.display = "none";
         }
     }
 </script>
 
-<?php $_SESSION["noti"] = 0; ?>
+<?php $_SESSION["noti"] = 0 ?>

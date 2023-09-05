@@ -31,8 +31,8 @@ if ($count_results > 0) {
         //Lista de los usuarios
         echo '<tr data-solicitud="' . $v['id_solicitud'] . '" data-receptor="' . encriptar($v['ci_solicitada']) . '">';
         echo '<td><a>' . $v['id_solicitud'] . '</a></td>';
-        echo '<td><a class="lol" href="principal.php?perfil=' . encriptar($v['ci']) . '&parce=true">' . getUser('', $v['ci_emisor']) . '</a></td>';
-        echo '<td><a class="lol" href="principal.php?perfil=' . encriptar($v['ci_solicitada']) . '&parce=true">' . $v['ci_solicitada'] . '</a></td>';
+        echo '<td><a class="lol" href="perfil.php?perfil=' . encriptar($v['ci_emisor']) . '&parce=true">' . getUser('', encriptar($v['ci_emisor'])) . '</a></td>';
+        echo '<td><a class="lol" href="perfil.php?perfil=' . encriptar($v['ci_solicitada']) . '&parce=true">' . $v['ci_solicitada'] . '</a></td>';
         echo '<td><a>' . $v['fecha'] . '</a></td>';
         echo '<td><a class="viewDetails btn btn"> Ver detalles </a></td>';
 

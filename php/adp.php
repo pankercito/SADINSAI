@@ -1,7 +1,7 @@
 <?php
 
 //pendiente
-$url = "principal.php?perfil=true";
+$url = "perfil.php?perfil=" . $wci;
 
 if ($adpval == TRUE) {
    

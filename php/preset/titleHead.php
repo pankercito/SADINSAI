@@ -7,8 +7,9 @@ include('../php/function/fHead.php');
 // Guardar el nombre de los URL *Direccion* => *Nombre que tendra*
 $titles = [
     'perfil' => 'perfil',
-    '/sadinsai/public/principal.php' => 'perfil',
-    '/sadinsai/public/estados.php' => 'Estados',
+    '/sadinsai/public/principal.php' => 'Dashboard',
+    '/sadinsai/public/perfil.php' => 'perfil',
+    '/sadinsai/public/estados.php' => 'Personal',
     '/sadinsai/public/nomina.php' => 'Nomina',
     '/sadinsai/public/anadir.php' => 'A&ntilde;adir',
     '/sadinsai/public/solicitudes.php' => 'Solicitudes',
@@ -16,7 +17,6 @@ $titles = [
     '/sadinsai/public/anadir.php?users/register=true' => 'Registrar Usuarios',
     '/sadinsai/public/anadir.php?users/register-two=true' => 'Registrar Usuarios',
     '/sadinsai/public/anadir.php?form=true' => 'Agregar Personal',
-    '/sadinsai/public/solicitudes.php?solicitud=true' => 'Nueva solicitud',
 ];
 
 // URL actual sin los parámetros GET
@@ -29,25 +29,25 @@ $get = $_SERVER['REQUEST_URI'];
 parse_str(parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY), $params);
 
 // Obtener el título correspondiente a la URL actual
-if ($actUrl == '/sadinsai/public/principal.php') {
+if ($actUrl == '/sadinsai/public/perfil.php') {
     //Pagina de inicio o Perfil
     include('../php/perfilCheck.php');
-    
+
     //Imprimir tanto perfil como el Nombre si se detecta el GET "parce"
     encabezado('Perfil' . (isset($params['parce']) ? ' de ' . $pName : ''));
-}else 
-if(isset($params['onlystate'])){
-    //Imprimir titulos de estados
-    encabezado($estados[($params['onlystate'])] . (isset($params['onlysede']) ? ' | ' . $sedes[($params['onlysede'])] : ''));
-}else
-if(isset($params['onlysede'])){
-    //Imprimir titulos de sede
-    $title = $estados[($params['onlystate'])] + $sedes[($params['onlysede'])];
-    
-    encabezado($title);
-}else{
-    //Imprimir los demas GETs enteros segun la URL
-    $title = isset($titles[$get]) ? $titles[$get] : 'No agregado';
+} else
+    if (isset($params['onlystate'])) {
+        //Imprimir titulos de estados
+        encabezado($estados[($params['onlystate'])] . (isset($params['onlysede']) ? ' | ' . $sedes[($params['onlysede'])] : ''));
+    } else
+        if (isset($params['onlysede'])) {
+            //Imprimir titulos de sede
+            $title = $estados[($params['onlystate'])] + $sedes[($params['onlysede'])];
 
-    encabezado($title);
-}
+            encabezado($title);
+        } else {
+            //Imprimir los demas GETs enteros segun la URL
+            $title = isset($titles[$get]) ? $titles[$get] : 'No agregado';
+
+            encabezado($title);
+        }

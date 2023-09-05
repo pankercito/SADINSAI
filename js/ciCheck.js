@@ -14,7 +14,7 @@ function verificarCI() {
 
       if (respuesta == "!registra primero¡") { //no se encuentra en ninguna tabla
         document.getElementById("mensajeCi").innerHTML = `<p class="errormake" style="
-                                                          margin: -1rem 0rem 0.5rem 0rem;
+                                                          margin: -2rem 0rem 0.5rem 0rem;
                                                           position: absolute;
                                                           white-space: pre-line;
                                                           text-decoration: none;

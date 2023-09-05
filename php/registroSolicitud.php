@@ -11,7 +11,6 @@ session_start();
 //soli
 $ciEm = $conn->real_escape($_SESSION['cidelusuario']);
 $recep = asignar();
-print_r($recep);
 $ciRec = $conn->real_escape($_SESSION['editCI']);
 
 //precarga

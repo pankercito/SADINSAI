@@ -8,13 +8,12 @@ $count_results = mysqli_num_rows($regisview);
 
 if ($count_results > 0) {
     //Muestra la cantidad de usuarios    
-    echo '<h2>Se han registrado '.$count_results.' usuarios.</h2>';
     
     while ($v = mysqli_fetch_array($regisview)){
 
         //Lista de los usuarios
         echo '<tr>';
-        echo '<td><a id="vrname" href="principal.php?perfil='.encriptar($v['ci']).'&parce=true">'.strtoupper(strtolower($v['user'])).'</a></td>';
+        echo '<td><a id="vrname" href="perfil.php?perfil='.encriptar($v['ci']).'&parce=true">'.strtoupper(strtolower($v['user'])).'</a></td>';
         echo '<td><a>'.ucwords(strtolower($v['nombre'])).'</a></td>';
         echo '<td><a>'.ucwords(strtolower($v['apellido'])).'</a></td>';
         echo '<td><a>'.$v['ci'].'</a></td>';

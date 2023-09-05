@@ -4,8 +4,6 @@
 
 <?php require("../layout/navbar.php"); ?>
 
-<?php require("../php/function/adminSet.php"); ?>
-
 <link rel="stylesheet" href="../styles/viewtables.css">
 <link rel="stylesheet" href="../styles/nomina.css">
 <link rel="stylesheet" href="../styles/solicitudes.css">
@@ -61,6 +59,5 @@
     </div>
 </div>
 <script src="../js/solicitudDetails.js"></script>
-<script src="../js/search.js"></script>
 
 <?php require ("../layout/footer.php"); ?>

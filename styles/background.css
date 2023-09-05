@@ -33,7 +33,7 @@ body{ /*FONDO DE PANTALLA*/
     background: var(--bg-color-principal);
     left: -15px;
     bottom: 0;
-    margin-top: 2.5%;
+    margin-top: 2%;
     width: 103%;
     height: 12rem;
     display: flex;

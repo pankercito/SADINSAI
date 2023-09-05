@@ -4,15 +4,15 @@ session_start();
 
 if (isset($_SESSION['sesion'])) {
     include("conx.php");
-    include("function/sesion.php");
     include("class/auditoria.php");
+    include("function/sesion.php");
 
-    $s = $_SESSION['sesion'];
     $conn = new Conexion;
+    $s = $_SESSION['sesion'];
 
     if (isset($_SESSION['event'])) {
         $d = new auditoria();
-        if ($d->auditoriaSesionClose($s) && outSesion($s)) {
+        if ($d->sesionClose($s) && outSesion($s)) {
            
             $evento = $_SESSION['event'];
             echo $evento;
@@ -23,4 +23,8 @@ if (isset($_SESSION['sesion'])) {
             header("Location: ../index.php");
         }
     }
+}else {
+    session_destroy();
+    session_unset();
+    header("Location: ../index.php");
 }

@@ -35,7 +35,7 @@
                   ?>
             </div>
          </div>
-         <div class="conten col-8">
+         <div class="conten col-9">
             <div class="contenido">
                <p>Contenido</p>
                <?php

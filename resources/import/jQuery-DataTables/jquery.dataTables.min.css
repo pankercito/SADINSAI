@@ -569,7 +569,7 @@ table.dataTable td {
 
 .dataTables_wrapper {
     position: relative;
-    clear: both
+    clear: both;
 }
 
 .dataTables_wrapper .dataTables_length {

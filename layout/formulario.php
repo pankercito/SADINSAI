@@ -2,16 +2,16 @@
   <form action="../php/registroPersonal.php" method="post">
     <div class="lmao row">
       <div class="one row">
-        <p>Nombre </p>
+        <label for="Name">Nombre</label>
         <input id="Name" name="name" type="text">
-        <p>Cedula </p>
+        <label for="Ci">Cedula</label>
         <input id="Ci" name="ci" type="num" onblur="verificarCI()">
         <div id="mensajeCi"></div>
       </div>
       <div class="two row">
-        <p>Apellido </p>
+        <label for="Apellido">Apellido </label>
         <input id="Apellido" name="apellido" type="text">
-        <p>Telefono </p>
+        <label for="Phone">Telefono </label>
         <input id="Phone" name="telefono" type="text" maxlength="11">
     </div>
     </div>
@@ -42,16 +42,16 @@
     </div>
     <div class="lmao row">
       <div class="one row">
-        <p>Correo</p>
+        <label for="Email">Email</label>
         <input id="Email" name="email" type="text">
       </div>
       <div class="two row">
-        <p>Direcci&oacute;n</p>
+        <label for="Direccion">Direccion</label>
         <input id="Direccion" name="direccion" type="text">
       </div>
     </div>
     <br>
-    <button class="btn btn-warning" id="log" type="submit" name="registrar" disabled>Registrar</button>
+    <button class="btn btn-lg btn-warning" id="log" type="submit" name="registrar" disabled>Registrar</button>
   </form>
   <script src="../js/formRegistroValidacion.js"></script>
   <script src="../js/selectorScript.js"></script>

@@ -57,7 +57,7 @@ form.regisform p{
 }
 
 button#log {
-    margin: 1rem;
+    margin: -1rem 0rem 1rem 0rem;
 }
 
 a.btn.btn-warning{
@@ -155,4 +155,10 @@ div.alert{
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
+}
+.contenido {
+    padding: 1rem 0;
+}
+div#mensajeCi {
+    margin: 1rem;
 }

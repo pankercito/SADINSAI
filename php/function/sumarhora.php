@@ -29,3 +29,21 @@ function hora()
 
     return $hora_actual;
 }
+
+/**
+ * Crea un rango de fechas de la semana actual
+ * @return array lunes | domingo
+ */
+function rangoFechas()
+{
+    $fech = date('Y-m-d');
+
+    $domingo = date('Y-m-d', strtotime('next Sunday', strtotime($fech)));
+
+    $lunes = date('Y-m-d', strtotime('-6 days', strtotime($domingo)));
+
+    return [
+        'lunes' => $lunes,
+        'domingo' => $domingo
+    ];
+}

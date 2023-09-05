@@ -152,4 +152,9 @@ div.card.show div.card-flap {
  div.card.show div.flap2 {
 	 transition: all 0.3s 0.2s ease-out;
 }
+
+.str.text-center a {
+    color: #198754;
+    text-decoration: none;
+}
  

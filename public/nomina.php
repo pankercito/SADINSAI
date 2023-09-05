@@ -46,7 +46,7 @@
 							$i = 0;
 							while ($i != 58) {
 								$c = rand(1, 5);
-								$lol = rand(500, 5000);
+								$precarInf = rand(500, 5000);
 								$lmo = rand(1, 31);
 								$ci = rand(01111111, 99999999);
 								echo "
@@ -56,7 +56,7 @@
 										<td>041212345" . $i++ . "</td>
 										<td>" . $cargo[$c] . "</td>
 										<td>dic" . $lmo . ", 2023</td>
-										<td>" . $lol . " Bs.</td>
+										<td>" . $precarInf . " Bs.</td>
 									</tr>";
 							}
 							?>

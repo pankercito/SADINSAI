@@ -10,23 +10,23 @@ function getUser($id, $ci)
 {
     $conn = new Conexion;
     switch (true) {
-        case ($id != '' && $ci == ''):
-            $ci = desencriptar($ci);
+        case ($id == '' && $ci != ''):
+            $ci = $conn->real_escape(desencriptar($ci));
 
-            $sql = "SELECT user FROM registro WHERE ci";
+            $sql = "SELECT user FROM registro WHERE ci = $ci";
 
-            if ($row = $conn->query( $sql)) {
+            if ($row = $conn->query($sql)) {
                 $q = mysqli_fetch_assoc($row);
                 $data = $q['user'];
             } else {
                 $data = "Error al optener Username";
             }
             break;
-        case ($id == '' && $ci != ''):
+        case ($id != '' && $ci == ''):
 
-            $sql = "SELECT user FROM registro WHERE ci";
+            $sql = "SELECT user FROM registro WHERE id_usuario = $id";
 
-            if ($row = $conn->query( $sql)) {
+            if ($row = $conn->query($sql)) {
                 $q = mysqli_fetch_assoc($row);
                 $data = $q['user'];
             } else {
@@ -36,12 +36,13 @@ function getUser($id, $ci)
         case ($id == '' && $ci == ''):
             echo 'error';
             break;
+        case ($id != '' && $ci != ''):
+            echo 'error';
+            break;
         case ($id == $ci):
             echo 'error';
             break;
-        default:
-            echo 'error';
-            break;
     }
+    $conn->close();
     return $data;
 }

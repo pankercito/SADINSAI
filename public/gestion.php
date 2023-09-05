@@ -3,8 +3,9 @@
 <?php require ("../layout/head.php"); ?>
 
 <link rel="stylesheet" href="../styles/archives.css">
-
-
+<script type="text/javascript">
+  document.title = "SADINSAI | Archivos";
+</script>
 <?php 
   require("../layout/navbar.php");
 ?>

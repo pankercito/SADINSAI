@@ -19,6 +19,8 @@ class Personal
     private $idCiudad;
     private $sede;
     private $idSede;
+    private $cargo;
+    private $idCargo;
     private $connec;
 
     /**
@@ -26,7 +28,7 @@ class Personal
      * @param mixed $ci
      */
     public function __construct($ci)
-    {   
+    {
         $this->ci = $ci;
         $this->connec = new Conexion();
         $this->getDatos();
@@ -42,8 +44,6 @@ class Personal
         $pCi = desencriptar($this->ci);
 
         if (ctype_digit($pCi)) {
-
-            
 
             $cnce = $this->connec->query("SELECT * FROM personal p
                                            INNER JOIN estados e ON p.id_estado = e.id_estado
@@ -68,6 +68,7 @@ class Personal
                 $this->idCiudad = $data['id_ciudad'];
                 $this->sede = $data['nombre_sede'];
                 $this->idSede = $data['sede_id'];
+                $this->idCargo = $data['sede_id'];
             } else {
                 $this->nombre = "Sin datos";
                 $this->apellido = "Sin datos";
@@ -80,6 +81,7 @@ class Personal
                 $this->idCiudad = "Sin datos";
                 $this->sede = "Sin datos";
                 $this->idSede = "Sin datos";
+                $this->idCargo = "Sin datos";
             }
         } else {
             $this->nombre = "Sin datos";
@@ -94,9 +96,10 @@ class Personal
             $this->idCiudad = "Sin datos";
             $this->sede = "Sin datos";
             $this->idSede = "Sin datos";
+            $this->idCargo = "Sin datos";
         }
+        $this->connec->close();
     }
-
     /**
      * @return string nombre
      */
@@ -180,5 +183,12 @@ class Personal
     public function getIdSede()
     {
         return $this->idSede;
+    }
+    /**
+     * @return mixed|string cargo
+     */
+    public function getCargo()
+    {
+        return $this->cargo;
     }
 }
