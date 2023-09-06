@@ -8,9 +8,8 @@ require("../php/adp.php");
             aria-valuemax="100"></div>
     </div>
     <form method="post" action="../php/civerify.php" class="regisform" name="regisform" id="rgt" require>
-
-        <div class="form-group">
             <legend>Cedula</legend>
+            
             <input id="ci" type="number" name="cedula" placeholder="cedula" maxlength="8" onblur="verificarCI()" required>
             <button id="singup" class="singup btn btn-lg btn-primary" type="submit" name="singup" disabled>Siguiente</button>
             <div id="mensajeCi"></div>

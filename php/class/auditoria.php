@@ -160,4 +160,28 @@ class auditoria extends based
         }
         return $result;
     }
+
+    /**
+     * consulta solicitudes en rango de fechas
+     * @param mixed $dat1
+     * @param mixed $dat2
+     * @return array
+     */
+    public function archivesStats($dat1, $dat2)
+    {
+        // obtenemos recorrido del rango de fechas 
+        $fech = getRangeDate($dat1, $dat2);
+
+        $con = count($fech);
+        $i = 0;
+        $result = [];
+
+        while ($i <= $con - 1) {
+            $num = $this->connec->query("SELECT * FROM arch_direc WHERE DATE(fecha) = '" . $fech[$i] . "'");
+            $f = mysqli_num_rows($num);
+            $result[] = [$f];
+            $i++;
+        }
+        return $result;
+    }
 }

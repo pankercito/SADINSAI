@@ -6,10 +6,11 @@ $.ajax({
         if (response != null) {
             var colon = JSON.parse(response);
             // crear grafico con variables de base de datos 
-            nuevoGrafico(colon[0], colon[1], colon[0]);
+            nuevoGrafico(colon[0], colon[1], colon[2]);
             
             console.log(colon[0]);
             console.log(colon[1]);
+            console.log(colon[2]);
         } else {
 
         }

@@ -172,3 +172,21 @@ select#Sede {
 a.añadir.btn.btn-primary {
     width: 69.3%;
 }
+.two.row.radio {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    font-size: 10px;
+    margin: 0 -35px !important;
+}
+.radio {
+    height: 4rem !important;
+    width: 2.5rem !important;
+    margin: 0 14px !important;
+}
+input#Edad {
+    padding: 1rem;
+}
+select#Edad {
+    margin: 1rem;
+}

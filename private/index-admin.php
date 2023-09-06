@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <!--TITULO DE LA PAGINA-->
-    <title>SADINSAI | Inicio de Sesi&oacute;n</title>
+    <title>SADINSAI | Registro</title>
     
     <!--HOJAS DE ESTILO/BOOTSTRAP-->
     <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
@@ -16,17 +16,13 @@
     <link rel="stylesheet" href="styles/background.css">
     <link rel="stylesheet" href="styles/body.css">
 </head>    
-
 <body  class="logged-in env-production page-responsive" style="word-wrap: break-word;">
-
 <link rel="stylesheet" href="styles/login.css">
-
 <div class="col-lg-12">
     <div class="sadin"> 
         <img src="resources/sadinverde.png">
     </div>
 </div>
-    
 <section class="col-lg-12 "><!--seccion de login-->
     <form action="../sadinsai/php/validation.php" method="post"> <!---ACCION DEL FORMULADIO-->
         <div id="login-box">
@@ -45,10 +41,6 @@
                     require ("php/preset/fallo.php");
                 ?>
                 <button type="submit" name="login" class="btn btn-link btn-default">Iniciar</button>
-            </div>
-            <!-- PAGINA DE RECUPERACION -->
-            <div class="parte-abajo">
-                <a href="public/recovery.php" class="button">Olvide mi Contrase&ntilde;a</a> 
             </div>
         </div>
     </form>

@@ -1,0 +1,50 @@
+.d-flex {
+    display: flex !important;
+    justify-content: center;
+}
+
+button.consul.btn.btn-primary {
+    margin: 2rem auto -1rem;
+    height: 2.55rem;
+}
+
+h5.text-center {
+    margin: 0rem 1rem 2rem;
+}
+
+input#ci {
+    background: white;
+    border: 1px solid #5154577a;
+    width: auto;
+    margin: 0 1rem 0;
+}
+
+label.form-label {
+    margin: 0 1rem 0;
+}
+
+small#mensajeCi {
+    margin: 0 1rem 0;
+}
+
+.fless.col-lg-5 {
+    display: flex;
+    flex-direction: column;
+    background: #ffffffcc;
+    margin: 10rem 5rem 0;
+    width: 21rem;
+    padding: 2rem;
+    box-shadow: 0 1px 7px 0px #1e2022 !important;
+    border-radius: 10px;
+    margin-right: auto !important;
+}
+
+body {
+    background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(22, 22, 22, 0.879)), url(../resources/fondo.jpg);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover !important;
+}

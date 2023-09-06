@@ -2,7 +2,7 @@
 
 if (isset($_POST["cedula"])){
 
-    $subcedula  = mysqli_real_escape_string($conn, $_POST["cedula"]);
+    $subcedula  = $conn->real_escape($_POST["cedula"]);
     
     $cvp = $conn->query("SELECT * FROM registro WHERE ci = '$subcedula'");
     $cv = mysqli_num_rows($cvp);

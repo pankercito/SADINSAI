@@ -1,14 +1,12 @@
-body{ /*FONDO DE PANTALLA*/
+
+body {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.068), rgba(0, 0, 0, 0.923)), url(../resources/fondo.jpg);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: contain;
-    background-color: #29d796;
-    /*
-    background-color: #1aefa0; 
-    background-color: rgb(125, 197, 125); */
+    background-size: cover !important;
 }
 
 .estructur-conten {
