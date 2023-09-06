@@ -47,9 +47,7 @@ if (moveFile($arch, $folDestino, $nombreArch) == true) {//mover archivos a la ru
 
     if ($conn->query($sql) && $conn->query($sql1)) {
         echo "success";
-
     } else {
-
         echo "error";
     }
 
