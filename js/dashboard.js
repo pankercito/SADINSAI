@@ -27,10 +27,10 @@ function nuevoGrafico(array1, array2, array3) {
             label: 'Usuarios Activos',
             data: array1,
             fill: false,
-            borderColor: "red",
-            backgroundColor: "#ff6384",
+            cubicInterpolationMode: 'monotone',
+            tension: 0.4
         }, {
-            label: 'Solicitudes realizadas',
+            label: 'solicitudes',
             data: array2,
             fill: false,
             borderColor: "blue",
