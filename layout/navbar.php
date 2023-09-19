@@ -21,30 +21,40 @@
                     <ul class="nav nav-list nav-pills navbar-right">
                         <!--ELEMENTOS DE LA LISTA DE NAVEGACION-->
                         <li class="nav-item">
-                            <?php imprime('<a data-position="1" class="nav-link" href="principal.php">Dashboard</a>', '<a data-position="1" class="nav-link" href="perfil.php?perfil=' . $wci . '">Inicio</a>') ?>
+                            <?php imprime('<a data-position="1" class="nav-link" href="principal.php">Inicio</a>', '<a data-position="1" class="nav-link" href="perfil.php?perfil=' . $wci . '">Inicio</a>') ?>
                         </li>
                         <li class="nav-item">
                             <a data-position="2" class="nav-link" href="estados.php">Personal</a>
                         </li>
                         <li class="nav-item">
-                            <a data-position="3" class="nav-link" href="nomina.php">Nomina</a>
+                            <a data-position="3" class="nav-link" href="anadir.php">A&ntilde;adir</a>
                         </li>
                         <li class="nav-item">
-                            <a data-position="4" class="nav-link" href="anadir.php">A&ntilde;adir</a>
-                        </li>
-                        <li class="nav-item">
-                            <a data-position="5" class="nav-link" href="solicitudes.php">Solicitudes</a>
+                            <a data-position="4" class="nav-link" href="solicitudes.php">Solicitudes</a>
                         </li>
                     </ul>
                 </nav>
                 <form class="form-inline">
                     <!--BARRA DE BUSQUEDA-->
-                    <input id="searchbar" class="form-control" type="search" placeholder="Buscar...">
+                    <input id="searchbar" class="form-control" type="search" placeholder="Buscar..." autocomplete="off">
                     </input>
                     <!--BOTON DE BUSQUEDA-->
-                    <button id="search" class="btn btn-outline-success" type="submit" name="keyworks">
+                    <button id="search" class="btn" name="keyworks">
                         <i class="bi bi-search"></i><!--ICONO-->
                     </button>
+                    <div id="result" class="resultsearch d-none" style="display: flex;
+                                                                position: absolute;
+                                                                color: white;
+                                                                margin: 34px 0px 0px 0px;
+                                                                background: #d1d1d1;
+                                                                width: 15.67rem;
+                                                                padding: 1rem 1rem 1rem;
+                                                                z-index: 10000000;
+                                                                border-radius: 0px 0px 6px 6px;
+                                                                flex-direction: column;
+                                                                flex-wrap: nowrap;
+                                                                align-content: center;
+                                                            }"></div>
                     <span class="input-group-text" id="basic-addon1"></span><!--SEPARADOR-->
                     <!--BOTON DE AYUDA-->
                     <button id="help" class="btn btn-info btn-default" href="#">

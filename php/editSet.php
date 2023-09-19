@@ -4,14 +4,18 @@ include_once("../php/conx.php");
 include_once("../php/class/personal.php");
 include_once("../php/function/criptCodes.php");
 
- 
+
 $personal = new Personal($_GET['perfil']);
 
 $SetName = $personal->getNombre();
 $SetApellido = $personal->getApellido();
 $SetCi = $personal->getCi();
+$SetFecha = $personal->getFecha();
+$SetGrado = $personal->getGrado();
+$SetSexo = $personal->getSexo();
+$SetCargo = $personal->getCargo();
 $SetPhone = $personal->getTelefono();
-$SetEmail =  $personal->getEmail();
+$SetEmail = $personal->getEmail();
 $SetDireccion = $personal->getDireccion();
 $SetEstado = $personal->getEstado();
 $SetIdEstado = $personal->getIdEstado();
@@ -19,4 +23,3 @@ $SetCiudad = $personal->getCiudad();
 $SetIdCiudad = $personal->getIdCiudad();
 $SetSede = $personal->getSede();
 $SetIdSede = $personal->getIdSede();
-

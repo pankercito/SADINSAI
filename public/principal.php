@@ -21,7 +21,7 @@
     <div class="grid-containerr">
         <div class="row">
             <div class="centro col-lg-9 d-flex" id="centro">
-                <div class="userDash mx-auto col-md-2">
+                <div class="userDash col-md-2">
                     <?php
                     include('../php/class/auditoria.php');
                     $new = new auditoria();
@@ -29,21 +29,22 @@
                     <p>Usuarios activos</p>
                     <ul class="userUl">
                         <li class="user">
-                        <?php
-                        //imprime una lista con usuarios activos y no activos
-                        echo $new->usersActives();
-                        ?></li>
+                            <?php
+                            //imprime una lista con usuarios activos y no activos
+                            echo $new->usersActives();
+                            ?>
+                        </li>
                     </ul>
                 </div>
-                <div class="conteDash mx-auto col-md-8">
+                <div class="conteDash col-md-8">
                     <canvas id="dashboard"></canvas>
                 </div>
-            </div>
-            <div class="colunma col-lg-3" id="columna">
-                <p>Informacion extra</p>
-                <a class="pnomina btn btn-primary" href="perfil.php?perfil=<?php echo $wci ?>">Mi perfil</a>
-                <br>
-                <button class='pedit btn btn-warning' id="editar">generar reporte</button>
+                <div class="colunma col-md-3" id="columna">
+                    <p>Informacion extra</p>
+                    <a class="pnomina btn btn-primary" href="perfil.php?perfil=<?php echo $wci ?>">Mi perfil</a>
+                    <br>
+                    <button class='pedit btn btn-warning' id="editar">generar reporte</button>
+                </div>
             </div>
             <script src="../resources/import/Chart/chart.js"></script>
             <script src="../js/dashboard.js"></script>

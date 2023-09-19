@@ -1,11 +1,10 @@
 <?php
-ini_set('session.cookie_lifetime', 600); //tiempo de la sesion en segundos
+ini_set('session.cookie_lifetime', 100); //tiempo de la sesion en segundos
 
 include("function/criptCodes.php");
 include("function/dec.php");
 include("actualizarSesion.php");
 require("../php/function/adminSet.php");
-
 
 // Controlo si el usuario ya está logueado en el sistema.
 if (isset($_SESSION['sesioninit'])) {

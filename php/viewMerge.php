@@ -1,120 +1,502 @@
 <?php
 
-if (isset($_POST["idSoli"])) {
+if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
 
     include("function/criptCodes.php");
     include("function/getESCname.php");
+    include("function/removerAcentos.php");
     include("class/personal.php");
     require("conx.php");
 
     $conn = new Conexion();
+    $rst = false;
+
+    switch ($_POST['receptor']) {
+        case '0':
+            // ingreso de personal
+            $subId = $conn->real_escape($_POST["idSoli"]);
+
+            $svp = $conn->query("SELECT * FROM solicitudes s INNER JOIN solicitudes_precarga p ON p.id_solicitud_precarga = s.id_solicitud WHERE s.id_solicitud = '$subId'");
+            $sv = mysqli_num_rows($svp);
 
 
-    if (isset($_POST['receptor'])) {
-        // obtener datos de la tabla principal para comparar 
-        $personal = new Personal($conn->real_escape($_POST['receptor']));
-
-        $pName = $personal->getNombre();
-        $pApellido = $personal->getApellido();
-        $pCi = $personal->getCi();
-        $pPhone = $personal->getTelefono();
-        $pEmail = $personal->getEmail();
-        $pDireccion = $personal->getDireccion();
-        $pStado = $personal->getEstado();
-        $pCiudad = $personal->getCiudad();
-        $pSede = $personal->getSede();
-        $pCargo = $personal->getCargo();
-
-        $conn = new Conexion;
-
-        $subId = $_POST["idSoli"];
-
-        $svp = $conn->query("SELECT * FROM precarga WHERE id_solicitud = '$subId'");
-        $sv = mysqli_num_rows($svp);
-
-        /**
-         * Imprimir informes si los datos de entrada son diferentes
-         * @param mixed $vma dato a
-         * @param mixed $vmb dato b
-         * @param mixed $vmc nombre de listado
-         * @return string
-         */
-        function viewMerge($vma, $vmb, $vmc)
-        {
-            if ($vma !== $vmb) {
-                $dad = $vmb . ' <i class="bi bi-arrow-right"></i> ' . $vma;
-
-                $vmca = '<li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div class="ms-2 me-auto">
-                                <p class="por fw-bold">' . $vmc . '</p>
-                                ' . $dad . '
-                            </div>
-                        </li>';
-            } else {
-                $vmca = '';
-            }
-
-            return $vmca;
-        }
-
-        if ($sv == 1) {
             $precarInf = mysqli_fetch_array($svp);
 
-            $ecs = getNameEsc($precarInf['id_estado'], $precarInf['id_ciudad'], $precarInf['sede_id']);
+            $n = getNameEsc($precarInf['id_estado_pre'], $precarInf['id_ciudad_pre'], $precarInf['id_sede_pre']);
+
+            if ($sv == 1) {
+                function trPrint($vma, $vmc)
+                {
+
+                    $vmca =
+                        '<tr class="imago">
+                            <td scope="row"><p class="por fw-bold">' . $vmc . '</p></td>
+                            <td></td>
+                            <td>' . $vma . '</td>
+                        </tr>';
 
 
-            //Lista DE MUESTREO DE CAMBIOS'
-            echo '
-                <h6 class="" style="margin: 0 0 1.2rem 6%;">Cambios realizados</h6>
-                <ul class="list-group-flush overflow-auto">
+                    return $vmca;
+                }
 
-                    ' . viewMerge(ucwords(strtolower($precarInf['name'])), $pName, "Nombre") . '
-
-                    ' . viewMerge(ucwords(strtolower($precarInf['apelido'])), $pApellido, "Apellido") . '
-
-                    ' . viewMerge(ucwords(strtolower($precarInf['direccion'])), ucwords(strtolower($pDireccion)), "Direcci&oacute;n") . '
-                    
-                    ' . viewMerge($precarInf['telefono'], $pPhone, "Telefono") . '
-                    
-                    ' . viewMerge(ucwords(strtolower($precarInf['email'])), ucwords(strtolower($pEmail)), "Email") . '
-
-                    ' . viewMerge(ucwords(strtolower($ecs['estado'])), ucwords(strtolower($pStado)), "Estado") . '
-
-                    ' . viewMerge(ucwords(strtolower($ecs['ciudad'])), ucwords(strtolower($pCiudad)), "Ciudad") . '
-
-                    ' . viewMerge(ucwords(strtolower($ecs['sede'])), ucwords(strtolower($pSede)), "Sede") . '
-
-                    ' . viewMerge(ucwords(strtolower($precarInf['cargo'])), ucwords(strtolower($pCargo)), "Cargo") . '
-
-
-
-                </ul>';
-
-            $rst = TRUE;
-        } else {
-            echo "Error al consultar datos por favor intente más tarde";
-        }
-
-        if ($rst = TRUE) {
-            echo '
-                <form action="../php/personalMerge.php" class="formgroup" id="soliMerge" method="POST">
-                    <h6 class="" style="margin: 0 0 1.2rem 6%;">Por favor elija una opcion</h6>
-                    <div class="form-check">
-                        <input type="radio" class="btn-check"  name="editSoli" id="pendiente" value="0" checked>
-                        <label for="pendiente" class="btn btn-outline-secondary">Pendiente</label>  
+                //Lista DE MUESTREO DE DATOS QUE INGRESARAN
+                ?>
+                <h4 class="" style="margin: 0 0 1.2rem 6%;">Ingreso de personal</h4>
+                <div class="editConten row col-md-8">
+                    <div class="col-md-8">
+                        <form action="../php/personalMerge.php" class="formgroup" id="soliMerge" method="POST">
+                            <h6 class="" style="margin: 0 0 1.2rem 11%;">Por favor elija una opcion</h6>
+                            <div class="form-check">
+                                <input type="radio" class="btn-check" name="editSoli" id="pendiente" value="0" checked>
+                                <label for="pendiente" class="rat btn btn-outline-secondary">Pendiente</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="btn-check" name="editSoli" id="aceptar" value="1">
+                                <label for="aceptar" class="rat btn btn-outline-success">Aceptar solicitud</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="btn-check" name="editSoli" id="rechazar" value="2">
+                                <label for="rechazar" class=" rat btn btn-outline-danger">Rechazar solicitud</label>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-check">
-                        <input type="radio" class="btn-check" name="editSoli" id="aceptar" value="1">
-                        <label for="aceptar" class="btn btn-outline-success">Aceptar solicitud</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="radio" class="btn-check" name="editSoli" id="rechazar" value="2">
-                        <label for="rechazar" class="btn btn-outline-danger">Rechazar solicitud</label>  
-                    </div>
-                </form>';
-        }
+                    <div class="dit table-responsive">
+                        <div class="contenedor">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Campo</th>
+                                        <th></th>
+                                        <th>Dato ingresado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
 
+                                    echo trPrint(ucwords($precarInf['ci_solicitada']), "Cedula");
+
+                                    echo trPrint(ucwords(strtolower($precarInf['nombre_pre'])), "Nombre");
+
+                                    echo trPrint(ucwords(strtolower($precarInf['apelido_pre'])), "Apellido");
+
+                                    echo trPrint(ucwords(strtolower($precarInf['direccion_pre'])), "Direcci&oacute;n");
+
+                                    echo trPrint($precarInf['telefono_pre'], "Telefono");
+
+                                    echo trPrint(strtolower($precarInf['email_pre']), "Email");
+
+                                    echo trPrint(ucwords(strtolower(remover_acentos($n['estado']))), "Estado");
+
+                                    echo trPrint(ucwords(strtolower(remover_acentos($n['ciudad']))), "Ciudad");
+
+                                    echo trPrint(ucwords(strtolower(remover_acentos($n['sede']))), "Sede");
+
+                                    echo trPrint($precarInf['cargo_pre'], "Cargo");
+
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <style>
+                            img {
+                                border-radius: 6px;
+                                margin: 1rem 0;
+                            }
+
+                            .dit.table-responsive {
+                                margin: 0 1rem 0px -4rem;
+                            }
+
+                            .paneldit {
+                                margin: 0 0 0 13rem;
+                            }
+
+                            .editConten.row {
+                                display: flex;
+                                flex-wrap: nowrap;
+                                margin: 2rem auto;
+                                width: 64%;
+                                align-items: flex-start;
+                                justify-content: center;
+                            }
+                        </style>
+                    </div>
+                </div>
+
+                <?php
+            } else {
+                echo "Error al consultar datos por favor intente más tarde" . $ciCrip;
+            }
+            break;
+
+        case '1':
+            // edicion de datos de person
+
+            $subId = $conn->real_escape($_POST["idSoli"]);
+
+            $svp = $conn->query("SELECT * FROM solicitudes s INNER JOIN solicitudes_precarga p ON p.id_solicitud_precarga = s.id_solicitud WHERE s.id_solicitud = '$subId'");
+            $sv = mysqli_num_rows($svp);
+
+            $precarInf = mysqli_fetch_array($svp);
+
+            $personal = new Personal(encriptar($precarInf['ci_pre']));
+
+            $pName = $personal->getNombre();
+            $pApellido = $personal->getApellido();
+            $pCi = $personal->getCi();
+            $pPhone = $personal->getTelefono();
+            $pEmail = $personal->getEmail();
+            $pDireccion = $personal->getDireccion();
+            $pStado = $personal->getEstado();
+            $pCiudad = $personal->getCiudad();
+            $pSede = $personal->getSede();
+            $pCargo = $personal->getCargo();
+
+            /**
+             * Imprimir informes si los datos de entrada son diferentes
+             * @param mixed $vma dato a nuevo dato
+             * @param mixed $vmb dato b viejo dato
+             * @param mixed $vmc nombre de listado
+             * @return string
+             */
+            function viewMerge($vma, $vmb, $vmc)
+            {
+                if ($vma !== $vmb) {
+                    // tbla de datos 
+                    $dad =
+                        '<tr class="imago">
+                            <td scope="row"><p class="por fw-bold">' . $vmc . '</p></td>
+                            <td>' . $vmb . '</td>
+                            <td><i class="bi bi-arrow-right"></i></td>
+                            <td>' . $vma . ' </td>
+                        </tr>';
+
+                    $vmca = $dad;
+                } else {
+                    $vmca = '';
+                }
+
+                return $vmca;
+            }
+
+
+            if ($sv == 1) {
+
+                $ecs = getNameEsc($precarInf['id_estado_pre'], $precarInf['id_ciudad_pre'], $precarInf['id_sede_pre']);
+
+                //Lista DE MUESTREO DE CAMBIOS
+                ?>
+                <h4 class="" style="margin: 0 0 1.2rem 6%;">Cambios realizados</h4>
+                <div class="editConten row col-md-8">
+                    <div class="col-md-8">
+                        <form action="../php/personalMerge.php" class="formgroup" id="soliMerge" method="POST">
+                            <h6 class="" style="margin: 0 0 1.2rem 11%;">Por favor elija una opcion</h6>
+                            <div class="form-check">
+                                <input type="radio" class="btn-check" name="editSoli" id="pendiente" value="0" checked>
+                                <label for="pendiente" class="rat btn btn-outline-secondary">Pendiente</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="btn-check" name="editSoli" id="aceptar" value="1">
+                                <label for="aceptar" class="rat btn btn-outline-success">Aceptar solicitud</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="btn-check" name="editSoli" id="rechazar" value="2">
+                                <label for="rechazar" class=" rat btn btn-outline-danger">Rechazar solicitud</label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="dit table-responsive">
+                        <h6 class="">
+                            <p class="">edicion de datos de <a href="perfil.php?perfil=<?php echo encriptar($precarInf['ci_pre']) ?>">
+                                    <?php echo $precarInf['ci_pre'] ?>
+                                </a></p>
+                        </h6>
+                        <style>
+                            .dit.table-responsive {
+                                margin: 0 1rem 0px -4rem;
+                            }
+
+                            .paneldit {
+                                margin: 0 0 0 13rem;
+                            }
+
+                            .editConten.row {
+                                display: flex;
+                                flex-wrap: nowrap;
+                                margin: 2rem auto;
+                                width: 64%;
+                                align-items: flex-start;
+                                justify-content: center;
+                            }
+                        </style>
+                        <table class="table table-primary">
+                            <thead>
+                                <tr>
+                                    <th scope="col">campo</th>
+                                    <th scope="col">antes</th>
+                                    <th scope="col"></th>
+                                    <th scope="col">despues</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+
+                                echo viewMerge(ucwords(strtolower($precarInf['nombre_pre'])), $pName, "Nombre");
+
+                                echo viewMerge(ucwords(strtolower($precarInf['apelido_pre'])), $pApellido, "Apellido");
+
+                                echo viewMerge(ucwords(strtolower($precarInf['direccion_pre'])), ucwords(strtolower($pDireccion)), "Direcci&oacute;n");
+
+                                echo viewMerge($precarInf['telefono_pre'], $pPhone, "Telefono");
+
+                                echo viewMerge(ucwords(strtolower($precarInf['email_pre'])), ucwords(strtolower($pEmail)), "Email");
+
+                                echo viewMerge(ucwords(strtolower($ecs['estado'])), ucwords(strtolower($pStado)), "Estado");
+
+                                echo viewMerge(ucwords(strtolower($ecs['ciudad'])), ucwords(strtolower($pCiudad)), "Ciudad");
+
+                                echo viewMerge(ucwords(strtolower($ecs['sede'])), ucwords(strtolower($pSede)), "Sede");
+
+                                echo viewMerge(ucwords(strtolower($precarInf['cargo_pre'])), ucwords(strtolower($pCargo)), "Cargo");
+
+                                ?>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+                <?php
+            } else {
+                echo "Error al consultar datos por favor intente más tarde" . $ciCrip;
+            }
+
+            break;
+        case '2':
+            // ingreso de archivos
+            $subId = $conn->real_escape($_POST["idSoli"]);
+
+            $svp = $conn->query("SELECT * FROM solicitudes s INNER JOIN solicitudes_archivos_precarga p INNER JOIN tiposarch t ON p.id_solicitud_archivo_pre = s.id_solicitud AND t.id_tipo = p.tipo_pre WHERE s.id_solicitud = '$subId'");
+            $sv = mysqli_num_rows($svp);
+
+            $precarInf = mysqli_fetch_array($svp);
+
+            $tipoArch = $precarInf['nombre_tipo_arch'];
+
+            $nota = ($precarInf['nota_pre'] == "") ? "sin nota" : $precarInf['nota_pre'];
+            $c = $precarInf['size_pre'] / 1024;
+            $size = ($c <= 920) ? number_format($c, 2) . "KB" : number_format($c / 1024, 2) . "MB";
+
+            if ($sv == 1) {
+
+                //Lista DE MUESTREO DE CAMBIOS
+                ?>
+                <h4 class="" style="margin: 0 0 1.2rem 6%;">Ingreso de archivos</h4>
+                <div class="editConten row col-md-8">
+                    <div class="col-md-8">
+                        <form action="../php/personalMerge.php" class="formgroup" id="soliMerge" method="POST">
+                            <h6 class="" style="margin: 0 0 1.2rem 11%;">Por favor elija una opcion</h6>
+                            <div class="form-check">
+                                <input type="radio" class="btn-check" name="editSoli" id="pendiente" value="0" checked>
+                                <label for="pendiente" class="rat btn btn-outline-secondary">Pendiente</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="btn-check" name="editSoli" id="aceptar" value="1">
+                                <label for="aceptar" class="rat btn btn-outline-success">Aceptar solicitud</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="btn-check" name="editSoli" id="rechazar" value="2">
+                                <label for="rechazar" class=" rat btn btn-outline-danger">Rechazar solicitud</label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="dit table-responsive">
+                        <div class="">
+                            <h6 class="">
+                                <p style="font-size:15px;">subida de datos en el folder de: <a
+                                        style="color: darkcyan; text-decoration: none;"
+                                        href="perfil.php?perfil=<?php echo encriptar($precarInf['ci_arch_pre']) ?>">
+                                        <?php echo $precarInf['ci_arch_pre'] ?>
+                                    </a></p>
+                            </h6>
+                            <div class="row">
+                                <div class="btn-toolbar d-grid gap-1" role="toolbar" aria-label="Toolbar">
+                                    <div class="btn-group" role="group" aria-label="Button Group">
+                                        <button class="btn btn-outline-primary" disabled>nombre del archivo:
+                                            <?php echo $precarInf['nombre_archivo_pre'] ?>
+                                        </button>
+                                        <button class="btn btn-outline-primary" disabled>Archivo:
+                                            <?php echo $tipoArch ?>
+                                        </button>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Button Group">
+                                        <button class="btn btn-outline-primary" disabled>peso:
+                                            <?php echo $size ?>
+                                        </button>
+                                        <button class="btn btn-outline-primary" disabled>requerido:
+                                            si
+                                        </button>
+                                        <button class="btn btn-outline-primary" disabled>nota:
+                                            <?php echo $nota ?>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <img class="" src="<?php echo $precarInf['d_archivo_pre'] ?>" alt="Some text" width="200px">
+                        </div>
+
+                        <style>
+                            img {
+                                border-radius: 6px;
+                                margin: 1rem 0;
+                            }
+
+                            .dit.table-responsive {
+                                margin: 0 1rem 0px -4rem;
+                            }
+
+                            .paneldit {
+                                margin: 0 0 0 13rem;
+                            }
+
+                            .editConten.row {
+                                display: flex;
+                                flex-wrap: nowrap;
+                                margin: 2rem auto;
+                                width: 64%;
+                                align-items: flex-start;
+                                justify-content: center;
+                            }
+                        </style>
+                    </div>
+                </div>
+
+                <?php
+            } else {
+                echo "Error al consultar datos por favor intente más tarde";
+            }
+            break;
+
+        case '3':
+
+            $id = $conn->real_escape($_POST["idSoli"]);
+
+            @$x = $conn->query("SELECT * FROM solicitudes_eliminacion_arch e WHERE id_solicitud_eliminacion = '$id'");
+            
+            $idArch = $x->fetch_object()->id_archivo_eliminar;
+
+            $verifi = $conn->query("SELECT * FROM archidata WHERE id_archivo = $idArch");
+
+            if ($verifi->num_rows == 1) {
+
+                $id_arch = $verifi->fetch_object()->id_archivo;
+
+                $svp = $conn->query("SELECT * FROM solicitudes s INNER JOIN solicitudes_archivos_precarga p INNER JOIN tiposarch t ON p.id_solicitud_archivo_pre = s.id_solicitud AND t.id_tipo = p.tipo_pre WHERE s.id_solicitud = '$id_arch'");
+                $sv = $svp->num_rows;
+
+                $precarInf = mysqli_fetch_array($svp);
+
+                $tipoArch = $precarInf['nombre_tipo_arch'];
+
+                $nota = ($precarInf['nota_pre'] == "") ? "sin nota" : $precarInf['nota_pre'];
+                $c = $precarInf['size_pre'] / 1024;
+                $size = ($c <= 920) ? number_format($c, 2) . "KB" : number_format($c / 1024, 2) . "MB";
+
+
+                //Lista DE MUESTREO DE CAMBIOS
+                ?>
+                <h4 class="" style="margin: 0 0 1.2rem 6%;">Eliminacion de archivo</h4>
+                <div class="editConten row col-md-8">
+                    <div class="col-md-8">
+                        <form action="../php/personalMerge.php" class="formgroup" id="soliMerge" method="POST">
+                            <h6 class="" style="margin: 0 0 1.2rem 11%;">Por favor elija una opcion</h6>
+                            <div class="form-check">
+                                <input type="radio" class="btn-check" name="editSoli" id="pendiente" value="0" checked>
+                                <label for="pendiente" class="rat btn btn-outline-secondary">Pendiente</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="btn-check" name="editSoli" id="aceptar" value="1">
+                                <label for="aceptar" class="rat btn btn-outline-success">Aceptar solicitud</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="btn-check" name="editSoli" id="rechazar" value="2">
+                                <label for="rechazar" class=" rat btn btn-outline-danger">Rechazar solicitud</label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="dit table-responsive">
+                        <div class="">
+                            <h6 class="">
+                                <p style="font-size:15px;">datos del folder de: <a style="color: darkcyan; text-decoration: none;"
+                                        href="perfil.php?perfil=<?php echo encriptar($precarInf['ci_arch_pre']) ?>">
+                                        <?php echo $precarInf['ci_arch_pre'] ?>
+                                    </a></p>
+                            </h6>
+                            <div class="row">
+                                <div class="btn-toolbar d-grid gap-1" role="toolbar" aria-label="Toolbar">
+                                    <div class="btn-group" role="group" aria-label="Button Group">
+                                        <button class="btn btn-outline-primary" disabled>nombre del archivo:
+                                            <?php echo $precarInf['nombre_archivo_pre'] ?>
+                                        </button>
+                                        <button class="btn btn-outline-primary" disabled>Archivo:
+                                            <?php echo $tipoArch ?>
+                                        </button>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Button Group">
+                                        <button class="btn btn-outline-primary" disabled>peso:
+                                            <?php echo $size ?>
+                                        </button>
+                                        <button class="btn btn-outline-primary" disabled>requerido:
+                                            si
+                                        </button>
+                                        <button class="btn btn-outline-primary" disabled>nota:
+                                            <?php echo $nota ?>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <img class="" src="<?php echo $precarInf['d_archivo_pre'] ?>" alt="Some text" width="200px">
+                        </div>
+
+                        <style>
+                            img {
+                                border-radius: 6px;
+                                margin: 1rem 0;
+                            }
+
+                            .dit.table-responsive {
+                                margin: 0 1rem 0px -4rem;
+                            }
+
+                            .paneldit {
+                                margin: 0 0 0 13rem;
+                            }
+
+                            .editConten.row {
+                                display: flex;
+                                flex-wrap: nowrap;
+                                margin: 2rem auto;
+                                width: 64%;
+                                align-items: flex-start;
+                                justify-content: center;
+                            }
+                        </style>
+                    </div>
+                </div>
+
+                <?php
+            } else {
+                echo "el archivo no existe o ya fue eliminado";
+            }
+
+            break;
+
+        default:
+            # code...
+            break;
     }
-} else {
-    echo "Error al consultar datos por favor intente más tarde";
+
+
 }

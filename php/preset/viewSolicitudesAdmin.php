@@ -1,6 +1,11 @@
 <?php
 
-include("../php/function/getUser.php");
+include("../function/getUser.php");
+include("../function/criptCodes.php");
+include("../conx.php");
+
+session_start();
+
 $conn = new Conexion();
 $idP = $_SESSION['sesion'];
 
@@ -8,40 +13,52 @@ $idP = $_SESSION['sesion'];
 $regisview = $conn->query("SELECT * FROM solicitudes s INNER JOIN registro r ON r.id_usuario = s.id_receptor WHERE s.id_receptor = $idP ORDER BY fecha DESC");
 $count_results = mysqli_num_rows($regisview);
 
+
+$apr = [
+    "0" => "alert alert-secondary",
+    "1" => "alert alert-success",
+    "2" => "alert alert-danger",
+];
+$aprN = [
+    "0" => "pendiente",
+    "1" => "aceptada",
+    "2" => "rechasada",
+];
+$aprL = [
+    "0" => 'bi bi-person-lines-fill',
+    "1" => 'bi bi-person-fill-check',
+    "2" => 'bi bi-person-fill-x'
+];
+$tipoSolic = [
+    "0" => "ingreso de personal",
+    "1" => "edicion de datos",
+    "2" => "ingreso de archivo",
+    "3" => "eliminacion de archivo",
+    "4" => "recuperacion de contraseña"
+];
+
 //Si ha resultados
 if ($count_results > 0) {
-    //Muestra la cantidad de usuarios
-    $apr = [
-        "0" => "alert alert-secondary",
-        "1" => "alert alert-success",
-        "2" => "alert alert-danger",
-    ];
-    $aprN = [
-        "0" => "pendiente",
-        "1" => "aceptada",
-        "2" => "rechasada",
-    ];
-    $aprL = [
-        "0" => 'bi bi-person-lines-fill',
-        "1" => 'bi bi-person-fill-check',
-        "2" => 'bi bi-person-fill-x'
-    ];
 
-    while ($v = mysqli_fetch_array($regisview)) {
-        //Lista de los usuarios
-        echo '<tr data-solicitud="' . $v['id_solicitud'] . '" data-receptor="' . encriptar($v['ci_solicitada']) . '">';
-        echo '<td><a>' . $v['id_solicitud'] . '</a></td>';
-        echo '<td><a class="lol" href="perfil.php?perfil=' . encriptar($v['ci_emisor']) . '&parce=true">' . getUser('', encriptar($v['ci_emisor'])) . '</a></td>';
-        echo '<td><a class="lol" href="perfil.php?perfil=' . encriptar($v['ci_solicitada']) . '&parce=true">' . $v['ci_solicitada'] . '</a></td>';
-        echo '<td><a>' . $v['fecha'] . '</a></td>';
-        echo '<td><a class="viewDetails btn btn"> Ver detalles </a></td>';
+    $data = [];
+    while ($data = $regisview->fetch_object()) {
+        // Poner los datos en un array en el orden de los campos de la tabla
+        $disabled = ($data->apr_estado != 0) ? "" : "aprStates(" . $data->id_solicitud . "," . $data->tipo . ")";
 
-        $disabled = ($v['apr_estado'] != 0) ? "disabled" : "";
-
-        echo '<td><a class="aprState ' . $apr[$v['apr_estado']] . '" ' . $disabled . '>' . $aprN[$v['apr_estado']] . '<span style="margin:.5rem;"></span><i class="' . $aprL[$v['apr_estado']] . '"></i></a></td>';
-        echo '</tr>';
+        $data_array[] = [
+            $data->id_solicitud,
+            '<a class="lol" href="perfil.php?perfil=' . encriptar($data->ci_solicitada) . '&parce=true">' . strtoupper((getUser($data->id_emisor))) . '</a>',
+            $data->fecha,
+            $tipoSolic[$data->tipo],
+            '<a onclick="detalles(' . $data->id_solicitud . ',' . $data->tipo . ')" class="viewDetails btn btn"> Ver detalles </a>',
+            '<a onclick="' . $disabled . '" class="aprState ' . $apr[$data->apr_estado] . '">' . $aprN[$data->apr_estado] . '<span style="margin:.5rem;"></span><i class="' . $aprL[$data->apr_estado] . '"></i></a>',
+        ];
     }
+    // crear un array con el array de los datos, importante que esten dentro de : data
+    $new_array = array("data" => $data_array);
+    // crear el JSON apartir de los arrays
+    echo json_encode($new_array);
 } else {
     //Si no hay registros encontrados
-    echo '<h2>no posee ninguna solicitud</h2>';
+    echo '<h6>no posee ninguna solicitud</h6>';
 }

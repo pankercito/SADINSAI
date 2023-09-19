@@ -50,8 +50,12 @@ class auditoria extends based
      * @return bool
      */
     public function sesionInit($idEntrada)
-    {
-        $query = $this->connec->query("INSERT INTO registro_entrada_salida (id_usuario_init, fecha, entradaSalida) VAlUES ('$idEntrada', now(), 1)");
+    {   
+        $consu = $this->connec->query("SELECT * FROM registro WHERE id_usuario = $idEntrada");
+        $fechi = mysqli_fetch_assoc($consu);
+        $user = $fechi["user"];
+
+        $query = $this->connec->query("INSERT INTO registro_entrada_salida (id_usuario_init, fecha, entradaSalida, user_name) VAlUES ('$idEntrada', now(), 1, '$user')");
         $this->connec->close();
 
         if ($query) {
@@ -68,7 +72,11 @@ class auditoria extends based
      */
     public function sesionClose($idEntrada)
     {
-        $sql = $this->connec->query("INSERT INTO registro_entrada_salida (id_usuario_init, fecha, entradaSalida) VAlUES ('$idEntrada', now(), 0)");
+        $consu = $this->connec->query("SELECT * FROM registro WHERE id_usuario = $idEntrada");
+        $fechi = mysqli_fetch_assoc($consu);
+        $user = $fechi["user"];
+
+        $sql = $this->connec->query("INSERT INTO registro_entrada_salida (id_usuario_init, fecha, entradaSalida, user_name) VAlUES ('$idEntrada', now(), 0, '$user')");
         $this->connec->close();
 
         if ($sql) {
@@ -177,7 +185,7 @@ class auditoria extends based
         $result = [];
 
         while ($i <= $con - 1) {
-            $num = $this->connec->query("SELECT * FROM arch_direc WHERE DATE(fecha) = '" . $fech[$i] . "'");
+            $num = $this->connec->query("SELECT * FROM archidata a INNER JOIN solicitudes s ON a.id_archivo = s.id_solicitud WHERE s.tipo = '2' AND s.apr_estado = 1 AND DATE(s.fecha) = '" . $fech[$i] . "'");
             $f = mysqli_num_rows($num);
             $result[] = [$f];
             $i++;

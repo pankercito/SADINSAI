@@ -26,7 +26,7 @@ require("../layout/navbar.php");
 
         <div class="col-lg-12">
             <div class="sot">
-                <table id="example" class="table table-striped">
+                <table id="table" class="table table-striped">
                     <thead>
                         <tr>
                             <th>estado</th>

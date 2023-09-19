@@ -1,14 +1,3 @@
-/*recolor a footer y croma */
-.croma.col-lg-12.col-ms-12 {
-    background-color: var(--bg-color-principal2);
-}
-
-#cena {
-    background-color: var(--bg-color-principal2);
-}
-
-/**************************************************/
-
 .estructur-conten {
     margin: 2%;
     margin-top: 1.5rem;
@@ -29,8 +18,6 @@
 }
 
 .n-estructure.col-lg-9 {
-    background-color: var(--bg-conten-color2);
-    /* padding: 10px; */
     padding: 0 0rem 0 2rem;
 }
 
@@ -131,4 +118,14 @@ a.aprState.alert.alert-secondary {
 p.por.fw-bold {
     font-size: 14px;
     margin: 10px 0 0;
+}
+
+select.filterE {
+    border-radius: 5px;
+    height: 2.5rem;
+    padding: 0 1rem;
+}
+
+label.rat {
+    height: 2.5rem;
 }

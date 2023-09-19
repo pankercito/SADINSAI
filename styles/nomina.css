@@ -1,13 +1,27 @@
 body {
     background-color: #24a5c1;
 }
+
 .grid-containerr>div {
     margin: 1.5rem;
-    background-color: rgba(51, 51, 51, 0.205);
+    background-color: var(--bg-conten-color);
     text-align: center;
     padding: 20px 0;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
+}
+
+p.ttl-dashboard {
+    color: var(--font-color-bg);
+    font-weight: bold;
+    margin: 1rem;
+}
+
+label {
+    background: #f2f2f2;
+    padding: 5px 1rem;
+    border-radius: 5px;
+    height: 3.5rem;
 }

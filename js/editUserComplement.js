@@ -13,8 +13,10 @@ function bue() {
   document.getElementById("centro").style.display = "none";
   document.getElementById("columna").style.display = "none";
   document.getElementById("centroEdit").style.display = "unset";
+  setTimeout(() => {
 
-  agregarSelectedAll(idC, idS);
+    agregarSelectedAll(idC, idS);
+  }, 500);
 }
 
 //funcion de preselecion de selectores

@@ -79,7 +79,7 @@ th {
   padding: 1rem 0.5rem 0 2rem;
 }
 
-select#filterE {
+select.filterE {
   height: 2rem;
   background: #a6ffad;
   border: none;
@@ -88,7 +88,7 @@ select#filterE {
   border-radius: 5px;
 }
 
-select#filterE option:hover {
+select.filter option:hover {
   background: #ff0000e6;
 }
 
@@ -96,4 +96,7 @@ label {
   background: #f2f0f5;
   padding: 5px 1rem;
   border-radius: 5px;
+}
+div#example_info {
+  color: #f2f2f2;
 }

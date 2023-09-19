@@ -17,11 +17,9 @@ if(isset($_GET["adminregister"])){
 }else 
 if(isset($_GET["error"])){
     echo "El proceso de registro a fallado por favor intente nuevamente <br>";
-    echo '<img src="../resources/banana-cat.gif" alt="GIF animado">';
 }else
 if(isset($_GET["exito"])){
     echo "El proceso de registro ha concluido exitosamente <br>";
-    echo '<img src="../resources/goocat.gif" alt="GIF animado">';
 }else{
     echo "Elija una opcion :)";
 }

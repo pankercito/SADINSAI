@@ -7,7 +7,7 @@ a:not([href]):not([tabindex]) {
     padding: 10px;
     margin: 0;
 }
-a#vrname {
+a.vrname {
     color: inherit;
     display: flex;
     justify-content: center;
@@ -20,4 +20,15 @@ a#vrname {
 }
 tr{
     vertical-align: -webkit-baseline-middle;
+}
+label {
+    background: #f2f2f2;
+    padding: 5px 1rem;
+    border-radius: 5px;
+    height: 3.5rem;
+    color: black;
+}
+.spinner-border {
+    height: 2.5rem;
+    width: 2.5rem;
 }

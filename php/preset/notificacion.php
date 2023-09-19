@@ -1,8 +1,8 @@
 <script type="text/javascript">
     // Obtener el mensaje de la notificación desde PHP
-    const mensaje = "<?php echo htmlspecialchars($_SESSION["noti"]); ?>";
+    const mensaje = "<?php echo @$_SESSION["noti"] ?>";
 
-    localStorage.setItem('activeSection', '5');
+    localStorage.setItem('activeSection', '4');
 
     if (window.onload) {
         setTimeout(() => {

@@ -14,4 +14,4 @@ $jsa = $new->solicitudStats($dat['lunes'], $dat['domingo']);
 $jsc = $new->archivesStats($dat['lunes'], $dat['domingo']);
 
 // enviamos los datos como caden json
-echo json_encode([$json, $jsa, $jsc]);
+echo json_encode([$json, $jsa, $jsc, $dat]);

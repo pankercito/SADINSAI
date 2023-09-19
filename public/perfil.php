@@ -19,18 +19,11 @@
                 <?php require_once("../php/preset/seleccionPerfil.php"); ?>
             </div>
             <?php require_once("../layout/editarUsuario.php"); ?>
-            <div class="colunma col-lg-3" id="columna">
-                <p>Informacion extra</p>
+            <div class="colunma col-lg-3 mt-2" id="columna">
+                <p style="color: white; font-weight:500;">Informacion extra</p>
                 <a class="pnomina btn btn-primary" href=''>generar reporte</a>
                 <br>
                 <button class='pedit btn btn-warning' id="editar">editar datos</button>
-                <br>
-                <p>Archivos totales =
-                    <?php echo @$data ?>
-                </p>
-                <p>Archivos faltantes =
-                    <?php echo @$data ?>
-                </p>
             </div>
         </div>
     </div>

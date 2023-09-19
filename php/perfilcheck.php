@@ -4,8 +4,11 @@ include("class/personal.php");
 if (isset($_GET['perfil'])) {
     $personal = new Personal($_GET['perfil']);
 
-    $pName = $personal->getNombre() . ' ' . $personal->getApellido();
     $pCi = $personal->getCi();
+    $pName = $personal->getNombre() . ' ' . $personal->getApellido();
+    $pSexo = $personal->getSexo();
+    $pGrado = $personal->getGrado();
+    $pFecha = $personal->getFecha();
     $pPhone = $personal->getTelefono();
     $pEmail = $personal->getEmail();
     $pDireccion = $personal->getDireccion();

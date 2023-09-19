@@ -5,11 +5,12 @@
 include("../php/preset/cardsPreset.php");
 
 if ($count > 0) {
-    for ($i = 0; $i < $count; $i++) {
-        $row = mysqli_fetch_assoc($sql);
-
-        $image = $row['direccion'];
-        $nameSet = $row['nombre_archivo'];
+    $i = 0;
+    while ($row = $sql->fetch_assoc()) {
+        $id = $row['id_archivo'];
+        $image = $row['d_archivo'];
+        $ubicatinFis = $row['dir_nombre'];
+        $nameSet = $row['nombre_arch'];
         if (strlen($nameSet) > 15) {
             $q = 1;
             $name = substr($nameSet, 0, 15) . "...";
@@ -17,26 +18,24 @@ if ($count > 0) {
             $q = 0;
             $name = $nameSet;
         }
+
         $f = ($q == 1) ? $nameSet : "";
         $fecha = $row['fecha'];
-        $tipoDarch = $row['archivo'];
-        $note = ($row['note'] == '') ? "sin nota" : $row['note'];
-        $userName = '<a href="perfil.php?perfil=' . encriptar($row['ci']) . '">' . getUser($row['Id_user_sub'], "") . '</a>';
+        $note = ($row['nota'] == '') ? "sin nota" : $row['nota'];
+        $userName = '<a href="perfil.php?perfil=' . encriptar($row['ci']) . '">' . getUser($row['id_emisor'], "") . '</a>';
         $c = ($row['size'] / 1024);
         $size = ($c <= 920) ? number_format($c, 2) . "KB" : number_format($c / 1024, 2) . "MB";
 
-        // cambiar etiquetas segun tipos de archivo
-        $d = ($tipoDarch != "pdf") ? '<img class="card__image" src="' . @$image . '" alt="fotos" width="298" height="223.5"/>'
-            : '<iframe src="' . @$image . '" scrolling="yes"  title="' . @$name . '" width="298" height="223.5">documento</iframe>';
-        
-        // imprimir las card 
-        ?>
+        $d = '<img class="card__image" src="' . @$image . '" alt="fotos" width="298" height="223.5"/>'
+
+            // imprimir las card 
+            ?>
         <div class="card">
             <div class="card__image-holder">
                 <?php echo @$d ?>
             </div>
             <div class="card-title">
-                <a href="#" class="toggle-info btn btn-success">
+                <a href="#conteni<?php echo @$i?>" class="toggle-info btn btn-success">
                     <span class="left"></span>
                     <span class="right"></span>
                 </a>
@@ -58,29 +57,42 @@ if ($count > 0) {
                     <?php echo @$f ?>
                 </h6>
                 <div class="card-description">
-                    <p>Nota:
-                        <br>
-                        <?php echo @$note ?>
-                    </p>
-                    <div class="strContent d-flex mx-auto">
-                        <p class="str text-center" style="margin: 0;">subido por
+                    <div class="row justify-content-center align-items-center g-2 mb-3" style="background:none; padding: 0 0 0 0;">
+                        <div class="col" style="color: #282c30;  text-align:start;">
+                            <p>Nota:
+                                <br>
+                                <?php echo @$note ?>
+                            </p>
+                        </div>
+                        <div class="col" style="color: #282c30; text-align:start; font-size:12px;">
+                            <p>
+                                ubicacion:
+                                <br>
+                                <?php echo @$ubicatinFis?>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="strContent justify-content-center d-flex mx-auto">
+                        <p class="str text-center mx-2" style="margin: 0;">subido por
                             <?php echo @$userName ?>
                         </p>
                         <span class="c"> | </span>
-                        <p class="str text-center">tamaño
+                        <p class="str text-center mx-2">tamaño
                             <?php echo @$size ?>
                         </p>
                     </div>
                 </div>
-                <div class="card-flap flap2">
+                <div id="conteni<?php echo @$i?>" class="card-flap flap2">
                     <div class="card-actions">
-                        <a href="<?php echo @$image ?>" class="btn btn-success" download="<?php echo @$f?>">descargar</a>
-                        <a href="#" class="btn btn-secondary">Editar</a>
+                        <a href="<?php echo @$image ?>" class="btn btn-success" download="<?php echo @$name?>">descargar</a>
+                        <a class="btn btn-danger" onclick=" deleteCar(<?php echo @$id ?>)">eliminar</a>
+                        <a class="btn btn-secondary mb-1 mt-2" onclick="cambiarUb(<?php echo @$id ?>)">cambiar ubicacion</a>
                     </div>
                 </div>
             </div>
         </div>
         <?php
+        $i++;
     }
 } else {
     ?>

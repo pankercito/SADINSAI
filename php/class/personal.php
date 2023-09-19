@@ -10,6 +10,9 @@ class Personal
     private $ci;
     private $nombre;
     private $apellido;
+    private $grado;
+    private $sexo;
+    private $fecha;
     private $telefono;
     private $email;
     private $direccion;
@@ -19,7 +22,7 @@ class Personal
     private $idCiudad;
     private $sede;
     private $idSede;
-    private $cargo;
+    private $Cargo;
     private $idCargo;
     private $connec;
 
@@ -56,10 +59,13 @@ class Personal
             if ($count_results > 0) {
                 $data = mysqli_fetch_array($cnce);
 
+                $this->ci = $data['ci'];
                 $this->nombre = ucwords(strtolower($data['nombre']));
                 $this->apellido = ucwords(strtolower($data['apellido']));
+                $this->grado = $data['grado_ac'];
+                $this->fecha = $data['fecha_nac'];
+                $this->sexo = $data['sexo'];
                 $this->telefono = $data['telefono'];
-                $this->ci = $data['ci'];
                 $this->email = strtolower($data['email']);
                 $this->direccion = ucwords(strtolower($data['direccion']));
                 $this->estado = $data['estado'];
@@ -68,7 +74,10 @@ class Personal
                 $this->idCiudad = $data['id_ciudad'];
                 $this->sede = $data['nombre_sede'];
                 $this->idSede = $data['sede_id'];
-                $this->idCargo = $data['sede_id'];
+                $this->Cargo = $data['cargo'];
+                $this->fecha = $data['fecha_nac'];
+                $this->sexo = $data['sexo'];
+                $this->grado = $data['grado_ac'];
             } else {
                 $this->nombre = "Sin datos";
                 $this->apellido = "Sin datos";
@@ -81,7 +90,10 @@ class Personal
                 $this->idCiudad = "Sin datos";
                 $this->sede = "Sin datos";
                 $this->idSede = "Sin datos";
-                $this->idCargo = "Sin datos";
+                $this->Cargo = "Sin datos";
+                $this->fecha = "Sin datos";
+                $this->sexo = "Sin datos";
+                $this->grado = "Sin datos";
             }
         } else {
             $this->nombre = "Sin datos";
@@ -96,7 +108,10 @@ class Personal
             $this->idCiudad = "Sin datos";
             $this->sede = "Sin datos";
             $this->idSede = "Sin datos";
-            $this->idCargo = "Sin datos";
+            $this->Cargo = "Sin datos";
+            $this->fecha ="Sin datos";
+            $this->sexo ="Sin datos";
+            $this->grado = "Sin datos";
         }
         $this->connec->close();
     }
@@ -189,6 +204,30 @@ class Personal
      */
     public function getCargo()
     {
-        return $this->cargo;
+        return $this->Cargo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGrado()
+    {
+        return $this->grado;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSexo()
+    {
+        return $this->sexo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFecha()
+    {
+        return $this->fecha;
     }
 }

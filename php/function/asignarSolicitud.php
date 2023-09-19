@@ -8,7 +8,7 @@
 function asignar()
 {
     $conn = new Conexion();
-    $stmt = $conn->query("SELECT id_usuario FROM registro WHERE adp = 1");
+    $stmt = $conn->query("SELECT * FROM registro WHERE adp = 1");
 
     $arraySet = array();
 
@@ -16,14 +16,14 @@ function asignar()
         $arraySet = $arraySet + $resultado;
     }
 
-    $count = count($arraySet);
-    $initial = null;
+    $count = mysqli_num_rows($stmt);
+    $initial = [];
 
-    if ($count == 1) {
-        $initial = $arraySet[0];
-    } else {
+    if ($count != 1) {
         $ad = rand(0, $count - 1);
         $initial = $arraySet[$ad];
+    } else {
+        $initial = $arraySet[0];
     }
     $conn->close();
 

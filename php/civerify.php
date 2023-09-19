@@ -1,6 +1,10 @@
 <?php
 
+include("conx.php");
+
 if (isset($_POST["cedula"])){
+
+    $conn = new Conexion();
 
     $subcedula  = $conn->real_escape($_POST["cedula"]);
     

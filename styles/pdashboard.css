@@ -33,8 +33,15 @@ i.bi.bi-dot.active {
     color: #4ce300;;
 }
 div#centro {
-    justify-content: space-around;
+    display: flex!important;
+    margin: 0 auto;
+    flex-direction: row;
+    justify-content: center;
 }
 p {
     font-weight: 600;
+    color: #e7e7e7;
+}
+.conteDash.col-md-8 {
+    margin: 0px 10%;
 }

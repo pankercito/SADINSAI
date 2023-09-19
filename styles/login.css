@@ -1,11 +1,14 @@
 #cena { /*ACOMODADOR CINTILLO*/
-    position: fixed;
+    display: flex;
+    position: absolute;
     border-color: none;
     background: none;
     height: 60px;
-    left: 0;
-    bottom: 0;
-    margin-top: 10%;
-    width: 100%;
+    left: -4rem;
+    top: 0;
+    margin-top: 1%;
+    /* width: 100%; */
+    flex-direction: row;
+    justify-content: flex-end;
 }
 

@@ -1,23 +1,11 @@
 <?php
 
-include("php/conx.php");
-include("php\class\auditoria.php");
-include("php/function/sumarhora.php");
+function generarId() {
+    // Genera un número aleatorio de 12 dígitos
+    $number = str_pad(random_int(10000000 , 99999999), 8, '0', STR_PAD_LEFT);
 
-$new = new auditoria();
+    // Devuelve el número aleatorio
+    return $number;
+}
 
-$dat = rangoFechas();
-
-?>
-<p> rangoFechas <?php echo implode(" - ", $dat) . date("w")?></p>
-<br>
-<div class="" style="display:flex;">
-    <?php
-    var_dump($new->solicitudStats($dat['lunes'], $dat['domingo']));
-    ?>
-</div>
-<div class="" style="display:flex;">
-    <?php
-    var_dump($new->userStats($dat['lunes'], $dat['domingo']));
-    ?>
-</div>
+echo generarId();

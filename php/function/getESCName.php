@@ -4,6 +4,7 @@
 function getNameEsc($estado, $ciudad, $sede)
 {
     $conn = new Conexion();
+    
     $estado = $conn->real_escape($estado);
     $ciudad = $conn->real_escape($ciudad);
     $sede = $conn->real_escape($sede);

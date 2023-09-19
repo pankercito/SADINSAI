@@ -112,6 +112,7 @@ div.archives-structur .row{
     text-align: center;
     padding: 20px 0;
     border-radius: 10px;
+    color: #fafafa;
 }
 p.plistcatg {
     color: var(--font-color-bg);

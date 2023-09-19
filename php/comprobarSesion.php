@@ -1,7 +1,7 @@
 <?php
 
 // Establecer la duración de la sesión en segundos
-$duracion_sesion = 600;
+$duracion_sesion = 300;
 
 // Comprobar si el usuario está autenticado y la sesión está activa
 if (isset($_SESSION['LAST_ACTIVITY'])) {
