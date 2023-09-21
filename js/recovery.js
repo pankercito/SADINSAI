@@ -36,46 +36,57 @@ $(document).ready(function () {
                                         var help = document.getElementById("helpId1");
 
                                         // VERIFICACION DE PIN
-                                        $('#pin').change(function (event) {
+                                        $('#pin').keyup(function () {
+
                                             var pin = $("#pin").val();
 
-                                            $.ajax({
-                                                data: {
-                                                    "pin": pin
-                                                },
-                                                url: "../php/verificarPin.php",
-                                                type: "post",
-                                                beforeSend: function () {
-                                                    help.classList.add('text-muted');
-                                                    help.innerHTML = 'verificando...';
-                                                },
-                                                success: function (res) {
-                                                    setTimeout(() => {
-                                                        switch (res) {
-                                                            case "pin.success":
-                                                                help.innerText = 'pin verificado correctamente';
-                                                                help.classList.remove('text-muted');
-                                                                help.style.color = '#00b500';
-                                                                pass.removeAttribute("disabled");
-                                                                vpas.removeAttribute("disabled");
-                                                                break;
-                                                            case "false":
-                                                                help.innerText = "ingrese su pin de verificarcion";
-                                                                help.classList.add('text-muted');
-                                                                pass.setAttribute("disabled", "true");
-                                                                vpas.setAttribute("disabled", "true");
-                                                                break;
-                                                            default:
-                                                                help.classList.remove('text-muted');
-                                                                help.style.color = "red";
-                                                                help.innerText = 'pin erroneo';
-                                                                pass.setAttribute("disabled", "true");
-                                                                vpas.setAttribute("disabled", "true");
-                                                                break;
-                                                        }
-                                                    }, 500);
-                                                }
-                                            });
+                                            if (pin.length > 3) {
+                                                $.ajax({
+                                                    data: {
+                                                        "pin": pin,
+                                                        "ci": ci
+                                                    },
+                                                    url: "../php/pinRecovery.php",
+                                                    type: "post",
+                                                    beforeSend: function () {
+                                                        help.classList.add('text-muted');
+                                                        help.innerHTML = 'verificando...';
+                                                    },
+                                                    success: function (res) {
+                                                        setTimeout(() => {
+                                                            switch (res) {
+                                                                case "pin.success":
+                                                                    help.innerText = 'pin verificado correctamente';
+                                                                    help.classList.remove('text-muted');
+                                                                    help.style.color = '#00b500';
+                                                                    pass.removeAttribute("disabled");
+                                                                    vpas.removeAttribute("disabled");
+                                                                    break;
+                                                                case "false":
+                                                                    help.innerText = "ingrese su pin de verificarcion";
+                                                                    help.classList.add('text-muted');
+                                                                    pass.setAttribute("disabled", "true");
+                                                                    vpas.setAttribute("disabled", "true");
+                                                                    break;
+                                                                default:
+                                                                    help.classList.remove('text-muted');
+                                                                    help.style.color = "red";
+                                                                    help.innerText = 'pin erroneo';
+                                                                    pass.setAttribute("disabled", "true");
+                                                                    vpas.setAttribute("disabled", "true");
+                                                                    break;
+                                                            }
+                                                        }, 500);
+                                                    }
+                                                });
+                                            } else {
+                                                help.innerText = "ingrese su pin de verificarcion";
+                                                help.classList.add('text-muted');
+                                                pass.setAttribute("disabled", "true");
+                                                vpas.setAttribute("disabled", "true");
+                                            }
+
+
                                         });
 
                                         var self = this;
@@ -86,7 +97,7 @@ $(document).ready(function () {
                                         this.buttons.registrar.disable();
 
                                         // colores de verificacion y activacion de input password 
-                                        this.$content.find('.form-control').change(function () {
+                                        this.$content.find('.form-control').keyup(function () {
                                             if (self.$content.find('#vpass').val() == self.$content.find("#pass").val()) {
                                                 document.getElementById("helpId3").classList.add('text-muted');
                                                 document.getElementById("helpId3").innerText = "verificar contraseña";
@@ -109,18 +120,19 @@ $(document).ready(function () {
                                         registrar: {
                                             text: "procesar",
                                             action: function () {
-                                                var cedula = $("#cedula").val();
-                                                var user = $("#user").val();
-                                                var pass = $("#pass").val();
+                                                const form = document.getElementById('recover');
+
+                                                var fom = new FormData(form);
+
+                                                fom.append("ci", ci);
+
                                                 // registro con ajax
                                                 $.ajax({
-                                                    data: {
-                                                        "cedula": cedula,
-                                                        "user": user,
-                                                        "pass": pass
-                                                    },
-                                                    url: "../php/solitChange.php",
+                                                    data: fom,
+                                                    url: "../php/recoverChange.php",
                                                     type: "post",
+                                                    processData: false,
+                                                    contentType: false,
                                                     error: function (error) {
                                                         $.confirm({
                                                             title: false, // hides the title.
@@ -128,6 +140,7 @@ $(document).ready(function () {
                                                                 <div class="d-flex justify-content-center">
                                                                 <h6> error al procesar intente nuevamente</h6>
                                                                 <i class="bi bi-arrow"></i>
+                                                                ` + error + `
                                                                 </div>
                                                                 </div>`,
                                                             buttons: {
@@ -146,50 +159,26 @@ $(document).ready(function () {
                                                         });
                                                     },
                                                     success: function (respons) {
-                                                        switch (respons) {
-                                                            case "success":
-                                                                $.confirm({
-                                                                    title: 'verificacion completa',
-                                                                    content: "url:../private/inner.html",
-                                                                    buttons: {
-                                                                        da: {
-                                                                            text: 'cerrar',
-                                                                            action: function () {
-                                                                                location.reload();
-                                                                            }
-                                                                        },
-                                                                        rs: {
-                                                                            text: "inicio de sesion",
-                                                                            action: function () {
-                                                                                location.replace("../index.php");
-                                                                            }
-                                                                        }
+
+                                                        $.confirm({
+                                                            title: '',
+                                                            content: respons,
+                                                            buttons: {
+                                                                da: {
+                                                                    text: 'cerrar',
+                                                                    action: function () {
+                                                                        location.reload();
                                                                     }
-                                                                });
-                                                                break;
-                                                            default:
-                                                                $.alert({
-                                                                    title: false, // hides the title.
-                                                                    content: `
-                                                                <div class="d-flex justify-content-center">
-                                                                <h6> error al registrar intente nuevamente</h6>
-                                                                <i class="bi bi-arrow"></i>
-                                                                </div>
-                                                                </div>`,
-                                                                    buttons: {
-                                                                        r: {
-                                                                            text: "cerrar",
-                                                                            action: function () {
-                                                                                help.innerText = "Ingrese el pin de de registro por favor";
-                                                                                help.classList.add('text-muted')
-                                                                                boton.removeAttribute("disabled");
-                                                                                boton.innerText = "consultar";
-                                                                            }
-                                                                        }
+                                                                },
+                                                                rs: {
+                                                                    text: "inicio de sesion",
+                                                                    action: function () {
+                                                                        location.replace("../index.php");
                                                                     }
-                                                                });
-                                                                break;
-                                                        }
+                                                                }
+                                                            }
+                                                        });
+
                                                     }
                                                 })
                                             },

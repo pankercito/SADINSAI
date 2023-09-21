@@ -69,5 +69,4 @@
             </nav>
         </div>
     </section>
-    </style>
 </header>

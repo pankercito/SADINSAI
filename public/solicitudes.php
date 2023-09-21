@@ -21,7 +21,7 @@
 			<div id="notificacion">
 				<?php include("../php/preset/notificacion.php"); ?>
 			</div>
-			<div class="n-estructure col-lg-9">
+			<div class="n-estructure col">
 				<p class="ttl-dashboard">Solicitudes</p>
 				<div class="container">
 					<?php incluir("../layout/solicitudAdmin.php", "../layout/solicitudUser.php") ?>

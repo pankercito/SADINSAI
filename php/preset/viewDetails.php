@@ -158,7 +158,79 @@ if (isset($_POST["idSoli"])) {
                                             <?php echo $tipoArch ?>
                                         </button>
                                         <a class="btn btn-outline-primary"
-                                            href="perfil.php?perfil=<?php echo encriptar($precarInf['ci_arch_pre']) ?>&parce=true">carpeta de :
+                                            href="perfil.php?perfil=<?php echo encriptar($precarInf['ci_arch_pre']) ?>&parce=true">carpeta
+                                            de :
+                                            <?php echo $precarInf['ci_arch_pre'] ?>
+                                        </a>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Button Group">
+                                        <button class="btn btn-outline-primary" disabled>peso:
+                                            <?php echo $size ?>
+                                        </button>
+                                        <button class="btn btn-outline-primary" disabled>requerido:
+                                            requerido: si
+                                        </button>
+                                        <button class="btn btn-outline-primary" disabled>nota:
+                                            <?php echo $nota ?>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <img class="" src="<?php echo $precarInf['d_archivo_pre'] ?>" alt="Some text" width="200px">
+                        </div>
+                    </div>
+                    <style>
+                        img {
+                            border-radius: 6px;
+                            margin: 1rem 0;
+                        }
+                    </style>
+                </div>
+
+                <?php
+            } else {
+                echo "Error al consultar datos por favor intente más tarde";
+            }
+            break;
+        case '3':
+            // ingreso de archivos
+            $id = $conn->real_escape($_POST["idSoli"]);
+
+            @$x = $conn->query("SELECT * FROM solicitudes_eliminacion_arch e WHERE id_solicitud_eliminacion = '$id'");
+            
+            $subId = $x->fetch_object()->id_archivo_eliminar;
+            
+            $svp = $conn->query("SELECT * FROM solicitudes s INNER JOIN solicitudes_archivos_precarga p INNER JOIN tiposarch t ON p.id_solicitud_archivo_pre = s.id_solicitud AND t.id_tipo = p.tipo_pre WHERE s.id_solicitud = '$subId'");
+            $sv = mysqli_num_rows($svp);
+
+            $precarInf = mysqli_fetch_assoc($svp);
+
+            @$tipoArch = $precarInf['nombre_tipo_arch'];
+
+            @$nota = ($precarInf['nota_pre'] == "") ? "sin nota" : $precarInf['nota_pre'];
+            @$c = $precarInf['size_pre'] / 1024;
+            $size = ($c <= 920) ? number_format($c, 2) . "KB" : number_format($c / 1024, 2) . "MB";
+
+            if ($sv == 1) {
+                //DETALLES DE ARCHIVO SUBIDO
+                ?>
+                <h4 class="" style="margin: 0 0 1.2rem 6%;">eliminacion de archivo de archivos</h4>
+                <div class="editConten row col-md-8">
+                    <div class="dit">
+                        <div class="caram">
+                            <div class="row">
+                                <div class="btn-toolbar d-grid gap-1" role="toolbar" aria-label="Toolbar">
+                                    <div class="btn-group" role="group" aria-label="Button Group">
+                                        <button class="btn btn-outline-primary" disabled>nombre del archivo:
+                                            <?php echo $precarInf['nombre_archivo_pre'] ?>
+                                        </button>
+                                        <button class="btn btn-outline-primary" disabled>Archivo:
+                                            <?php echo $tipoArch ?>
+                                        </button>
+                                        <a class="btn btn-outline-primary"
+                                            href="perfil.php?perfil=<?php echo encriptar($precarInf['ci_arch_pre']) ?>&parce=true">carpeta
+                                            de :
                                             <?php echo $precarInf['ci_arch_pre'] ?>
                                         </a>
                                     </div>

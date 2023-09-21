@@ -76,7 +76,7 @@ function aprStates(idSolis, tipoS) {
                     content: `
                           <div class="d-flex justify-content-center">
                                             <div class="spinner-border" role="status">
-                               <span class="visually-hidden">Loading...</span>
+                               <span class="visually-hidden">procesando...</span>
                           </div>
                           </div>`
                 });

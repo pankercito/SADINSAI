@@ -8,19 +8,19 @@ function nuevoGrafico(canvas, array1, array2, array3, arrayFechas) {
         datasets: [{
             label: 'usuarios ingresados',
             data: array1,
-            borderColor: "#ff6384",
+            borderColor: "#ff63849e",
             backgroundColor: "#ff6384",
             tension: 0.4
         }, {
             label: 'solicitudes realizadas',
             data: array2,
-            borderColor: "#3fe8fa",
+            borderColor: "#4be9faad",
             backgroundColor: "#3fe8fa",
             tension: 0.3
         }, {
             label: 'archivos subidos',
             data: array3,
-            borderColor: "#f9c940",
+            borderColor: "#f9c940c7",
             backgroundColor: "#f9c940",
             tension: 0.5
         }]
@@ -36,7 +36,7 @@ function nuevoGrafico(canvas, array1, array2, array3, arrayFechas) {
                 },
                 title: {
                     display: true,
-                    text: 'Registro de volumen de usuarios '+arrayFechas,
+                    text: 'Registro de volumen de datos' + arrayFechas,
                     color: '#484848',
                     font: {
                         size: 16,
@@ -46,6 +46,6 @@ function nuevoGrafico(canvas, array1, array2, array3, arrayFechas) {
             }
         },
     };
-    
+
     new Chart(canvas, config);
 };

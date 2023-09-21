@@ -3,7 +3,7 @@
     margin-top: 1.5rem;
 }
 canvas#dashboard {
-    background: #f1f0f3;
+    background: #f9f9f8;
     padding: 1rem;
     border-radius: 5px;
 }
@@ -22,7 +22,7 @@ a.aUser {
     flex-direction: row;
     align-items: center;
     margin: 10px 0;
-    background: #f1f0f3;
+    background: #f9f9f8;
     height: 2.5rem;
 }
 i.bi.bi-dot {
@@ -44,4 +44,11 @@ p {
 }
 .conteDash.col-md-8 {
     margin: 0px 10%;
+}
+.bg-color-stats {
+    background: #f9f9f8;
+    border: none;
+}
+.table {
+    --bs-table-bg: #f9f9f8;
 }

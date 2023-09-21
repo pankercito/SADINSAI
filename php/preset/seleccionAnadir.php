@@ -16,10 +16,10 @@ if(isset($_GET["adminregister"])){
     require_once ("../php/adregis.php");
 }else 
 if(isset($_GET["error"])){
-    echo "El proceso de registro a fallado por favor intente nuevamente <br>";
+    echo "<h6> el proceso de registro a fallado por favor intente nuevamente</h6>";
 }else
 if(isset($_GET["exito"])){
-    echo "El proceso de registro ha concluido exitosamente <br>";
+    echo "<h6>el proceso de registro ha concluido exitosamente</h6>";
 }else{
-    echo "Elija una opcion :)";
+    echo "<h6>eliga una opcion<h6>";
 }

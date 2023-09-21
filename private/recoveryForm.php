@@ -1,4 +1,4 @@
-<form method="post" class="reco">
+<form method="post" class="reco" id="recover">
     <div class="mb-3">
         <label for="pin" class="form-label">pin</label>
         <input type="text" class="form-control" name="pin" id="pin" aria-describedby="helpId" autocomplete="off">

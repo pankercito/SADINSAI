@@ -12,7 +12,7 @@ require("../php/adp.php");
         <div class="mx-auto mb-3 col-md-3 ">
             <label for="ci" class="form-label">Cedula</label>
             <input class="form-control" id="ci" type="number" name="cedula" placeholder="cedula" maxlength="8"
-                onblur="verificarCI()" required>
+                onkeyup="verificarCI()" required>
             <small id="mensajeCi" class="form-text text-muted">ingrese la cedula para comprovacion</small>
 
         </div>

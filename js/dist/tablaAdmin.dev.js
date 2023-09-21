@@ -60,7 +60,7 @@ function aprStates(idSolis, tipoS) {
         title: false,
         closeIcon: false,
         // hides the close icon.
-        content: "\n                          <div class=\"d-flex justify-content-center\">\n                                            <div class=\"spinner-border\" role=\"status\">\n                               <span class=\"visually-hidden\">Loading...</span>\n                          </div>\n                          </div>"
+        content: "\n                          <div class=\"d-flex justify-content-center\">\n                                            <div class=\"spinner-border\" role=\"status\">\n                               <span class=\"visually-hidden\">procesando...</span>\n                          </div>\n                          </div>"
       }); //CERRAR EL DIALOG ANTERIOR
 
       setTimeout(function () {

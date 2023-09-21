@@ -84,7 +84,7 @@ if ($count > 0) {
                 </div>
                 <div id="conteni<?php echo @$i?>" class="card-flap flap2">
                     <div class="card-actions">
-                        <a href="<?php echo @$image ?>" class="btn btn-success" download="<?php echo @$name?>">descargar</a>
+                        <a href="<?php echo @$image ?>" class="btn btn-success" download="<?php echo @$nameSet?>">descargar</a>
                         <a class="btn btn-danger" onclick=" deleteCar(<?php echo @$id ?>)">eliminar</a>
                         <a class="btn btn-secondary mb-1 mt-2" onclick="cambiarUb(<?php echo @$id ?>)">cambiar ubicacion</a>
                     </div>

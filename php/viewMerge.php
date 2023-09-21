@@ -161,7 +161,7 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
              */
             function viewMerge($vma, $vmb, $vmc)
             {
-                if ($vma !== $vmb) {
+                if ($vma != $vmb) {
                     // tbla de datos 
                     $dad =
                         '<tr class="imago">

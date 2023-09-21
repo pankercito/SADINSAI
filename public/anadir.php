@@ -11,6 +11,12 @@ if ($_SERVER['REQUEST_URI'] == "/sadinsai/public/anadir.php") {
       bottom: 0;
    }</style>";
 }
+if ($_SERVER['REQUEST_URI'] == "/sadinsai/public/anadir.php?users/register=true") {
+    echo "<style>section.footer.col-lg-12 {
+      position: fixed;
+      bottom: 0;
+   }</style>";
+}
 ?>
 
 <link rel="stylesheet" href="../styles/regiform.css">
@@ -27,9 +33,10 @@ if ($_SERVER['REQUEST_URI'] == "/sadinsai/public/anadir.php") {
 
 
 <div class="structur-conten">
-    <div class="first row">
-        <div class="fixed col-3">
-            <div class="fijo contenido">
+    <div class="row justify-content-center text-center">
+
+        <div class="col-md-3 mx-1">
+            <div class="fijo contenido ">
                 <p>Personal</p>
                 <div class="botones">
                     <a class="añadir btn btn-primary" type="button" href="?form=true">
@@ -43,12 +50,14 @@ if ($_SERVER['REQUEST_URI'] == "/sadinsai/public/anadir.php") {
                 </div>
             </div>
         </div>
-        <div class="conten col-9">
-            <div class="contenido">
-                <p>Contenido</p>
-                <?php
-                include('../php/preset/seleccionAnadir.php');
-                ?>
+        <div class="conten col ms-2 me-3">
+            <div class="centro">
+                <div class="contenido">
+                    <p>Contenido</p>
+                    <?php
+                    include('../php/preset/seleccionAnadir.php');
+                    ?>
+                </div>
             </div>
         </div>
     </div>

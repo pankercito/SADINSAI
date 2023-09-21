@@ -1,4 +1,5 @@
 .first.row {
+    margin: 0;
     text-align: center;
     justify-content: start;
 }
@@ -6,6 +7,7 @@
 .structur-conten {
     margin: 1.5rem 1rem;
 }
+
 .fijo.contenido i {
     margin: 0 5px 0 0px;
 }
@@ -32,11 +34,6 @@ a.btn.btn-warning:hover {
     justify-content: center;
 }
 
-.fixed {
-    flex: 0 0 auto;
-    width: 24.5%;
-}
-
 .ui.stackable.grid {
     display: flex;
     justify-content: center;
@@ -46,7 +43,6 @@ a.btn.btn-warning:hover {
     position: -webkit-sticky;
     position: sticky;
     top: 5.9rem;
-    padding: 1rem 0 1rem;
     background-color: rgba(51, 51, 51, 0.205);
     text-align: center;
     border-radius: 10px;
@@ -57,9 +53,8 @@ a.btn.btn-warning:hover {
     text-align: center;
 }
 
-.conten.col-9 {
+.conten.col {
     background-color: var(--bg-conten-color);
-    margin: 0rem 0rem 0rem 0rem;
     border-radius: 10px;
     height: 50%;
     box-shadow: 0px 1px 2px 0 black;
@@ -233,4 +228,16 @@ td.callo {
 label.btn {
     display: flex;
     align-items: center;
+}
+
+small#msjverify {
+    color: #edb8b8;
+}
+
+small#vpassmsj {
+    color: #edb8b8;
+}
+
+small#passmsj {
+    color: #edb8b8;
 }

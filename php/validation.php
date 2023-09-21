@@ -26,10 +26,9 @@ if (isset($_POST['login'])) {
     if ($nr == 1 && $pass == $trix) { //contraseña correcta 
         $resultado = 1;
 
-        if ($dataview['active'] == 2) {
+        if ($dataview['active'] == 2 || $dataview['active'] == 0) {
             $resultado = 2;
-        }
-
+        } 
     } else {
         $resultado = 3;
     }

@@ -1,13 +1,13 @@
 <div class="centro col-lg-12" id="centroEdit">
     <link rel="stylesheet" href="../styles/editarUsuarios.css">
-
+<div class="col">
+    <button class="btn btn-light my-4" onclick="eback()" >atras</button>
+</div>
     <?php
     include_once("../php/editSet.php");
-
     $_SESSION['editCI'] = $SetCi;
     ?>
     <div class="contenido1" id="editSet" display="none">
-
         <form action="../php/registroSolicitud.php" method="post" id="editForm" name="xdit">
             <h4>Editar perfil</h4>
             <div class="lmao row">
@@ -37,8 +37,8 @@
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input radio" type="radio" name="sexo" id="inlineRadio2"
-                                value="masculino">
-                            <label class="form-check-label" for="inlineRadio2">masculino</label>
+                                value="masculino" checked>
+                            <label class="form-check-label" for="inlineRadio2">masculino</label >
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input radio" type="radio" name="sexo" id="inlineRadio3"
@@ -104,6 +104,7 @@
             <button class="btn btn-lg btn-warning" id="log" type="submit" name="editLog">Solicitar cambio</button>
         </form>
         <script type="text/javascript">
+            var idCar = <?php echo $SetIdCargo ?>;
             var idE = <?php echo $SetIdEstado ?>;
             var idC = <?php echo $SetIdCiudad ?>;
             var idS = <?php echo $SetIdSede ?>;
@@ -122,6 +123,7 @@
             "estado": "<?php echo $SetEstado ?>",
             "ciudad": "<?php echo $SetCiudad ?>",
             "sede": "<?php echo $SetSede ?>",
+            "telefono": "<?php echo $SetPhone ?>",
             "email": "<?php echo $SetEmail ?>",
             "direccion": "<?php echo $SetDireccion ?>",
             "cargo": "<?php echo $SetCargo ?>"

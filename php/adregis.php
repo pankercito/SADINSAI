@@ -27,5 +27,5 @@ if (isset($_SESSION['subcedula'])) {
         echo "no se pudo registrar por favor intenta de nuevo <a href='?adminregister=true'>click para registrar de nuevo</a>";
     } 
 }else {
-    echo "ocurrio un error inesperado intente nuevamente";
+    echo "<h6> elija una opcion </h6>";
 }

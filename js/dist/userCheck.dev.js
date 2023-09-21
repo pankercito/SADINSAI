@@ -1,71 +1,115 @@
 "use strict";
 
+// VERIFICACION DEL FORM REGISTRO FASE 2
 $(document).ready(function () {
   // Agregar un controlador de eventos para el evento cambio en input
-  $('.form-control').change(function () {
+  $('#user').keyup(function () {
     var user = $('#user');
     var pass = $('#pass');
     var vpass = $('#vpass');
     var pin = $('#pin');
     var cheki = $('#flexSwitch');
+    var sing = $('#singup');
     var p = false;
     var u = false;
-    $.ajax({
-      url: "../php/userCheck.php",
-      data: {
-        "user": user.val()
-      },
-      type: "post",
-      success: function success(params) {
-        switch (params) {
-          case "success":
-            document.getElementById("msjverify").innerHTML = "";
-            user.removeAttr('disabled');
-            pass.removeAttr('disabled');
-            vpass.removeAttr('disabled');
-            pin.removeAttr('disabled');
-            cheki.removeAttr('disabled');
-            u = true;
-            break;
 
-          case "exist":
-            document.getElementById("msjverify").innerHTML = "este usuario esta en uso";
-            u = false;
-            pass.attr('disabled', 'true');
-            vpass.attr('disabled', 'true');
-            pin.attr('disabled', 'true');
-            cheki.attr('disabled', 'true');
-            break;
+    if ($(this).val().match(/[0-9a-zA-Z]$/)) {
+      document.getElementById("msjverify").innerHTML = "";
 
-          default:
-            document.getElementById("msjverify").innerHTML = "";
-            u = false;
-            pass.attr('disabled', 'true');
-            vpass.attr('disabled', 'true');
-            pin.attr('disabled', 'true');
-            cheki.attr('disabled', 'true');
-            break;
-        }
+      if (user.val().length >= 5) {
+        $.ajax({
+          url: "../php/userCheck.php",
+          data: {
+            "user": user.val()
+          },
+          type: "post",
+          success: function success(params) {
+            switch (params) {
+              case "success":
+                document.getElementById("msjverify").innerHTML = "";
+                user.removeAttr('disabled');
+                pass.removeAttr('disabled');
+                vpass.removeAttr('disabled');
+                pin.removeAttr('disabled');
+                cheki.removeAttr('disabled');
+                sing.attr('disabled', 'true');
+                u = true;
+                break;
 
-        if (pass.val() != "" && vpass.val() != "") {
-          if (pass.val() == vpass.val()) {
-            document.getElementById("vpassmsj").innerHTML = "";
-            p = true;
-          } else {
-            document.getElementById("vpassmsj").innerHTML = "las contraseñas no coinciden";
-            p = false;
+              case "exist":
+                document.getElementById("msjverify").innerHTML = "este usuario esta en uso";
+                u = false;
+                pass.attr('disabled', 'true');
+                vpass.attr('disabled', 'true');
+                pin.attr('disabled', 'true');
+                cheki.attr('disabled', 'true');
+                sing.attr('disabled', 'true');
+                break;
+
+              default:
+                document.getElementById("msjverify").innerHTML = "";
+                u = false;
+                pass.attr('disabled', 'true');
+                vpass.attr('disabled', 'true');
+                pin.attr('disabled', 'true');
+                cheki.attr('disabled', 'true');
+                sing.attr('disabled', 'true');
+                break;
+            }
+
+            $('.form-control').keyup(function () {
+              // minino de caracteres
+              if (pass.val().length > 5) {
+                // verificacion de igualdad
+                document.getElementById("passmsj").innerHTML = "";
+
+                if (pass.val() == vpass.val()) {
+                  document.getElementById("vpassmsj").innerHTML = "";
+                  p = true;
+                } else {
+                  document.getElementById("vpassmsj").innerHTML = "las contraseñas no coinciden";
+                  p = false;
+                }
+              } else {
+                document.getElementById("passmsj").innerHTML = "minimo 6 caracteres";
+                sing.attr('disabled', 'true');
+              } // activar boton 
+
+
+              if (p == true && u == true && pin.val().length > 3) {
+                sing.removeAttr('disabled');
+              } else {
+                sing.attr('disabled', 'true');
+              }
+            });
           }
-        } else {
-          document.getElementById("vpassmsj").innerHTML = "";
-        }
-
-        if (p == true && u == true && pin.val() != "") {
-          $('#singup').removeAttr('disabled');
-        } else {
-          $('#singup').attr('disabled', 'true');
-        }
+        });
+      } else if (user.val().length == 0) {
+        document.getElementById("msjverify").innerHTML = "";
+        pass.attr('disabled', 'true');
+        vpass.attr('disabled', 'true');
+        pin.attr('disabled', 'true');
+        cheki.attr('disabled', 'true');
+        sing.attr('disabled', 'true');
+        u = false;
+      } else {
+        document.getElementById("msjverify").innerHTML = "minimo 5 caracteres";
+        pass.attr('disabled', 'true');
+        vpass.attr('disabled', 'true');
+        pin.attr('disabled', 'true');
+        cheki.attr('disabled', 'true');
+        sing.attr('disabled', 'true');
+        u = false;
       }
-    });
+    } else {
+      document.getElementById("msjverify").innerHTML = "no use caracteres especiales por favor";
+      u = false;
+      pass.attr('disabled', 'true');
+      vpass.attr('disabled', 'true');
+      pin.attr('disabled', 'true');
+      cheki.attr('disabled', 'true');
+      sing.attr('disabled', 'true');
+    }
   });
 }); //SWITCHVALIDATION
 
@@ -113,15 +157,17 @@ $(document).ready(function () {
                         document.querySelector("#flexSwitch").checked = true;
                         document.getElementById("pinMsj").innerText = " vericacion correcta";
                         document.getElementById("pinMsj").style.color = "green";
+                        $('.bg-box').attr('style', 'border-color: green; box-shadow: 0 0 0 0.055rem green;');
                         setTimeout(function () {
                           panel.close();
-                        }, 2000);
+                        }, 1500);
                         break;
 
                       case "pin.error":
                         document.querySelector("#flexSwitch").checked = false;
                         document.getElementById("pinMsj").innerText = "pin incorrecto, intente otra vez";
                         document.getElementById("pinMsj").style.color = "red";
+                        $('.bg-box').attr('style', 'border-color: red; box-shadow: 0 0 0 0.055rem rgba(255, 0, 0, 1);');
                         break;
 
                       default:

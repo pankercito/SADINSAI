@@ -45,7 +45,7 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
                         } else {
                             $sql2 = $conn->query("UPDATE solicitudes SET apr_estado = '1' WHERE id_solicitud = '$id'");
                             $location[] = [
-                                'redirec' => 'perfil.php?perfil=' . encriptar($precarInf['ci_arch_pre']) . '&parce=true',
+                                'redirec' => 'perfil.php?perfil=' . encriptar($dat['ci_pre']) . '&parce=true',
                                 'estado' => 'succes.personal.ingres'
                             ];
                             echo json_encode($location);
@@ -155,8 +155,8 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
                         $size = $precarInf['size_pre'];
                         $tipo = $precarInf['tipo_pre'];
 
-                        $sql = $conn->query("INSERT INTO archidata (id_archivo, ci_arch, d_archivo, nombre_arch, nota, size, tipo_arch, ubicacion_fis, responsable) 
-                                                            VALUES ('$id', '$ci', '$dire', '$note', '$taken', '$size', '$tipo', 2, null)");
+                        $sql = $conn->query("INSERT INTO archidata (id_archivo, ci_arch, d_archivo, nombre_arch, nota, size, tipo_arch, ubicacion_fis, responsable, delete_arch) 
+                                                            VALUES ('$id', '$ci', '$dire', '$note', '$taken', '$size', '$tipo', 2, 0, 0)");
 
                         if ($sql == true) {
                             $sql2 = $conn->query("UPDATE solicitudes SET apr_estado = '1' WHERE id_solicitud = '$id'");

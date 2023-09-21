@@ -13,6 +13,7 @@ $SetCi = $personal->getCi();
 $SetFecha = $personal->getFecha();
 $SetGrado = $personal->getGrado();
 $SetSexo = $personal->getSexo();
+$SetIdCargo = $personal->getIdCargo();
 $SetCargo = $personal->getCargo();
 $SetPhone = $personal->getTelefono();
 $SetEmail = $personal->getEmail();

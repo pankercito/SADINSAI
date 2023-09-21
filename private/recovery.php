@@ -13,6 +13,7 @@
                     autocomplete="off">
                 <small id="mensajeCi" class="form-text text-muted">ingrese su numero de cedula</small>
                 <button class="consul btn btn-primary" id="verify">consultar</button>
+                <a href="../index.php" class="mt-3 col-sm-5 mx-auto btn btn" >inicio de sesion</a>
             </form>
         </div>
     </div>

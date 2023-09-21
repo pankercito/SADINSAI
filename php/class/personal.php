@@ -52,6 +52,7 @@ class Personal
                                            INNER JOIN estados e ON p.id_estado = e.id_estado
                                            INNER JOIN ciudades c ON p.id_ciudad = c.id_ciudad
                                            INNER JOIN sedes s ON p.sede_id = s.sede_id
+                                           INNER JOIN cargo g ON g.id_cargo = p.cargo
                                            WHERE p.ci = $pCi");
 
             $count_results = mysqli_num_rows($cnce);
@@ -74,9 +75,10 @@ class Personal
                 $this->idCiudad = $data['id_ciudad'];
                 $this->sede = $data['nombre_sede'];
                 $this->idSede = $data['sede_id'];
-                $this->Cargo = $data['cargo'];
+                $this->Cargo = $data['cargo_nombre'];
+                $this->idCargo = $data['cargo'];
                 $this->fecha = $data['fecha_nac'];
-                $this->sexo = $data['sexo'];
+                $this->sexo = strtolower($data['sexo']);
                 $this->grado = $data['grado_ac'];
             } else {
                 $this->nombre = "Sin datos";
@@ -91,6 +93,7 @@ class Personal
                 $this->sede = "Sin datos";
                 $this->idSede = "Sin datos";
                 $this->Cargo = "Sin datos";
+                $this->iCargo = "Sin datos";
                 $this->fecha = "Sin datos";
                 $this->sexo = "Sin datos";
                 $this->grado = "Sin datos";
@@ -109,8 +112,9 @@ class Personal
             $this->sede = "Sin datos";
             $this->idSede = "Sin datos";
             $this->Cargo = "Sin datos";
-            $this->fecha ="Sin datos";
-            $this->sexo ="Sin datos";
+            $this->iCargo = "Sin datos";
+            $this->fecha = "Sin datos";
+            $this->sexo = "Sin datos";
             $this->grado = "Sin datos";
         }
         $this->connec->close();
@@ -205,6 +209,13 @@ class Personal
     public function getCargo()
     {
         return $this->Cargo;
+    }
+    /**
+     * @return mixed|string ID cargo
+     */
+    public function getIdCargo()
+    {
+        return $this->idCargo;
     }
 
     /**

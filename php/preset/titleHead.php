@@ -7,8 +7,9 @@ include('../php/function/fHead.php');
 // Guardar el nombre de los URL *Direccion* => *Nombre que tendra*
 $titles = [
     'perfil' => 'perfil',
-    '/sadinsai/public/principal.php' => 'inicio',
-    '/sadinsai/public/perfil.php' => 'perfil',
+    '/sadinsai/public/principal.php' => 'Inicio',
+    '/sadinsai/private/recovery.php' => 'Recuperacion de Contrase&nacute;a',
+    '/sadinsai/public/perfil.php' => 'Perfil',
     '/sadinsai/public/estados.php' => 'Personal',
     '/sadinsai/public/anadir.php' => 'A&ntilde;adir',
     '/sadinsai/public/solicitudes.php' => 'Solicitudes',

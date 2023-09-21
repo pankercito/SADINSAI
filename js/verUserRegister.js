@@ -4,6 +4,9 @@ var table = $('#table').DataTable({
         url: " ../php/preset/viewRegister.php",
         dataSrc: 'data'
     },
+    order: [
+        [4, 'asc']
+    ],
     language: {
         "decimal": "",
         "emptyTable": "No hay información",
