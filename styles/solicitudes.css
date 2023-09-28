@@ -1,19 +1,12 @@
-/*recolor a footer y croma */
-.croma.col-lg-12.col-ms-12 {
-    background-color: var(--bg-color-principal2);
-}
-#cena {
-    background-color: var(--bg-color-principal2);
-}
-/**************************************************/
-
 .estructur-conten {
     margin: 2%;
     margin-top: 1.5rem;
 }
+
 .estructur-solicitudes {
     margin: 1% 0;
 }
+
 .conten {
     position: -webkit-sticky;
     position: sticky;
@@ -22,17 +15,20 @@
     background-color: var(--bg-conten-color2);
     text-align: center;
     height: 11rem;
-}.n-estructure.col-lg-9 {
-    background-color: var(--bg-conten-color2);
-    /* padding: 10px; */
-    padding: 0 0rem 0  2rem;
 }
+
+.n-estructure.col-lg-9 {
+    padding: 0 0rem 0 2rem;
+}
+
 .ramas {
     margin: 4rem 7.5rem 0px 0;
 }
+
 .form-floating {
     margin: 0rem 0 1rem;
 }
+
 input#floatingMotiv {
     width: 100%;
     min-height: 1px;
@@ -40,6 +36,7 @@ input#floatingMotiv {
     padding-left: 8px;
     padding-bottom: 14px;
 }
+
 .form-floating>label {
     padding: 7px 0 0 7px;
     height: 78%;
@@ -52,53 +49,83 @@ input#floatingMotiv {
 
 div#notificacion {
     position: fixed;
+    display: flex;
     float: left;
-    margin: -37rem 0rem -1rem -125rem;
+    margin: 1rem;
     background: #ffc107;
+    right: 0;
+    bottom: 0;
+    margin-right: -125rem;
     font-size: 14px;
     padding: 10px;
     font-weight: 600;
     width: 20rem;
     z-index: 116;
-    height: 3rem;
-    border-radius: 0 20px 20px;
+    height: 4rem;
+    border-radius: 10px 10px 0;
     -webkit-transition: all 0.8s;
     -moz-transition: all 0.8s;
     -mos-transition: all 0.8s;
     -o-transition: all 0.8s;
     transition: all 0.8s;
+    align-items: center;
+    justify-content: center;
 }
+
 a.alert.alert-success {
     padding: 12px;
     margin: 0;
     font-weight: 700;
     color: #369321;
 }
+
 a.alert.alert-danger {
     font-weight: 700;
     color: #cb3434;
     margin: 0;
     padding: 12px;
 }
+
 a.alert.alert-dark {
     font-weight: 700;
     color: #7e7e7e;
     margin: 0;
     padding: 12px;
 }
+
 input#adminSearch {
     width: 420%;
 }
+
 input#userSearch {
     width: 400%;
     margin-left: -9.5em;
 }
+
 span.jconfirm-title {
     margin: 0 0 0 5%;
 }
+
 .form-check {
     margin: 3%;
 }
+
 a.aprState.alert.alert-secondary {
     cursor: pointer;
+    margin: 0;
+}
+
+p.por.fw-bold {
+    font-size: 14px;
+    margin: 10px 0 0;
+}
+
+select.filterE {
+    border-radius: 5px;
+    height: 2.5rem;
+    padding: 0 1rem;
+}
+
+label.rat {
+    height: 2.5rem;
 }

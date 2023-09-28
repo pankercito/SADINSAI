@@ -1,0 +1,51 @@
+.d-flex {
+    display: flex !important;
+    justify-content: center;
+}
+
+button.consul.btn.btn-primary {
+    margin: 3rem auto .5rem;
+    height: 2.55rem;
+}
+
+h5.text-center {
+    margin: 0rem 1rem 2rem;
+}
+
+input#ci {
+    width: auto;
+    margin: 0 1rem 0;
+}
+
+.ci {
+    margin: 0 1rem 0;
+}
+
+small#mensajeCi {
+    margin: 0 1rem 0;
+}
+
+.jconfirm-title-c {
+    text-align: center;
+}
+
+.fless.col-lg-5 {
+    display: flex;
+    flex-direction: column;
+    background: #e3e3e3;
+    margin: 10rem 5rem 0;
+    width: 21rem;
+    padding: 2rem;
+    box-shadow: 0 1px 7px 0px #1e2022 !important;
+    border-radius: 10px;
+    margin-right: auto !important;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.reco {
+    margin: 2rem;
+}

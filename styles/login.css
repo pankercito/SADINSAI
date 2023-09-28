@@ -1,11 +1,25 @@
-#cena { /*ACOMODADOR CINTILLO*/
-    position: fixed;
-    border-color: none;
-    background: none;
-    height: 60px;
-    left: 0;
-    bottom: 0;
-    margin-top: 10%;
-    width: 100%;
+img.mx-auto {
+    height: 75px;
+    width: auto;
 }
 
+.sadin{
+    margin: 0rem 0 0 0;
+}
+.sadin img{ /*TITULO DEL FONDO*/
+    max-width: 120px;
+    max-height: 120px;
+    display: block;
+    margin: 4rem auto -4rem;
+}
+
+img.insai {
+    right: 0 !important;
+    position: absolute;
+    width: 75px;
+    margin: -35.4rem 1.5rem 0rem 0rem;
+}
+
+.col-lg-12 {
+    padding: 2rem;
+}

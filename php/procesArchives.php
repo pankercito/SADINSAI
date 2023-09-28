@@ -12,7 +12,7 @@ $conn = new Conexion();
 $taken = $conn->real_escape( $_POST["nameArchive"]);
 $tipeArch = $conn->real_escape($_POST["gestionArch"]);
 $ci = $conn->real_escape(desencriptar($_POST["ciArch"]));
-$note = $conn->real_escape(remover_acentos($_POST["textArchive"]));
+$note = $conn->real_escape(cor_acentos($_POST["textArchive"]));
 $carion = $_FILES["inpArch"]["name"];
 $arch = $_FILES["inpArch"]["tmp_name"];
 
@@ -47,9 +47,7 @@ if (moveFile($arch, $folDestino, $nombreArch) == true) {//mover archivos a la ru
 
     if ($conn->query($sql) && $conn->query($sql1)) {
         echo "success";
-
     } else {
-
         echo "error";
     }
 

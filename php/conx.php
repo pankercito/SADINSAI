@@ -18,8 +18,7 @@ class Conexion
      */
     public function query($query)
     {
-        $a = $this->connec->query($query);
-        return $a;
+       return  $this->connec->query($query);
     }
     /**
      * Escapa texto para evitar inyeciones por input
@@ -29,5 +28,22 @@ class Conexion
     public function real_escape($texto)
     {
         return mysqli_real_escape_string($this->connec, $texto);
+    }
+
+    /**
+     * cerrar concexion con base de datos 
+     * @param mixed $conn es conexion 
+     * @return bool mysqli_result 
+     */
+    public function close(){
+        return mysqli_close($this->connec);
+    }
+
+    /**
+     * Devuelve numero de filas afectadas por la ultima consulta
+     * @return int|string
+     */
+    public function affected_rows(){
+        return mysqli_affected_rows($this->connec);
     }
 }

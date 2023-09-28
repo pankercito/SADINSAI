@@ -1,9 +1,9 @@
-div.perfil{
-    background-color: rgb(196, 255, 226);
+div.perfil {
+    background-color: #ffffffde;
     border-radius: 10px;
     border: none;
     padding: 10px 20px 10px 10px;
-    Width: 90%; 
+    Width: 90%;
     height: 100%;
     text-align: center;
     margin: auto;
@@ -20,53 +20,43 @@ div.perfil{
     display: block;
     font-size: large;
     font-weight: var(--font-semibold);
-    margin-top: -1rem;
+    /* margin-top: -1rem; */
 }
+
 div.perfil p {
     font-size: 15px;
     font-weight: 400;
 }
-div.perfil.ptittle{
+
+div.perfil.ptittle {
     font-size: 18px;
     font-weight: 600;
 }
-.plist1.row {
-    margin-left: 20%;
-    margin-top: 6%;
-    margin-bottom: 6%;
-    width: 10rem;
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: baseline;
-    flex-direction: row;
-}
-.plist2.row {
-    width: 12rem;
-    display: flex;
-    flex-direction: row;
-    align-items: baseline;
-    flex-wrap: nowrap;
-    margin-left: -3%;
-}
+
 i.bi.bi-person-square {
-    position: absolute;
-    margin-top: 1.4rem;
-    margin-left: -31.5rem;
-    font-size: 8.5rem;
+    font-size: 8rem;
 }
-button#editar {
-    margin: 1rem 0;
-    width: 50%;
-    height: 2.5rem;
-}
+
 a.pnomina.btn.btn-primary {
-    width: 50%;
+    width: 55%;
     height: 2.5rem;
 }
+
 p {
     font-size: 18px;
 }
+
 #ptittle {
     font-size: 20px;
     font-weight: 600;
+}
+
+.pedit{
+    margin: .5rem 0 0;
+    height: 3rem !important;
+    width: 10rem !important;
+}
+
+.neg{
+    color: black !important;
 }

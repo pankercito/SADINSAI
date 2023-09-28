@@ -1,8 +1,8 @@
 // Definir la duración de la sesión en segundos
-var duracion_sesion = 600; 
+var duracion_sesion = 300; 
 
 // Definir la duración del tiempo de advertencia en segundos
-var duracion_advertencia = 589;
+var duracion_advertencia = 289;
 
 // Función para comprobar el estado de la sesión
 function comprobarSesion() {
@@ -30,6 +30,7 @@ function comprobarSesion() {
   // Enviar la solicitud
   xhr.send();
 }
+
 //funcion cerrar sesion
 function cerrarSesion() {
   fetch('../php/cerrarSesion.php', {

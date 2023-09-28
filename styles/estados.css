@@ -1,32 +1,37 @@
 .grid-containerr>div {
   background-color: rgba(51, 51, 51, 0.205);
   text-align: center;
-  padding: 20px 0;
-  font-size: 30px;
+  padding: 1rem;
+  font-size: 1rem;
+  border-radius: 10px;
 }
+
 .estructur-conten {
   margin: 2%;
   margin-top: 1.5rem;
 }
+
 .conten {
   margin: 0 0 1rem;
   font-size: 20px;
 }
+
 .sot.col-lg-5 {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
 }
+
 .states {
   margin-top: 1rem;
 }
-.grid-containerr  .row{
+
+.grid-containerr .row {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
 }
+
 p.n-inf {
   text-align: start;
   font-size: 15px;
@@ -34,12 +39,64 @@ p.n-inf {
   font-weight: 600;
   color: #4e4c4c;
 }
+
 input#estadosSearch {
   border: none;
   border-radius: 3px;
   width: auto;
   margin: 1rem 0;
 }
+
 table#example {
   font-size: 16px;
+}
+
+.selectEts.d-flex {
+  margin: 2rem 0 -2.59rem 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+a.aStates {
+  text-decoration: none;
+  color: #212529;
+}
+
+label.form-label {
+  margin: 0 0 0.5rem 1rem;
+}
+
+tr {
+  vertical-align: -webkit-baseline-middle;
+}
+
+th {
+  text-align: center;
+}
+
+.sot {
+  margin: 0 auto;
+  padding: 1rem 0.5rem 0 2rem;
+}
+
+select.filterE {
+  height: 2rem;
+  background: #a6ffad;
+  border: none;
+  padding: 0 1rem;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+select.filter option:hover {
+  background: #ff0000e6;
+}
+
+label {
+  background: #f2f0f5;
+  padding: 5px 1rem;
+  border-radius: 5px;
+}
+div#example_info {
+  color: #f2f2f2;
 }

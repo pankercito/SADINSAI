@@ -1,17 +1,16 @@
 <div class="tablesoli">
-    <table class="admin-table table table-striped table-class" id="table-id">	
+    <table class="admin-table table table-striped table-class" id="table">
         <thead>
             <tr>
                 <th>Solicitud</th>
                 <th>Emisor</th>
-                <th>Para</th>
                 <th>Fecha</th>
-                <th>Motivo</th>
+                <th>Tipo</th>
+                <th>Detalles</th>
                 <th>Acci&oacute;n</th>
             </tr>
         </thead>
-        <tbody>
-            <?php include('../php/preset/viewSolicitudesAdmin.php') ?>
-        </tbody>
     </table>
 </div>
+<script src="../js/tablaAdmin.js"></script>
+<script src="../js/solicitudes.js"></script>

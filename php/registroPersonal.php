@@ -6,18 +6,21 @@ include("function/removerAcentos.php");
 
 $conn = new Conexion();
 
-$cedula = $_POST['ci'];
-$taken=  strtoupper(remover_acentos($_POST['name']));
-$apellido=  strtoupper(remover_acentos($_POST['apellido']));
-$email =  strtoupper(remover_acentos($_POST['email']));
-$direccion =  strtoupper(remover_acentos($_POST['direccion']));
-$phone = $_POST['telefono'];
-$estado = $_POST['estado'];
-$ciudad = $_POST['ciudad'];
-$sede = $_POST['sede'];
+$cedula = $conn->real_escape($_POST['ci']);
+$nombre =  strtoupper(cor_acentos($_POST['name']));
+$apellido =  strtoupper(cor_acentos($_POST['apellido']));
+$sexo = $conn->real_escape($_POST['sexo']);
+$nac = $conn->real_escape($_POST['edad']);
+$grado = $conn->real_escape($_POST['grado_academico']);
+$email =  strtoupper(cor_acentos($_POST['email']));
+$direccion =  strtoupper(cor_acentos($_POST['direccion']));
+$phone = $conn->real_escape($_POST['telefono']);
+$estado = $conn->real_escape($_POST['estado']);
+$ciudad = $conn->real_escape($_POST['ciudad']);
+$sede = $conn->real_escape($_POST['sede']);
 
-$correr = "INSERT INTO personal (ci, nombre, apellido, id_estado, id_ciudad, sede_id, direccion, email, telefono) 
-    VALUES ('$cedula','$taken','$apellido', '$estado', '$ciudad', '$sede', '$direccion', '$email', '$phone')";
+$correr = "INSERT INTO `personal` (`ci`, `nombre`, `apellido`, `grado_ac`, `fecha_nac`, `sexo`, `id_estado`, `id_ciudad`, `sede_id`, `direccion`, `email`, `telefono`, `cargo`) 
+                        VALUES ('$cedula', '$nombre ', '$apellido', '$sexo', '$nac', '$grado', '$estado', '$ciudad', '$sede', '$direccion', '$emai ', '$phone', '')";
 
 $proceso=  $conn->query( $correr);
 

@@ -5,10 +5,10 @@ include("php/function/idGenerador.php");
 include("php/conx.php");
 
 // Escapar los caracteres especiales
-$taken = mysqli_real_escape_string($connec, remover_acentos($_POST["nameArchive"]));
+$taken = mysqli_real_escape_string($connec, cor_acentos($_POST["nameArchive"]));
 $tipeArch = mysqli_real_escape_string($connec, $_POST["gestionArch"]);
 $ci = mysqli_real_escape_string($connec, $_POST["ciArch"]);
-$note = mysqli_real_escape_string($connec, remover_acentos($_POST["textArchive"]));
+$note = mysqli_real_escape_string($connec, cor_acentos($_POST["textArchive"]));
 $carion = basename($_FILES["inpArch"]["name"]);
 
 // Obtener la ruta de la carpeta

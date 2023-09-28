@@ -5,12 +5,14 @@
  * @param string $user ID de usuario
  * @return
  */
-function initSesion($user){
+function initSesion($user)
+{
     $conn = new Conexion;
     $ssn = $conn->query("UPDATE registro SET sesion = '1' WHERE registro.id_usuario = $user");
-    if ($ssn){
+    $conn->close();
+    if ($ssn) {
         return true;
-    } else{
+    } else {
         return false;
     }
 }
@@ -20,12 +22,14 @@ function initSesion($user){
  * @param string $user ID de usuario
  * @return
  */
-function outSesion($user){
+function outSesion($user)
+{
     $conn = new Conexion;
     $ssn = $conn->query("UPDATE registro SET sesion = '0' WHERE registro.id_usuario = $user");
-    if ($ssn){
+    $conn->close();
+    if ($ssn) {
         return true;
-    } else{
+    } else {
         return false;
     }
 }

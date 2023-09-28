@@ -1,0 +1,50 @@
+.form-masked-pin+.bg-box-group .bg-box {
+    width: 14%;
+    height: 65px;
+    margin-top: -65px;
+    display: block;
+    border-radius: 3px;
+    border: 1px solid #777;
+    background: #fff;
+}
+
+.form-masked-pin::selection {
+    background: transparent;
+}
+
+.form-masked-pin::-moz-selection {
+    background: transparent;
+}
+
+input.form-masked-pin::-webkit-outer-spin-button,
+input.form-masked-pin::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.form-masked-pin+.bg-box-group .bg-box {
+    width: 14%;
+    height: 47px;
+    margin: -56px 0.8rem 0;
+    display: block;
+    border-radius: 3px;
+    border: 1px solid #777;
+    background: #f3f3f3;
+}
+
+input.form-masked-pin {
+    width: 295px;
+    height: 65px;
+    overflow: hidden;
+    font-size: 2rem;
+    text-align: start;
+    letter-spacing: 3.5rem;
+    border: none !important;
+    background: none !important;
+    box-shadow: none !important;
+    text-indent: 3.1rem;
+    position: relative;
+    padding: 0;
+    margin: auto;
+    font-family: 'Roboto Mono', monospace;
+}

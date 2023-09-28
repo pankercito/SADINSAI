@@ -1,35 +1,50 @@
 <?php
-    require("../php/adp.php");
+require("../php/adp.php");
 ?>
 <link rel="stylesheet" href="../styles/regiform.css">
-<div class="col-lg-6">
-    <div class="conten-regisform">
-        <div class="progress " style="height: 3px; width: 30%;">
-            <div class="progress-bar bg-danger" role="progressbar"  style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <a href="javascript:history.back()" class="btn btn-secondary">Atras</a>
-        <form method="post" action="?adminregister=true" class="regisform"  name="regisform" id="rgt" require>
+<script src="../js/userCheck.js"></script>
+<div class="conten-regisform mx-auto">
+    <div class="progress my-3" style="height: 3px; width: 30%;">
+        <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0"
+            aria-valuemax="100"></div>
+    </div>
+    <a href="javascript:history.back()" class="btn btn-light">volver</a>
+    <div class="col-md-2 mx-auto mt-4">
+        <form method="post" action="?adminregister=true" class="mx-auto" name="regisform" id="rgt" require>
             <div class="form-group">
-                <legend>Usuario</legend>
-                <input class="regis1" id="user" type="text" name="user" placeholder="usuario" maxlength="30" onblur="verify_user();" required>
-                
-                <div class="msjverify" id="msjverify"></div>
+                <label for="user">usuario</label>
+                <input class="form-control" id="user" type="text" name="user" placeholder="usuario" pattern="[A-Za-z0-9]{1,15}" maxlength="12"
+                    required autocomplete="off">
+                <small class="form-text" id="msjverify"></small>
             </div>
-            <script src="../sadinsai/js/user-check.js"></script>
-            <div class="form-group">
-                <legend>Contraseña</legend>
-                <input class="regis2" type="password" name="pass" placeholder="contraseña" maxlength="12" required>
-            </div> 
-            <div class="form-group">
-                <div class="checkadmin alert alert-danger">
-                    <p>Condecer permiso Admin</p>
-                    <div class="checkform">
-                        <input type="checkbox" class="form-item" id="conditions" name="checkadmin" value="1">
-                        <label class="form-item" for="conditions"></label> 
+            <div class="form-group my-3">
+                <label for="pass">contraseña</label>
+                <input class="form-control" type="password" id="pass" name="pass" placeholder="contraseña" required
+                    autocomplete="off" disabled>
+                <small class="form-text" id="passmsj"></small>
+            </div>
+            <div class="form-group my-3">
+                <label for="vpass">verificar contraseña</label>
+                <input class="form-control" type="password" id="vpass" name="vpass" placeholder="contraseña" required
+                    autocomplete="off" disabled>
+                <small class="form-text" id="vpassmsj"></small>
+            </div>
+            <div class="form-group my-3">
+                <label for="pass">pin</label>
+                <input class="form-control" type="password" id="pin" name="pin" placeholder="pin" maxlength="4" required
+                    autocomplete="off" disabled>
+            </div>
+            <div class="form-group my-3">
+                <div class="contenSwitch">
+                    <div class="form-check form-switch">
+                        <label class="form-check-label" for="flexSwitch">Condecer permiso de Admin</label>
+                        <input class="form-check-input" name="checkadmin" type="checkbox" id="flexSwitch" value="1"
+                            disabled>
                     </div>
                 </div>
             </div>
-            <button type="submit" name="singup" class="btn btn-defaul">Registrar</button>
+            <button type="submit" id="singup" name="singup" class="btn btn-warning" disabled>Registrar</button>
         </form>
     </div>
+
 </div>

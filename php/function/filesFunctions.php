@@ -7,15 +7,11 @@
  * @param string $nombreDelArchivo nombre de alternativo || null = "sin_nombre"
  * @return bool
  */
-function moveFile($archivo, $destino, $nombreDelArchivo)
+function moveFile($archivo, $destino, $nombreDelArchivo = 'sin_nombre')
 {   
-    if ($nombreDelArchivo == ''){
-        $nombreDelArchivo = 'sin_nombre';
-    }
     // Crear carpeta sino existe
     if (!file_exists($destino)) {
         mkdir($destino, 0777, true);
-        echo "creado";
     }
     // mover archivo a su carpeta
     if (move_uploaded_file($archivo, $destino . "/" . $nombreDelArchivo)) {

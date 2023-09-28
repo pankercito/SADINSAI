@@ -2,11 +2,11 @@
 
 include('conx.php');
 
-$conn =new Conexion;
+$conn = new Conexion;
 
 if($_POST["ci"] != ""){
   // Verificación de la CI ingresada en la base de datos
-  $com = $_POST["ci"];
+  $com = $conn->real_escape($_POST["ci"]);
 
   $sql = "SELECT * FROM personal WHERE ci = $com";
 
@@ -16,6 +16,8 @@ if($_POST["ci"] != ""){
     $result =  $conn->query( $sql);
 
     if($result->num_rows> 0){
+      session_start();
+      $_SESSION["recoveryCi"] = $com;
       echo "¡La CI ingresada ya está registrada!";//esta en ambos
     }else{
       echo "true";//no esta en registro pero si en personal

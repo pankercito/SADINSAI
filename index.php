@@ -1,68 +1,73 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <!--TITULO DE LA PAGINA-->
     <title>SADINSAI | Inicio de Sesi&oacute;n</title>
-    
+
     <!--HOJAS DE ESTILO/BOOTSTRAP-->
-    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <script src="resources/import/jquery/jquery-3.6.0.js"></script> <!--js jQuery -->
+    <script src="resources/import/jquery/jquery-3.6.0.min.js"></script> <!--js jQuery -->
+    <link href="resources/import/jQuery-DataTables/jquery.dataTables.min.css" rel="stylesheet">
+    <!--js jQuery DataTables -->
+    <script src="resources/import/jQuery-DataTables/jquery.dataTables.min.js"></script> <!--js jQuery DataTables-->
+    <link href="resources/import/jQuery-DataTables/themes/Semantic-UI/dataTables.semanticui.min.css" rel="stylesheet">
+    <!--js jQuery DataTables SEMANTIC UI -->
+    <script src="resources/import/jQuery-DataTables/themes/Semantic-UI/dataTables.semanticui.min.js"></script>
+    <!--js jQuery DataTables SEMANTIC UI -->
+    <link href="resources/import/jQuery-DataTables/themes/Semantic-UI/semantic.min.css" rel="stylesheet">
+    <!--js jQuery DataTables SEMANTIC UI -->
+    <script src="resources/import/jQuery-DataTables/themes/Semantic-UI/semantic.min.js"></script>
+    <!--js jQuery DataTables SEMANTIC UI -->
+    <script src="resources/import/jQuery-Confirm/jquery-confirm.min.js"></script> <!--js jQuery Confirm -->
+    <link href="resources/import/jQuery-Confirm/jquery-confirm.min.css" rel="stylesheet"> <!--js jQuery Confirm -->
+    <link href="resources/import/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/import/Bootstrap/font/bootstrap-icons.css">
     <link rel="stylesheet" href="styles/buttomlogin.css">
     <link rel="shorcut icon" href="resources/faviconverde.png">
     <link rel="stylesheet" href="styles/background.css">
-    <link rel="stylesheet" href="styles/body.css">
-</head>    
+    <link rel="stylesheet" href="styles/login.css">
+</head>
 
-<body  class="logged-in env-production page-responsive" style="word-wrap: break-word;">
-
-<link rel="stylesheet" href="styles/login.css">
-
-<div class="col-lg-12">
-    <div class="sadin"> 
-        <img src="resources/sadinverde.png">
-    </div>
-</div>
-    
-<section class="col-lg-12 "><!--seccion de login-->
-    <form action="../sadinsai/php/validation.php" method="post"> <!---ACCION DEL FORMULADIO-->
-        <div id="login-box">
-            <p>INICIO DE SESI&Oacute;N</p>
-            <div class="form">
-                <div class="item">
-                    <!--SE UTILIZA PARA CASILLAS DE NOMBRE DE USUARIO-->
-                    <i class="bi bi-person-fill"></i>
-                    <input type="text" placeholder="Usuario" name="userlg" required>
-                </div>
-                <div class="item"> 
-                    <i class="bi bi-input-cursor"></i>
-                    <input type="password" placeholder="Contrase&ntilde;a" name="passlg" required>
-                </div>
-                <?php 
-                    require ("php/preset/fallo.php");
-                ?>
-                <button type="submit" name="login" class="btn btn-link btn-default">Iniciar</button>
-            </div>
-            <!--PAGINA DE RECUPERACION
-            <div class="parte-abajo">
-                <a href="AQUI VA LA PAGINAS DE RECUPERACION" class="button">Olvide mi Contrase&ntilde;a</a> 
-            </div>-->
+<body class="logged-in env-production page-responsive" style="word-wrap: break-word;">
+    <div class="col-lg-12">
+        <div class="sadin">
+            <img src="resources/sadinverde.png">
         </div>
-    </form>
-</section>
-<section class="footer col-lg-12"> 
- <div id="cena">
-    <div class="ins">
-        <img src="resources/ins.png" alt="insailogo">
-        <hr> </hr>
     </div>
-    <div class="bicent">     
-         <img src="resources/sintillo.jpg" alt="bicentenario">
-    </div>
- </div>
-</section>
+
+    <section class="col-lg-12 "><!--seccion de login-->
+        <form action="../sadinsai/php/validation.php" method="post"> <!---ACCION DEL FORMULADIO-->
+            <div id="login-box">
+                <p>INICIO DE SESI&Oacute;N</p>
+                <div class="form">
+                    <div class="item">
+                        <!--SE UTILIZA PARA CASILLAS DE NOMBRE DE USUARIO-->
+                        <i class="bi bi-person-fill"></i>
+                        <input type="text" placeholder="Usuario" name="userlg" required>
+                    </div>
+                    <div class="item">
+                        <i class="bi bi-input-cursor"></i>
+                        <input type="password" placeholder="Contrase&ntilde;a" name="passlg" required>
+                    </div>
+                    <?php
+                    require("php/preset/fallo.php");
+                    ?>
+                    <button type="submit" name="login" class="btn btn-link btn-default">iniciar</button>
+                </div>
+                <!-- PAGINA DE RECUPERACION -->
+                <div class="parte-abajo">
+                    <a href="private/recovery.php" class="button">Olvide mi Contrase&ntilde;a</a>
+                </div>
+            </div>
+        </form>
+    </section>
+    <section>
+        <div class="row justify-conten-center">
+            <div class="mx-auto">
+                <img src="resources/ins.png" class="insai" alt="insailogo">
+            </div>
+        </div>
+    </section>
 </body>
 </html>

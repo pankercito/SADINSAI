@@ -1,26 +1,15 @@
 <?php
 
-$regisview = $conn->query("SELECT * FROM registro r INNER JOIN personal p ON r.ci = p.ci");
-    
-$count_results = mysqli_num_rows($regisview);
+include('../conx.php');
+include("../function/criptCodes.php");
+include("../class/auditoria.php");
 
-//Si ha resultados
+session_start();
 
-if ($count_results > 0) {
-    //Muestra la cantidad de usuarios    
-    echo '<h2>Se han registrado '.$count_results.' usuarios.</h2>';
-    
-    while ($v = mysqli_fetch_array($regisview)){
+$yo = $_SESSION['sesion'];
 
-        //Lista de los usuarios
-        echo '<tr>';
-        echo '<td><a id="vrname" href="principal.php?perfil='.encriptar($v['ci']).'&parce=true">'.strtoupper(strtolower($v['user'])).'</a></td>';
-        echo '<td><a>'.ucwords(strtolower($v['nombre'])).'</a></td>';
-        echo '<td><a>'.ucwords(strtolower($v['apellido'])).'</a></td>';
-        echo '<td><a>'.$v['ci'].'</a></td>';
-        echo '</tr>';
-    }
-}else {
-        //Si no hay registros encontrados
-        echo '<h2>No se encuentran resultados con los criterios de búsqueda.</h2>';
-    }
+$auditoria = new auditoria();
+
+$data = $auditoria->users($yo);
+
+echo json_encode($data);
