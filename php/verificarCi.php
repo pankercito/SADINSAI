@@ -2,7 +2,7 @@
 
 include('conx.php');
 
-$conn =new Conexion;
+$conn = new Conexion;
 
 if($_POST["ci"] != ""){
   // Verificación de la CI ingresada en la base de datos

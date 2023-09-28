@@ -3,25 +3,23 @@ img.mx-auto {
     width: auto;
 }
 
-
-body {
-    overflow-y: hidden;
-  }
-
 .sadin{
-    margin: 3rem 0 0 0;
+    margin: 0rem 0 0 0;
 }
 .sadin img{ /*TITULO DEL FONDO*/
     max-width: 120px;
     max-height: 120px;
     display: block;
-    margin-left: auto;    
-    margin-right: auto;
+    margin: 4rem auto -4rem;
 }
 
-.footer img {
+img.insai {
     right: 0 !important;
     position: absolute;
     width: 75px;
-    margin: -30.4rem 1.5rem 0rem 0rem;
+    margin: -35.4rem 1.5rem 0rem 0rem;
+}
+
+.col-lg-12 {
+    padding: 2rem;
 }

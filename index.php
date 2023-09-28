@@ -62,10 +62,10 @@
             </div>
         </form>
     </section>
-    <section class="footer col-lg-12">
+    <section>
         <div class="row justify-conten-center">
             <div class="mx-auto">
-                <img src="resources/ins.png" alt="insailogo">
+                <img src="resources/ins.png" class="insai" alt="insailogo">
             </div>
         </div>
     </section>

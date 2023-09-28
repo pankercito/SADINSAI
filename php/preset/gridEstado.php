@@ -20,13 +20,13 @@ if ($count > 0) {
         //Lista del personal
         $v = mysqli_fetch_array($sql);
         echo '<tr>';
-        echo '<td>' . strtoupper(remover_acentos($v['estado'])) . '</td>';
-        echo '<td>' . remover_acentos($v['nombre_sede']) . '</td>';
-        echo '<td><a class="aStates" href="perfil.php?perfil=' . encriptar($v['ci']) . '">' . remover_acentos($v['nombre']) . '</a></td>';
-        echo '<td>' . remover_acentos($v['apellido']) . '</td>';
-        echo '<td>' . remover_acentos($v['ci']) . '</td>';
-        echo '<td>' . remover_acentos($v['telefono']) . '</td>';
-        echo '<td>' . remover_acentos($v['cargo']) . '</td>';
+        echo '<td>' . strtoupper(cor_acentos($v['estado'])) . '</td>';
+        echo '<td>' . cor_acentos($v['nombre_sede']) . '</td>';
+        echo '<td><a class="aStates" href="perfil.php?perfil=' . encriptar($v['ci']) . '">' . cor_acentos($v['nombre']) . '</a></td>';
+        echo '<td>' . cor_acentos($v['apellido']) . '</td>';
+        echo '<td>' . cor_acentos($v['ci']) . '</td>';
+        echo '<td>' . cor_acentos($v['telefono']) . '</td>';
+        echo '<td>' . cor_acentos($v['cargo']) . '</td>';
         echo '</tr>';
     }
 

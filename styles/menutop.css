@@ -106,49 +106,44 @@ ul.nav.nav-list.nav-pills.navbar-right {
 
 }
 
-.form-inline {
+.searchito {
     margin-right: 0.5rem !important;
     display: flex !important;
     align-items: baseline !important;
 }
 
-.form-inline button {
+.searchito button {
     /*botones de toda la barra*/
     border: none;
     color: #312e2e;
 
 }
 
-.form-inline button:hover {
-    /*botones color*/
-}
-
-.form-inline #searchbar {
+.searchito #searchbar {
     /*buscador*/
     border: none;
     background-color: rgb(209, 209, 209);
     color: #312e2e;
+    padding: 0 2.4rem 0 1rem;
     height: 38px;
     width: 100%;
 }
 
-.form-inline #search {
-    padding-bottom: 5px;
-    height: 2.35rem;
+.searchito #search {
     margin: 0 0 0 -2.8rem;
 }
 
-.form-inline #help {
+.searchito #help {
     /*Boton ayuda*/
     background-color: rgb(209, 209, 209);
 }
 
-.form-inline #help:hover {
+.searchito #help:hover {
     /*Boton ayuda*/
     background-color: rgb(113, 218, 209);
 }
 
-.form-inline #close {
+.searchito #close {
     /*boton de salida*/
     background-color: rgb(209, 209, 209);
     border: none;
@@ -156,7 +151,7 @@ ul.nav.nav-list.nav-pills.navbar-right {
     width: 8rem;
 }
 
-.form-inline #close:hover {
+.searchito #close:hover {
     /*cambio d color del boton de salida*/
     background-color: #f5c6cb;
     color: red;
@@ -171,28 +166,28 @@ button.btn.btn-outline-success {
 
 }
 
-.form-inline span {
+.searchito span {
     /*separadores*/
     background-color: rgba(0, 0, 0, 0);
     border-color: none;
     border: none;
 }
 
-.form-inline button i {
+.searchito button i {
     /*logo boton*/
     font-family: sans-serif !important;
     font-style: normal !important;
     font-size: 17px !important;
 }
 
-.form-inline a i {
+.searchito a i {
     /*sepadores*/
     font-family: sans-serif;
     font-style: normal;
     font-size: 15px;
 }
 
-.form-inline a {
+.searchito a {
     /*margen*/
     font-family: sans-serif;
     font-style: normal;
@@ -219,4 +214,65 @@ button.btn.btn-outline-success {
 a.nav-link.active:hover {
     background-color: var(--color-hoverbuttom);
     color: #2e2e2eda;
+}
+
+#result {
+    display: flex;
+    position: absolute;
+    border-top: solid 1px #ffffff61;
+    color: black;
+    margin: 34px 0px 0px 0px;
+    background: #d1d1d1;
+    width: 15.67rem;
+    padding: 0.6rem 1rem 1rem;
+    z-index: 10000000;
+    border-radius: 0px 0px 6px 6px;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+}
+#resultList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: start;
+}
+
+#resultList li {
+    padding: 10px 15px;
+}
+
+#resultList li:hover {
+    background: #595959;
+    border-radius: 7px;
+}
+
+.searched {
+    text-decoration: none;
+    font-size: 12px !important;
+    color: black;
+}
+
+.searched:hover{
+    color: rgb(184, 245, 179);
+}
+
+#adminSetMsj {
+    background: #6c6c6c;
+    color: white;
+    position: absolute;
+    margin: 1.6rem 0rem 0 -7.5rem;
+    height: 1.5rem;
+    font-size: 10px;
+    padding: 2px 4px;
+}
+
+#sysAdminSetMsj{
+    background: #ff6384;
+    color: white;
+    position: absolute;
+    margin: 1.6rem 0rem 0 -7.5rem;
+    height: 1.5rem;
+    font-size: 10px;
+    padding: 2px 4px;
 }

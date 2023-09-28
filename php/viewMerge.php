@@ -85,11 +85,11 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
 
                                     echo trPrint(strtolower($precarInf['email_pre']), "Email");
 
-                                    echo trPrint(ucwords(strtolower(remover_acentos($n['estado']))), "Estado");
+                                    echo trPrint(ucwords(strtolower(cor_acentos($n['estado']))), "Estado");
 
-                                    echo trPrint(ucwords(strtolower(remover_acentos($n['ciudad']))), "Ciudad");
+                                    echo trPrint(ucwords(strtolower(cor_acentos($n['ciudad']))), "Ciudad");
 
-                                    echo trPrint(ucwords(strtolower(remover_acentos($n['sede']))), "Sede");
+                                    echo trPrint(ucwords(strtolower(cor_acentos($n['sede']))), "Sede");
 
                                     echo trPrint($precarInf['cargo_pre'], "Cargo");
 
@@ -98,7 +98,7 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
                             </table>
                         </div>
                         <style>
-                            img {
+                            .dit img {
                                 border-radius: 6px;
                                 margin: 1rem 0;
                             }
@@ -347,7 +347,7 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
                         </div>
 
                         <style>
-                            img {
+                            .dit img {
                                 border-radius: 6px;
                                 margin: 1rem 0;
                             }
@@ -383,7 +383,7 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
             $id = $conn->real_escape($_POST["idSoli"]);
 
             @$x = $conn->query("SELECT * FROM solicitudes_eliminacion_arch e WHERE id_solicitud_eliminacion = '$id'");
-            
+
             $idArch = $x->fetch_object()->id_archivo_eliminar;
 
             $verifi = $conn->query("SELECT * FROM archidata WHERE id_archivo = $idArch");
@@ -461,7 +461,7 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
                         </div>
 
                         <style>
-                            img {
+                            .dit img {
                                 border-radius: 6px;
                                 margin: 1rem 0;
                             }

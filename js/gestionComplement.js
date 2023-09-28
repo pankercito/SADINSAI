@@ -61,7 +61,7 @@ function modalcito() {
                             const read = new FileReader(e);
 
                             read.onload = function (e) {
-                                    img.src = e.target.result;
+                                img.src = e.target.result;
                             }
                             read.readAsDataURL(file);
 
@@ -101,7 +101,7 @@ function modalcito() {
 
                             // Creamos un objeto con los datos del formulario
                             var formData = new FormData(form);
-                            
+
                             // modal de confirmacion
                             $.confirm({
                                 title: false,
@@ -218,3 +218,14 @@ function modalcito() {
         }
     });
 }
+
+var tipoDarch = getQueryVariable('gestion');
+
+// ocultar agregar documentos en el area de planillas
+$(document).ready(function () {
+    if (tipoDarch == "1046") {
+        document.getElementById("tittleDoc").innerHTML = "Campos";
+        document.title = "SADINSAI | Planillas";
+    }
+
+})

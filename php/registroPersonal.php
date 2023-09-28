@@ -7,13 +7,13 @@ include("function/removerAcentos.php");
 $conn = new Conexion();
 
 $cedula = $conn->real_escape($_POST['ci']);
-$nombre =  strtoupper(remover_acentos($_POST['name']));
-$apellido =  strtoupper(remover_acentos($_POST['apellido']));
+$nombre =  strtoupper(cor_acentos($_POST['name']));
+$apellido =  strtoupper(cor_acentos($_POST['apellido']));
 $sexo = $conn->real_escape($_POST['sexo']);
 $nac = $conn->real_escape($_POST['edad']);
 $grado = $conn->real_escape($_POST['grado_academico']);
-$email =  strtoupper(remover_acentos($_POST['email']));
-$direccion =  strtoupper(remover_acentos($_POST['direccion']));
+$email =  strtoupper(cor_acentos($_POST['email']));
+$direccion =  strtoupper(cor_acentos($_POST['direccion']));
 $phone = $conn->real_escape($_POST['telefono']);
 $estado = $conn->real_escape($_POST['estado']);
 $ciudad = $conn->real_escape($_POST['ciudad']);

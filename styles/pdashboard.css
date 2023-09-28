@@ -52,3 +52,7 @@ p {
 .table {
     --bs-table-bg: #f9f9f8;
 }
+
+span.jconfirm-title {
+    margin: 0 1rem 0;
+}

@@ -6,11 +6,11 @@ if ($_POST['pin'] != "") {
     $conn = new Conexion();
 
     $user = $conn->real_escape($_POST['userId']);
-    $pin = $conn->real_escape($_POST['pin']);
+    $radio = $conn->real_escape($_POST['radio']);
 
-    switch ($pin) {
+    switch ($radio) {
         case '1':
-            $sql = $conn->query("UPDATE registro SET active = '$pin' WHERE id_usuario = '$user'");
+            $sql = $conn->query("UPDATE registro SET active = '$radio' WHERE id_usuario = '$user'");
 
             if ($sql == true) {
                 echo "success";
@@ -19,7 +19,7 @@ if ($_POST['pin'] != "") {
             }
             break;
         case '2':
-            $sql = $conn->query("UPDATE registro SET active = '$pin' WHERE id_usuario = '$user'");
+            $sql = $conn->query("UPDATE registro SET active = '$radio' WHERE id_usuario = '$user'");
             if ($sql == true) {
                 echo "success.rech";
             }else{

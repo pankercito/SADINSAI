@@ -8,6 +8,7 @@ include('../php/function/fHead.php');
 $titles = [
     'perfil' => 'perfil',
     '/sadinsai/public/principal.php' => 'Inicio',
+    '/sadinsai/public/sysAdmin.php' => 'Inicio',
     '/sadinsai/private/recovery.php' => 'Recuperacion de Contrase&nacute;a',
     '/sadinsai/public/perfil.php' => 'Perfil',
     '/sadinsai/public/estados.php' => 'Personal',
@@ -17,6 +18,11 @@ $titles = [
     '/sadinsai/public/anadir.php?users/register=true' => 'Registrar Usuarios',
     '/sadinsai/public/anadir.php?users/register-two=true' => 'Registrar Usuarios',
     '/sadinsai/public/anadir.php?form=true' => 'Agregar Personal',
+    '/sadinsai/private/planilla-1.php' => 'Documento',
+    '/sadinsai/private/planilla-2.php' => 'Documento',
+    '/sadinsai/private/planilla-3.php' => 'Documento',
+    '/sadinsai/private/planilla-4.php' => 'Documento',
+    '/sadinsai/private/planilla-5.php' => 'Documento',
 ];
 
 // URL actual sin los parámetros GET

@@ -181,7 +181,7 @@ if (isset($_POST["idSoli"])) {
                         </div>
                     </div>
                     <style>
-                        img {
+                        .dit img {
                             border-radius: 6px;
                             margin: 1rem 0;
                         }
@@ -194,7 +194,7 @@ if (isset($_POST["idSoli"])) {
             }
             break;
         case '3':
-            // ingreso de archivos
+            // eliminacion de archivos
             $id = $conn->real_escape($_POST["idSoli"]);
 
             @$x = $conn->query("SELECT * FROM solicitudes_eliminacion_arch e WHERE id_solicitud_eliminacion = '$id'");
@@ -252,7 +252,7 @@ if (isset($_POST["idSoli"])) {
                         </div>
                     </div>
                     <style>
-                        img {
+                        .dit img {
                             border-radius: 6px;
                             margin: 1rem 0;
                         }
@@ -261,7 +261,7 @@ if (isset($_POST["idSoli"])) {
 
                 <?php
             } else {
-                echo "Error al consultar datos por favor intente más tarde";
+                echo "Error al encontrar el Archivo o Archivo eliminado";
             }
             break;
 

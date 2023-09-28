@@ -28,7 +28,7 @@ if (isset($_POST['login'])) {
 
         if ($dataview['active'] == 2 || $dataview['active'] == 0) {
             $resultado = 2;
-        } 
+        }
     } else {
         $resultado = 3;
     }
@@ -68,6 +68,8 @@ if (isset($_POST['login'])) {
                 header("HTTP/1.1 302 Moved Temporarily");
                 if ($dataview['adp'] == 1) {
                     header('location:../public/principal.php');
+                } elseif ($dataview['adp'] == 2) {
+                    header('location:../public/sysAdmin.php');
                 } else {
                     header('location:../public/perfil.php?perfil=' . encriptar($_SESSION['cidelusuario']));
 

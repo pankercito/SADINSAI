@@ -19,19 +19,23 @@ function incluir($admin, $user)
 }
 
 /**
- * Esta Funcion imprime en el documento un archivo
- * dependiendo de si es Admin o Usuario
+ * Esta Funcion retorna el texto dependiendo de si es Admin, Usuario o SysAdmin
  * @param string $admin textByAdmin
  * @param string $user textByUser
- * @return void
+ * @param string $sysAdmin textBySysAdmin
+ * @return string 
  */
-function imprime($admin, $user)
+function selectPrint($admin, $user, $sysAdmin = null)
 {
     $adpval = $_SESSION['admincheck'];
 
-    if ($adpval == TRUE) {
-        echo $admin;
-    } else {
-        echo $user;
+    if ($adpval != 2) {
+        if ($adpval == TRUE) {
+            return $admin;
+        } else {
+            return $user;
+        }
+    }else {
+       return $sysAdmin;
     }
 }

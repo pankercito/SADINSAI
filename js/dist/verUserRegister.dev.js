@@ -43,7 +43,7 @@ function gestionUser(idUserd) {
           if (radio.value != 0) {
             $.ajax({
               data: {
-                "pin": radio.value,
+                "radio": radio.value,
                 "userId": idUser
               },
               type: "post",
@@ -133,8 +133,81 @@ function gestionUser(idUserd) {
   });
 }
 
-; // RECARGA DE LA TABLA AUTOMATICA CADA 3M || NUMERO EN MILISEGUNDOS
+;
 
-setInterval(function () {
-  table.ajax.reload(null, false);
-}, 300000);
+function deleteUser(idUserd) {
+  var idUser = idUserd;
+  $.confirm({
+    title: "eliminar usuario",
+    content: 'eliminara este usuario de forma permanente',
+    buttons: {
+      ac: {
+        text: "aceptar",
+        action: function action() {
+          $.ajax({
+            data: {
+              "userId": idUser
+            },
+            type: "post",
+            url: "../php/deteleUser.php",
+            beforeSend: function beforeSend() {
+              var obj = $.dialog({
+                title: false,
+                closeIcon: false,
+                // ocultar close icon.
+                content: "\n                                        <div class=\"d-flex my-3 justify-content-center\">\n                                        <div class=\"spinner-border\" role=\"status\">\n                                            <span class=\"visually-hidden\">procesando...</span>\n                                        </div>\n                                        </div>"
+              });
+              setTimeout(function () {
+                obj.close();
+              }, 501);
+            },
+            error: function error() {
+              setTimeout(function () {
+                $.dialog({
+                  title: false,
+                  content: "\n                                        <div class=\"grid text-center\" style=\"row-gap: 0; display: flex; flex-direction: column;\">\n                                            <i class=\"bi-patch-exclamation-fill\" style=\"font-size: 5rem; color: red;\"></i>\n                                            <h6  style=\"color: red;\"> Error</h6>\n                                            <span class=\"\" style=\"color: red;\" disabled>\n                                                por favor intente nuevamente\n                                            </span>\n                                        </div>"
+                });
+              }, 500);
+            },
+            success: function success(cc) {
+              setTimeout(function () {
+                if (cc == "success.dele") {
+                  $.confirm({
+                    title: '',
+                    content: " \n                                            <div class=\"grid text-center\" style=\"row-gap: 0; display: flex; flex-direction: column;\">\n                                                <i class=\"bi-check-circle\" style=\"font-size: 5rem; color: green;\"></i>\n                                                <span class=\"\" style=\"color: #008000;\" disabled>\n                                                    <span role=\"status\" style=\"color: red\">se elimino correctamente</span>\n                                                </span>\n                                            </div>",
+                    buttons: {
+                      da: {
+                        text: 'cerrar',
+                        action: function action() {
+                          var obj = $.dialog({
+                            title: false,
+                            closeIcon: false,
+                            // ocultar close icon.
+                            content: "\n                                                                <div class=\"d-flex my-3 justify-content-center\">\n                                                                <div class=\"spinner-border\" role=\"status\">\n                                                                    <span class=\"visually-hidden\">actualizando...</span>\n                                                                </div>\n                                                                </div>"
+                          });
+                          setTimeout(function () {
+                            table.ajax.reload(null, false);
+                            obj.close();
+                          }, 800);
+                        }
+                      }
+                    }
+                  });
+                } else {
+                  $.dialog({
+                    title: false,
+                    content: "\n                                            <div class=\"grid text-center\" style=\"row-gap: 0; display: flex; flex-direction: column;\">\n                                                <i class=\"bi-patch-exclamation-fill\" style=\"font-size: 5rem; color: red;\"></i>\n                                                <h6  style=\"color: red;\"> Error</h6>\n                                                <span class=\"\" style=\"color: red;\" disabled>\n                                                    por favor intente nuevamente\n                                                </span>\n                                            </div>"
+                  });
+                }
+              }, 500);
+            }
+          });
+        }
+      },
+      cl: {
+        text: "cerrar",
+        action: function action() {}
+      }
+    }
+  });
+}

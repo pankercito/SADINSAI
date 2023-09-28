@@ -44,19 +44,19 @@
                     </div>
                 </div>
                 <div class="col">
-                    <p>Informacion extra</p>
+                    <p>acciones</p>
                     <button class="pedit pnomina btn btn-primary"
                         onclick="location.replace('perfil.php?perfil=<?php echo $wci ?>');">mi perfil</button>
                     <br>
-                    <button class='pedit btn btn-warning'>generar reporte</button>
+                    <button class='pedit btn btn-warning' id="genReport">generar reporte</button>
                 </div>
             </div>
             <hr class="alert alert-light">
             <!-- stats -->
             <div class="mb-2 mt-4 row mx-1 justify-content-center">
-                <div class="bg-color-stats mx-1 d-inline-flex col-md-6 justify-content-between alert">
-                    <div class="concan">
-                        <canvas id="solicitudes"></canvas>
+                <div class="bg-color-stats mx-1 d-flex flex-wrap col-md-6 justify-content-around alert">
+                    <div class="concan text-star">
+                        <canvas id="solicitudes" class="mb-4"></canvas>
                     </div>
                     <div class="alert-content">
                         <h5>detalles de solicitudes </h5>
@@ -93,7 +93,7 @@
                     </div>
                 </div>
                 <div class="bg-color-stats col alert">
-                    <h5>ingresos diarios por usuarios</h5>
+                    <h5>inicios diarios por usuarios</h5>
                     <hr>
                     <div class="alert-content text-center ">
                         <div class="bg-color-stats table-responsive-sm">
@@ -101,7 +101,7 @@
                                 <tbody>
                                 <tbody>
                                     <?php
-                                    $r = $new->userInixStats();
+                                    $r = $new->userInixStats(date('Y-m-d'));
                                     foreach ($r as $r) {
                                         echo
                                             '<tr>
@@ -122,16 +122,80 @@
                     </div>
                 </div>
                 <div class="bg-color-stats col mx-1 alert">
-                    <h5>archivos agregados</h5>
+                    <h5>ultimos archivos agregados</h5>
                     <hr>
+                    <div class="alert-content text-center ">
+                        <div class="text-star table-responsive-sm">
+                            <table class=" table table-borderless">
+                                <tbody>
+                                    <?php
+                                    $r = $new->solicitudDetailstStats(date('y-m-d'));
+
+                                    $tipoSolic = [
+                                        "0" => "ingreso de personal",
+                                        "1" => "edicion de datos",
+                                        "2" => "ingreso de archivo",
+                                        "3" => "eliminacion de archivo"
+                                    ];
+
+                                    foreach ($r as $r) {
+                                        echo
+                                            '<tr>
+                                                <td class="text-start">
+                                                    <h6>' . $tipoSolic[$r['tipo']] . '</h6>
+                                                </td>
+                                                <td></td>
+                                                <td>
+                                                    <h6>' . $r['count'] . '</h6>
+                                                </td>
+                                            </tr>';
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="mb-2 mt-4 row mx-1 justify-content-center">
+            <!-- <div class="mb-2 mt-4 row mx-1 justify-content-center">
                 <div class="bg-color-stats col mx-1 alert">
                     <h5>movimientos de usuarios</h5>
                     <hr>
+                    <div class="text-star table-responsive-sm">
+                        <table class=" table table-borderless">
+                            <tbody>
+                                <?php
+                                $r = $new->solicitudDetailstStats(date('y-m-d'));
+
+                                $tipoSolic = [
+                                    "0" => "ingreso de personal",
+                                    "1" => "edicion de datos",
+                                    "2" => "ingreso de archivo",
+                                    "3" => "eliminacion de archivo"
+                                ];
+
+                                foreach ($r as $r) {
+                                    echo
+                                        '<tr>
+                                                <td class="text-start">
+                                                    <h6>' . $tipoSolic[$r['tipo']] . '</h6>
+                                                </td>
+                                                
+                                                <td>
+                                                    <h6> textoooooooooooooooooooooooooooooooooooooooooooooooooooooooo</h6>
+                                                </td>
+                                                <td></td>
+                                                <td>
+                                                    <h6>' . $r['count'] . '</h6>
+                                                </td>
+                                            </tr>';
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <script src="../resources/import/Chart/chart.js"></script>
         <script src="../js/dashboard.js"></script>

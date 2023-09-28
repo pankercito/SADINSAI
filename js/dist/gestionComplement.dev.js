@@ -196,3 +196,12 @@ function modalcito() {
     }
   });
 }
+
+var tipoDarch = getQueryVariable('gestion'); // ocultar agregar documentos en el area de planillas
+
+$(document).ready(function () {
+  if (tipoDarch == "1046") {
+    document.getElementById("tittleDoc").innerHTML = "Campos";
+    document.title = "SADINSAI | Planillas";
+  }
+});

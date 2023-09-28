@@ -1,6 +1,7 @@
 const dashboard = document.querySelector('#dashboard');
 const soli = document.querySelector('#solicitudes');
 
+// GRAFICO PRINCIPAL DE LINEAS
 $.ajax({
     url: "../php/dashboardDataPre.php",
     success: function (response) {
@@ -21,6 +22,7 @@ $.ajax({
     }
 })
 
+// GRAFICO DE SOLICITUDES DE PIE
 $.ajax({
     url: "../php/dashboardSolicitudesPre.php",
     success: function (response) {
@@ -35,12 +37,12 @@ $.ajax({
 
             const data = {
                 labels: [
-                 "ingreso de personal",
-                 "edicion de datos",
-                 "ingreso de archivo",
-                 "eliminacion de archivo"
+                    "ingreso de personal",
+                    "edicion de datos",
+                    "ingreso de archivo",
+                    "eliminacion de archivo"
                 ],
-                datasets:[{
+                datasets: [{
                     labels: 'reliminada',
                     data: [us, dos, tri, four],
                     backgroundColor: [
@@ -53,10 +55,17 @@ $.ajax({
             }
 
             const config = {
-                type: 'doughnut',
-                data: data
+                type: 'pie',
+                data: data,
+                responsive: true,
+                options: {
+                    legend:{
+                        
+                    }
+                }
+
             }
-            
+
             new Chart(soli, config);;
 
         } else {
@@ -64,4 +73,3 @@ $.ajax({
         }
     }
 })
-

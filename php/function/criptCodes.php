@@ -12,6 +12,7 @@ function encriptar($datoAEncriptar){
     $encriptado = openssl_encrypt($datoAEncriptar, 'aes-256-cbc', md5($passwordSave), OPENSSL_RAW_DATA, $iv);
     return rtrim(strtr(base64_encode($iv . $encriptado), '+/', '-_'), '=');
 }
+
 /**
  * Desencripta strings encriptados.
  * solo strings encriptados con -- encriptar() --

@@ -3,6 +3,7 @@
 <?php require("../layout/head.php"); ?>
 
 <?php require("../layout/navbar.php"); ?>
+<script src="../js/requerimientos.js"></script>
 <script src="../js/prestablecer.js"></script>
 
 <!--SALUDO DE BIENVENIDA-->
@@ -20,10 +21,10 @@
             </div>
             <?php require_once("../layout/editarUsuario.php"); ?>
             <div class="colunma col-md-3 mt-2" id="columna">
-                <p style="color: white; font-weight:500;">Informacion extra</p>
-                <button class="pedit btn btn-primary" href=''>generar reporte</button>
+                <p style="color: white; font-weight:500;">acciones</p>
+                <!-- <button class="pedit btn btn-primary" id="generar" onclick="reportePerfil()">generar reporte</button> -->
                 <br>
-                <button class='pedit btn btn-secondary' id="requeri">requerimientos</button>
+                <button class='pedit btn btn-secondary' id="requeri" onclick="requerido('<?php echo $SetCi?>')">requerimientos</button>
                 <br>
                 <button class='pedit btn btn-warning' id="editar">editar datos</button>
             </div>

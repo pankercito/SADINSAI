@@ -7,10 +7,8 @@ include("../conx.php");
 session_start();
 
 $conn = new Conexion();
-$idP = $_SESSION['sesion'];
 
-
-$regisview = $conn->query("SELECT * FROM solicitudes s INNER JOIN registro r ON r.id_usuario = s.id_receptor WHERE s.id_receptor = $idP ORDER BY fecha DESC");
+$regisview = $conn->query("SELECT * FROM solicitudes s INNER JOIN registro r GROUP by s.id_solicitud");
 $count_results = mysqli_num_rows($regisview);
 
 

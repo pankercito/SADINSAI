@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_URI'] == "/sadinsai/public/anadir.php?users/register=true"
 
         <div class="col-md-3 mx-1">
             <div class="fijo contenido ">
-                <p>Personal</p>
+                <p>acciones</p>
                 <div class="botones">
                     <a class="añadir btn btn-primary" type="button" href="?form=true">
                         <i class="bi bi-person-add"></i> Agregar personal

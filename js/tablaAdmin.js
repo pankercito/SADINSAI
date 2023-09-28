@@ -161,7 +161,7 @@ function aprStates(idSolis, tipoS) {
                                                                 var conten = colon[0]['estado'];
 
                                                                 setTimeout(() => {
-                                                                    if (conten == "succes.personal.retire" || conten == "succes.personal.edit" || conten == "succes.arch.ingres" || conten == "succes.arch.move") {
+                                                                    if (conten == "succes.personal.ingres" || conten == "succes.personal.edit" || conten == "succes.arch.ingres" || conten == "succes.arch.move") {
                                                                         $.confirm({
                                                                             title: 'Se acepto solicitud con exito',
                                                                             content: false,

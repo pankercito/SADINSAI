@@ -19,18 +19,16 @@ switch ($tipo) {
     case 0:
 
         $IdEm = $conn->real_escape($_SESSION['sesion']);
-        //asignar solicitud a un admin
-        $recep = asignar();
 
         //precarga
         $ciRec = $conn->real_escape($_POST['ci']);
-        $taken = $conn->real_escape(strtoupper(remover_acentos($_POST['name'])));
-        $apellido = $conn->real_escape(strtoupper(remover_acentos($_POST['apellido'])));
-        $grado = $conn->real_escape(strtoupper(remover_acentos($_POST['grado_academico'])));
-        $sexo = $conn->real_escape(strtoupper(remover_acentos($_POST['sexo'])));
+        $taken = $conn->real_escape(strtoupper(cor_acentos($_POST['name'])));
+        $apellido = $conn->real_escape(strtoupper(cor_acentos($_POST['apellido'])));
+        $grado = $conn->real_escape(strtoupper(cor_acentos($_POST['grado_academico'])));
+        $sexo = $conn->real_escape(strtoupper(cor_acentos($_POST['sexo'])));
         $fecha = $conn->real_escape($_POST['naci']);
-        $email = $conn->real_escape(strtoupper(remover_acentos($_POST['email'])));
-        $direccion = $conn->real_escape(strtoupper(remover_acentos($_POST['direccion'])));
+        $email = $conn->real_escape(strtoupper(cor_acentos($_POST['email'])));
+        $direccion = $conn->real_escape(strtoupper(cor_acentos($_POST['direccion'])));
         $phone = $conn->real_escape($_POST['telefono']);
         $estado = $_POST['estado'];
         $ciudad = $_POST['ciudad'];
@@ -49,8 +47,8 @@ switch ($tipo) {
 
             $fech = hora();
 
-            $sqlsoli = $conn->query("INSERT INTO solicitudes (id_solicitud, id_emisor, id_receptor, ci_solicitada,  fecha, apr_estado, tipo) 
-                                        VALUES ('$id_solicitud', '$IdEm', '$recep', '$ciRec', '$fech', '0', 0)");
+            $sqlsoli = $conn->query("INSERT INTO solicitudes (id_solicitud, id_emisor, ci_solicitada,  fecha, apr_estado, tipo) 
+                                        VALUES ('$id_solicitud', '$IdEm', '$ciRec', '$fech', '0', 0)");
 
             $correr = $conn->query("INSERT INTO solicitudes_precarga (id_solicitud_precarga, ci_pre, nombre_pre, apelido_pre, grado_ac_pre, fecha_nac_pre, sexo_pre, id_estado_pre, id_ciudad_pre, id_sede_pre, direccion_pre, email_pre, telefono_pre, cargo_pre) 
                                                             VALUES ('$id_solicitud', '$ciRec','$taken','$apellido', '$grado ', '$fecha', '$sexo', '$estado', '$ciudad', '$sede', '$direccion', '$email', '$phone', '$cargo')");
@@ -71,20 +69,20 @@ switch ($tipo) {
 
     // edicion de archivos de $personal
     case 1:
-        $ciEm = $conn->real_escape($_SESSION['sesion']);
-        //asignar solicitud a un admin
-        $recep = asignar();
 
+        $IdEm = $conn->real_escape($_SESSION['sesion']);
+
+        // CI de editado
         $ciRec = $conn->real_escape($_SESSION['editCI']);
 
         //precarga
-        $taken = $conn->real_escape(strtoupper(remover_acentos($_POST['name'])));
-        $apellido = $conn->real_escape(strtoupper(remover_acentos($_POST['apellido'])));
-        $grado = $conn->real_escape(strtoupper(remover_acentos($_POST['grado_academico'])));
-        $sexo = $conn->real_escape(strtoupper(remover_acentos($_POST['sexo'])));
+        $taken = $conn->real_escape(strtoupper(cor_acentos($_POST['name'])));
+        $apellido = $conn->real_escape(strtoupper(cor_acentos($_POST['apellido'])));
+        $grado = $conn->real_escape(strtoupper(cor_acentos($_POST['grado_academico'])));
+        $sexo = $conn->real_escape(strtoupper(cor_acentos($_POST['sexo'])));
         $fecha = $conn->real_escape($_POST['edad']);
-        $email = $conn->real_escape(strtoupper(remover_acentos($_POST['email'])));
-        $direccion = $conn->real_escape(strtoupper(remover_acentos($_POST['direccion'])));
+        $email = $conn->real_escape(strtoupper(cor_acentos($_POST['email'])));
+        $direccion = $conn->real_escape(strtoupper(cor_acentos($_POST['direccion'])));
         $phone = $conn->real_escape($_POST['telefono']);
         $estado = $_POST['estado'];
         $ciudad = $_POST['ciudad'];
@@ -103,8 +101,8 @@ switch ($tipo) {
 
             $fech = hora();
 
-            $sqlsoli = $conn->query("INSERT INTO solicitudes (id_solicitud, id_emisor, id_receptor, ci_solicitada,  fecha, apr_estado, tipo) 
-                                        VALUES ('$id_solicitud', '$ciEm', '$recep', '$ciRec', '$fech', '0', 1)");
+            $sqlsoli = $conn->query("INSERT INTO solicitudes (id_solicitud, id_emisor, ci_solicitada,  fecha, apr_estado, tipo) 
+                                        VALUES ('$id_solicitud', '$IdEm', '$ciRec', '$fech', '0', 1)");
 
             $correr = $conn->query("INSERT INTO solicitudes_precarga (id_solicitud_precarga, ci_pre, nombre_pre, apelido_pre, grado_ac_pre, fecha_nac_pre, sexo_pre, id_estado_pre, id_ciudad_pre, id_sede_pre, direccion_pre, email_pre, telefono_pre, cargo_pre) 
                                                             VALUES ('$id_solicitud', '$ciRec','$taken','$apellido', '$grado ', '$fecha', '$sexo', '$estado', '$ciudad', '$sede', '$direccion', '$email', '$phone', '$cargo')");
@@ -125,15 +123,13 @@ switch ($tipo) {
         break;
     case 2:
         // ingreso de archivo
-        $ciEm = $conn->real_escape($_SESSION['sesion']);
-        //asignar solicitud a un admin
-        $recep = asignar();
+        $IdEm = $conn->real_escape($_SESSION['sesion']);
 
         // ingreso de documento 
         $taken = $conn->real_escape($_POST["nameArchive"]);
         $tipeArch = $conn->real_escape($_POST["gestionArch"]);
         $ci = $conn->real_escape(desencriptar($_POST["ciArch"]));
-        $note = $conn->real_escape(remover_acentos($_POST["textArchive"]));
+        $note = $conn->real_escape(cor_acentos($_POST["textArchive"]));
         $carion = $_FILES["inpArch"]["name"];
         $arch = $_FILES["inpArch"]["tmp_name"];
 
@@ -161,8 +157,8 @@ switch ($tipo) {
             $direccion = $folDestino . "/" . $nombreArch;
 
             // Inyección a BD
-            @$sqlsoli = $conn->query("INSERT INTO solicitudes (id_solicitud, id_emisor, id_receptor, ci_solicitada,  fecha, apr_estado, tipo) 
-                                        VALUES ('$id_solicitud', '$ciEm', '$recep', '$ci', '$fech', '0', 2)");
+            @$sqlsoli = $conn->query("INSERT INTO solicitudes (id_solicitud, id_emisor, ci_solicitada,  fecha, apr_estado, tipo) 
+                                        VALUES ('$id_solicitud', '$IdEm', '$ci', '$fech', '0', '2')");
 
             // Inyección a BD
             @$sql = $conn->query("INSERT INTO solicitudes_archivos_precarga (id_solicitud_archivo_pre, ci_arch_pre, d_archivo_pre, nombre_archivo_pre, nota_pre, size_pre, tipo_pre) 
@@ -196,8 +192,6 @@ switch ($tipo) {
             $arch = $conn->query("SELECT * FROM archidata WHERE id_archivo = '$archivo'");
 
             if ($arch->num_rows == 1) {
-                //asignar solicitud a un admin
-                $recep = asignar();
 
                 $data = $arch->fetch_object();
 
@@ -214,8 +208,8 @@ switch ($tipo) {
 
                 $fech = hora();
 
-                @$sqlsoli = $conn->query("INSERT INTO solicitudes (id_solicitud, id_emisor, id_receptor, ci_solicitada,  fecha, apr_estado, tipo) 
-                                            VALUES ('$id_solicitud', '$IdEm', '$recep', '$ci', '$fech', '0', 3)");
+                @$sqlsoli = $conn->query("INSERT INTO solicitudes (id_solicitud, id_emisor, ci_solicitada,  fecha, apr_estado, tipo) 
+                                            VALUES ('$id_solicitud', '$IdEm', '$ci', '$fech', '0', 3)");
 
                 if ($sqlsoli == true) {
                     // tabla delete soli 
@@ -249,4 +243,5 @@ switch ($tipo) {
         echo "no agregado";
         break;
 }
+
 $conn->close();

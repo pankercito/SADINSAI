@@ -8,6 +8,6 @@ $sql = "SELECT * FROM estados";
 // Ejecutar la consulta
 $resultado = $conn->query($sql);
 
-while ($row = mysqli_fetch_array($resultado)) {
+while ($row = $resultado->fetch_assoc()) {
     echo '<option value="' . $row['id_estado'] . '">' . $row['estado'] . '</option>';
 }

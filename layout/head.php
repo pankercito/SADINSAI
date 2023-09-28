@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,13 +10,13 @@
         <?php require_once('../php/preset/titleHead.php') ?>
     </title>
 
-    <script src="../resources/import/jquery/jquery-3.6.0.js"></script> 
+    <script src="../resources/import/jquery/jquery-3.6.0.js"></script>
     <!--js jQuery -->
-    <script src="../resources/import/jquery/jquery-3.6.0.min.js"></script> 
+    <script src="../resources/import/jquery/jquery-3.6.0.min.js"></script>
     <!--js jQuery -->
     <link href="../resources/import/jQuery-DataTables/jquery.dataTables.min.css" rel="stylesheet">
     <!--js jQuery DataTables -->
-    <script src="../resources/import/jQuery-DataTables/jquery.dataTables.min.js"></script> 
+    <script src="../resources/import/jQuery-DataTables/jquery.dataTables.min.js"></script>
     <!--js jQuery DataTables-->
     <link href="../resources/import/jQuery-DataTables/themes/Semantic-UI/dataTables.semanticui.min.css"
         rel="stylesheet"> <!--js jQuery DataTables SEMANTIC UI -->
@@ -35,6 +36,8 @@
     <!-- funciones js  -->
     <script src="../js/nuevoGrafico.js"></script>
     <script src="../js/jeisonXD.js"></script>
+    <script src="../js/reporteSolis.js"></script>
+    <script src="../js/search.js"></script>
     <!-- ******** -->
     <link rel="shorcut icon" href="../resources/faviconverde.png">
     <link rel="stylesheet" href="../styles/background.css">
@@ -46,11 +49,6 @@
 
 <body class="logged-in env-production page-responsive">
     <script type="text/javascript">
-        // reescalar
-        function scaleWindowTo100() {
-            window.resizeTo(window.innerWidth, window.innerHeight);
-        }
-
         //  se quita al cargar por completo la pagina
         var panel =
             $.dialog({
@@ -62,7 +60,7 @@
         window.onload = function () {
             setTimeout(() => {
                 panel.close();
-            }, 1000);
+            }, 100);
         };
     </script>
     <style>

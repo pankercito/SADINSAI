@@ -241,3 +241,7 @@ small#vpassmsj {
 small#passmsj {
     color: #edb8b8;
 }
+
+a.vrname {
+    cursor: pointer;
+}

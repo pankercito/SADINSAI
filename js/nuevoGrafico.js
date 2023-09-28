@@ -6,7 +6,7 @@ function nuevoGrafico(canvas, array1, array2, array3, arrayFechas) {
     const data = {
         labels: labels,
         datasets: [{
-            label: 'usuarios ingresados',
+            label: 'usuarios iniciados',
             data: array1,
             borderColor: "#ff63849e",
             backgroundColor: "#ff6384",

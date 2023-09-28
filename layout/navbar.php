@@ -11,17 +11,38 @@
                 <script>
                     // carta de hover
                     $(".navbar-brand").hover(function () {
-                        $(this).append('<span class="Msg btn btn" style="background: #ff6384; color: white; margin: -3rem -1rem 0 -3rem;height: 1.5rem; font-size: 12px;padding: 0px 8px; ">Ver mi perfil</span>');
+                        $(this).append('<span class="Msg btn btn" style="background: #ff6384; color: white;  position: absolute; margin: -.8rem 0rem 0 -1.5rem;height: 1.5rem; font-size: 12px;padding: 0px 8px; ">Ver mi perfil</span>');
                     }, function () {
-                        $(this).children("span").remove();
+                        $(this).children(".Msg").remove();
                     });
                 </script>
+
+                <?php
+                if ($adpval == 1) {
+                    ?>
+                    <script>
+                        // carta de hover
+                        $(".navbar-brand").append('<span id="adminSetMsj" class="btn btn">admin</span>');
+
+                    </script>
+                    <?php
+                } else if ($adpval == 2) {
+                    ?>
+                        <script>
+                            // carta de hover
+                            $(".navbar-brand").append('<span id="sysAdminSetMsj" class="btn btn">sysAdmin</span>');
+
+                        </script>
+                    <?php
+                }
+                ?>
+
                 <nav class="navbar-nav">
                     <!--LISTA DE NAVEGACION-->
                     <ul class="nav nav-list nav-pills navbar-right">
                         <!--ELEMENTOS DE LA LISTA DE NAVEGACION-->
                         <li class="nav-item">
-                            <?php imprime('<a data-position="1" class="nav-link" href="principal.php">Inicio</a>', '<a data-position="1" class="nav-link" href="perfil.php?perfil=' . $wci . '">Inicio</a>') ?>
+                            <?php echo selectPrint('<a data-position="1" class="nav-link" href="principal.php">Inicio</a>', '<a data-position="1" class="nav-link" href="perfil.php?perfil=' . $wci . '">Inicio</a>', '<a data-position="1" class="nav-link" href="sysAdmin.php">Inicio</a>') ?>
                         </li>
                         <li class="nav-item">
                             <a data-position="2" class="nav-link" href="estados.php">Personal</a>
@@ -34,27 +55,20 @@
                         </li>
                     </ul>
                 </nav>
-                <form class="form-inline">
+                <form class="searchito d-flex">
                     <!--BARRA DE BUSQUEDA-->
-                    <input id="searchbar" class="form-control" type="search" placeholder="Buscar..." autocomplete="off">
+                    <input id="searchbar" class="form-control" type="search" placeholder="Buscar..." autocomplete="off"
+                        onkeyup="searching()">
                     </input>
                     <!--BOTON DE BUSQUEDA-->
-                    <button id="search" class="btn" name="keyworks">
+                    <button id="search" class="btn" disabled>
                         <i class="bi bi-search"></i><!--ICONO-->
                     </button>
-                    <div id="result" class="resultsearch d-none" style="display: flex;
-                                                                position: absolute;
-                                                                color: white;
-                                                                margin: 34px 0px 0px 0px;
-                                                                background: #d1d1d1;
-                                                                width: 15.67rem;
-                                                                padding: 1rem 1rem 1rem;
-                                                                z-index: 10000000;
-                                                                border-radius: 0px 0px 6px 6px;
-                                                                flex-direction: column;
-                                                                flex-wrap: nowrap;
-                                                                align-content: center;
-                                                            }"></div>
+                    <div id="result" class="resultsearch d-none">
+                        <ul id="resultList">
+
+                        </ul>
+                    </div>
                     <span class="input-group-text" id="basic-addon1"></span><!--SEPARADOR-->
                     <!--BOTON DE AYUDA-->
                     <button id="help" class="btn btn-info btn-default" href="#">

@@ -1,7 +1,8 @@
 "use strict";
 
 var dashboard = document.querySelector('#dashboard');
-var soli = document.querySelector('#solicitudes');
+var soli = document.querySelector('#solicitudes'); // GRAFICO PRINCIPAL DE LINEAS
+
 $.ajax({
   url: "../php/dashboardDataPre.php",
   success: function success(response) {
@@ -17,7 +18,8 @@ $.ajax({
       document.querySelector('#canvasconten').innerHTML = "<h6 style='color: #fafafa;'>no hay datos para mostrar</h6>";
     }
   }
-});
+}); // GRAFICO DE SOLICITUDES DE PIE
+
 $.ajax({
   url: "../php/dashboardSolicitudesPre.php",
   success: function success(response) {
@@ -38,8 +40,12 @@ $.ajax({
         }]
       };
       var config = {
-        type: 'doughnut',
-        data: data
+        type: 'pie',
+        data: data,
+        responsive: true,
+        options: {
+          legend: {}
+        }
       };
       new Chart(soli, config);
       ;

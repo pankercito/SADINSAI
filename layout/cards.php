@@ -35,7 +35,7 @@ if ($count > 0) {
                 <?php echo @$d ?>
             </div>
             <div class="card-title">
-                <a href="#conteni<?php echo @$i?>" class="toggle-info btn btn-success">
+                <a href="#conteni<?php echo @$i ?>" class="toggle-info btn btn-success">
                     <span class="left"></span>
                     <span class="right"></span>
                 </a>
@@ -57,7 +57,8 @@ if ($count > 0) {
                     <?php echo @$f ?>
                 </h6>
                 <div class="card-description">
-                    <div class="row justify-content-center align-items-center g-2 mb-3" style="background:none; padding: 0 0 0 0;">
+                    <div class="row justify-content-center align-items-center g-2 mb-3"
+                        style="background:none; padding: 0 0 0 0;">
                         <div class="col" style="color: #282c30;  text-align:start;">
                             <p>Nota:
                                 <br>
@@ -68,7 +69,7 @@ if ($count > 0) {
                             <p>
                                 ubicacion:
                                 <br>
-                                <?php echo @$ubicatinFis?>
+                                <?php echo @$ubicatinFis ?>
                             </p>
                         </div>
                     </div>
@@ -82,9 +83,9 @@ if ($count > 0) {
                         </p>
                     </div>
                 </div>
-                <div id="conteni<?php echo @$i?>" class="card-flap flap2">
+                <div id="conteni<?php echo @$i ?>" class="card-flap flap2">
                     <div class="card-actions">
-                        <a href="<?php echo @$image ?>" class="btn btn-success" download="<?php echo @$nameSet?>">descargar</a>
+                        <a href="<?php echo @$image ?>" class="btn btn-success" download="<?php echo @$nameSet ?>">descargar</a>
                         <a class="btn btn-danger" onclick=" deleteCar(<?php echo @$id ?>)">eliminar</a>
                         <a class="btn btn-secondary mb-1 mt-2" onclick="cambiarUb(<?php echo @$id ?>)">cambiar ubicacion</a>
                     </div>
@@ -96,6 +97,12 @@ if ($count > 0) {
     }
 } else {
     ?>
+    <style>
+        section.footer.col-lg-12 {
+            position: fixed;
+            bottom: 0;
+        }
+    </style>
     <div class="noCard mx-auto text-center">
         <p>no hay documentos en esta seccion</p>
     </div>

@@ -13,7 +13,7 @@ if ($count > 0) {
         //Lista de los usuarios
         $v = mysqli_fetch_array($regisview);
         echo '
-                <option value=' . strtoupper(remover_acentos($v['estado'])) . '">' . remover_acentos($v['estado']) . '</option>
+                <option value=' . strtoupper(cor_acentos($v['estado'])) . '">' . cor_acentos($v['estado']) . '</option>
               ';
 
     }

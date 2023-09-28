@@ -15,7 +15,7 @@
                     <label for="Name">Nombre</label>
                     <input id="Name" name="name" type="text" value="<?php echo $SetName ?>">
                     <label for="Ci">Cedula</label>
-                    <input id="Ci" name="ci" type="int" onblur="verificarCI()" value="<?php echo $SetCi ?>" disabled>
+                    <input id="Ci" name="cedi" type="int" onblur="verificarCI()" value="<?php echo $SetCi ?>" disabled>
                     <div id="mensajeCi"></div>
                 </div>
                 <div class="two row">

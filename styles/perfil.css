@@ -1,5 +1,5 @@
 div.perfil {
-    background-color: rgb(241 238 247 / 78%);
+    background-color: #ffffffde;
     border-radius: 10px;
     border: none;
     padding: 10px 20px 10px 10px;
@@ -55,4 +55,8 @@ p {
     margin: .5rem 0 0;
     height: 3rem !important;
     width: 10rem !important;
+}
+
+.neg{
+    color: black !important;
 }

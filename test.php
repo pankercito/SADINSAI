@@ -1,11 +1,27 @@
 <?php
 
-function generarId() {
-    // Genera un número aleatorio de 12 dígitos
-    $number = str_pad(random_int(10000000 , 99999999), 8, '0', STR_PAD_LEFT);
+$tipo = [null, 1, null, null];
 
-    // Devuelve el número aleatorio
-    return $number;
+function soloUnValor($array)
+{
+    // Comprobar si el array tiene solo un campo NO null
+    if (
+        count(array_filter($array, function ($value) {
+            return $value !== null;
+        })) == 1
+    ) {
+        // Si tiene solo un campo NO null, convertirlo en string
+        return implode(', ', array_filter($array));
+    } else {
+        // Si tiene más de un campo NO null, ordenarlo y devolverlo
+        return array_values(array_filter($array));
+    }
 }
 
-echo generarId();
+$var = soloUnValor($tipo);
+
+if (is_array($var)) {
+    echo var_dump($var);
+} else {
+    echo  $var;
+}
