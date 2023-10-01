@@ -238,23 +238,19 @@ a.nav-link.active:hover {
     text-align: start;
 }
 
-#resultList li {
-    padding: 10px 15px;
-}
-
-#resultList li:hover {
-    background: #595959;
-    border-radius: 7px;
-}
-
 .searched {
     text-decoration: none;
     font-size: 12px !important;
     color: black;
+    padding: 10px 15px;
+    margin: .2rem 0 .5rem;
+    border-radius: 3px;
 }
 
 .searched:hover{
     color: rgb(184, 245, 179);
+    background: #595959;
+    border-radius: 7px;
 }
 
 #adminSetMsj {

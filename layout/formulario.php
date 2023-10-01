@@ -1,107 +1,103 @@
-<div class="contenido1">
-    <form action="../php/registroSolicitud.php" method="post">
-        <div class="lmao row">
-            <div class="one row">
-                <div class="mb-3"><label for="Name">Nombre</label>
-                    <input id="Name" name="name" type="text">
-                </div>
-                <div class="mb-3"><label for="Ci">Cedula</label>
-                    <input id="Ci" name="ci" type="num" onblur="verificarCI()">
-                    <div id="mensajeCi"></div>
-                </div>
+<form action="../php/registroSolicitud.php" method="post" class="col-lg-10 mx-auto justifiy-content-center">
+    <div class="col row my-4">
+        <div class="col-md-8 row">
+            <div class="col mb-3">
+                <label for="Name">Nombre</label>
+                <input class="form-control" id="Name" name="name" type="text">
             </div>
-            <div class="two row">
-                <div class="mb-3">
-                    <label for="Apellido">Apellido </label>
-                    <input id="Apellido" name="apellido" type="text">
-                </div>
-                <div class="mb-3">
-                    <label for="Phone">Telefono </label>
-                    <input id="Phone" name="telefono" type="text" maxlength="11">
-                </div>
-            </div>
-            <div class="two row">
-                <label for="Grado_Academico">Grado Academico</label>
-                <input id="Grado_Academico" name="grado_academico" type="text" maxlength="11">
-                sexo
-                <div class="two row radio">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input radio" type="radio" name="sexo" id="inlineRadio1"
-                            value="femenino">
-                        <label class="form-check-label" for="inlineRadio1">femenino</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input radio" type="radio" name="sexo" id="inlineRadio2"
-                            value="masculino">
-                        <label class="form-check-label" for="inlineRadio2">masculino</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input radio" type="radio" name="sexo" id="inlineRadio3"
-                            value="no especificado">
-                        <label class="form-check-label" for="inlineRadio3">no especificado</label>
-                    </div>
-                </div>
+            <div class="col mb-3">
+                <label for="Apellido">Apellido </label>
+                <input class="form-control" id="Apellido" name="apellido" type="text">
             </div>
         </div>
-        <div class="selects row">
-            <div class="sel2">
-                <label for="Naci">Fecha de Nacimiento</label>
-                <input type="date" id="Naci" name="naci">
-            </div>
-            <div class="sel2">
-                <label for="Cargo">Cargo</label>
-                <select id="Cargo" name="cargo">
-                    <option value="">-seleccionar cargo-</option>
-                    <?php include("../php/preset/cargosPre.php") ?>
-                </select>
-                <!-- <input type="text" class="d-none" id="newCargo">
-                <label for="newCargo" class="form-label"></label>
-                <div class="form-check form-check-inline d-none">
-                    <input class="form-check-input" type="checkbox" id="checkNew" value="">
-                    <label class="form-check-label" for="checkNew">nuevo cargo</label>
-                </div> -->
-            </div>
+        <div class="col row">
+            <label>sexo
+                <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                    <input type="radio" class="btn-check" name="sexo" id="btncheck1" autocomplete="off"
+                        value="no especificado" checked>
+                    <label class="radiohead btn btn-outline-secondary" for="btncheck1">no especificado</label>
+                    <input type="radio" class="btn-check" name="sexo" id="btncheck2" autocomplete="off"
+                        value="femenino">
+                    <label class="radiohead btn btn-outline-danger" for="btncheck2">femenino</label>
+                    <input type="radio" class="btn-check" name="sexo" id="btncheck3" autocomplete="off"
+                        value="masculino">
+                    <label class="radiohead btn btn-outline-primary" for="btncheck3">masculino</label>
+                </div>
+            </label>
         </div>
-        <div class="selects row">
-            <div class="sel1">
-                <label for="Estados">Estado</label>
-                <select id="Estados" name="estado">
-                    <option value="0">- seleciona un estado-</option>
-                    <?php
-                    include("../php/preset/stadosForm.php")
-                        ?>
-                </select>
-            </div>
-            <div class="sel2">
-                <label for="Ciudades">Ciudad</label>
-                <select id="Ciudades" name="ciudad">
-                    <option value="0">- Seleciona una ciudad -</option>
-                </select>
-            </div>
+    </div>
+    <div class="col row">
+        <div class="col">
+            <label for="Ci">Cedula</label>
+            <input class="form-control" id="Ci" name="ci" type="num" onblur="verificarCI()">
+            <div id="mensajeCi"></div>
         </div>
-        <div class="lmao row">
-            <div class="sel3">
-                <label for="Sede">Sede</label>
-                <select id="Sede" name="sede">
-                    <option value="0">- selecione su sede-</option>
-                </select>
-            </div>
+        <div class="col ">
+            <label for="Phone">Telefono </label>
+            <input class="form-control" id="Phone" name="telefono" type="text" maxlength="11">
         </div>
-        <div class="lmao row">
-            <div class="one row">
-                <label for="Email">Email</label>
-                <input id="Email" name="email" type="text">
-            </div>
-            <div class="two row">
-                <label for="Direccion">Direccion</label>
-                <input id="Direccion" name="direccion" type="text">
-            </div>
+        <div class="col">
+            <label for="Naci">Fecha de Nacimiento</label>
+            <input class="form-control" type="date" id="Naci" name="naci">
         </div>
-        <input type="text" class="d-none" id="tipo" name="tipo" value="0">
-        <br>
-        <button class="btn btn-lg btn-warning" id="log" type="submit" name="registrar" disabled>Registrar</button>
-    </form>
-    <script src="../js/formRegistroValidacion.js"></script>
-    <script src="../js/selectorScript.js"></script>
-    <script src="../js/activarInput.js"></script>
-</div>
+    </div>
+    <div class="col row my-3">
+        <div class="col">
+            <label for="Grado_Academico">Grado Academico</label>
+            <input class="form-control" id="Grado_Academico" name="grado_academico" type="text" maxlength="11">
+        </div>
+        <div class="col ">
+            <label for="Cargo">Departamento</label>
+            <select class="form-select" id="Depa" name="departament">
+                <option value="">- seleccionar departamento -</option>
+                <?php include("../php/preset/cargosPre.php") ?>
+            </select>
+        </div>
+        <div class="col">
+            <label for="Cargo">Cargo</label>
+            <select class="form-select" id="Cargo" name="cargo">
+                <option value="">- seleccionar cargo -</option>
+                <?php include("../php/preset/cargosPre.php") ?>
+            </select>
+        </div>
+    </div>
+    <div class="col row my-4">
+        <div class="col">
+            <label for="Estados">Estado</label>
+            <select class="form-select" id="Estados" name="estado">
+                <option value="0">- seleciona un estado-</option>
+                <?php
+                include("../php/preset/stadosForm.php")
+                    ?>
+            </select>
+        </div>
+        <div class="col">
+            <label for="Ciudades">Ciudad</label>
+            <select class="form-select" id="Ciudades" name="ciudad">
+                <option value="0">- Seleciona una ciudad -</option>
+            </select>
+        </div>
+        <div class="col">
+            <label for="Sede">Sede</label>
+            <select class="form-select" id="Sede" name="sede">
+                <option value="0">- selecione su sede-</option>
+            </select>
+        </div>
+    </div>
+    <div class="col row my-4">
+        <div class="col">
+            <label for="Email">Email</label>
+            <input class="form-control" id="Email" name="email" type="text">
+        </div>
+        <div class="col">
+            <label for="Direccion">Direccion</label>
+            <input class="form-control" id="Direccion" name="direccion" type="text">
+        </div>
+    </div>
+    <input type="text" class="d-none" id="tipo" name="tipo" value="0">
+    <br>
+    <button class="btn btn-lg btn-warning" id="log" type="submit" name="registrar" disabled>Registrar</button>
+</form>
+<script src="../js/formRegistroValidacion.js"></script>
+<script src="../js/selectorScript.js"></script>
+<script src="../js/activarInput.js"></script>

@@ -21,7 +21,7 @@ $apr = [
 $aprN = [
     "0" => "pendiente",
     "1" => "aceptada",
-    "2" => "rechasada",
+    "2" => "rechazada",
     "3" => "vencida",
 ];
 $tipoSolic = [

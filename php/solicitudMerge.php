@@ -8,7 +8,7 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
     include("class/mergeSolicitudes.php");
 
     $conn = new Conexion();
-    $merge = new solicitudesMerge();
+    $merge = new SolicitudesAct();
 
     $id = $conn->real_escape($_POST['idSoli']);
 

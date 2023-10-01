@@ -1,8 +1,8 @@
 <div class="centro col-lg-12" id="centroEdit">
     <link rel="stylesheet" href="../styles/editarUsuarios.css">
-<div class="col">
-    <button class="btn btn-light my-4" onclick="eback()" >atras</button>
-</div>
+    <div class="col">
+        <button class="btn btn-light my-4" onclick="eback()">atras</button>
+    </div>
     <?php
     include_once("../php/editSet.php");
     $_SESSION['editCI'] = $SetCi;
@@ -28,23 +28,21 @@
                     <label for="Grado_Academico">Grado Academico</label>
                     <input id="Grado_Academico" name="grado_academico" type="text" maxlength="11"
                         value="<?php echo $SetGrado ?>">
-                    sexo
-                    <div class="two row radio">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input radio" type="radio" name="sexo" id="inlineRadio1"
-                                value="femenino">
-                            <label class="form-check-label" for="inlineRadio1">femenino</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input radio" type="radio" name="sexo" id="inlineRadio2"
-                                value="masculino" checked>
-                            <label class="form-check-label" for="inlineRadio2">masculino</label >
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input radio" type="radio" name="sexo" id="inlineRadio3"
-                                value="no especificado">
-                            <label class="form-check-label" for="inlineRadio3">no especificado</label>
-                        </div>
+                    <div class="col row">
+                        <label>sexo
+                            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" style="margin: 0 0 0 -3rem;">
+                                <input type="radio" class="btn-check" name="sexo" id="btncheck1" autocomplete="off"
+                                    value="no especificado" checked>
+                                <label class="radiohead btn btn-outline-secondary" for="btncheck1">no
+                                    especificado</label>
+                                <input type="radio" class="btn-check" name="sexo" id="btncheck2" autocomplete="off"
+                                    value="femenino">
+                                <label class="radiohead btn btn-outline-danger" for="btncheck2">femenino</label>
+                                <input type="radio" class="btn-check" name="sexo" id="btncheck3" autocomplete="off"
+                                    value="masculino">
+                                <label class="radiohead btn btn-outline-primary" for="btncheck3">masculino</label>
+                            </div>
+                        </label>
                     </div>
                 </div>
             </div>

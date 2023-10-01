@@ -10,11 +10,13 @@ $(document).ready(function () {
 
                 let selector = $('#selectipo');
                 let contentipo = $('#contenOpcion');
+                let fecha = $('#fecha');
+                var self = this;
+                self.buttons.ab.disable();
 
                 selector.on('change', function () {
                     $("#selectipo option:selected").each(function () {
                         var valor = $(this).val();
-
                         if (valor != 0) {
                             $.ajax({
                                 data: {
@@ -30,7 +32,15 @@ $(document).ready(function () {
                         } else {
                             contentipo.html("");
                         }
+                        
+                        if (fecha != null) {
+                            self.buttons.ab.enable();
+                        } else {
+                            self.buttons.ab.disable();
+                        }
                     });
+
+                        
 
                 });
             },

@@ -52,7 +52,6 @@ class auditoria
         $user = $fechi["user"];
 
         $query = $this->connec->query("INSERT INTO registro_entrada_salida (id_usuario_init, fecha, entradaSalida, user_name) VAlUES ('$idEntrada', now(), 1, '$user')");
-        $this->connec->close();
 
         if ($query) {
             return true;
@@ -196,9 +195,15 @@ class auditoria
         return $result;
     }
 
-    public function userInixStats($fecha, $fech2 = null)
+    /**
+     * Consulta la cantidad de inicios diarios de un usuario
+     * @param mixed $fecha
+     * @param mixed $fech2 para rango de fechas
+     * @return array
+     */
+    public function userInixStats($fecha = null, $fech2 = null)
     {
-        $q = $this->connec->query("SELECT * FROM registro");
+        $q = $this->connec->query("SELECT * FROM registro WHERE adp NOT IN (2)");
 
         if ($fech2 != null) {
             //RANGO DE FECHAS
@@ -208,18 +213,21 @@ class auditoria
             $i = 0;
             $result = [];
 
-            $v = $q->fetch_object();
             while ($i <= $con - 1) {
+                $v = $q->fetch_object();
 
                 $num = $this->connec->query("SELECT * FROM registro_entrada_salida WHERE id_usuario_init = '$v->id_usuario' AND entradaSalida = 1 AND DATE(fecha) = '$fech[$i]'");
                 $f = mysqli_num_rows($num);
-                $result[] = [
-                    "id" => $v->id_usuario,
-                    "user" => strtoupper($v->user),
-                    "cont" => $f,
-                    "fecha" => $fech[$i]
-                ];
+                $df = $num->fetch_object();
 
+                if ($f != 0) {
+                    $result[] = [
+                        "id" => $v->id_usuario,
+                        "user" => strtoupper($v->user),
+                        "cont" => $f,
+                        "fecha" => $fech[$i]
+                    ];
+                }
                 $i++;
             }
 
@@ -231,13 +239,15 @@ class auditoria
             while ($i = $q->fetch_object()) {
                 $num = $this->connec->query("SELECT * FROM registro_entrada_salida WHERE id_usuario_init = '$i->id_usuario' AND entradaSalida = 1 AND DATE(fecha) = '$fecha'");
                 $f = mysqli_num_rows($num);
-                $result[] = [
-                    "id" => $i->id_usuario,
-                    "user" => strtoupper($i->user),
-                    "cont" => $f,
-                    "fecha" => $fecha
-                ];
 
+                if ($f != 0) {
+                    $result[] = [
+                        "id" => $i->id_usuario,
+                        "user" => strtoupper($i->user),
+                        "cont" => $f,
+                        "fecha" => $fecha
+                    ];
+                }
             }
         } else {
             // NO FECH
@@ -247,19 +257,25 @@ class auditoria
             while ($i = $q->fetch_object()) {
                 $num = $this->connec->query("SELECT * FROM registro_entrada_salida WHERE id_usuario_init = '$i->id_usuario' AND entradaSalida = 1");
                 $f = mysqli_num_rows($num);
-                $result[] = [
-                    "id" => $i->id_usuario,
-                    "user" => strtoupper($i->user),
-                    "cont" => $f,
-                    "fecha" => 'todas'
-                ];
-
+                if ($f != 0) {
+                    $result[] = [
+                        "id" => $i->id_usuario,
+                        "user" => strtoupper($i->user),
+                        "cont" => $f,
+                        "fecha" => 'todas'
+                    ];
+                }
             }
-
         }
         return $result;
     }
 
+    /**
+     * Comprobar cantidad de solicitudes realizadas por usuarios
+     * @param mixed $fecha
+     * @param mixed $fech2
+     * @return array
+     */
     public function userSolisStats($fecha, $fech2 = null)
     {
         $q = $this->connec->query("SELECT * FROM registro");
@@ -277,13 +293,14 @@ class auditoria
 
                 $num = $this->connec->query("SELECT * FROM solicitudes WHERE id_emisor = '$v->id_usuario' AND DATE(fecha) = '$fech[$i]'");
                 $f = mysqli_num_rows($num);
-                $result[] = [
-                    "id" => $v->id_usuario,
-                    "user" => strtoupper($v->user),
-                    "cont" => $f,
-                    "fecha" => $fech[$i]
-                ];
-
+                if ($f != 0) {
+                    $result[] = [
+                        "id" => $v->id_usuario,
+                        "user" => strtoupper($v->user),
+                        "cont" => $f,
+                        "fecha" => $fech[$i]
+                    ];
+                }
                 $i++;
             }
 
@@ -295,12 +312,15 @@ class auditoria
             while ($i = $q->fetch_object()) {
                 $num = $this->connec->query("SELECT * FROM solicitudes WHERE id_emisor = '$i->id_usuario' AND DATE(fecha) = '$fecha'");
                 $f = mysqli_num_rows($num);
-                $result[] = [
-                    "id" => $i->id_usuario,
-                    "user" => strtoupper($i->user),
-                    "cont" => $f,
-                    "fecha" => $fecha
-                ];
+                if ($f != 0) {
+                    $result[] = [
+                        "id" => $i->id_usuario,
+                        "user" => strtoupper($i->user),
+                        "cont" => $f,
+                        "fecha" => $fecha
+                    ];
+                }
+                $i++;
             }
         } else {
             // NO FECH
@@ -321,6 +341,7 @@ class auditoria
         }
         return $result;
     }
+
     /**
      * consulta solicitudes en rango de fechas
      * @param mixed $dat1
@@ -346,7 +367,7 @@ class auditoria
     }
 
     /**
-     * Summary of solicitudDetailstStats
+     * CONSULTA POR TIPOS LA CANTIDAD DE SOLICITUDES
      * @param string $fech
      * @param string $fech2 || opcional rango de fechas
      * @return array
@@ -368,12 +389,13 @@ class auditoria
 
                     $data = $this->connec->query("SELECT * FROM solicitudes WHERE  tipo = '$c' AND DATE(fecha) = '" . $rango[$i] . "' ");
                     $total = $data->num_rows;
-
-                    $result[] = [
-                        'tipo' => $c,
-                        'count' => $total,
-                        'dia' => $rango[$i]
-                    ];
+                    if ($total != 0) {
+                        $result[] = [
+                            'tipo' => $c,
+                            'count' => $total,
+                            'dia' => $rango[$i]
+                        ];
+                    }
 
                     $c++;
                 }
@@ -402,106 +424,79 @@ class auditoria
         return $result;
     }
 
-    function solicitudPrecise($fech = 'dia presente', $fecha2 = null, $estatus = null, $tipo = null)
+    function solicitudPrecise($fech = 'dia presente', $fech2 = null, $estado = null)
     {
-        $fecha = ($fech == 'dia presente') ? date('Y-m-d') : $fech;
+        $estatus = ($estado != null) ? "AND apr_estado  = $estado" : '';
 
-        // Crear una variable con los parámetros SQL que consultar
-        $sql = "SELECT * FROM solicitudes  WHERE DATE(fecha) = '$fecha'";
-
-        $estado = ($estatus != null) ? " AND delete_arch = '$estatus'" : '';
-
-        $result = ['no data'];
-
-        if ($fecha2 != null) {
-            // Agregar el WHERE condicionalmente
-            $rango = getRangeDate($fecha, $fecha2);
+        if ($fech2 != null) {
+            //RANGO DE FECHAS
+            $rango = getRangeDate($fech, $fech2);
 
             $con = count($rango);
             $i = 0;
+            $result = [];
+
             while ($i <= $con - 1) {
 
-                if (is_array($tipo)) {
-                    //VARIOS TIPOS
-                    foreach ($tipo as $val => $key) {
-                        if ($val != null) {
-                            // Ejecutar la consulta
-                            $data = $this->connec->query(" SELECT * FROM solicitudes WHERE tipo = '$key' " . $estado . "  AND DATE(fecha) = '" . $rango[$i] . "' ");
-                            $row = $data->fetch_object();
-                            $total = $data->num_rows;
+                $c = 0;
+                while ($c != 4) {
 
-                            $result = [
-                                'tipo' => $key,
-                                'count' => $total,
-                                'dia' => $fecha
-                            ];
-                        }
-                    }
-                } else if (!is_array($tipo)) {
-                    $data = $this->connec->query("SELECT * FROM solicitudes WHERE tipo = '$tipo' " . $estado . " DATE(fecha) = '" . $rango[$i] . "' ");
-                    //  UN SOLO TIPO
-                    $fetch = $data->fetch_object();
+                    $data = $this->connec->query("SELECT * FROM solicitudes WHERE  tipo = '$c' AND DATE(fecha) = '" . $rango[$i] . "' ");
                     $total = $data->num_rows;
 
-                    $result = [
-                        'tipo' => $fetch->tipo,
+                    if ($total != 0) {
+                        $result[] = [
+                            'tipo' => $c,
+                            'count' => $total,
+                            'dia' => $rango[$i]
+                        ];
+                    }
+
+
+
+                    $c++;
+                }
+
+                $i++;
+            }
+        } else if ($fech != null) {
+            //UNA FECHA
+            $result = [];
+            $i = 0;
+
+            while ($i != 4) {
+                $data = $this->connec->query("SELECT * FROM solicitudes WHERE tipo = '$i'  AND DATE(fecha) = '$fech'");
+                $total = $data->num_rows;
+                if ($total != 0) {
+                    $result[] = [
+                        'tipo' => $i,
                         'count' => $total,
-                        'dia' => $rango[$i]
-                    ];
-                    $i++;
-                } else {
-                    // SIN TIPO 
-                    $data = $this->connec->query("SELECT * FROM solicitudes WHERE DATE(fecha) = '" . $rango[$i] . "' " . $estado . "");
-                    $result = [
-                        'tipo' => 'todos',
-                        'count' => $total,
-                        'dia' => $rango[$i]
+                        'dia' => ($fech != 0) ? $fech : 'todas'
                     ];
                 }
                 $i++;
             }
+
         } else {
-            if (is_array($tipo)) {
-                //VARIOS TIPOS
-                foreach ($tipo as $val => $key) {
-                    if ($val != null) {
-                        // Ejecutar la consulta
-                        $data = $this->connec->query($sql . " AND tipo = '$key' " . $estado);
-                        $row = $data->fetch_object();
-                        $total = $data->num_rows;
+            //UNA FECHA
+            $result = [];
+            $i = 0;
 
-                        $result = [
-                            'tipo' => $key,
-                            'count' => $total,
-                            'dia' => $fecha
-                        ];
-                    }
-                }
-            } else if (!is_array($tipo)) {
-                //  UN SOLO TIPO
-                $data = $this->connec->query($sql . " AND tipo = '$tipo' " . $estado);
-                $fetch = $data->fetch_object();
+            while ($i != 4) {
+
+                $data = $this->connec->query("SELECT * FROM solicitudes WHERE tipo = '$i'" . $estatus);
                 $total = $data->num_rows;
 
-                $result = [
-                    'tipo' => $fetch->tipo,
+                $result[] = [
+                    'tipo' => $i,
                     'count' => $total,
-                    'dia' => $fecha
+                    'dia' => ($fech != 0) ? $fech : 'todas'
                 ];
-            } else {
-                // SIN TIPO 
-                $data = $this->connec->query($sql . $estado);
-                $total = $data->num_rows;
 
-                $result = [
-                    'tipo' => 'todos',
-                    'count' => $total,
-                    'dia' => $fecha
-                ];
+                $i++;
             }
-
-            return $result;
         }
+        return $result;
     }
 
     /**
@@ -541,9 +536,6 @@ class auditoria
     public function archivesDetailsStats($fech = null, $fech2 = null, $estatus = null)
     {
         $estado = (!empty($estatus)) ? " AND apr_estado = '$estatus'" : '';
-        $tipos = $this->connec->query("SELECT * FROM tiposarch");
-        $r = $tipos->fetch_assoc();
-        $tipearch = $tipos->fetch_assoc();
 
         if ($fech2 != null) {
             //RANGO DE FECHAS
@@ -554,15 +546,18 @@ class auditoria
             $result = [];
 
             while ($i <= $con - 1) {
-                $data = $this->connec->query("SELECT * FROM archidata a INNER JOIN solicitudes s ON a.id_archivo = s.id_solicitud WHERE s.tipo = '2' " . " DATE(fecha) = '" . $rango[$i] . "'" . @$estado);
+                $data = $this->connec->query("SELECT * FROM archidata a INNER JOIN solicitudes s ON a.id_archivo = s.id_solicitud WHERE s.tipo = '2'  AND DATE(fecha) = '" . $rango[$i] . "'" . $estado);
                 $fetch = $data->fetch_object();
                 $total = $data->num_rows;
 
-                $result[] = [
-                    'tipo' => $r[$fetch->tipo_arch],
-                    'count' => $total,
-                    'dia' => $rango[$i]
-                ];
+                if ($total != 0) {
+                    $result[] = [
+                        'tipo' => $fetch->tipo_arch,
+                        'count' => $total,
+                        'dia' => $rango[$i]
+                    ];
+                }
+
                 $i++;
             }
 
@@ -593,12 +588,49 @@ class auditoria
                     $result[] = [
                         'tipo' => $i,
                         'count' => $total,
-                        'dia' => date('Y-m-d')
+                        'dia' => "total"
                     ];
                 }
                 $i++;
             }
         }
         return $result;
+    }
+
+
+    /**
+     * Guarda en la bade de Datos registro de Cambios en [sadinsai.personal]
+     * usar arrays associativos para que sea funcional
+     * @param mixed $arrayA Datos base
+     * @param mixed $arrayB Nuevos Datos
+     * @return void
+     */
+    public function registChange($arrayA, $arrayB)
+    {
+        @session_start();
+
+        $ID = $_SESSION['sesion'];
+
+        $registro = $this->connec->query("SELECT * FROM registro WHERE id_usuarios = $ID");
+        $fr = $registro->fetch_object();
+
+        $coun = count($arrayA);
+
+        $d = "cambios aceptados por $fr->usuario a " . $arrayA['ci'] . "<br>";
+
+        // Comparamos los elementos de los arrays
+
+        // Usamos array_diff_assoc() para obtener una lista de los elementos que han cambiado
+        $cambios = array_diff_assoc($arrayA, $arrayB);
+
+        // Recorremos la lista de cambios e imprimimos los cambios
+        foreach ($cambios as $clave => $valor) {
+            if ($clave != $valor) {
+                $d .= "$clave: antes: $arrayA[$clave] | despues: $arrayB[$clave] //  ";
+            }
+        }
+
+        $inyec = $this->connec->query("INSERT INTO auditoria ");
+
     }
 }

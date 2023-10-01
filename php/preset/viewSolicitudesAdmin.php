@@ -20,7 +20,7 @@ $apr = [
 $aprN = [
     "0" => "pendiente",
     "1" => "aceptada",
-    "2" => "rechasada",
+    "2" => "rechazada",
 ];
 $aprL = [
     "0" => 'bi bi-person-lines-fill',

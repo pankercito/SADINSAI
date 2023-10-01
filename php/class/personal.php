@@ -14,6 +14,7 @@ class Personal
     private $sexo;
     private $fecha;
     private $telefono;
+    private $departamento;
     private $email;
     private $direccion;
     private $estado;
@@ -38,7 +39,7 @@ class Personal
     }
 
     /**
-     * Summary of getDatos
+     * OBTENER DATOS DEL PERSONAL POR CEDULA
      * @return void
      */
     private function getDatos()
@@ -80,6 +81,7 @@ class Personal
                 $this->fecha = $data['fecha_nac'];
                 $this->sexo = strtolower($data['sexo']);
                 $this->grado = $data['grado_ac'];
+
             } else {
                 $this->nombre = "Sin datos";
                 $this->apellido = "Sin datos";
@@ -119,6 +121,7 @@ class Personal
         }
         $this->connec->close();
     }
+
     /**
      * @return string nombre
      */
@@ -126,6 +129,7 @@ class Personal
     {
         return $this->nombre;
     }
+
     /**
      * @return string apellido
      */
@@ -133,6 +137,7 @@ class Personal
     {
         return $this->apellido;
     }
+
     /**
      * @return mixed|string ci desencriptada
      */
@@ -140,6 +145,7 @@ class Personal
     {
         return $this->ci;
     }
+
     /**
      * @return mixed|string telefono
      */
@@ -147,6 +153,7 @@ class Personal
     {
         return $this->telefono;
     }
+
     /**
      * @return string email
      */
@@ -154,6 +161,7 @@ class Personal
     {
         return $this->email;
     }
+
     /**
      * @return string direccion
      */
@@ -161,6 +169,7 @@ class Personal
     {
         return $this->direccion;
     }
+
     /**
      * @return mixed|string estado
      */
@@ -168,6 +177,7 @@ class Personal
     {
         return $this->estado;
     }
+    
     /**
      * @return mixed|string ID estado
      */
@@ -175,6 +185,7 @@ class Personal
     {
         return $this->idEstado;
     }
+
     /**
      * @return mixed|string Ciudad
      */
@@ -182,6 +193,7 @@ class Personal
     {
         return $this->ciudad;
     }
+
     /**
      * @return mixed|string ID Ciudad
      */
@@ -189,6 +201,7 @@ class Personal
     {
         return $this->idCiudad;
     }
+
     /**
      * @return mixed|string Sede
      */
@@ -196,6 +209,7 @@ class Personal
     {
         return $this->sede;
     }
+
     /**
      * @return mixed|string ID Sede
      */
@@ -203,6 +217,7 @@ class Personal
     {
         return $this->idSede;
     }
+
     /**
      * @return mixed|string cargo
      */
@@ -210,6 +225,7 @@ class Personal
     {
         return $this->Cargo;
     }
+    
     /**
      * @return mixed|string ID cargo
      */

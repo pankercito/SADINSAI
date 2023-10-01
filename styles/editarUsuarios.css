@@ -11,6 +11,10 @@ div#centroEdit {
     margin: 1.5rem 1rem;
 }
 
+label.radiohead.btn {
+    font-size: 13px !important;
+}
+
 .contenido1 form input {
     height: 2.2rem;
     border: none;

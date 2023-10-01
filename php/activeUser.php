@@ -1,7 +1,7 @@
 <?php
 include("conx.php");
 
-if ($_POST['pin'] != "") {
+if ($_POST['userId'] != "") {
 
     $conn = new Conexion();
 

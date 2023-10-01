@@ -194,7 +194,7 @@ function deleteUser(idUserd) {
                             "userId": idUser
                         },
                         type: "post",
-                        url: "../php/deteleUser.php",
+                        url: "../php/deleteUser.php",
                         beforeSend: function () {
                             var obj =
                                 $.dialog({

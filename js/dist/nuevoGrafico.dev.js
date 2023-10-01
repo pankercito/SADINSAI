@@ -36,7 +36,7 @@ function nuevoGrafico(canvas, array1, array2, array3, arrayFechas) {
         },
         title: {
           display: true,
-          text: 'Registro de volumen de datos' + arrayFechas,
+          text: 'Registro de volumen de datos ' + arrayFechas,
           color: '#484848',
           font: {
             size: 16,

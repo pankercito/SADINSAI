@@ -22,7 +22,7 @@
             <?php require_once("../layout/editarUsuario.php"); ?>
             <div class="colunma col-md-3 mt-2" id="columna">
                 <p style="color: white; font-weight:500;">acciones</p>
-                <!-- <button class="pedit btn btn-primary" id="generar" onclick="reportePerfil()">generar reporte</button> -->
+                <button class="pedit btn btn-primary" id="generar" onclick="reportePerfil()">generar reporte</button>
                 <br>
                 <button class='pedit btn btn-secondary' id="requeri" onclick="requerido('<?php echo $SetCi?>')">requerimientos</button>
                 <br>

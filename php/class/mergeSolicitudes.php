@@ -1,6 +1,6 @@
 <?php
 
-class solicitudesMerge
+class SolicitudesAct
 {
     private $connec;
 
