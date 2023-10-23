@@ -183,7 +183,6 @@ class Personal
     {
         return $this->estado;
     }
-
     /**
      * @return mixed|string ID estado
      */
@@ -231,7 +230,6 @@ class Personal
     {
         return $this->Cargo;
     }
-
     /**
      * @return mixed|string ID cargo
      */

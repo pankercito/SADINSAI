@@ -139,6 +139,8 @@
                                     } else {
                                         echo "<h6>ningun usuario a iniciado sesion hoy</h6> ";
                                     }
+
+
                                     ?>
                                 </tbody>
                                 </tbody>
