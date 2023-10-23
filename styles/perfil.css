@@ -51,12 +51,16 @@ p {
     font-weight: 600;
 }
 
-.pedit{
+.pedit {
     margin: .5rem 0 0;
     height: 3rem !important;
     width: 10rem !important;
 }
 
-.neg{
+.neg {
     color: black !important;
+}
+
+button#generar {
+    height: 4rem !important;
 }

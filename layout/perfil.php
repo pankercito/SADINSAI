@@ -66,6 +66,13 @@
                 ?>
             </label>
         </div>
+        <div class="col">
+            <label class="labperfil">departamento
+                <?php
+                echo '<p>' . $pDepart . '</p>';
+                ?>
+            </label>
+        </div>
     </div>
     <div class="row justify-content-center align-items-center g-2 mb-3">
         <div class="col">

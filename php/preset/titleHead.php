@@ -7,22 +7,21 @@ include('../php/function/fHead.php');
 // Guardar el nombre de los URL *Direccion* => *Nombre que tendra*
 $titles = [
     'perfil' => 'perfil',
-    '/sadinsai/public/principal.php' => 'Inicio',
-    '/sadinsai/public/sysAdmin.php' => 'Inicio',
-    '/sadinsai/private/recovery.php' => 'Recuperacion de Contrase&nacute;a',
-    '/sadinsai/public/perfil.php' => 'Perfil',
-    '/sadinsai/public/estados.php' => 'Personal',
-    '/sadinsai/public/anadir.php' => 'A&ntilde;adir',
-    '/sadinsai/public/solicitudes.php' => 'Solicitudes',
-    '/sadinsai/public/anadir.php?users/viewregister=true' => 'Usuarios Registrados',
-    '/sadinsai/public/anadir.php?users/register=true' => 'Registrar Usuarios',
-    '/sadinsai/public/anadir.php?users/register-two=true' => 'Registrar Usuarios',
-    '/sadinsai/public/anadir.php?form=true' => 'Agregar Personal',
-    '/sadinsai/private/planilla-1.php' => 'Documento',
-    '/sadinsai/private/planilla-2.php' => 'Documento',
-    '/sadinsai/private/planilla-3.php' => 'Documento',
-    '/sadinsai/private/planilla-4.php' => 'Documento',
-    '/sadinsai/private/planilla-5.php' => 'Documento',
+    '/public/principal.php' => 'Inicio',
+    '/public/sysAdmin.php' => 'Inicio',
+    '/private/recovery.php' => 'Recuperacion de Contrase&nacute;a',
+    '/public/perfil.php' => 'Perfil',
+    '/public/estados.php' => 'Personal',
+    '/public/anadir.php' => 'A&ntilde;adir',
+    '/public/solicitudes.php' => 'Solicitudes',
+    '/public/anadir.php?users/viewregister=true' => 'Usuarios Registrados',
+    '/public/anadir.php?users/register=true' => 'Registrar Usuarios',
+    '/public/anadir.php?users/register-two=true' => 'Registrar Usuarios',
+    '/public/anadir.php?form=true' => 'Agregar Personal',
+    '/private/backRec.php' => 'Respaldo',
+    '/components/cargos.php' => 'Cargos',
+    '/components/sedes.php' => 'Sedes',
+    '/components/recovery.php' => 'Recuperacion de contraseña'
 ];
 
 // URL actual sin los parámetros GET
@@ -32,7 +31,7 @@ $actUrl = strtok($_SERVER['REQUEST_URI'], '?');
 $get = $_SERVER['REQUEST_URI'];
 
 // Obtener el título correspondiente a la URL actual
-if ($actUrl == '/sadinsai/public/perfil.php') {
+if ($actUrl == '/public/perfil.php') {
     //Pagina de inicio o Perfil
     include('../php/perfilCheck.php');
 

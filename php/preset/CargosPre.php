@@ -1,6 +1,6 @@
 <?php
 
-@include('../conx.php');
+include '../conx.php';
 
 $conn = new Conexion();
 

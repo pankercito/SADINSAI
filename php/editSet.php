@@ -24,3 +24,5 @@ $SetCiudad = $personal->getCiudad();
 $SetIdCiudad = $personal->getIdCiudad();
 $SetSede = $personal->getSede();
 $SetIdSede = $personal->getIdSede();
+$SetDepart = $personal->getDepartament();
+$SetIdDepart = $personal->getIdDepart();

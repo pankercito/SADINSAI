@@ -6,20 +6,19 @@ img.mx-auto {
 .sadin{
     margin: 0rem 0 0 0;
 }
-.sadin img{ /*TITULO DEL FONDO*/
-    max-width: 120px;
-    max-height: 120px;
+.sadin img{ /* IMAGEN LOGO*/
+    max-width: 170px;
     display: block;
-    margin: 4rem auto -4rem;
+    margin: 1rem auto -4rem;
 }
 
 img.insai {
     right: 0 !important;
     position: absolute;
     width: 75px;
-    margin: -35.4rem 1.5rem 0rem 0rem;
+    margin: -30.5rem 1.5rem 0rem 0rem;
 }
 
 .col-lg-12 {
-    padding: 2rem;
+    padding: 2rem 2rem 1rem;
 }

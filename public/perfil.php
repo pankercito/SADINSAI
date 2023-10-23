@@ -7,11 +7,8 @@
 <script src="../js/prestablecer.js"></script>
 
 <!--SALUDO DE BIENVENIDA-->
-<section name="cromaconten">
-    <div class="contencroma">
-        <?php include("../layout/sidebar.php"); ?>
-    </div>
-</section>
+<?php include("../layout/sidebar.php"); ?>
+
 
 <div class="estructur-conten">
     <div class="grid-containerr">
@@ -22,9 +19,10 @@
             <?php require_once("../layout/editarUsuario.php"); ?>
             <div class="colunma col-md-3 mt-2" id="columna">
                 <p style="color: white; font-weight:500;">acciones</p>
-                <!-- <button class="pedit btn btn-primary" id="generar" onclick="reportePerfil()">generar reporte</button> -->
+                <button class="pedit btn btn-primary" id="generar" onclick="reportePerfil()">reporte de archivos faltantes</button>
                 <br>
-                <button class='pedit btn btn-secondary' id="requeri" onclick="requerido('<?php echo $SetCi?>')">requerimientos</button>
+                <button class='pedit btn btn-secondary' id="requeri"
+                    onclick="requerido('<?php echo $SetCi ?>')">requerimientos</button>
                 <br>
                 <button class='pedit btn btn-warning' id="editar">editar datos</button>
             </div>

@@ -7,6 +7,7 @@ a:not([href]):not([tabindex]) {
     padding: 10px;
     margin: 0;
 }
+
 a.vrname {
     color: inherit;
     display: flex;
@@ -14,13 +15,16 @@ a.vrname {
     align-items: baseline;
     text-decoration: none;
 }
-.lol{
+
+.lol {
     color: #212529;
     text-decoration: none;
 }
-tr{
+
+tr {
     vertical-align: -webkit-baseline-middle;
 }
+
 label {
     background: #f2f2f2;
     padding: 5px 1rem;
@@ -28,7 +32,15 @@ label {
     height: 3.5rem;
     color: black;
 }
+
 .spinner-border {
     height: 2.5rem;
     width: 2.5rem;
+}
+
+.dataTables_wrapper .dataTables_length select {
+    background: white;
+}
+.dataTables_wrapper .dataTables_filter input{
+    background: white;
 }

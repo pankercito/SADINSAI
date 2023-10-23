@@ -13,7 +13,7 @@ if (isset($_POST["idArch"])) {
 
     $sql = $conn->query("SELECT * FROM archidata a 
                               INNER JOIN solicitudes s
-                              INNER JOIN direccion_direcciones d
+                              INNER JOIN departamentos d
                               ON a.id_archivo = s.id_solicitud
                               AND d.id_direccion = a.ubicacion_fis
                               WHERE s.id_solicitud = '$id' ");
@@ -21,7 +21,7 @@ if (isset($_POST["idArch"])) {
     $data = $sql->fetch_object();
 
     $UbicacionA = $data->dir_nombre;
-    $responsable = ($data->responsable == "") ? $data->dir_nombre : $data->responsable;
+    $responsable = ($data->responsable == '' || $data->responsable == '0') ? $data->dir_nombre : $data->responsable;
 
 }else {
     $UbicacionA = "error no data";

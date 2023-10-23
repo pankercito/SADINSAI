@@ -1,15 +1,15 @@
 //filtro de busqueda de estados
 function searching(e) {
 
-    let input = document.getElementById("searchbar").value; //id del input de busqueda;
+    let input = document.getElementById("searchbar"); //id del input de busqueda;
     let lista = document.getElementById("resultList"); //id del input de busqueda;
     let divResult = document.getElementById("result"); //id del input de busqueda;
 
     let keys = new FormData();
 
-    keys.append("keys", input);
+    keys.append("keys", input.value);
 
-    if (input.length > 0) {
+    if (input.value.length > 0) {
         $.ajax({
             data: keys,
             processData: false,
@@ -21,9 +21,9 @@ function searching(e) {
 
                 if (jeisonXD(params)) {
 
-                   let newlist = JSON.parse(params);
+                    let newlist = JSON.parse(params);
 
-                   lista.innerHTML = newlist.join(" ");
+                    lista.innerHTML = newlist.join(" ");
 
                 } else {
                     lista.innerHTML = "sin resultados";
@@ -33,4 +33,10 @@ function searching(e) {
     } else {
         divResult.classList.add("d-none");
     }
+    
+    input.addEventListener("blur", function () {
+       setTimeout(() => {
+         divResult.classList.add("d-none");
+       }, 100);
+    });
 }

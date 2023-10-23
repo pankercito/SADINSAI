@@ -14,6 +14,8 @@ class Personal
     private $sexo;
     private $fecha;
     private $telefono;
+    private $departamento;
+    private $idDepartamento;
     private $email;
     private $direccion;
     private $estado;
@@ -38,7 +40,7 @@ class Personal
     }
 
     /**
-     * Summary of getDatos
+     * OBTENER DATOS DEL PERSONAL POR CEDULA
      * @return void
      */
     private function getDatos()
@@ -53,6 +55,8 @@ class Personal
                                            INNER JOIN ciudades c ON p.id_ciudad = c.id_ciudad
                                            INNER JOIN sedes s ON p.sede_id = s.sede_id
                                            INNER JOIN cargo g ON g.id_cargo = p.cargo
+                                           INNER JOIN departamentos d ON d.id_direccion = p.departamento
+
                                            WHERE p.ci = $pCi");
 
             $count_results = mysqli_num_rows($cnce);
@@ -63,9 +67,8 @@ class Personal
                 $this->ci = $data['ci'];
                 $this->nombre = ucwords(strtolower($data['nombre']));
                 $this->apellido = ucwords(strtolower($data['apellido']));
-                $this->grado = $data['grado_ac'];
+                $this->grado = strtolower($data['grado_ac']);
                 $this->fecha = $data['fecha_nac'];
-                $this->sexo = $data['sexo'];
                 $this->telefono = $data['telefono'];
                 $this->email = strtolower($data['email']);
                 $this->direccion = ucwords(strtolower($data['direccion']));
@@ -77,9 +80,10 @@ class Personal
                 $this->idSede = $data['sede_id'];
                 $this->Cargo = $data['cargo_nombre'];
                 $this->idCargo = $data['cargo'];
-                $this->fecha = $data['fecha_nac'];
                 $this->sexo = strtolower($data['sexo']);
-                $this->grado = $data['grado_ac'];
+                $this->departamento = ucwords(strtolower($data['dir_nombre']));
+                $this->idDepartamento = $data['departamento'];
+
             } else {
                 $this->nombre = "Sin datos";
                 $this->apellido = "Sin datos";
@@ -97,6 +101,8 @@ class Personal
                 $this->fecha = "Sin datos";
                 $this->sexo = "Sin datos";
                 $this->grado = "Sin datos";
+                $this->departamento = "Sin datos";
+                $this->idDepartamento = "Sin datos";
             }
         } else {
             $this->nombre = "Sin datos";
@@ -116,9 +122,12 @@ class Personal
             $this->fecha = "Sin datos";
             $this->sexo = "Sin datos";
             $this->grado = "Sin datos";
+            $this->departamento = "Sin datos";
+            $this->idDepartamento = "Sin datos";
         }
         $this->connec->close();
     }
+
     /**
      * @return string nombre
      */
@@ -126,6 +135,7 @@ class Personal
     {
         return $this->nombre;
     }
+
     /**
      * @return string apellido
      */
@@ -133,6 +143,7 @@ class Personal
     {
         return $this->apellido;
     }
+
     /**
      * @return mixed|string ci desencriptada
      */
@@ -140,6 +151,7 @@ class Personal
     {
         return $this->ci;
     }
+
     /**
      * @return mixed|string telefono
      */
@@ -147,6 +159,7 @@ class Personal
     {
         return $this->telefono;
     }
+
     /**
      * @return string email
      */
@@ -154,6 +167,7 @@ class Personal
     {
         return $this->email;
     }
+
     /**
      * @return string direccion
      */
@@ -161,6 +175,7 @@ class Personal
     {
         return $this->direccion;
     }
+
     /**
      * @return mixed|string estado
      */
@@ -168,6 +183,7 @@ class Personal
     {
         return $this->estado;
     }
+
     /**
      * @return mixed|string ID estado
      */
@@ -175,6 +191,7 @@ class Personal
     {
         return $this->idEstado;
     }
+
     /**
      * @return mixed|string Ciudad
      */
@@ -182,6 +199,7 @@ class Personal
     {
         return $this->ciudad;
     }
+
     /**
      * @return mixed|string ID Ciudad
      */
@@ -189,6 +207,7 @@ class Personal
     {
         return $this->idCiudad;
     }
+
     /**
      * @return mixed|string Sede
      */
@@ -196,6 +215,7 @@ class Personal
     {
         return $this->sede;
     }
+
     /**
      * @return mixed|string ID Sede
      */
@@ -203,6 +223,7 @@ class Personal
     {
         return $this->idSede;
     }
+
     /**
      * @return mixed|string cargo
      */
@@ -210,6 +231,7 @@ class Personal
     {
         return $this->Cargo;
     }
+
     /**
      * @return mixed|string ID cargo
      */
@@ -241,4 +263,22 @@ class Personal
     {
         return $this->fecha;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getIdDepart()
+    {
+        return $this->idDepartamento;
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDepartament()
+    {
+        return $this->departamento;
+    }
+
 }

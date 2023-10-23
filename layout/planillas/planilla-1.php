@@ -1,45 +1,60 @@
-<h6>ancticipo</h6>
-<form action="../pdf/epdf.php" target='_blank' method="post">
-    <div class="mb-3 row col align-items-baseline">
+<?php
+session_start();
+?>
+<h6>ANTICIPO</h6>
+<hr>
+<form action="../php/solisPlanlillas.php" method="post">
+    <div class="col">
+        <h6 class="text-center">
+            DATOS DEL SOLICITANTE
+        </h6>
+    </div>
+    <div class="mb-3 row col align-items-baseline mx-2">
         <div class="col">
             <label for="codigo" class="col-form-label">codigo</label>
-            <input type="text" class="form-control" name="codigo" id="codigo" placeholder="Name">
+            <input type="text" class="form-control" name="codigo" id="codigo" placeholder="codigo">
         </div>
         <div class="col">
             <label for="fecha" class="col-form-label">fecha</label>
-            <input type="date" class="form-control" name="fecha" id="fecha" placeholder="Name">
+            <input type="date" class="form-control" name="fecha" id="fecha" value="<?php echo date('Y-m-d') ?>">
         </div>
         <div class="col">
             <label for="codigoNomina" class="col-form-label">codigo de nomina</label>
-            <input type="text" class="form-control" name="codigoNomina" id="codigoNomina" placeholder="Name">
+            <input type="text" class="form-control" name="codigoNomina" id="codigoNomina" placeholder="codigo">
         </div>
     </div>
-    <div class="mb-3 row col align-items-baseline">
+    <div class="mb-3 row col align-items-baseline mx-2">
         <div class="col">
             <label for="inputNames" class="col-form-label">nombres y apellidos</label>
-            <input type="text" class="form-control" name="inputNames" id="inputNames" placeholder="Name">
+            <input type="text" class="form-control" name="inputNames" id="inputNames"
+                value="<?php echo $_SESSION['getPlanillaNombre'] . ' ' . $_SESSION['getPlanillaApellido'] ?>" readonly>
         </div>
         <div class="col">
             <label for="cin" class="col-form-label">C.I.N</label>
-            <input type="text" class="form-control" name="cin" id="cin" placeholder="Name">
+            <input type="text" class="form-control" name="cin" id="cin" value="<?php echo $_SESSION['getPlanillaCI'] ?>"
+                readonly>
         </div>
         <div class="col">
             <label for="cargo" class="col-form-label">cargo</label>
-            <input type="text" class="form-control" name="cargo" id="cargo" placeholder="Name">
+            <input type="text" class="form-control" name="cargo" id="cargo"
+                value="<?php echo $_SESSION['getPlanillaCargo'] ?>" readonly>
         </div>
         <div class="col">
             <label for="adscrito" class="col-form-label">adscrito a</label>
-            <input type="text" class="form-control" name="adscrito" id="adscrito" placeholder="Name">
+            <input type="text" class="form-control" name="adscrito" id="adscrito"
+                value="<?php echo $_SESSION['getPlanillaDepart'] ?>" readonly>
         </div>
         <div class="col">
             <label for="unidad" class="col-form-label">unidad</label>
-            <input type="text" class="form-control" name="unidad" id="unidad" placeholder="Name">
+            <input type="text" class="form-control" name="unidad" id="unidad"
+                value="<?php echo $_SESSION['getPlanillaSede'] ?>" readonly>
         </div>
     </div>
-    <div class="mb-3 row col align-items-baseline">
+    <div class="mb-3 row col align-items-baseline mx-2">
         <div class="col">
             <label for="ubicacion" class="col-form-label">ubicacion</label>
-            <input type="text" class="form-control" name="ubicacion" id="ubicacion" placeholder="Name">
+            <input type="text" class="form-control" name="ubicacion" id="ubicacion"
+                value="<?php echo $_SESSION['getPlanillaEst'] ?>" readonly>
         </div>
         <div class="col">
             <label for="fechaingreso" class="col-form-label">fecha de ingreso al insai</label>
@@ -54,49 +69,66 @@
             <input type="text" class="form-control" name="tiempototal" id="tiempototal" placeholder="Name">
         </div>
     </div>
-    <div class="mb-3 row col align-items-baseline">
-        <h6 class="mb-2">motivo de anticipo</h6>
-        <div class="col row no-color align-items-baseline">
-            <h6>Construccion de vivienda</h6>
-            <div class="col d-grid align-items-baseline">
-                <label for="motivoanticipo" class="mb-0">adquisicion de vivienda</label>
-                <input class="" type="radio" value="adquisicion de vivienda" name="motivoanticipo" id="motivoanticipo">
-                <label for="motivoanticipo2" class="mb-0"> mejora o reparacion de vivienda</label>
-                <input class="" type="radio" value="mejora o reparacion de vivienda" name="motivoanticipo" id="motivoanticipo2">
-            </div>
-        </div>
-        <div class="col row no-color align-items-baseline">
-            <h6>liberacion de hipoteca</h6>
-            <div class="form-check-inline">
-                <label for="motivoanticipo3" class="mb-2">sobre la vivienda</label>
-                <input class="" type="radio" value="sobre la vivienda" name="motivoanticipo" id="motivoanticipo3">
-                <label for="motivoanticipo4" class="mb-2">otro gravamen</label>
-                <input class="" type="radio" value="otro gravamen" name="motivoanticipo" id="motivoanticipo4">
-            </div>
-        </div>
-        <div class="col row no-color align-items-baseline">
-            <h6>pago de pension escolar</h6>
-            <div class="form-check-inline">
-                <input class="form-control-checkbox" value="pago de pension escolar" type="radio" name="motivoanticipo" id="motivoanticipo8">
-            </div>
-        </div>
-        <div class="col row no-color align-items-baseline">
-            <h6>gastos medicos</h6>
-            <div class="form-check-inline">
-                <label for="motivoanticipo5" class="mx-2">trabajador</label>
-                <input class="" type="radio" value="gm-trabajador" name="motivoanticipo" id="motivoanticipo5">
-                <label for="motivoanticipo6" class="mx-2">conyugue</label>
-                <input class="" type="radio" value="gm-conyugue" name="motivoanticipo" id="motivoanticipo6">
-                <label for="motivoanticipo7" class="mx-2">hijos</label>
-                <input class="" type="radio" value="gm-hijos" name="motivoanticipo" id="motivoanticipo7">
+    <h6 class="col">MOTIVO DE ANTICIPO</h6>
+    <div class="mb-3 row col align-items-baseline mx-2">
+        <div class="col">
+            <h6 class="col">Construccion de vivienda</h6>
+            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                <input type="radio" class="btn-check" name="motivode" id="btncheck1" autocomplete="off"
+                    value="Vivienda Adquisición devivienda">
+                <label class="btn btn-outline-light" for="btncheck1">Adquisición devivienda</label>
+
+                <input type="radio" class="btn-check" name="motivode" id="btncheck2" autocomplete="off"
+                    value="Vivienda Mejora o reparacion de la vivienda">
+                <label class="btn btn-outline-light" for="btncheck2">Mejora o reparacion de la vivienda</label>
             </div>
         </div>
         <div class="col">
+            <h6 class="col">Liberación de hipoteca</h6>
+            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                <input type="radio" class="btn-check" name="motivode" id="btncheck3" autocomplete="off"
+                    value="Hipoteca Sobre la vivienda">
+                <label class="btn btn-outline-light" for="btncheck3">Sobre la vivienda</label>
+
+                <input type="radio" class="btn-check" name="motivode" id="btncheck4" autocomplete="off"
+                    value="Hipoteca Otro gravamen">
+                <label class="btn btn-outline-light" for="btncheck4">Otro gravamen</label>
+            </div>
+        </div>
+        <div class="col">
+            <h6 class="col">Gastos médicos</h6>
+            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                <input type="radio" class="btn-check" name="motivode" id="btncheck5" autocomplete="off"
+                    value="Gastos Trabajador">
+                <label class="btn btn-outline-light" for="btncheck5">Trabajador</label>
+
+                <input type="radio" class="btn-check" name="motivode" id="btncheck6" autocomplete="off"
+                    value="Gastos Cónyugue">
+                <label class="btn btn-outline-light" for="btncheck6">Cónyugue</label>
+                <input type="radio" class="btn-check" name="motivode" id="btncheck7" autocomplete="off"
+                    value="Gastos Hijos">
+                <label class="btn btn-outline-light" for="btncheck7">Hijos</label>
+            </div>
+        </div>
+        <div class="col">
+            <h6 class="col">Pago de pension escolar</h6>
+            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                <input type="radio" class="btn-check" name="motivode" id="btncheck8" autocomplete="off"
+                    value="pago de pension escolar">
+                <label class="btn btn-outline-light" for="btncheck8">pago de pension escolar</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3 row col align-items-baseline mx-2">
+
+        <div class="col-md-5 mx-auto">
             <label for="observaciones">observaciones</label>
-            <input type="text" name="observaciones" value="observaciones" id="observaciones" class="form-control">
+            <input type="text" name="observaciones" placeholder="observaciones" id="observaciones" class="form-control">
         </div>
     </div>
     <div class="col">
-        <button type="submit" class="btn btn-success">procesar</button>
+        <input type="text" class="d-none" value="1" name="formtipo">
+        <button type="submit" class="btn btn-success btn-lg">procesar</button>
     </div>
 </form>

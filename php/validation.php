@@ -14,7 +14,7 @@ if (isset($_POST['login'])) {
     $pass = $_POST['passlg'];
 
 
-    $auditoria = new auditoria();
+    $auditoria = new Auditoria();
 
     $conn = new Conexion();
 

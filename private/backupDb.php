@@ -3,7 +3,6 @@
  * Respaldar base de datos de MySQL con PHP
  * Función modificada de: https://stackoverflow.com/a/21284229/5032550
  *
- * Visita: https://parzibyte.me/blog/2018/10/22/script-respaldar-base-de-datos-mysql-php/
  */
 
 // Ejemplo de llamada: exportarTablas("localhost", "root", "123", "foo");

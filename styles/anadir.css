@@ -16,23 +16,6 @@ a.btn.btn-warning:hover {
     background: #ffd24c;
 }
 
-.contenido1 form input {
-    height: 1.9rem;
-    border: none;
-    padding: 0.2rem;
-    border-radius: 3px;
-    width: auto;
-    font-size: 15px;
-}
-
-.selects.row {
-    display: flex;
-    justify-items: self-end;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
 
 .ui.stackable.grid {
     display: flex;
@@ -68,103 +51,9 @@ a.btn.btn-warning:hover {
     margin: -1rem 1.4rem 1.5rem;
 }
 
-.one.row {
-    display: flex;
-    margin: 1.5rem;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: center;
-}
-
-.two.row {
-    display: flex;
-    margin: 1.5rem;
-    align-items: center;
-    flex-wrap: wrap;
-    flex-direction: column;
-}
-
-.sel1 {
-    display: flex;
-    flex-direction: column;
-}
-
-.sel2 {
-    display: flex;
-    flex-direction: column;
-}
-
-.sel3 {
-    margin: 2rem 0 0;
-    display: flex;
-    flex-direction: column;
-}
-
-.contenido1 {
-    justify-content: center;
-    display: flex;
-    text-align: center;
-    margin: auto;
-}
-
-.contenido1 form {
-    width: 25%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-    align-content: space-around;
-    font-size: 20px;
-}
-
-.one.row {
-    display: block;
-}
-
-.two.row {
-    display: block;
-    color: #fafafa;
-}
-
-.selects.row {
-    display: flex;
-    justify-items: self-end;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    align-items: baseline;
-    justify-content: center;
-    width: 110%;
-}
-
-.selects select {
-    height: 1.9rem;
-    border: none;
-    padding: 0.2rem;
-    border-radius: 3px;
-}
-
-.selects select {
+select {
+    border: none !important;
     font-size: 15px;
-}
-
-select#Sede {
-    font-size: 15px;
-}
-
-.lmao.row {
-    width: 80%;
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    justify-content: center;
-    align-items: baseline;
-}
-
-select#Sede {
-    height: 1.9rem;
-    border: none;
-    padding: 0.2rem;
-    border-radius: 3px;
 }
 
 .registersuser {
@@ -173,14 +62,6 @@ select#Sede {
     margin: 1.5rem 3rem;
     justify-content: center;
     align-items: baseline;
-}
-
-input#Edad {
-    padding: 1rem;
-}
-
-select#Edad {
-    margin: 1rem;
 }
 
 p {
@@ -209,25 +90,13 @@ td.callo {
     margin: 0 0 0rem 0rem;
 }
 
-.two.row.radio {
-    flex-direction: row;
-    display: flex;
-    justify-content: center;
-    flex-wrap: nowrap;
-}
-
-.form-check-inline {
-    display: inline-block;
-    margin-right: 1rem;
-    display: flex;
-    align-items: center;
-    margin: -16px -1.4rem 0;
-    justify-content: center;
-}
-
 label.btn {
     display: flex;
     align-items: center;
+}
+
+label.radiohead.btn {
+    font-size: 13px !important;
 }
 
 small#msjverify {

@@ -25,6 +25,7 @@ function nuevoGrafico(canvas, array1, array2, array3, arrayFechas) {
             tension: 0.5
         }]
     };
+    
     const config = {
         type: 'line',
         data: data,
@@ -36,14 +37,14 @@ function nuevoGrafico(canvas, array1, array2, array3, arrayFechas) {
                 },
                 title: {
                     display: true,
-                    text: 'Registro de volumen de datos' + arrayFechas,
+                    text: 'Volumen de datos ' + arrayFechas,
                     color: '#484848',
                     font: {
                         size: 16,
                         weight: 600,
                     }
                 },
-            }
+            },
         },
     };
 

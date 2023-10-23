@@ -17,6 +17,13 @@
     height: 11rem;
 }
 
+a.alert.alert-primary {
+    padding: 12px;
+    margin: 0;
+    font-weight: 700;
+    color: #052c65;
+}
+
 .n-estructure.col-lg-9 {
     padding: 0 0rem 0 2rem;
 }

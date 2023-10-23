@@ -1,5 +1,6 @@
 <?php
 ini_set('session.cookie_lifetime', 100); //tiempo de la sesion en segundos
+date_default_timezone_set('America/Caracas');
 
 include("function/criptCodes.php");
 include("function/dec.php");

@@ -16,7 +16,14 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
             // ingreso de personal
             $subId = $conn->real_escape($_POST["idSoli"]);
 
-            $svp = $conn->query("SELECT * FROM solicitudes s INNER JOIN solicitudes_precarga p ON p.id_solicitud_precarga = s.id_solicitud WHERE s.id_solicitud = '$subId'");
+            $svp = $conn->query("SELECT * FROM solicitudes t
+                                          INNER JOIN solicitudes_precarga p ON p.id_solicitud_precarga = t.id_solicitud 
+                                          INNER JOIN estados e ON p.id_estado_pre = e.id_estado
+                                          INNER JOIN ciudades c ON p.id_ciudad_pre = c.id_ciudad
+                                          INNER JOIN sedes s ON p.id_sede_pre = s.sede_id
+                                          INNER JOIN cargo g ON  p.cargo_pre = g.id_cargo
+                                          INNER JOIN departamentos d ON p.departamento_pre = d.id_direccion
+                                          WHERE t.id_solicitud = '$subId'");
             $sv = mysqli_num_rows($svp);
 
 
@@ -45,7 +52,7 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
                 <div class="editConten row col-md-8">
                     <div class="col-md-8">
                         <form action="../php/personalMerge.php" class="formgroup" id="soliMerge" method="POST">
-                            <h6 class="" style="margin: 0 0 1.2rem 11%;">Por favor elija una opcion</h6>
+                            <h6 class="" style="margin: 0 0 1.2rem 11%;">Por favor elija una accion</h6>
                             <div class="form-check">
                                 <input type="radio" class="btn-check" name="editSoli" id="pendiente" value="0" checked>
                                 <label for="pendiente" class="rat btn btn-outline-secondary">Pendiente</label>
@@ -79,19 +86,25 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
 
                                     echo trPrint(ucwords(strtolower($precarInf['apelido_pre'])), "Apellido");
 
-                                    echo trPrint(ucwords(strtolower($precarInf['direccion_pre'])), "Direcci&oacute;n");
+                                    echo trPrint(ucwords(strtolower($precarInf['fecha_nac_pre'])), "Fecha de Nacimiento");
+
+                                    echo trPrint(ucwords(strtolower($precarInf['grado_ac_pre'])), "Grado");
+
+                                    echo trPrint(ucwords(strtolower($precarInf['direccion_pre'])), "Dirección");
 
                                     echo trPrint($precarInf['telefono_pre'], "Telefono");
 
                                     echo trPrint(strtolower($precarInf['email_pre']), "Email");
-
+                                    
                                     echo trPrint(ucwords(strtolower(cor_acentos($n['estado']))), "Estado");
-
+                                    
                                     echo trPrint(ucwords(strtolower(cor_acentos($n['ciudad']))), "Ciudad");
-
+                                    
                                     echo trPrint(ucwords(strtolower(cor_acentos($n['sede']))), "Sede");
+                                    
+                                    echo trPrint(strtolower($precarInf['dir_nombre']), "Departamento");
 
-                                    echo trPrint($precarInf['cargo_pre'], "Cargo");
+                                    echo trPrint($precarInf['cargo_nombre'], "Cargo");
 
                                     ?>
                                 </tbody>
@@ -130,27 +143,36 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
             break;
 
         case '1':
-            // edicion de datos de person
+            // edicion de datos de personal
 
             $subId = $conn->real_escape($_POST["idSoli"]);
 
-            $svp = $conn->query("SELECT * FROM solicitudes s INNER JOIN solicitudes_precarga p ON p.id_solicitud_precarga = s.id_solicitud WHERE s.id_solicitud = '$subId'");
-            $sv = mysqli_num_rows($svp);
+            $saralo = $conn->query("SELECT * FROM solicitudes t
+                                          INNER JOIN solicitudes_precarga p ON p.id_solicitud_precarga = t.id_solicitud
+                                          INNER JOIN cargo g ON g.id_cargo = p.cargo_pre
+                                          INNER JOIN departamentos d ON d.id_direccion = p.departamento_pre
+                                          WHERE t.id_solicitud = '$subId'");
 
-            $precarInf = mysqli_fetch_array($svp);
+            $sv = $saralo->num_rows;
 
+            $precarInf = $saralo->fetch_assoc();
+
+            // data vieja
             $personal = new Personal(encriptar($precarInf['ci_pre']));
 
             $pName = $personal->getNombre();
             $pApellido = $personal->getApellido();
             $pCi = $personal->getCi();
             $pPhone = $personal->getTelefono();
+            $pSexo = $personal->getSexo();
+            $pGrado = $personal->getGrado();
             $pEmail = $personal->getEmail();
             $pDireccion = $personal->getDireccion();
             $pStado = $personal->getEstado();
             $pCiudad = $personal->getCiudad();
             $pSede = $personal->getSede();
             $pCargo = $personal->getCargo();
+            $pDepart = $personal->getDepartament();
 
             /**
              * Imprimir informes si los datos de entrada son diferentes
@@ -186,11 +208,11 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
 
                 //Lista DE MUESTREO DE CAMBIOS
                 ?>
-                <h4 class="" style="margin: 0 0 1.2rem 6%;">Cambios realizados</h4>
+                <h4 class="" style="margin: 0 0 1.2rem 6%;">Cambios a Realizar</h4>
                 <div class="editConten row col-md-8">
                     <div class="col-md-8">
                         <form action="../php/personalMerge.php" class="formgroup" id="soliMerge" method="POST">
-                            <h6 class="" style="margin: 0 0 1.2rem 11%;">Por favor elija una opcion</h6>
+                            <h6 class="" style="margin: 0 0 1.2rem 11%;">Por favor elija una accion</h6>
                             <div class="form-check">
                                 <input type="radio" class="btn-check" name="editSoli" id="pendiente" value="0" checked>
                                 <label for="pendiente" class="rat btn btn-outline-secondary">Pendiente</label>
@@ -229,7 +251,7 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
                                 justify-content: center;
                             }
                         </style>
-                        <table class="table table-primary">
+                        <table class="table table-ligth">
                             <thead>
                                 <tr>
                                     <th scope="col">campo</th>
@@ -245,6 +267,8 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
 
                                 echo viewMerge(ucwords(strtolower($precarInf['apelido_pre'])), $pApellido, "Apellido");
 
+                                echo viewMerge(ucwords(strtolower($precarInf['sexo_pre'])), ucwords(strtolower($pSexo)), "Sexo");
+
                                 echo viewMerge(ucwords(strtolower($precarInf['direccion_pre'])), ucwords(strtolower($pDireccion)), "Direcci&oacute;n");
 
                                 echo viewMerge($precarInf['telefono_pre'], $pPhone, "Telefono");
@@ -257,12 +281,13 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
 
                                 echo viewMerge(ucwords(strtolower($ecs['sede'])), ucwords(strtolower($pSede)), "Sede");
 
-                                echo viewMerge(ucwords(strtolower($precarInf['cargo_pre'])), ucwords(strtolower($pCargo)), "Cargo");
+                                echo viewMerge(ucwords(strtolower($precarInf['cargo_nombre'])), ucwords(strtolower($pCargo)), "Cargo");
+
+                                echo viewMerge(ucwords(strtolower($precarInf['dir_nombre'])), ucwords(strtolower($pDepart)), "Departamento");
 
                                 ?>
                             </tbody>
                         </table>
-
                     </div>
                 </div>
 
@@ -295,7 +320,7 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
                 <div class="editConten row col-md-8">
                     <div class="col-md-8">
                         <form action="../php/personalMerge.php" class="formgroup" id="soliMerge" method="POST">
-                            <h6 class="" style="margin: 0 0 1.2rem 11%;">Por favor elija una opcion</h6>
+                            <h6 class="" style="margin: 0 0 1.2rem 11%;">Por favor elija una accion</h6>
                             <div class="form-check">
                                 <input type="radio" class="btn-check" name="editSoli" id="pendiente" value="0" checked>
                                 <label for="pendiente" class="rat btn btn-outline-secondary">Pendiente</label>
@@ -410,7 +435,7 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
                 <div class="editConten row col-md-8">
                     <div class="col-md-8">
                         <form action="../php/personalMerge.php" class="formgroup" id="soliMerge" method="POST">
-                            <h6 class="" style="margin: 0 0 1.2rem 11%;">Por favor elija una opcion</h6>
+                            <h6 class="" style="margin: 0 0 1.2rem 11%;">Por favor elija una accion</h6>
                             <div class="form-check">
                                 <input type="radio" class="btn-check" name="editSoli" id="pendiente" value="0" checked>
                                 <label for="pendiente" class="rat btn btn-outline-secondary">Pendiente</label>

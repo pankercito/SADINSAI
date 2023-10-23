@@ -1,13 +1,13 @@
-#login-box{ /*DISEÑO DE MARCO DE INICIO DE SESION*/
+#login-box {
     border: 0;
     border-radius: 15px;
     width: 300px;
     text-align: center;
     margin: auto;
     margin-top: 30px;
-    background: #ffffffd2;
-    padding: 20px 50px 20px 50px; 
-    box-shadow: 0px 0px 10px 10px rgba(70, 70, 70, 0.329);
+    background: #e8e7e6;
+    padding: 20px 50px 20px 50px;
+    box-shadow: 0px 0px 10px 2px #00000054;
 }
 #login-box p{ /* TITULO DEL RECUADRO DE I S*/
     color:rgba(26, 26, 26, 0.904);
@@ -36,18 +36,19 @@
     color:rgb(85, 85, 85);
     font-size: 20px;
 }
-#login-box button { /*BOTON DE INCIO*/
-    font-size: 20px; 
-    color:white;
+#login-box button { /* BOTON LOGI*/
+    font-size: 20px;
+    color: white;
     margin-top: 30px;
     margin-bottom: 0px;
     border-radius: 8px;
     border-bottom: 0;
     border-style: solid;
-    border:0;
-    background:#74c37c;
+    border: 0;
+    background: #74c37c;
     cursor: pointer;
     text-decoration: none;
+    box-shadow: 0px 1px 1px 0px #0000005c;
     outline: none;
 }
 #login-box button:hover {
@@ -66,9 +67,12 @@
     text-decoration: none;
     color: rgb(126, 123, 123);
 }
-#login-box .parte-abajo a:hover{
-    color: #A6DEB7;
+#login-box .parte-abajo a:hover {
+    color: #36c077;
+    text-decoration: underline;
 }
 .parte-abajo {
     margin: 1.5rem 0 0 0;
 }
+
+button.dropbtn {}

@@ -5,7 +5,7 @@ editar.addEventListener("click", bue);
 
 //funcion de boton ocultal todo y enjecutar todas la funciones
 function bue() {
-    agregarSelectedE(idE, idCar);
+    agregarSelectedE(idE, idCar, idDep);
     //cambiar titulo y variable para complemento
     document.title = "SADINSAI | Editar usuario";
 
@@ -20,11 +20,21 @@ function bue() {
 }
 
 //funcion de preselecion de selectores
-function agregarSelectedE(valor1, valor2) {
+function agregarSelectedE(valor1, valor2, valor3) {
     // Obtener los elementos select del DOM
     var selectE = document.getElementById("Estados");
     var selectCargo = document.getElementById("Cargo");
+    var ep = document.getElementById("ep");
+    
+    // ESTADO
+    for (var i = 0; i < selectE.options.length; i++) {
+        var option = selectE.options[i];
+        if (option.value == valor1) {
+            option.selected = true;
+        }
+    }
 
+    // CARGO
     for (var i = 0; i < selectCargo.options.length; i++) {
         var option = selectCargo.options[i];
         if (option.value == valor2) {
@@ -32,16 +42,18 @@ function agregarSelectedE(valor1, valor2) {
         }
     }
 
-    // Establecer el valor seleccionado en los selectores
-    for (var i = 0; i < selectE.options.length; i++) {
-        var option = selectE.options[i];
-        if (option.value == valor1) {
+    // DEPARTAMENTO
+    for (var i = 0; i < ep.options.length; i++) {
+        var option = ep.options[i];
+        if (option.value == valor3) {
             option.selected = true;
         }
     }
+
     // Llamar al evento change en el selector de Estado
     $("#Estados").trigger('change');
     $("#Cargo").trigger('change');
+    $("#pe").trigger('change');
 
 }
 

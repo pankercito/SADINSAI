@@ -70,3 +70,14 @@ body {
 div#table_info {
   color: #f2f2f2;
 }
+/* 
+p.ttl-dashboard {
+  color: var(--font-color-bg);
+  font-weight: 500 !important;
+  font-family: system-ui;
+  border-bottom: 4px solid #f2f2f2;
+  padding: 10px 0;
+  letter-spacing: 5px;
+  margin: 0 2rem;
+  width: 25%;
+} */

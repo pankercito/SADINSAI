@@ -1,13 +1,26 @@
 <div class="tablesoli">
+    <div class="col-lg-3 mx-auto">
+        <h6 class="col" style="color:white;">estado de solicitudes</h6>
+        <label class="d-flex">
+            <select name="coro" class="form-select " id="estado">
+                <option value="">selecione una opcion</option>
+                <option value="0">Pendiente</option>
+                <option value="1">Aceptadas</option>
+                <option value="2">Rechazadas</option>
+                <option value="3">Anuladas</option>
+            </select>
+        </label>
+    </div>
     <table class="user-table table table-striped table-class" id="table">
         <thead>
             <tr>
-                <th>Solicitud</th>
-                <th>Receptor</th>
-                <th>Fecha</th>
-                <th>Tipo</th>
-                <th>Detalles</th>
-                <th>Estado</th>
+                <th>SOLICITUD</th>
+                <th>RECEPTOR</th>
+                <th>FECHA</th>
+                <th>TIPO</th>
+                <th>DETALLES</th>
+                <th>ESTADO</th>
+                <th>filtro</th>
             </tr>
         </thead>
     </table>

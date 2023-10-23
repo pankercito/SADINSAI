@@ -20,7 +20,7 @@ if ($count > 0) {
         //Lista del personal
         $v = mysqli_fetch_array($sql);
         echo '<tr>';
-        echo '<td>' . strtoupper(cor_acentos($v['estado'])) . '</td>';
+        echo '<td>' . strtoupper($v['estado']) . '</td>';
         echo '<td>' . cor_acentos($v['nombre_sede']) . '</td>';
         echo '<td><a class="aStates" href="perfil.php?perfil=' . encriptar($v['ci']) . '">' . cor_acentos($v['nombre']) . '</a></td>';
         echo '<td>' . cor_acentos($v['apellido']) . '</td>';

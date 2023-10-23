@@ -2,7 +2,7 @@
 
 $conn = new Conexion;
 
-$d = $conn->query("SELECT * FROM `direccion_direcciones`");
+$d = $conn->query("SELECT * FROM `departamentos`");
 
 while ($row = $d->fetch_object()) {
     ?>

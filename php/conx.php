@@ -20,6 +20,7 @@ class Conexion
     {
        return  $this->connec->query($query);
     }
+    
     /**
      * Escapa texto para evitar inyeciones por input
      * @param mixed $texto entrada a escapar
@@ -37,6 +38,11 @@ class Conexion
      */
     public function close(){
         return mysqli_close($this->connec);
+    }
+
+    public function error(){
+        return mysqli_error($this->connec);
+
     }
 
     /**

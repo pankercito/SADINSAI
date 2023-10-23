@@ -1,14 +1,15 @@
 <?php
 
 if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
-    include('conx.php');
-    include("function/criptCodes.php");
-    include("function/filesFunctions.php");
-    include("function/sumarhora.php");
-    include("class/mergeSolicitudes.php");
+    include "conx.php";
+    include "function/criptCodes.php";
+    include "function/filesFunctions.php";
+    include "function/sumarhora.php";
+    include "class/auditoria.php";
+    include "class/solicitudesActions.php";
 
     $conn = new Conexion();
-    $merge = new solicitudesMerge();
+    $merge = new GestioData();
 
     $id = $conn->real_escape($_POST['idSoli']);
 
@@ -25,6 +26,7 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
                         echo json_encode($add);
                     } else {
                         echo "error.personal";
+                        echo $add;
                     }
                     break;
 
@@ -71,7 +73,7 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
                     echo "ha ocurrido un error por favor intente nuevamente";
             }
             break;
-        case '2': //ingreso de archivos
+        case '2': // INGRESO DE ARCHIVO
             switch ($_POST['radio']) {
                 case '1': // ACEPTAR SOLICITUD
 

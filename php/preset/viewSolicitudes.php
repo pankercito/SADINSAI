@@ -21,8 +21,8 @@ $apr = [
 $aprN = [
     "0" => "pendiente",
     "1" => "aceptada",
-    "2" => "rechasada",
-    "3" => "vencida",
+    "2" => "rechazada",
+    "3" => "anulada",
 ];
 $tipoSolic = [
     "0" => "ingreso de personal",
@@ -45,7 +45,8 @@ if ($count_results > 0) {
             $data->fecha,
             $tipoSolic[$data->tipo],
             '<a onclick="detalles(' . $data->id_solicitud . ',' . $data->tipo . ')" class="viewDetails btn btn"> Ver detalles </a>',
-            '<a class="' . $apr[$data->apr_estado] . '">' . $aprN[$data->apr_estado] . '</a>  '
+            '<a class="' . $apr[$data->apr_estado] . '">' . $aprN[$data->apr_estado] . '</a>  ',
+            $data->apr_estado
         ];
     }
     // crear un array con el array de los datos, importante que esten dentro de : data

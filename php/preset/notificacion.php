@@ -1,40 +1,38 @@
 <script type="text/javascript">
-    // Obtener el mensaje de la notificación desde PHP
-    const mensaje = "<?php echo @$_SESSION["noti"] ?>";
+    // Obtener verifiacion de notificación desde PHP
+    const activo = "<?php  echo $_SESSION["noti"]?>";
 
-    localStorage.setItem('activeSection', '4');
+    <?php
 
-    if (window.onload) {
-        setTimeout(() => {
-            notify(mensaje);
-        }, 800);
+    // URL actual sin los parámetros GET
+    $actUrl = strtok($_SERVER['REQUEST_URI'], '?');
+
+    if ($actUrl != '/public/gestionData.php') {
+        ?>
+
+        const mensaje = "Solicitud realizada con exito";
+
+        <?php
+    } else {
+        ?>
+
+        const mensaje = "Gestion de datos realizada con exito";
+
+        <?php
     }
 
-    function notify(mensaje) {
-        if (mensaje == 1) {
-            // Mostrar el mensaje en el contenedor
-            document.getElementById("notificacion").innerHTML = "Su solicitud a sido procesada con exito";
+    ?>
 
-            let notificacion = document.getElementById("notificacion");
+    localStorage.setItem('activeSection', '<?php echo (strtok($_SERVER['REQUEST_URI'], '?') == '/public/solicitudes.php') ? 4 : 5 ?>');
 
-            // Hacer la animación de entrada de la notificación
-            setTimeout(function () {
-                notificacion.style.transform = "translateX(-126rem)";
-            }, 500)
+    if (window.onload) {
 
-            // Hacer la animación de salida de la notificación
-            setTimeout(function () {
-                notificacion.style.transform = "translateX(125rem)";
-            }, 3500);
-
-            // Ocultar la notificación después de la animación de salida
-            setTimeout(function () {
-                notificacion.style.display = "none";
-            }, 5000);
-
-        } else {
-            document.getElementById("notificacion").style.display = "none";
-        }
+        setTimeout(() => {
+            // tipo,
+            // msj,
+            // activo.
+            notifySolis(1, mensaje, activo);
+        }, 1500);
     }
 </script>
 

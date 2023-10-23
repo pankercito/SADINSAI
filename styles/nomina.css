@@ -16,7 +16,7 @@ body {
 p.ttl-dashboard {
     color: var(--font-color-bg);
     font-weight: bold;
-    margin: 1rem;
+    margin: 0 1rem;
 }
 
 label {

@@ -8,7 +8,7 @@ session_start();
 
 $yo = $_SESSION['sesion'];
 
-$auditoria = new auditoria();
+$auditoria = new Auditoria();
 
 $data = $auditoria->users($yo);
 
