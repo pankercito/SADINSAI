@@ -15,9 +15,9 @@ $.ajax({
 
             const f = colon[3]["lunes"] + " - " + colon[3]["domingo"];
 
-            document.getElementById('prom').innerHTML = 'promedio semanal de solicitudes: ' + colon[5] + '% ';
+            document.getElementById('prom').innerHTML = 'promedio semanal de gestiones realizadas: ' + colon[5] + '% ';
             document.getElementById('prem').innerHTML = 'promedio semanal ingresos archivos agregados: ' + colon[6] + '% ';
-            document.getElementById('prim').innerHTML = 'promedio semanal inicios de sesion diarios: ' + colon[4] + '% ';
+            document.getElementById('prim').innerHTML = 'promedio semanal inicios de sesion: ' + colon[4] + '% ';
 
             nuevoGrafico(dashboard, us, dos, tri, f);
 

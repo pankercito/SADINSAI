@@ -58,13 +58,12 @@
                         <h5 style="margin-bottom: 0;">informacion extra</h5>
                         <hr>
                         <p id="prom" style="font-size: 14px !important; color: #212529;">promedio semanal de
-                            solicitudes: %s</p>
+                            gestiones realizadas: %s</p>
                         <p id="prem" style="font-size: 14px !important; color: #212529;">promedio semanal de archivos
-                            agregados:
-                            %s
+                            agregados: %s
                         </p>
                         <p id="prim" style="font-size: 14px !important; color: #212529;">promedio semanal de inicios de
-                            sesion diarios: %s
+                            sesion: %s
                         </p>
                     </div>
                 </div>

@@ -12,7 +12,7 @@ function nuevoGrafico(canvas, array1, array2, array3, arrayFechas) {
             backgroundColor: "#ff6384",
             tension: 0.4
         }, {
-            label: 'solicitudes realizadas',
+            label: 'gestiones realizadas',
             data: array2,
             borderColor: "#4be9faad",
             backgroundColor: "#3fe8fa",
@@ -30,6 +30,12 @@ function nuevoGrafico(canvas, array1, array2, array3, arrayFechas) {
         type: 'line',
         data: data,
         options: {
+            scales: {
+                y: {
+                    suggestedMin: 0,
+                    suggestedMax: 100,
+                }
+            },
             responsive: true,
             plugins: {
                 legend: {
