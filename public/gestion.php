@@ -34,13 +34,15 @@ include "../php/class/personal.php";
         </div>
       </div>
       <div class="archives-conten col-lg-10">
-        <h4 id="tittleDoc">Documentos de
+        <h4 id="tittleDoc">
           <?php
           $ver = new Personal($_GET['carga']);
-          echo $ver->getNombre() . ' ' . $ver->getApellido();
+          $get = $_GET['gestion'];
+          $pero = $conn->query("SELECT nombre_tipo_arch FROM `tiposarch` WHERE id_tipo ='$get'");
+          echo $pero->fetch_object()->nombre_tipo_arch . " de " . $ver->getNombre() . ' ' . $ver->getApellido();
           ?>
         </h4>
-        <hr style="border-color: #e7e7e7;" >
+        <hr style="border-color: #e7e7e7;">
         <div class="cards d-flex" style="flex-wrap: wrap;">
           <?php
           include_once "../php/preset/cardSelector.php"

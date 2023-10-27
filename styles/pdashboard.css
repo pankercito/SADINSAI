@@ -6,6 +6,8 @@ canvas#dashboard {
     background: #f9f9f8;
     padding: 1rem;
     border-radius: 5px;
+    min-width: 100%;
+    min-height: 27rem;
 }
 
 ul.userUl {

@@ -1,6 +1,6 @@
 <script type="text/javascript">
     // Obtener verifiacion de notificación desde PHP
-    const activo = "<?php  echo $_SESSION["noti"]?>";
+    const activo = "<?php  echo @$_SESSION["noti"]?>";
 
     <?php
 

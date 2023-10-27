@@ -44,9 +44,24 @@
                     background: #33b779;
                 }
 
-                a.aprState.alert.alert-secondary:hover {
+                a.aprState.alert.alert-secondary:not(:disabled):hover {
                     background: #bdbdbd;
                 }
+
+                <?php
+
+                if ($adpval == 0) {
+                    echo "a.aprState.alert.alert-secondary:hover {
+                        background: #e2e3e5  !important;
+                    }
+                    a.aprState.alert.alert-secondary {
+                        cursor: default !important;
+                        margin: 0;
+                    }";
+                }
+
+
+                ?>
             </style>
         </div>
     </div>

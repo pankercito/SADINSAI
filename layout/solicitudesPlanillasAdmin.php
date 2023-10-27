@@ -20,7 +20,7 @@
                 <th scope="col">SOLICITANTE</th>
                 <th scope="col">FECHA</th>
                 <th scope="col">DETALLES</th>
-                <th scope="col">ACCIONES</th>
+                <th scope="col">ESTADO / ACCIONES</th>
                 <th scope="col">filtro</th>
             </tr>
         </thead>

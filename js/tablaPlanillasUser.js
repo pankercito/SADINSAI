@@ -1,6 +1,6 @@
 var puth = $("#table").DataTable({
     ajax: {
-        url: "../php/preset/viewPlanillasSolicis.php",
+        url: "../php/preset/viewPlanillasSolicisUser.php",
     },
     columnDefs: [
         {

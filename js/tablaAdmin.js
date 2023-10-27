@@ -106,13 +106,16 @@ function aprStates(idSolis, tipoS) {
         type: 'POST',
         error: function (jqXHR, xhr, status, error) {
             var nroERROR = jqXHR.status;
-            obj.close();
             setTimeout(() => {
+                obj.close();
                 alert("Estatus " + status + nroERROR + xhr + error)
-            }, 500);
+            }, 200);
         },
         success: function (response) {
-            obj.close();
+            setTimeout(() => {
+                obj.close();
+            }, 200);
+            
             contenido = response;
             // Mostrar el diálogo de confirmación CAMBIO DE ESTATUS
             $.confirm({

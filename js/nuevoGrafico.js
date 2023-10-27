@@ -33,10 +33,8 @@ function nuevoGrafico(canvas, array1, array2, array3, arrayFechas) {
             scales: {
                 y: {
                     suggestedMin: 0,
-                    suggestedMax: 100,
                 }
             },
-            responsive: true,
             plugins: {
                 legend: {
                     position: 'top',

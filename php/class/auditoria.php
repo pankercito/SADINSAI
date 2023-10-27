@@ -65,6 +65,25 @@ class Auditoria
     }
 
     /**
+     * Desactivar usuario
+     * @param mixed $user
+     * @return bool
+     */
+    public function supenderUsuario($user, $senha = null)
+    {
+        if ($senha != null) {
+            $si = $this->connec->query("UPDATE registro SET active = 2 WHERE ci = '$senha'");
+        } else {
+            $si = $this->connec->query("UPDATE registro SET active = 2 WHERE user = '$user'");
+        }
+
+        if ($si) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Registro de salida de sesion en BD
      * @param string $idEntrada ID de usuario 
      * @return bool

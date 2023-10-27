@@ -47,28 +47,17 @@
             <input class="form-control" id="Grado_Academico" name="grado_academico" type="text" maxlength="11">
         </div>
         <div class="col ">
-<<<<<<< HEAD
             <label for="Depa">Departamento</label>
             <select class="form-select" id="Depa" name="departament">
                 <option value="">- seleccionar departamento -</option>
                 <?php include "../php/preset/opcionesD.php" ?>
-=======
-            <label for="Cargo">Departamento</label>
-            <select class="form-select" id="Depa" name="departament">
-                <option value="">- seleccionar departamento -</option>
-                <?php include("../php/preset/cargosPre.php") ?>
->>>>>>> c827d06d94e8a5e9493640358a33d8b12764913d
             </select>
         </div>
         <div class="col">
             <label for="Cargo">Cargo</label>
             <select class="form-select" id="Cargo" name="cargo">
                 <option value="">- seleccionar cargo -</option>
-<<<<<<< HEAD
                 <?php include "../php/preset/cargosPre.php" ?>
-=======
-                <?php include("../php/preset/cargosPre.php") ?>
->>>>>>> c827d06d94e8a5e9493640358a33d8b12764913d
             </select>
         </div>
     </div>

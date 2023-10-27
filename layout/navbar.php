@@ -86,21 +86,34 @@
                     </div>
                     <span class="input-group-text" id="basic-addon1"></span><!--SEPARADOR-->
                     <!--BOTON DE AYUDA-->
-                    <button id="help" class="btn" type="button" id="triggerId" data-bs-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <i class="bi bi-list"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="triggerId">
-                        <a class="dropdown-item" href="../components/cargos.php">Cargo <i
-                                class="estrate bi bi-diagram-3-fill"></i></a>
-                        <a class="dropdown-item" href="../components/sedes.php">Sedes <i
-                                class="estrate bi bi-geo-fill"></i></a>
-                        <a class="dropdown-item" href="../private/backRec.php">Respalo/Restaurcion <i
-                                class="estrate bi bi-database-fill-gear"></i></a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Manual de usuario <i
-                                class="estrate bi bi-journal-medical"></i></a>
-                    </div>
+                    <?php
+                    if ($adpval == 0) {
+                        ?>
+                        <a id="help" class="btn" type="button" href="#" target="_blank">
+                            <i class="bi bi-question-lg"></i>
+                        </a>
+                        <?php
+                    } else {
+                        ?>
+                        <button id="help" class="btn" type="button" id="triggerId" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="bi bi-list"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="triggerId">
+                            <a class="dropdown-item" href="../components/cargos.php">Cargo <i
+                                    class="estrate bi bi-diagram-3-fill"></i></a>
+                            <a class="dropdown-item" href="../components/sedes.php">Sedes <i
+                                    class="estrate bi bi-geo-fill"></i></a>
+                            <a class="dropdown-item" href="../private/backRec.php">Respalo/Restaurcion <i
+                                    class="estrate bi bi-database-fill-gear"></i></a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Manual de usuario <i
+                                    class="estrate bi bi-journal-medical"></i></a>
+                        </div>
+                        <?php
+                    }
+                    ?>
+
                     <span class="input-group-text" id="basic-addon1"></span><!--SERPARADOR-->
                     <!--BOTO DE CERRAR SESION-->
                     <a id="close" class="btn" href="../php/cerrarSesion.php">

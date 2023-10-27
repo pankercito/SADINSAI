@@ -13,7 +13,6 @@ if (isset($_POST['login'])) {
     $usuariolg = $_POST['userlg'];
     $pass = $_POST['passlg'];
 
-
     $auditoria = new Auditoria();
 
     $conn = new Conexion();
@@ -30,8 +29,27 @@ if (isset($_POST['login'])) {
             $resultado = 2;
         }
     } else {
-        $resultado = 3;
+
+        if (!isset($_SESSION['errorContra'])) {
+            $_SESSION['errorContra'] = 1;
+        }
+
+        if ($_SESSION['errorName'] != $usuariolg) {
+            $_SESSION['errorContra'] = 1;
+        }
+
+        if ($_SESSION['errorContra'] == 3 && $_SESSION['errorName'] == $usuariolg) {
+            $auditoria->supenderUsuario($usuariolg);
+            $_SESSION['errorContra'] = 1;
+            $resultado = 2;
+        } else {
+            $_SESSION['errorContra']++;
+            $_SESSION['errorName'] = $usuariolg;
+            $resultado = 3;
+        }
     }
+
+    echo $_SESSION['errorContra'];
 
     switch ($resultado) {
         case 1: // Contraseña correcta

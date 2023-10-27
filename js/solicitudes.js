@@ -26,12 +26,17 @@ function detalles(idSolis, tipoS) {
         type: 'POST',
         error: function (jqXHR, xhr, status, error) {
             var nroERROR = jqXHR.status;
+            setTimeout(() => {
+                obj.close();
+            }, 200);
             alert("Estatus " + status)
         },
         success: function (response) {
             contenido = response;
 
-            obj.close();
+            setTimeout(() => {
+                obj.close();
+            }, 200);
 
             // Mostrar el diálogo de confirmación
             $.confirm({
@@ -80,12 +85,14 @@ function detallesPlanillas(idSolis, tipoS) {
         type: 'POST',
         error: function (jqXHR, xhr, status, error) {
             var nroERROR = jqXHR.status;
-            alert("Estatus " + status)
+            alert("Estatus " + nroERROR)
         },
         success: function (response) {
             contenido = response;
 
-            obj.close();
+            setTimeout(() => {
+                obj.close();
+            }, 200);
 
             // Mostrar el diálogo de confirmación
             $.confirm({
@@ -113,13 +120,12 @@ function detallesPlanillas(idSolis, tipoS) {
                     printar: {
                         text: 'descargar planilla',
                         action: function () {
-                            alert('verg');
                             $.ajax({
                                 data: parametro,
                                 url: '../php/preparePlanillas.php',
                                 type: 'POST',
                                 success: function (params) {
-                                    window.open("../pdf/planilla"+params+".php", "_blank");
+                                    window.open("../pdf/planilla" + params + ".php", "_blank");
                                 }
                             })
                         }

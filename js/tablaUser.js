@@ -81,4 +81,4 @@ $('#estado').on('change', function () {
 // RECARGA DE LA TABLA AUTOMATICA CADA 1M || NUMERO EN MILISEGUNDOS
 setInterval(() => {
     table.ajax.reload(null, false);
-}, 10000);
+}, 60000);

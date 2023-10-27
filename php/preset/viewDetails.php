@@ -45,6 +45,7 @@ if (isset($_POST["idSoli"])) {
                 ?>
 
                 <h4 class="text-star p-2 mx-4">Ingreso de personal</h4>
+                <hr>
                 <div class="dit mx-auto table-responsive">
                     <div class="contenedor col-md-8 mx-auto mt-4">
                         <table class="table table">
@@ -130,9 +131,10 @@ if (isset($_POST["idSoli"])) {
                 ?>
 
                 <h4 class="text-star p-2 mx-4">Edicion de datos: Nueva informacion</h4>
+                <hr>
                 <div class="dit mx-auto table-responsive">
                     <div class="contenedor col-md-10 mx-auto mt-4">
-                        <?php echo "Dirigido a:" . $precarInf['ci_solicitada']?>
+                        <?php echo "Dirigido a: " . $precarInf['ci_solicitada']?>
                         <table class="table table-primary">
                             <thead>
                                 <tr>
@@ -200,6 +202,7 @@ if (isset($_POST["idSoli"])) {
                 //DETALLES DE ARCHIVO SUBIDO
                 ?>
                 <h4 class="" style="margin: 0 0 1.2rem 6%;">Ingreso de archivos</h4>
+                <hr>
                 <div class="editConten row mx-auto mt-4 col-md-8">
                     <div class="dit">
                         <div class="caram">
@@ -271,6 +274,7 @@ if (isset($_POST["idSoli"])) {
                 //DETALLES DE ARCHIVO SUBIDO
                 ?>
                 <h4 class="" style="margin: 0 0 1.2rem 6%;">Eliminacion de archivos</h4>
+                <hr>
                 <div class="editConten mx-auto mt-5 row col-md-8">
                     <div class="dit">
                         <div class="caram">

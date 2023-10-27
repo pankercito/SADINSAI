@@ -1,4 +1,4 @@
-<?php require_once("../php/sesionval.php"); ?>
+<?php require_once "../php/sesionval.php"; ?>
 
 <?php require("../php/adp.php"); ?>
 
@@ -272,7 +272,7 @@
                                             "3" => "ingreso de archivo",
                                             "4" => "eliminacion de archivo",
                                             '5' => 'registro de usuario',
-                                            '6' => 'activación/desactivación de usurio',
+                                            '6' => 'activación/desactivación de usuario',
                                             '7' => 'cambio de locacion de archivo',
                                             '8' => 'rezacho de solicitud'
                                         ];
@@ -322,7 +322,7 @@
                                         "3" => "ingreso de archivo",
                                         "4" => "eliminacion de archivo",
                                         '5' => 'registro de usuario',
-                                        '6' => 'activación/desactivación de usurio',
+                                        '6' => 'activación/desactivación de usuario',
                                         '7' => 'cambio de locacion de archivo',
                                         '8' => 'rezacho de solicitud'
                                     ];
