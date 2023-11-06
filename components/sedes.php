@@ -36,13 +36,13 @@ include "../layout/sidebar.php";
                         </label>
                         <label>
                             direccion
-                            <input type="text" name="direccion" id="dir" class="form-control mb-3">
+                            <input type="text" name="direccion" id="dir" class="form-control mb-3" disabled>
                         </label>
                         <label>
                             nueva sede
-                            <input type="text" name="cargo" id="cargo" class="form-control mb-3">
+                            <input type="text" name="sede" id="sede" class="form-control mb-3" disabled>
                         </label>
-                        <button type="submit" class="btn btn-primary my-3" disabled>agregar</button>
+                        <button type="submit" class="btn btn-primary my-3" id="lalo" disabled>agregar</button>
                     </form>
                 </div>
             </div>
@@ -86,37 +86,145 @@ include "../layout/sidebar.php";
                         </tbody>
                     </table>
                 </div>
-                <script type="text/javascript">
-                    var table = $("#table").DataTable({
-                        order: [
-                            [0, 'asc']
-                        ],
-                        language: {
-                            "decimal": "",
-                            "emptyTable": "No hay información",
-                            "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-                            "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-                            "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-                            "infoPostFix": "",
-                            "thousands": ",",
-                            "lengthMenu": "Mostrar _MENU_ Entradas",
-                            "loadingRecords": "Cargando...",
-                            "processing": "Procesando...",
-                            "search": "Buscar:",
-                            "zeroRecords": "Sin resultados encontrados",
-                            "paginate": {
-                                "first": "Primero",
-                                "last": "Ultimo",
-                                "next": "Siguiente",
-                                "previous": "Anterior"
-                            }
-                        },
-                    })
-                </script>
+
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    let selector = $("#estado");
+    let direccion = $('#dir');
+    let nombre = $('#sede');
+    let bot = $('#lalo');
+
+
+    var table = $("#table").DataTable({
+        order: [
+            [0, 'asc']
+        ],
+        language: {
+            "decimal": "",
+            "emptyTable": "No hay información",
+            "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+            "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+            "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": "Mostrar _MENU_ Entradas",
+            "loadingRecords": "Cargando...",
+            "processing": "Procesando...",
+            "search": "Buscar:",
+            "zeroRecords": "Sin resultados encontrados",
+            "paginate": {
+                "first": "Primero",
+                "last": "Ultimo",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            }
+        },
+    });
+
+    selector.change(function () {
+        $("#estado option:selected").each(function () {
+            let valor = $(this).val();
+
+            if (valor != 0) {
+                direccion.attr("disabled", false);
+                nombre.attr("disabled", false);
+            } else {
+                direccion.attr("disabled", true);
+                nombre.attr("disabled", true);
+                bot.attr("disabled", true);
+            }
+        });
+    });
+
+    $('input[type=text]').keyup(function (s) {
+
+        if (direccion.val().length > 5 && nombre.val().length > 5) {
+            bot.attr("disabled", false);
+        } else {
+            bot.attr("disabled", true);
+        }
+
+    })
+
+    bot.click(function (e) {
+        e.preventDefault();
+
+        $.confirm({
+            title: '',
+            content: "<h5 class='text-center'>¿Esta seguro de agregar esta SEDE? <h5><br><h6 class='text-center'>no podra eliminarlo mas tarde</h6>",
+            buttons: {
+                bue: {
+                    text: "si, estoy seguro",
+                    btnClass: "btn-success",
+                    action: function () {
+                        $.ajax({
+                            url: "../php/upload/componentSede.php",
+                            type: "post",
+                            data: {
+                                sede: nombre.val(),
+                                estado: selector.val(),
+                                direccion: direccion.val()
+                            },
+                            success: function (cc) {
+                                notie.setOptions({
+                                    alertTime: 2
+                                });
+                                if (cc == "success") {
+                                    setTimeout(() => {
+                                        bot.html("agregar");
+                                        bot.attr("disabled", false);
+                                        $("#cargo").val(""); // limpiar input
+
+                                        notie.alert({
+                                            type: 1,
+                                            text: 'Se agrego el cargo correctamente',
+                                            time: 3
+                                        });
+                                        
+                                    }, 400);
+                                } else if (cc == "dupli") {
+                                    setTimeout(() => {
+                                        bot.html("agregar");
+                                        bot.attr("disabled", false);
+
+                                        notie.alert({
+                                            type: 3,
+                                            text: 'Cargo duplicado',
+                                            time: 3
+                                        });
+                                    }, 400);
+                                } else {
+                                    setTimeout(() => {
+                                        bot.html("agregar");
+                                        bot.attr("disabled", false);
+
+                                        notie.alert({
+                                            type: 3,
+                                            text: cc,
+                                            time: 3
+                                        });
+                                    }, 400);
+                                }
+
+                            }
+                        });
+                    }
+                },
+                car: {
+                    text: "no, cancelar",
+                    btnClass: "btn-danger",
+                    action: function () {
+                        bot.html("agregar");
+                        bot.attr("disabled", false);
+                    }
+                }
+            }
+        });
+    });
+</script>
 <style>
     .grid-containerr>div {
         margin: 1.5rem;

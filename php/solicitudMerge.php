@@ -1,12 +1,13 @@
 <?php
 
 if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
+    
     include "conx.php";
     include "function/criptCodes.php";
     include "function/filesFunctions.php";
     include "function/sumarhora.php";
     include "class/auditoria.php";
-    include "class/solicitudesActions.php";
+    include "class/Gestiones.php";
 
     $conn = new Conexion();
     $merge = new GestioData();

@@ -14,7 +14,7 @@ if ($count > 0) {
         //Lista de los usuarios
         $v = mysqli_fetch_array($regisview);
         echo '
-                <option value=' . strtoupper($v['estado']) . '">' . $v['estado'] . '     total de sedes: '. $v['total_sedes'] . '</option>
+                <option value=' . $v['id_estado'] . '>' . $v['estado'] . '     total de sedes: '. $v['total_sedes'] . '</option>
               ';
 
     }

@@ -1,5 +1,10 @@
 <?php
 
+
+if (!class_exists('Conexion')) {
+    include "conx.php";
+}
+
 /**
  * Gestion de datos del sistema
  * movimientos
@@ -7,49 +12,25 @@
  * solicitudes
  * Data de personal
  * registro de cambios
+ * promedios de movimientos
  */
 class Auditoria
 {
     private $idEntrada;
     private $arrayEntrada;
-
     protected $connec;
     public $aplicacion;
 
     /**
-     * declarando getRange
      * inicializando conexion global
      * REORDENAR REGISTROS
      * REORDENAR USUARIOS
      */
     public function __construct()
     {
-        /**
-         * recorrer rango de fechas y devolver array
-         * @param mixed $date_ini
-         * @param mixed $date_end
-         * @return array
-         */
-        function getRangeDate($date_ini, $date_end)
-        {
-            $dt_ini = DateTime::createFromFormat("Y-m-d", $date_ini);
-            $dt_end = DateTime::createFromFormat("Y-m-d", $date_end);
-            $period = new DatePeriod(
-                $dt_ini,
-                new DateInterval('P1D'),
-                $dt_end,
-            );
-            $range = [];
-            foreach ($period as $date) {
-                $range[] = $date->format("Y-m-d");
-            }
-            $range[] = $date_end;
-            return $range;
-        }
 
         //Creamos el obj, instanciando la clase Conexion()
         $this->connec = new Conexion();
-        $this->aplicacion = array();
 
         // REORDENAR REGISTROS
         $this->connec->query("SET @autoid := 0");
@@ -60,8 +41,29 @@ class Auditoria
         $this->connec->query("SET @autoid := 0");
         $this->connec->query("UPDATE registro SET id_usuario = (@autoid := @autoid + 1)");
         $this->connec->query("ALTER TABLE registro AUTO_INCREMENT = 1");
+    }
 
-
+    /**
+     * recorrer rango de fechas y devolver array
+     * @param mixed $date_ini
+     * @param mixed $date_end
+     * @return array
+     */
+    private function getRangeDate($date_ini, $date_end)
+    {
+        $dt_ini = DateTime::createFromFormat("Y-m-d", $date_ini);
+        $dt_end = DateTime::createFromFormat("Y-m-d", $date_end);
+        $period = new DatePeriod(
+            $dt_ini,
+            new DateInterval('P1D'),
+            $dt_end,
+        );
+        $range = [];
+        foreach ($period as $date) {
+            $range[] = $date->format("Y-m-d");
+        }
+        $range[] = $date_end;
+        return $range;
     }
 
     /**
@@ -74,7 +76,46 @@ class Auditoria
         if ($senha != null) {
             $si = $this->connec->query("UPDATE registro SET active = 2 WHERE ci = '$senha'");
         } else {
-            $si = $this->connec->query("UPDATE registro SET active = 2 WHERE user = '$user'");
+            $si = $this->connec->query("UPDATE registro SET active = 2 WHERE id_usuario = '$user'");
+        }
+
+        if ($si) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Activar usuario
+     * @param mixed $user
+     * @return bool
+     */
+    public function activarUsuario($user, $senha = null)
+    {
+        if ($senha != null) { #verificacion por cedula
+            $si = $this->connec->query("UPDATE registro SET active = 1 WHERE ci = '$senha'");
+        } else { #verificacion por id
+            $si = $this->connec->query("UPDATE registro SET active = 1 WHERE id_usuario = '$user'");
+        }
+
+        if ($si) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Eliminar Usuario del Sistema
+     * @param mixed $user
+     * @param mixed $senha
+     * @return bool
+     */
+    public function deleleUser($user, $senha = null)
+    {
+        if ($senha != null) { #eliminacion por cedula
+            $si = $this->connec->query("DELETE FROM registro WHERE ci = '$senha'");
+        } else { #eliminacion por id
+            $si = $this->connec->query("DELETE FROM registro WHERE id_usuario = '$user'");
         }
 
         if ($si) {
@@ -217,7 +258,7 @@ class Auditoria
     {
         if ($dat2 != null) {
             // obtenemos recorrido del rango de fechas 
-            $fech = getRangeDate($dat1, $dat2);
+            $fech = $this->getRangeDate($dat1, $dat2);
 
             $con = count($fech);
             $i = 0;
@@ -250,7 +291,7 @@ class Auditoria
 
         if ($fech2 != null) {
             //RANGO DE FECHAS
-            $fech = getRangeDate($fech, $fech2);
+            $fech = $this->getRangeDate($fech, $fech2);
 
             $conu = count($fech);
             $i = 0;
@@ -325,7 +366,7 @@ class Auditoria
 
         if ($fech2 != null) {
             //RANGO DE FECHAS
-            $fech = getRangeDate($fecha, $fech2);
+            $fech = $this->getRangeDate($fecha, $fech2);
 
             $con = count($fech);
             $i = 0;
@@ -396,7 +437,7 @@ class Auditoria
     {
         if ($dat2 != null) {
             // obtenemos recorrido del rango de fechas 
-            $fech = getRangeDate($dat1, $dat2);
+            $fech = $this->getRangeDate($dat1, $dat2);
 
             $con = count($fech);
             $i = 0;
@@ -429,7 +470,7 @@ class Auditoria
     {
         if ($fech2 != null) {
             //RANGO DE FECHAS
-            $rango = getRangeDate($fech, $fech2);
+            $rango = $this->getRangeDate($fech, $fech2);
 
             $con = count($rango);
             $i = 0;
@@ -476,13 +517,20 @@ class Auditoria
         return $result;
     }
 
+    /**
+     * Consulta de movimientos de Gestiones avanzados
+     * @param mixed $fech
+     * @param mixed $fech2
+     * @param mixed $estado
+     * @return array
+     */
     function solicitudPrecise($fech = 'dia presente', $fech2 = null, $estado = null)
     {
         $estatus = ($estado != null) ? "AND apr_estado  = $estado" : '';
 
         if ($fech2 != null) {
             //RANGO DE FECHAS
-            $rango = getRangeDate($fech, $fech2);
+            $rango = $this->getRangeDate($fech, $fech2);
 
             $con = count($rango);
             $i = 0;
@@ -561,7 +609,7 @@ class Auditoria
     {
         if ($dat2 != null) {
             // obtenemos recorrido del rango de fechas 
-            $fech = getRangeDate($dat1, $dat2);
+            $fech = $this->getRangeDate($dat1, $dat2);
 
             $con = count($fech);
             $i = 0;
@@ -591,7 +639,7 @@ class Auditoria
 
         if ($fech2 != null) {
             //RANGO DE FECHAS
-            $rango = getRangeDate($fech, $fech2);
+            $rango = $this->getRangeDate($fech, $fech2);
 
             $con = count($rango);
             $i = 0;
@@ -673,7 +721,7 @@ class Auditoria
         $registro = $this->connec->query("SELECT * FROM registro WHERE id_usuario = $ID");
         $fr = $registro->fetch_object();
 
-        $d = 'Ingreso de personal aceptado por ' . $fr->user . '. id de solicitud ' . $idSoli . ' personal agregado: ' . $arrayA['ci'] . ' -- ';
+        $d = 'Ingreso de personal aceptado por ' . $fr->user . '. Id de gestion ' . $idSoli . ' personal agregado: ' . $arrayA['ci'] . ' -- ';
 
         // Recorremos la lista de cambios e imprimimos los cambios
         foreach ($arrayA as $clave => $valor) {
@@ -694,9 +742,8 @@ class Auditoria
 
     }
 
-
     /**
-     * Guarda en la bade de Datos registro de Cambios en [sadinsai.personal]
+     * Guarda en la Base de Datos registro de Cambios en [sadinsai.personal]
      * usar arrays asociativos para que sea funcional
      * @param mixed $arrayA Datos base
      * @param mixed $arrayB Nuevos Datos
@@ -713,7 +760,7 @@ class Auditoria
         $registro = $this->connec->query("SELECT * FROM registro WHERE id_usuario = $ID");
         $fr = $registro->fetch_object();
 
-        $d = 'Cambio de datos aceptados por ' . $fr->user . '. id de solicitud: ' . $idSoli . '. para ' . $arrayA['ci'] . ' -- ';
+        $d = 'Cambio de datos aceptados por ' . $fr->user . '. Id de gestion: ' . $idSoli . '. para ' . $arrayA['ci'] . ' -- ';
 
         // Comparamos los valores de los arrays
 
@@ -738,6 +785,10 @@ class Auditoria
         }
     }
 
+    /**
+     * Registro de ingresos de archivos para [sadinsai.auditoria]
+     * @return bool
+     */
     public function registArch()
     {
         @session_start();
@@ -751,7 +802,7 @@ class Auditoria
         $inf = $this->connec->query("SELECT * FROM solicitudes WHERE id_solicitud = $idSoli");
         $ci = $inf->fetch_object();
 
-        $d = 'Ingreso de archivos aceptado por ' . $fr->user . '. id de solicitud: ' . $idSoli . '. agregado a: ' . $ci->ci_solicitada;
+        $d = 'Ingreso de archivos aceptado por ' . $fr->user . '. Id de gestion: ' . $idSoli . '. agregado a: ' . $ci->ci_solicitada;
 
         $contenido = $this->connec->real_escape($d);
 
@@ -764,6 +815,10 @@ class Auditoria
         }
     }
 
+    /**
+     * Registro de eliminacion de Archivos para [sadinsai.auditoria]
+     * @return bool
+     */
     public function registArchDel()
     {
         @session_start();
@@ -777,7 +832,7 @@ class Auditoria
         $inf = $this->connec->query("SELECT * FROM solicitudes WHERE id_solicitud = $idSoli");
         $ci = $inf->fetch_object();
 
-        $d = 'Eliminacion de archivos aceptado por ' . $fr->user . '. id de solicitud: ' . $idSoli . '. carpteda de: ' . $ci->ci_solicitada;
+        $d = 'Eliminacion de archivos aceptado por ' . $fr->user . '. Id de gestion: ' . $idSoli . '. carpteda de: ' . $ci->ci_solicitada;
 
         $contenido = $this->connec->real_escape($d);
 
@@ -790,6 +845,10 @@ class Auditoria
         }
     }
 
+    /**
+     * Registro de registro de nuevos usuarios para [sadinsai.auditoria]
+     * @return bool
+     */
     public function registUser()
     {
         @session_start();
@@ -837,7 +896,7 @@ class Auditoria
 
         $a = ($radio == 1) ? 'Activacion de usuario ' : 'Desactivacion de usuario ';
 
-        $d = $a . 'por: ' . $fr->user . ' hacia el usuario: ' . $fc->user;
+        $d = $a . 'por: ' . $fr->user . ', hacia el usuario: ' . $fc->user;
 
         // Comparamos los elementos de los arrays
 
@@ -853,6 +912,10 @@ class Auditoria
 
     }
 
+    /**
+     * Resgitro de cambio de ubicacion de archivo para [sadinsai.auditoria]
+     * @return bool
+     */
     public function registArchUbi()
     {
         @session_start();
@@ -887,9 +950,12 @@ class Auditoria
 
     }
 
+    /**
+     * Registro de rechazo de solicitude para [sadinsai.auditoria]
+     * @return bool
+     */
     public function registRechaz()
     {
-
         @session_start();
 
         $ID = $_SESSION['sesion'];
@@ -901,12 +967,107 @@ class Auditoria
         $inf = $this->connec->query("SELECT * FROM solicitudes WHERE id_solicitud = $idSoli");
         $ci = $inf->fetch_object();
 
-        $d = 'Rechazo de solicitud por ' . $fr->user . '. id de solicitud: ' . $idSoli . '. dirigida a: ' . $ci->ci_solicitada;
+        $d = 'Rechazo de gestion por ' . $fr->user . '. Id de gestion: ' . $idSoli . ', dirigida a: ' . $ci->ci_solicitada;
 
         $contenido = $this->connec->real_escape($d);
 
         $inyec = $this->connec->query("INSERT INTO auditoria (id, id_usuario_audi, cambios, tipo_movi, fecha_audi) VALUES ('', '$ID', '$contenido', 8, NOW())");
 
+        if ($inyec == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function regisAceptacionSolicitudes($idSoli, $array)
+    {
+        @session_start();
+
+        $ID = $_SESSION['sesion'];
+
+        $registro = $this->connec->query("SELECT * FROM registro WHERE id_usuario = $ID");
+        $fr = $registro->fetch_object();
+
+        $inf = $this->connec->query("SELECT * FROM solicitudes_y_permisos WHERE id_solicitud_permiso = $idSoli");
+        $ci = $inf->fetch_object();
+
+        $nombres = [
+            '1' => "anticipo",
+            '2' => "permiso",
+            '3' => "vacaciones",
+            '4' => "carta de aval",
+            '5' => "licencia de paternidad"
+        ];
+
+        $d = 'Aceptacion de Solicitud de planilla/permiso por ' . $fr->user . '. Id de solicitud: ' . $idSoli . '. Solicitante: ' . $ci->ci_permiso . '. <br> Tipo: ' . $nombres[$ci->tipo_permiso] . ' -- ';
+
+        $cambios = $array;
+
+        // Recorremos la lista de cambios e imprimimos los cambios
+        foreach ($cambios as $clave => $valor) {
+
+            $d .= "{$clave}: {$valor} -- ";
+
+        }
+
+        $contenido = $this->connec->real_escape($d);
+        $inyec = $this->connec->query("INSERT INTO auditoria (id, id_usuario_audi, cambios, tipo_movi, fecha_audi) VALUES ('', '$ID', '$contenido', 9, NOW())");
+
+        if ($inyec == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Registro de rechazo de solicitude para [sadinsai.auditoria]
+     * @return bool
+     */
+    public function registSolisRechaz($idSoli)
+    {
+        @session_start();
+
+        $ID = $_SESSION['sesion'];
+
+        $registro = $this->connec->query("SELECT * FROM registro WHERE id_usuario = $ID");
+        $fr = $registro->fetch_object();
+
+        $inf = $this->connec->query("SELECT * FROM solicitudes_y_permisos WHERE id_solicitud_permiso = $idSoli");
+        $ci = $inf->fetch_object();
+
+        $nombres = [
+            '1' => "anticipo",
+            '2' => "permiso",
+            '3' => "vacaciones",
+            '4' => "carta de aval",
+            '5' => "licencia de paternidad"
+        ];
+
+        $d = 'Rechazo de solicitud por ' . $fr->user . '. Id de solicitud: ' . $idSoli . ', dirigida a: ' . $ci->ci_solicitada . '. Tipo: ' . $nombres[$ci->tipo_permiso];
+
+        $contenido = $this->connec->real_escape($d);
+
+        $inyec = $this->connec->query("INSERT INTO auditoria (id, id_usuario_audi, cambios, tipo_movi, fecha_audi) VALUES ('', '$ID', '$contenido', 10, NOW())");
+        if ($inyec == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function registRequerid($ci, $data){
+        @session_start();
+
+        $ID = $_SESSION['sesion'];
+
+        $registro = $this->connec->query("SELECT * FROM registro WHERE id_usuario = $ID");
+        $fr = $registro->fetch_object();
+
+        $contenido = "Cambios por {$fr->user}, en los requerimientos de: {$ci} -- ". $data;
+
+        $inyec = $this->connec->query("INSERT INTO auditoria (id, id_usuario_audi, cambios, tipo_movi, fecha_audi) VALUES ('', '$ID', '$contenido', 11, NOW())");
         if ($inyec == true) {
             return true;
         } else {

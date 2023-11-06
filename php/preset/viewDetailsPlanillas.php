@@ -23,7 +23,7 @@ if (isset($_POST["idSoli"])) {
 
     switch ($tipoSoli) {
         case '1':
-            $ver = solicitudes::ObtenerSolicitud($id);
+            $ver = Solicitud::ObtenerSolicitud($id);
 
             $vear = $ver->Detalles();
 
@@ -61,7 +61,7 @@ if (isset($_POST["idSoli"])) {
             <?php
             break;
         case '2':
-            $ver = solicitudes::ObtenerSolicitud($id);
+            $ver = Solicitud::ObtenerSolicitud($id);
 
             $vear = $ver->Detalles();
 
@@ -112,7 +112,7 @@ if (isset($_POST["idSoli"])) {
             <?php
             break;
         case '3':
-            $ver = solicitudes::ObtenerSolicitud($id);
+            $ver = Solicitud::ObtenerSolicitud($id);
 
             $vear = $ver->Detalles();
 
@@ -163,7 +163,7 @@ if (isset($_POST["idSoli"])) {
             <?php
             break;
         case '4':
-            $ver = solicitudes::ObtenerSolicitud($id);
+            $ver = Solicitud::ObtenerSolicitud($id);
 
             $vear = $ver->Detalles();
 
@@ -214,7 +214,7 @@ if (isset($_POST["idSoli"])) {
             <?php
             break;
         case '5':
-            $ver = solicitudes::ObtenerSolicitud($id);
+            $ver = Solicitud::ObtenerSolicitud($id);
 
             $vear = $ver->Detalles();
 

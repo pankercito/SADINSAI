@@ -95,13 +95,13 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
                                     echo trPrint($precarInf['telefono_pre'], "Telefono");
 
                                     echo trPrint(strtolower($precarInf['email_pre']), "Email");
-                                    
+
                                     echo trPrint(ucwords(strtolower(cor_acentos($n['estado']))), "Estado");
-                                    
+
                                     echo trPrint(ucwords(strtolower(cor_acentos($n['ciudad']))), "Ciudad");
-                                    
+
                                     echo trPrint(ucwords(strtolower(cor_acentos($n['sede']))), "Sede");
-                                    
+
                                     echo trPrint(strtolower($precarInf['dir_nombre']), "Departamento");
 
                                     echo trPrint($precarInf['cargo_nombre'], "Cargo");
@@ -141,7 +141,6 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
                 echo "Error al consultar datos por favor intente más tarde" . $ciCrip;
             }
             break;
-
         case '1':
             // edicion de datos de personal
 
@@ -402,7 +401,6 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
                 echo "Error al consultar datos por favor intente más tarde";
             }
             break;
-
         case '3':
 
             $id = $conn->real_escape($_POST["idSoli"]);
@@ -515,13 +513,9 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
             } else {
                 echo "el archivo no existe o ya fue eliminado";
             }
-
             break;
-
         default:
             # code...
             break;
     }
-
-
 }

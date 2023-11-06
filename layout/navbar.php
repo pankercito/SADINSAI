@@ -104,10 +104,10 @@
                                     class="estrate bi bi-diagram-3-fill"></i></a>
                             <a class="dropdown-item" href="../components/sedes.php">Sedes <i
                                     class="estrate bi bi-geo-fill"></i></a>
-                            <a class="dropdown-item" href="../private/backRec.php">Respalo/Restaurcion <i
+                            <a class="dropdown-item" href="../private/backRec.php">Respalo <i
                                     class="estrate bi bi-database-fill-gear"></i></a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Manual de usuario <i
+                            <a class="dropdown-item" href="<?php printf("../resources/sigensai-manual%s.pdf", @$manual)?>" target="_blank">Manual de usuario <i
                                     class="estrate bi bi-journal-medical"></i></a>
                         </div>
                         <?php

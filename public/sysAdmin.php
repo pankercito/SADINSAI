@@ -109,8 +109,6 @@
                         </div>
                     </div>
                 </div>
-                <script type="module" src="../resources/import/Chart/chart.js"></script>
-                <script src="../resources/import/Chart/chart.umd.js"></script>
                 <div class="bg-color-stats col alert">
                     <h5>ingresos de usuarios del dia</h5>
                     <hr>
@@ -138,8 +136,6 @@
                                     } else {
                                         echo "<h6>ningun usuario a iniciado sesion hoy</h6> ";
                                     }
-
-
                                     ?>
                                 </tbody>
                                 </tbody>
@@ -238,6 +234,42 @@
                 </div>
             </div>
             <div class="mb-2 mt-4 row mx-1 justify-content-center">
+                <div class="bg-color-stats mx-1 d-flex flex-wrap col justify-content-around alert">
+                    <div class="alert-content">
+                        <h5>promedio de aceptacion de gestiones</h5>
+                        <hr>
+                        <div class="text-star table-responsive-sm">
+                            <p class="panel-color" id="totalG">total de gestiones: %s</p>
+                            <table class=" table table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <td class="text-start">
+                                            <h6>aceptadas</h6>
+                                            <h6>rechazadas</h6>
+                                            <h6>anuladas</h6>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <h6 id="aceptadasG">%s</h6>
+                                            <h6 id="rechazadasG">%s</h6>
+                                            <h6 id="anuladasG">%s</h6>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <hr>
+                            <p class="subtitulo">no se toman en cuenta gestiones pendientes</p>
+                        </div>
+                    </div>
+                    <div class="concan text-star">
+                        <canvas id="gestionesProm" style="width: 30rem!importan;"></canvas>
+                    </div>
+
+                </div>
+            </div>
+            <div class="mb-2 mt-4 row mx-1 justify-content-center">
                 <div class="bg-color-stats col mx-1 alert">
                     <h5>movimientos de usuarios</h5>
                     <hr>
@@ -274,7 +306,10 @@
                                             '5' => 'registro de usuario',
                                             '6' => 'activación/desactivación de usuario',
                                             '7' => 'cambio de locacion de archivo',
-                                            '8' => 'rezacho de solicitud'
+                                            '8' => 'rezacho de gestion',
+                                            '9' => 'aceptacion de solicitud',
+                                            '10' => 'rezacho de solicitud',
+                                            '11' => 'requerimientos'
                                         ];
 
                                         foreach ($tipoMovi as $key => $value) {
@@ -315,17 +350,6 @@
                                     <?php
 
                                     $precarInf = $conn->query("SELECT * FROM auditoria a INNER JOIN registro r ON r.id_usuario = a.id_usuario_audi  ORDER BY fecha_audi DESC");
-
-                                    $tipoMovi = [
-                                        "1" => "ingreso de personal",
-                                        "2" => "edicion de datos",
-                                        "3" => "ingreso de archivo",
-                                        "4" => "eliminacion de archivo",
-                                        '5' => 'registro de usuario',
-                                        '6' => 'activación/desactivación de usuario',
-                                        '7' => 'cambio de locacion de archivo',
-                                        '8' => 'rezacho de solicitud'
-                                    ];
 
                                     $i = 1;
                                     while ($d = $precarInf->fetch_object()) {
@@ -472,6 +496,11 @@
                         max-height: 200px !important;
                     }
 
+                    canvas#gestionesProm {
+                        width: 700px !important;
+                        max-height: 200px !important;
+                    }
+
                     .panel-color {
                         font-size: 15px;
                         color: #212529 !important;
@@ -500,7 +529,7 @@
                     }
                 </style>
             </div>
+            <script src="../resources/import/Chart/chart.umd.js"></script>
             <script src="../js/dashboard.js"></script>
         </div>
-
         <?php require("../layout/footer.php"); ?>

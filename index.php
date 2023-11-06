@@ -46,7 +46,7 @@
                 </div>
                 <!-- PAGINA DE RECUPERACION -->
                 <div class="parte-abajo">
-                    <a href="components/recovery.php" class="button">Olvide mi Contrase&ntilde;a</a>
+                    <a href="components/recovery.php" class="button">olvide mi contrase&ntilde;a</a>
                 </div>
             </div>
         </form>

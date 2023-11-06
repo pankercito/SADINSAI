@@ -12,13 +12,11 @@ if ($_POST['userId'] != "") {
 
     switch ($radio) {
         case '1':
-
-
-
             if ($auditoria->registActivUser()) {
-                $sql = $conn->query("UPDATE registro SET active = '$radio' WHERE id_usuario = '$user'");
 
-                if ($sql == true) {
+                $aa = $auditoria->activarUsuario($user);
+
+                if ($aa == true) {
                     echo "success";
                 } else {
                     echo "error";
@@ -30,9 +28,9 @@ if ($_POST['userId'] != "") {
             break;
         case '2':
             if ($auditoria->registActivUser()) {
-                $sql = $conn->query("UPDATE registro SET active = '$radio' WHERE id_usuario = '$user'");
+                $aa = $auditoria->supenderUsuario($user);
 
-                if ($sql == true) {
+                if ($aa == true) {
                     echo "success.rech";
                 } else {
                     echo "error.rech";

@@ -14,7 +14,7 @@ $conn = new Conexion();
 
 switch (@$_POST['tipoSoli']) {
     case 1:
-        $dta = solicitudes::obtenersolicitud($id);
+        $dta = Solicitud::obtenersolicitud($id);
 
         $datospln = $dta->DetallePLanillas();
 
@@ -60,13 +60,12 @@ switch (@$_POST['tipoSoli']) {
         echo 1;
 
         break;
-
     case 2:
         echo 2;
-        break;
 
+        break;
     case 3:
-        $dta = solicitudes::obtenersolicitud($id);
+        $dta = Solicitud::obtenersolicitud($id);
 
         $datospln = $dta->DetallePLanillas();
 
@@ -115,9 +114,8 @@ switch (@$_POST['tipoSoli']) {
 
         echo 3;
         break;
-
     case 4:
-        $dta = solicitudes::obtenersolicitud($id);
+        $dta = Solicitud::obtenersolicitud($id);
 
         $datospln = $dta->DetallePLanillas();
 

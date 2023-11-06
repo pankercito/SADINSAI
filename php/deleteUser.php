@@ -1,19 +1,16 @@
 <?php
-include("conx.php");
 
+include "conx.php";
+include "class/auditoria.php";
 
 $conn = new Conexion();
+$auditoria = new Auditoria();
 
 $user = $conn->real_escape($_POST['userId']);
 
-$conn->query("SET @autoid := 0");
+$a = $auditoria->deleleUser($user);
 
-$conn->query("UPDATE registro SET id_usuario = (@autoid := @autoid + 1)");
-
-$conn->query("ALTER TABLE registro AUTO_INCREMENT = 1");
-
-$sql = $conn->query("DELETE FROM registro WHERE id_usuario = '$user'");
-if ($sql == true) {
+if ($a == true) {
     echo "success.dele";
 } else {
     echo "error.dele";

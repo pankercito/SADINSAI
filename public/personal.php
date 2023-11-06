@@ -3,12 +3,9 @@
 <?php require "../layout/head.php"; ?>
 
 <?php
-
 include "../php/function/removerAcentos.php";
-
 require "../layout/navbar.php";
 ?>
-
 
 <link rel="stylesheet" href="../styles/estados.css">
 <link rel="stylesheet" href="../styles/viewtables.css">

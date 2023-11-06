@@ -12,11 +12,11 @@ $conn = new Conexion();
 
 switch (@$_POST['radio']) {
     case 1:
-        $tn = solicitudes::ObtenerSolicitud($id);
+        $tn = Solicitud::ObtenerSolicitud($id);
 
-        $no = $tn->aceptarSolicitud();
+        $no = $tn->aceptarSolicitud(); 
 
-        if ($no) {
+        if (@$no) {
             echo "solicitud aceptada correctamente";
         } else {
             echo "error al aceptar solicitud";
@@ -25,15 +25,18 @@ switch (@$_POST['radio']) {
         break;
     case 2:
         $motivo = $conn->real_escape($_POST['motivo']);
-        if($motivo){$tn = solicitudes::ObtenerSolicitud($id);
 
-        $no = $tn->rechazarSolicitud($motivo);
+        if ($motivo) {
+            $tn = Solicitud::ObtenerSolicitud($id);
 
-        if ($no) {
-            echo "solicitud rechazada correctamente";
+            $no = $tn->rechazarSolicitud($motivo);
+
+            if ($no) {
+                echo "solicitud rechazada correctamente";
+            } else {
+                echo "error al aceptar solicitud";
+            }
         } else {
-            echo "error al aceptar solicitud";
-        }}else {
             echo "error no hay motivo";
             break;
         }

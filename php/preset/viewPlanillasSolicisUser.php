@@ -9,7 +9,7 @@ session_start();
 $yo = $_SESSION['sesion'];
 
 
-$a = Solicitudes::ObtenerSolicitud();
+$a = Solicitud::ObtenerSolicitud();
 
 $coro = $a->allSolicitudes();
 

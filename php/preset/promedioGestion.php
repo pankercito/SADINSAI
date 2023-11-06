@@ -7,10 +7,10 @@ include("../../php/function/sumarhora.php");
 $conn = new Conexion();
 
 // SACAR DATOS DE SOLICITUDES
-$colis = $conn->query("SELECT * FROM solicitudes_y_permisos WHERE estado_permiso NOT IN (1)");
-$colis1 = $conn->query("SELECT * FROM solicitudes_y_permisos WHERE estado_permiso = 2");
-$colis2 = $conn->query("SELECT * FROM solicitudes_y_permisos WHERE estado_permiso = 3");
-$colis3 = $conn->query("SELECT * FROM solicitudes_y_permisos WHERE estado_permiso = 4");
+$colis = $conn->query("SELECT * FROM solicitudes WHERE apr_estado NOT IN (0)");
+$colis1 = $conn->query("SELECT * FROM solicitudes WHERE apr_estado = 1");
+$colis2 = $conn->query("SELECT * FROM solicitudes WHERE apr_estado = 2");
+$colis3 = $conn->query("SELECT * FROM solicitudes WHERE apr_estado = 3");
 
 $total = $colis->num_rows;
 

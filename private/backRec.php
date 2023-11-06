@@ -21,21 +21,9 @@ include "../layout/sidebar.php";
             <h5 style="color: #e7e7e7;">Acciones</h5>
             <hr style="border-color:white;">
             <div class="col flex-item">
-                <button class="btn btn-warning mx-3 mb-3">
+                <button class="btn btn-warning mx-3 mb-3" onclick="respaldar()">
                     Respaldar Base de Datos
                 </button>
-                <button class="btn btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#contentId"
-                    aria-expanded="false" aria-controls="contentId">
-                    Rectaurar
-                </button>
-                <div class="collapse" id="contentId">
-                    <form class="col-8 my-4 flex-column d-flex mx-auto justify-conten-center">
-                        <label> ingrese id del Respaldo
-                            <input type="text" name="cargo" id="cargo" class="form-control">
-                        </label>
-                        <button type="submit" class="btn btn-primary my-3">agregar</button>
-                    </form>
-                </div>
             </div>
         </div>
         <div class="col text-center">
@@ -111,5 +99,16 @@ include "../layout/sidebar.php";
         color: #e7e7e7;
     }
 </style>
-
+<script>
+    function respaldar() {
+        $.ajax({
+            url: "../private/backupDB.php",
+            success: function (cc) {
+                $.confirm({
+                    content: cc
+                })
+            }
+        })
+    }
+</script>
 <?php require "../layout/footer.php" ?>

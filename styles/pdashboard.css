@@ -2,12 +2,11 @@
     margin: 2%;
     margin-top: 1.5rem;
 }
+
 canvas#dashboard {
     background: #f9f9f8;
     padding: 1rem;
     border-radius: 5px;
-    min-width: 100%;
-    min-height: 27rem;
 }
 
 ul.userUl {
@@ -15,6 +14,7 @@ ul.userUl {
     margin: 0;
     padding: 0;
 }
+
 a.aUser {
     display: flex;
     text-decoration: none;
@@ -27,30 +27,38 @@ a.aUser {
     background: #f9f9f8;
     height: 2.5rem;
 }
+
 i.bi.bi-dot {
     font-size: 32px;
     height: 48px;
 }
+
 i.bi.bi-dot.active {
-    color: #4ce300;;
+    color: #4ce300;
+    ;
 }
+
 div#centro {
-    display: flex!important;
+    display: flex !important;
     margin: 0 auto;
     flex-direction: row;
     justify-content: center;
 }
+
 p {
     font-weight: 600;
     color: #e7e7e7;
 }
+
 .conteDash.col-md-8 {
     margin: 0px 10%;
 }
+
 .bg-color-stats {
     background: #f9f9f8;
     border: none;
 }
+
 .table {
     --bs-table-bg: #f9f9f8;
 }

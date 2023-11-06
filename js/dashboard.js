@@ -1,6 +1,7 @@
 const dashboard = document.querySelector('#dashboard');
 const soli = document.querySelector('#solicitudes');
-const promedio = document.querySelector('#solicitudesProm');
+const promedioS = document.querySelector('#solicitudesProm');
+const promedioG = document.querySelector('#gestionesProm');
 
 // GRAFICO PRINCIPAL DE LINEAS
 $.ajax({
@@ -48,6 +49,7 @@ $.ajax({
                     "eliminacion de archivo"
                 ],
                 datasets: [{
+                    label: 'gestiones realizadas',
                     data: [us, dos, tri, four],
                     backgroundColor: [
                         '#f9c940',
@@ -69,7 +71,6 @@ $.ajax({
                             position: 'bottom',
                             align: 'start',
                             fullSize: true,
-                            maxWidth: 10,
                             title: {
                                 display: false
                             }
@@ -83,6 +84,16 @@ $.ajax({
                                 weight: 600,
                             }
                         },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    let label = context.dataset.label || '';
+
+                                    label = ' ' + label + ': ' + context.parsed;
+                                    return label;
+                                }
+                            }
+                        }
                     },
                 },
             }
@@ -93,7 +104,7 @@ $.ajax({
     }
 });
 
-// GRAFICO HORIZONTAL DE SOLICITUDES PROMEDIO
+// GRAFICO HORIZONTAL DE SOLICITUDES PROMEDIO ACEPTACION
 $.ajax({
     url: "../php/preset/promedioSolis.php",
     success: function (response) {
@@ -116,19 +127,19 @@ $.ajax({
                 labels: labels,
                 datasets: [
                     {
-                        label: "aceptadas %",
+                        label: "aceptadas",
                         data: [us],
-                        backgroundColor: ['#63ff6f']
+                        backgroundColor: ['#a0ffa9']
                     },
                     {
-                        label: "rechazadas %",
+                        label: "rechazadas",
                         data: [dos],
-                        backgroundColor: ['#ff6384']
+                        backgroundColor: ['#ffa0a0']
                     },
                     {
-                        label: "anuladas %",
+                        label: "anuladas",
                         data: [tri],
-                        backgroundColor: ['#63b7ff']
+                        backgroundColor: ['#d7d7d7']
                     }
                 ]
             };
@@ -158,13 +169,112 @@ $.ajax({
                                 weight: 600,
                             }
                         },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    let label = context.dataset.label || '';
+
+                                    label = ' ' + label + ': ' + context.parsed.x + ' %';
+                                    return label;
+                                }
+                            }
+                        }
                     },
+
                 },
             };
 
-            new Chart(promedio, config);
+            new Chart(promedioS, config);
 
-        } else {
         }
     }
 });
+
+// GRAFICO HORIZONTAL DE GESTIONES PROMEDIO ACEPTACION
+$.ajax({
+    url: "../php/preset/promedioGestion.php",
+    success: function (response) {
+        if (response != null) {
+
+            var colon = JSON.parse(response);
+
+            // ordenar datos de array 
+            console.log(colon);
+            const us = colon[0];
+            const dos = colon[1];
+            const tri = colon[2];
+
+            const labels = [''];
+
+            document.getElementById('totalG').innerHTML = 'total de gestiones atendidas: ' + colon[3];
+            document.getElementById('aceptadasG').innerHTML = colon[0] + '% ';
+            document.getElementById('rechazadasG').innerHTML = colon[1] + '% ';
+            document.getElementById('anuladasG').innerHTML = colon[2] + '% ';
+
+            const data = {
+                labels: labels,
+                datasets: [
+                    {
+                        label: "aceptadas",
+                        data: [us],
+                        backgroundColor: ['#a0d2ff']
+                    },
+                    {
+                        label: "rechazadas",
+                        data: [dos],
+                        backgroundColor: ['#f9ae80']
+                    },
+                    {
+                        label: "anuladas",
+                        data: [tri],
+                        backgroundColor: ['#d7d7d7']
+                    }
+                ]
+            };
+
+            const config = {
+                type: 'bar',
+                data: data,
+                options: {
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            suggestedMin: 0,
+                            suggestedMax: 100,
+                        },
+                    },
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Promedio de aceptacion de gestiones',
+                            color: '#484848',
+                            font: {
+                                size: 16,
+                                weight: 600,
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    let label = context.dataset.label || '';
+
+                                    label = ' ' + label + ': ' + context.parsed.x + ' %';
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+
+                },
+            };
+
+            new Chart(promedioG, config);
+
+        }
+    }
+});
+

@@ -25,7 +25,7 @@ function nuevoGrafico(canvas, array1, array2, array3, arrayFechas) {
             tension: 0.5
         }]
     };
-    
+
     const config = {
         type: 'line',
         data: data,
@@ -33,6 +33,10 @@ function nuevoGrafico(canvas, array1, array2, array3, arrayFechas) {
             scales: {
                 y: {
                     suggestedMin: 0,
+                    ticks: {
+                        // forces step size to be 50 units
+                        stepSize: 1
+                    }
                 }
             },
             plugins: {

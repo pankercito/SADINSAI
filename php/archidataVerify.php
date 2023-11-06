@@ -14,7 +14,6 @@ if (isset($_POST["personal"])) {
     $reque = $conn->query("SELECT id_tipo_arch, nombre_tipo_arch FROM arch_required a INNER JOIN tiposarch t ON a.id_tipo_arch = t.id_tipo WHERE ci_required_arch = '$ci' AND required_arch = 1");
     $varbi = $reque->num_rows;
 
-
     if ($var > 0) {
         echo "Archivos agregados: " . $var . "<br>";
         echo "Archivos faltantes: " . $varbi - $var . "<br><hr>";
@@ -42,12 +41,9 @@ if (isset($_POST["personal"])) {
             }
         }
 
-        
-
     } else {
         echo "por favor genere un registro de requeminientos primero";
     }
-
 } else {
     echo "nollego";
 }

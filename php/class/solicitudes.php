@@ -6,7 +6,7 @@ if (!class_exists('Conexion')) {
     include "conx.php";
 }
 
-class solicitudes
+class Solicitud
 {
     const de_anticipo = 1;
     const de_permiso = 2;
@@ -14,18 +14,33 @@ class solicitudes
     const de_carta_aval = 4;
     const de_licencia_paternidad = 5;
 
+    /**
+     * Devuelve una instancia de CtrSolicitudes
+     * @param mixed $tipo constantes de solicitud solicitud::[tipo_de_solicitud]
+     * @param mixed $array datos de solicitud
+     * @param mixed $paraquien ci de solicitante
+     * @return CtrSolicitudes
+     */
     public static function CrearSolicitud($tipo, $array, $paraquien)
     {
         return new CtrSolicitudes($tipo, $array, $paraquien);
     }
 
+    /**
+     * Devuelve una instancia de ObtSolicitudes
+     * @param mixed $id
+     * @return ObtSolicitudes
+     */
     public static function ObtenerSolicitud($id = null)
     {
         return new ObtSolicitudes($id);
     }
-
 }
 
+/**
+ * - Crear solicitudes y permisos 
+ * - Cargar solicitudes creadas
+ */
 class CtrSolicitudes
 {
     private $tipo;
@@ -33,7 +48,12 @@ class CtrSolicitudes
     private $paraquien;
     private $conn;
 
-
+    /**
+     * Summary of __construct
+     * @param mixed $tipo
+     * @param mixed $array
+     * @param mixed $paraquien
+     */
     public function __construct($tipo, $array, $paraquien)
     {
         $this->conn = new Conexion;
@@ -42,6 +62,10 @@ class CtrSolicitudes
         $this->data = $array;
     }
 
+    /**
+     * Carga en la bas de datos la solicitud creada
+     * @return 
+     */
     public function cargar()
     {
         $b = array_keys($this->data);
@@ -76,20 +100,55 @@ class CtrSolicitudes
         }
 
     }
-
 }
 
+/**
+ * Obtener informacion de solicitudes
+ * - Todas 
+ * - Detalles por id 
+ * - Informacion presisa de la planilla
+ */
 class ObtSolicitudes
 {
+    /**
+     * Summary of id
+     * @var 
+     */
     private $id;
+
+    /**
+     * Summary of conn
+     * @var 
+     */
     private $conn;
 
+    private $auditoria;
+
+    /**
+     * Summary of __construct
+     * @param mixed $id
+     */
     public function __construct($id = null)
     {
         $this->conn = new Conexion;
+        $this->auditoria = new Auditoria;
         $this->id = ($id != null) ? $this->conn->real_escape($id) : '';
     }
 
+    /**
+     * Obtener ID de solicitud
+     * @return
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Summary of allSolicitudes
+     * @throws \Exception
+     * @return array
+     */
     public function allSolicitudes()
     {
         if ($this->id != null) {
@@ -121,6 +180,11 @@ class ObtSolicitudes
         return $array;
     }
 
+    /**
+     * Summary of Detalles
+     * @throws \Exception
+     * @return array
+     */
     public function Detalles()
     {
         if ($this->id == null) {
@@ -151,8 +215,16 @@ class ObtSolicitudes
         return $array;
     }
 
+    /**
+     * Summary of DetallePLanillas
+     * @return array
+     */
     public function DetallePLanillas()
     {
+        if ($this->id == null) {
+            throw new Exception("Estas haciendo una llamada no valida, cosulta", 1);
+        }
+
         $vear = $this->Detalles();
         $printcito = [];
         foreach ($vear as $key => $value) {
@@ -173,13 +245,22 @@ class ObtSolicitudes
         return [$printcito, $verificacionDestado];
     }
 
+    /**
+     * Summary of aceptarSolicitud
+     * @return 
+     */
     public function aceptarSolicitud()
     {
+        if ($this->id == null) {
+            throw new Exception("Estas haciendo una llamada no valida, cosulta", 1);
+        }
 
         $qr = $this->conn->query("SELECT * FROM solicitudes_y_permisos WHERE id_solicitud_permiso = '$this->id'");
 
         $si = $qr->num_rows;
         if ($si > 0) {
+            $this->auditoria->regisAceptacionSolicitudes($this->id, $this->DetallePLanillas()[0]);
+
             $qrt = $this->conn->query("UPDATE solicitudes_y_permisos SET estado_permiso = 2 WHERE id_solicitud_permiso = '$this->id'");
 
             if ($qrt) {
@@ -192,6 +273,11 @@ class ObtSolicitudes
         }
     }
 
+    /**
+     * Summary of rechazarSolicitud
+     * @param mixed $motivo
+     * @return bool
+     */
     public function rechazarSolicitud($motivo)
     {
 
@@ -200,6 +286,8 @@ class ObtSolicitudes
         $si = $qr->num_rows;
 
         if ($si > 0) {
+            $this->auditoria->registSolisRechaz($this->id);
+            
             $qrt = $this->conn->query("UPDATE solicitudes_y_permisos SET estado_permiso = 3, motivo_permiso = '$motivo' WHERE id_solicitud_permiso = '$this->id'");
 
             if ($qrt) {
