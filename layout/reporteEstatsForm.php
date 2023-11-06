@@ -17,10 +17,10 @@
                     <label for="" class="form-label">tipo de reporte</label>
                     <select class="form-select form-select" name="selectipo" id="selectipo">
                         <option selected value="0">selecciona una opción</option>
+                        <option value="4">general</option>
                         <option value="1">solicitudes</option>
                         <option value="2">archivos</option>
                         <option value="3">usuarios</option>
-                        <option value="4">general</option>
                     </select>
                 </div>
             </div>

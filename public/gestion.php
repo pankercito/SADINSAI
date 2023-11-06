@@ -1,4 +1,10 @@
-<?php require_once("../php/sesionval.php"); ?>
+<?php
+
+require_once("../php/sesionval.php");
+
+include "../php/class/personal.php";
+
+?>
 
 <?php require("../layout/head.php"); ?>
 
@@ -8,15 +14,7 @@
 </script>
 <?php require("../layout/navbar.php"); ?>
 
-<section name="cromaconten">
-  <div class="contencroma">
-    <div class="croma col-lg-12  col-ms-12">
-      <?php
-      include('../layout/archives.php');
-      ?>
-    </div>
-  </div>
-</section>
+<?php include '../layout/archives.php' ?>
 
 <div class="archives-structur">
   <div class="grid-container">
@@ -36,15 +34,31 @@
         </div>
       </div>
       <div class="archives-conten col-lg-10">
-        <h2 id="tittleDoc">Documentos</h2>
+        <h4 id="tittleDoc">
+          <?php
+          $ver = new Personal($_GET['carga']);
+          $get = $_GET['gestion'];
+          $pero = $conn->query("SELECT nombre_tipo_arch FROM `tiposarch` WHERE id_tipo ='$get'");
+          echo $pero->fetch_object()->nombre_tipo_arch . " de " . $ver->getNombre() . ' ' . $ver->getApellido();
+          ?>
+        </h4>
+        <hr style="border-color: #e7e7e7;">
         <div class="cards d-flex" style="flex-wrap: wrap;">
           <?php
-          include_once("../php/preset/cardSelector.php")
+          include_once "../php/preset/cardSelector.php"
             ?>
         </div>
       </div>
     </div>
   </div>
 </div>
+<style>
+  .conten-archives {
+    position: relative;
+    margin-top: 65px;
+    margin-bottom: -5%;
+    padding-bottom: 10px;
+  }
+</style>
 
 <?php require("../layout/footer.php"); ?>

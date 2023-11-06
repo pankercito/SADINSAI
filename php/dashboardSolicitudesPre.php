@@ -4,7 +4,7 @@ include("../php/conx.php");
 include("../php/class/auditoria.php");
 include("../php/function/sumarhora.php");
 
-$new = new auditoria();
+$new = new Auditoria();
 
 // definimos array de datos 
 $json = $new->solicitudDetailstStats(date('Y-m-d'));

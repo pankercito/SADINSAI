@@ -11,7 +11,7 @@ $searching = $conn->query("SELECT ci, nombre, apellido FROM personal WHERE ci LI
 
 while ($v = $searching->fetch_object()) {
     $export[] = [
-        '<li><a class="searched" href="perfil.php?personal=' . encriptar($v->ci) . '&parce=true">' . $v->ci . ' | ' . ucfirst(strtolower($v->nombre)) . ' ' . ucfirst(strtolower($v->apellido)) . '</a></li>'
+        '<li class="nav-item"><a class="nav-link collapsed searched" href="../public/perfil.php?perfil=' . encriptar($v->ci) . '&parce=true">' . $v->ci . ' | ' . ucfirst(strtolower($v->nombre)) . ' ' . ucfirst(strtolower($v->apellido)) . '</a></li>'
     ];
 }
 

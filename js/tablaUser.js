@@ -29,6 +29,13 @@ var table = new DataTable('#table', {
     order: [
         [2, 'desc']
     ],
+    //OCULTAR COLUMNA
+    columnDefs: [
+        {
+            target: 6,
+            visible: false
+        }
+    ],
     language: {
         "decimal": "",
         "emptyTable": "No hay información",
@@ -51,7 +58,27 @@ var table = new DataTable('#table', {
     },
 });
 
+var usernameEl = $('#estado');
+
+//FILTRO TABLA
+DataTable.ext.search.push(function (settings, data, dataIndex) {
+    var username = data[6]; // use data for the username column
+
+    if (
+        (usernameEl.val() == '' || username.toLowerCase().includes(usernameEl.val().toLowerCase()))
+    ) {
+        return true;
+    }
+
+    return false;
+});
+
+// accion en selector
+$('#estado').on('change', function () {
+    table.draw();
+});
+
 // RECARGA DE LA TABLA AUTOMATICA CADA 1M || NUMERO EN MILISEGUNDOS
 setInterval(() => {
     table.ajax.reload(null, false);
-}, 10000);
+}, 60000);

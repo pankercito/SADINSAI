@@ -8,17 +8,6 @@
     <!--HOJAS DE ESTILO/BOOTSTRAP-->
     <script src="resources/import/jquery/jquery-3.6.0.js"></script> <!--js jQuery -->
     <script src="resources/import/jquery/jquery-3.6.0.min.js"></script> <!--js jQuery -->
-    <link href="resources/import/jQuery-DataTables/jquery.dataTables.min.css" rel="stylesheet">
-    <!--js jQuery DataTables -->
-    <script src="resources/import/jQuery-DataTables/jquery.dataTables.min.js"></script> <!--js jQuery DataTables-->
-    <link href="resources/import/jQuery-DataTables/themes/Semantic-UI/dataTables.semanticui.min.css" rel="stylesheet">
-    <!--js jQuery DataTables SEMANTIC UI -->
-    <script src="resources/import/jQuery-DataTables/themes/Semantic-UI/dataTables.semanticui.min.js"></script>
-    <!--js jQuery DataTables SEMANTIC UI -->
-    <link href="resources/import/jQuery-DataTables/themes/Semantic-UI/semantic.min.css" rel="stylesheet">
-    <!--js jQuery DataTables SEMANTIC UI -->
-    <script src="resources/import/jQuery-DataTables/themes/Semantic-UI/semantic.min.js"></script>
-    <!--js jQuery DataTables SEMANTIC UI -->
     <script src="resources/import/jQuery-Confirm/jquery-confirm.min.js"></script> <!--js jQuery Confirm -->
     <link href="resources/import/jQuery-Confirm/jquery-confirm.min.css" rel="stylesheet"> <!--js jQuery Confirm -->
     <link href="resources/import/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -37,7 +26,7 @@
     </div>
 
     <section class="col-lg-12 "><!--seccion de login-->
-        <form action="../sadinsai/php/validation.php" method="post"> <!---ACCION DEL FORMULADIO-->
+        <form action="php/validation.php" method="post"> <!---ACCION DEL FORMULADIO-->
             <div id="login-box">
                 <p>INICIO DE SESI&Oacute;N</p>
                 <div class="form">
@@ -57,7 +46,7 @@
                 </div>
                 <!-- PAGINA DE RECUPERACION -->
                 <div class="parte-abajo">
-                    <a href="private/recovery.php" class="button">Olvide mi Contrase&ntilde;a</a>
+                    <a href="components/recovery.php" class="button">olvide mi contrase&ntilde;a</a>
                 </div>
             </div>
         </form>

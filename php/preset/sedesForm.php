@@ -13,6 +13,6 @@ $sql = "SELECT * FROM sedes WHERE id_estado_sed = '$estadoSeleccionado'";
 // Ejecutar la consulta
 $resultado = $conn->query($sql);
 
-while($row = mysqli_fetch_array($resultado)){
-    echo '<option value="'.$row['sede_id'].'">'.$row['nombre_sede'].'</option>';
+while ($row = mysqli_fetch_array($resultado)) {
+    echo '<option value="' . $row['sede_id'] . '">' . $row['nombre_sede'] . '</option>';
 }

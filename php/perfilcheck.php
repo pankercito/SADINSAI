@@ -16,6 +16,7 @@ if (isset($_GET['perfil'])) {
     $pCiudad = $personal->getCiudad();
     $pSede = $personal->getSede();
     $pCargo = $personal->getCargo();
+    $pDepart = $personal->getDepartament();
 } else {
     echo 'no llego esa mondaa';
 }

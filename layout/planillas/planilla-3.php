@@ -1,49 +1,64 @@
-<h6>solicitud de vacaciones</h6>
-<form action="" method="post">
-    <div class="mb-3 row col align-items-baseline">
+<?php
+session_start();
+?>
+<h6>SOLICITUD DE VACACIONES</h6>
+<hr>
+<form action="../php/solisPlanlillas.php" method="post">
+    <div class="col">
+        <h6 class="text-center">
+            DATOS DEL SOLICITANTE
+        </h6>
+    </div>
+    <div class="mb-3 row col align-items-baseline mx-2">
         <div class="col">
             <label for="codigo" class="col-form-label">codigo</label>
-            <input type="text" class="form-control" name="codigo" id="codigo" placeholder="Name">
+            <input type="text" class="form-control" name="codigo" id="codigo" placeholder="codigo">
         </div>
         <div class="col">
             <label for="fecha" class="col-form-label">fecha</label>
-            <input type="date" class="form-control" name="fecha" id="fecha" placeholder="Name">
+            <input type="date" class="form-control" name="fecha" id="fecha" value="<?php echo date('Y-m-d') ?>">
         </div>
         <div class="col">
             <label for="codigoNomina" class="col-form-label">codigo de nomina</label>
-            <input type="text" class="form-control" name="codigoNomina" id="codigoNomina" placeholder="Name">
+            <input type="text" class="form-control" name="codigoNomina" id="codigoNomina" placeholder="codigo">
         </div>
     </div>
-    <div class="mb-3 row col align-items-baseline">
+    <div class="mb-3 row col align-items-baseline mx-2">
         <div class="col">
             <label for="inputNames" class="col-form-label">nombres y apellidos</label>
-            <input type="text" class="form-control" name="inputNames" id="inputNames" placeholder="Name">
+            <input type="text" class="form-control" name="inputNames" id="inputNames"
+                value="<?php echo $_SESSION['getPlanillaNombre'] . ' ' . $_SESSION['getPlanillaApellido'] ?>" readonly >
         </div>
         <div class="col">
             <label for="cin" class="col-form-label">C.I.N</label>
-            <input type="text" class="form-control" name="cin" id="cin" placeholder="Name">
+            <input type="text" class="form-control" name="cin" id="cin" value="<?php echo $_SESSION['getPlanillaCI'] ?>"
+                readonly >
         </div>
         <div class="col">
             <label for="cargo" class="col-form-label">cargo</label>
-            <input type="text" class="form-control" name="cargo" id="cargo" placeholder="Name">
+            <input type="text" class="form-control" name="cargo" id="cargo"
+                value="<?php echo $_SESSION['getPlanillaCargo'] ?>" readonly >
         </div>
         <div class="col">
             <label for="adscrito" class="col-form-label">adscrito a</label>
-            <input type="text" class="form-control" name="adscrito" id="adscrito" placeholder="Name">
+            <input type="text" class="form-control" name="adscrito" id="adscrito"
+                value="<?php echo $_SESSION['getPlanillaDepart'] ?>" readonly >
         </div>
         <div class="col">
             <label for="unidad" class="col-form-label">unidad</label>
-            <input type="text" class="form-control" name="unidad" id="unidad" placeholder="Name">
+            <input type="text" class="form-control" name="unidad" id="unidad"
+                value="<?php echo $_SESSION['getPlanillaSede'] ?>" readonly >
         </div>
     </div>
-    <div class="mb-3 row col align-items-baseline">
+    <div class="mb-3 row col align-items-baseline mx-2">
         <div class="col">
             <label for="ubicacion" class="col-form-label">ubicacion</label>
-            <input type="text" class="form-control" name="ubicacion" id="ubicacion" placeholder="Name">
+            <input type="text" class="form-control" name="ubicacion" id="ubicacion"
+                value="<?php echo $_SESSION['getPlanillaEst'] ?>" readonly >
         </div>
         <div class="col">
-            <label for="fechaingreso" class="col-form-label">fecha de ingreso</label>
-            <input type="text" class="form-control" name="fechaingreso" id="fechaingreso" placeholder="Name">
+            <label for="fechaingreso" class="col-form-label">fecha de ingreso al insai</label>
+            <input type="date" class="form-control" name="fechaingreso" id="fechaingreso" placeholder="Name">
         </div>
         <div class="col">
             <label for="organismos" class="col-form-label">tiempo de servicio en otros organismos publicos</label>
@@ -54,49 +69,27 @@
             <input type="text" class="form-control" name="tiempototal" id="tiempototal" placeholder="Name">
         </div>
     </div>
-    <div class="mb-3 row col align-items-baseline">
-        <h6 class="mb-2">motivo de anticipo</h6>
-        <div class="col row no-color align-items-baseline">
-            <h6>Construccion de vivienda</h6>
-            <div class="col d-grid align-items-baseline">
-                <label for="motivoanticipo" class="mb-0">adquisicion de vivienda</label>
-                <input class="" type="radio" name="motivoanticipo" id="motivoanticipo">
-                <label for="motivoanticipo2" class="mb-0"> mejora o reparacion de vivienda</label>
-                <input class="" type="radio" name="motivoanticipo" id="motivoanticipo2">
-            </div>
-        </div>
-        <div class="col row no-color align-items-baseline">
-            <h6>liberacion de hipoteca</h6>
-            <div class="form-check-inline">
-                <label for="motivoanticipo" class="mb-2">sobre la vivienda</label>
-                <input class="" type="radio" name="motivoanticipo" id="motivoanticipo">
-                <label for="motivoanticipo2" class="mb-2">otro gravamen</label>
-                <input class="" type="radio" name="motivoanticipo" id="motivoanticipo2">
-            </div>
-        </div>
-        <div class="col row no-color align-items-baseline">
-            <h6>pago de pension escolar</h6>
-            <div class="form-check-inline">
-                <input class="form-control-checkbox" type="radio" name="motivoanticipo" id="motivoanticipo">
-            </div>
-        </div>
-        <div class="col row no-color align-items-baseline">
-            <h6>gastos medicos</h6>
-            <div class="form-check-inline">
-                <label for="motivoanticipo" class="mx-2">trabajador</label>
-                <input class="" type="radio" name="motivoanticipo" id="motivoanticipo">
-                <label for="motivoanticipo" class="mx-2">conyugue</label>
-                <input class="" type="radio" name="motivoanticipo" id="motivoanticipo">
-                <label for="motivoanticipo2" class="mx-2">hijos</label>
-                <input class="" type="radio" name="motivoanticipo" id="motivoanticipo2">
-            </div>
+
+    <div class="mb-3 row col align-items-baseline mx-2">
+        <div class="col">
+            <label for="periodo">periodo vacacional</label>
+            <input type="text" name="periodo" placeholder="dias" id="periodo" class="form-control">
         </div>
         <div class="col">
-            <label for="observaciones">observaciones</label>
-            <input type="text" name="observaciones" id="observaciones" class="form-control">
+            <label for="habiles">dias habiles a disfrutar</label>
+            <input type="text" name="habiles" placeholder="dias" id="habiles" class="form-control">
+        </div>
+        <div class="col">
+            <label for="cantidad">cantidad</label>
+            <input type="text" name="cantidad" placeholder="cantidad" id="observaciones" class="form-control">
+        </div>
+        <div class="col">
+            <label for="incorporacion">fecha de incorporacion</label>
+            <input type="date" name="incorporacion" placeholder="observaciones" id="observaciones" class="form-control">
         </div>
     </div>
     <div class="col">
-        <button type="submit" class="btn btn-success">procesar</button>
+        <input type="text" class="d-none" value="3" name="formtipo">
+        <button type="submit" class="btn btn-success btn-lg">procesar</button>
     </div>
 </form>

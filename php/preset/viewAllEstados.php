@@ -1,5 +1,6 @@
 <?php
 
+//sedes por estado
 $regisview = $conn->query("SELECT estados.id_estado, estados.estado, COUNT(sedes.sede_id) AS total_sedes
                                     FROM estados
                                     INNER JOIN sedes ON estados.id_estado = sedes.id_estado_sed
@@ -13,7 +14,7 @@ if ($count > 0) {
         //Lista de los usuarios
         $v = mysqli_fetch_array($regisview);
         echo '
-                <option value=' . strtoupper(cor_acentos($v['estado'])) . '">' . cor_acentos($v['estado']) . '</option>
+                <option value=' . $v['id_estado'] . '>' . $v['estado'] . '     total de sedes: '. $v['total_sedes'] . '</option>
               ';
 
     }

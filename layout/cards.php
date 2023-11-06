@@ -2,7 +2,12 @@
 
 <?php
 
-include("../php/preset/cardsPreset.php");
+include "../php/preset/cardsPreset.php";
+
+function reverse($cadena)
+{
+    return substr($cadena, strrpos($cadena, '.') + 1);
+}
 
 if ($count > 0) {
     $i = 0;
@@ -11,6 +16,9 @@ if ($count > 0) {
         $image = $row['d_archivo'];
         $ubicatinFis = $row['dir_nombre'];
         $nameSet = $row['nombre_arch'];
+
+        $tipoDarch = reverse($row['nombre_arch']);
+
         if (strlen($nameSet) > 15) {
             $q = 1;
             $name = substr($nameSet, 0, 15) . "...";
@@ -26,10 +34,11 @@ if ($count > 0) {
         $c = ($row['size'] / 1024);
         $size = ($c <= 920) ? number_format($c, 2) . "KB" : number_format($c / 1024, 2) . "MB";
 
-        $d = '<img class="card__image" src="' . @$image . '" alt="fotos" width="298" height="223.5"/>'
+        $d = ($tipoDarch != "pdf") ? '<img class="card__image" src="' . @$image . '" alt="fotos" width="298" height="223.5"/>'
+            : '<embed src="' . @$image . '"  title="' . @$name . '" width="298" height="223.5"  frameborder="0" allowfullscreen scrolling="no" style="overflow: hidden;"></embed>';
 
-            // imprimir las card 
-            ?>
+        // imprimir las card 
+        ?>
         <div class="card">
             <div class="card__image-holder">
                 <?php echo @$d ?>

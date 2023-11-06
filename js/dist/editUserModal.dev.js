@@ -22,7 +22,11 @@ form.addEventListener("submit", function (event) {
 
   var cargoSelect = document.getElementById("Cargo");
   var cargoOption = cargoSelect.options[cargoSelect.selectedIndex];
-  var cargo = cargoOption.textContent;
+  var cargo = cargoOption.textContent; // Obtener el valor y el texto de la opción seleccionada en el selector de cargo
+
+  var depSelect = document.getElementById("ep");
+  var depOption = depSelect.options[depSelect.selectedIndex];
+  var departament = depOption.textContent;
   /*
    * NOTA IMPORTANTE FORM DE EDIT PRE Y FORMDATA
    * DEBEN TENER EL MISMO ORDEN DE VALORES
@@ -30,22 +34,24 @@ form.addEventListener("submit", function (event) {
   // Crear un objeto con los datos del formulario
 
   var formData = {
-    "cedula": document.getElementById("Ci").value,
-    "nombre": document.getElementById("Name").value,
-    "apellido": document.getElementById("Apellido").value,
-    "grado_academico": document.getElementById("Grado_Academico").value,
-    "sexo": document.querySelector('input[name="sexo"]:checked').value,
-    "fecha": document.getElementById("Edad").value,
-    "telefono": document.getElementById("Phone").value,
-    "estado": estadoText,
-    "ciudad": ciudadText,
-    "sede": sedeText,
-    "email": document.getElementById("Email").value,
-    "direccion": document.getElementById("Direccion").value,
-    "cargo": cargo
+    "cedula": document.getElementById("Ci").value.toLowerCase().trim(),
+    "nombre": document.getElementById("Name").value.toLowerCase().trim(),
+    "apellido": document.getElementById("Apellido").value.toLowerCase().trim(),
+    "grado": document.getElementById("Grado_Academico").value.toLowerCase().trim(),
+    "sexo": document.querySelector('input[name="sexo"]:checked').value.toLowerCase().trim(),
+    "fecha": document.getElementById("Edad").value.toLowerCase().trim(),
+    "telefono": document.getElementById("Phone").value.toLowerCase().trim(),
+    "estado": estadoText.toLowerCase().trim(),
+    "ciudad": ciudadText.toLowerCase().trim(),
+    "sede": sedeText.toLowerCase().trim(),
+    "email": document.getElementById("Email").value.toLowerCase().trim(),
+    "direccion": document.getElementById("Direccion").value.toLowerCase().trim(),
+    "cargo": cargo.toLowerCase().trim(),
+    "departamento": departament.toLowerCase().trim()
   }; // Función para crear los elementos HTML y agregarlos al MODAL
 
   function mostrarDatosFormulario() {
+    // HEADER
     var tableHtml = '<table>' + '<tr>' + '<th>Campo</th>' + '<th style="width:1rem;"></th>' + '<th>Antes</th>' + '<th style="width:1rem;"></th>' + '<th>Después</th>' + '</tr>'; //Variable booleana para condicionales
 
     var hasChanges = false; // Se utiliza el método $.each() de jQuery para iterar sobre cada campo del objeto formData.
@@ -53,7 +59,7 @@ form.addEventListener("submit", function (event) {
     $.each(formData, function (key, value) {
       var beforeValue = datosFormularioPre[key]; // Se utiliza una condición if para verificar si el valor del campo ha cambiado.
 
-      if (value !== beforeValue) {
+      if (value != beforeValue) {
         tableHtml += '<tr>' + '<td>' + key + '</td>' + '<th style="width:1rem;"></th>' + '<td>' + beforeValue + '</td>' + '<th style="width:1rem;"></th>' + '<td>' + value + '</td>' + '</tr>';
         hasChanges = true;
       }

@@ -8,8 +8,8 @@ $conn = new Conexion();
 $sql = "SELECT * FROM sedes";
 
 // Ejecutar la consulta
-$resultado = $conn->query( $sql);
+$resultado = $conn->query($sql);
 
-while($row = mysqli_fetch_array($resultado)){
-    echo '<option value="'.$row['sede_id'].'">'.$row['nombre_sede'].'</option>';
+while ($row = mysqli_fetch_array($resultado)) {
+    echo '<option value="' . $row['sede_id'] . '">' . $row['nombre_sede'] . '</option>';
 }

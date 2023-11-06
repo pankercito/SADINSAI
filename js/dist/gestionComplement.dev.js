@@ -201,7 +201,7 @@ var tipoDarch = getQueryVariable('gestion'); // ocultar agregar documentos en el
 
 $(document).ready(function () {
   if (tipoDarch == "1046") {
-    document.getElementById("tittleDoc").innerHTML = "Campos";
+    document.getElementById("tittleDoc").innerHTML = "<h4 class='mb-3'>FORMULARIO</h4>";
     document.title = "SADINSAI | Planillas";
   }
 });

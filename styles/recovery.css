@@ -3,6 +3,12 @@
     justify-content: center;
 }
 
+img.logo {
+    max-width: max-content;
+    height: 150px;
+    margin: auto;
+}
+
 button.consul.btn.btn-primary {
     margin: 3rem auto .5rem;
     height: 2.55rem;
@@ -33,7 +39,7 @@ small#mensajeCi {
     display: flex;
     flex-direction: column;
     background: #e3e3e3;
-    margin: 10rem 5rem 0;
+    margin: 2rem 5rem 0;
     width: 21rem;
     padding: 2rem;
     box-shadow: 0 1px 7px 0px #1e2022 !important;
@@ -49,3 +55,24 @@ form {
 .reco {
     margin: 2rem;
 }
+
+a.mt-4.mx-auto.text-center.p-1.nav-link:hover {
+    text-decoration: underline;
+    background: none;
+    color: #36c077;
+}
+
+a.mt-4.mx-auto.text-center.p-1.nav-link {
+    background: none;
+}
+
+button.consul {
+    background: #74c37c !important;
+    border: #74c37c !important;
+} 
+
+button.consul:hover {
+    background: #45884b !important;
+    border: #74c37c !important;
+    color: #d6d6d6;
+} 

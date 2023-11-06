@@ -5,13 +5,14 @@
 <?php
 include("../layout/navbar.php");
 
-if ($_SERVER['REQUEST_URI'] == "/sadinsai/public/anadir.php") {
+if ($_SERVER['REQUEST_URI'] == "/public/anadir.php") {
     echo "<style>section.footer.col-lg-12 {
       position: fixed;
       bottom: 0;
    }</style>";
 }
-if ($_SERVER['REQUEST_URI'] == "/sadinsai/public/anadir.php?users/register=true") {
+
+if ($_SERVER['REQUEST_URI'] == "/public/anadir.php?users/register=true") {
     echo "<style>section.footer.col-lg-12 {
       position: fixed;
       bottom: 0;
@@ -23,14 +24,7 @@ if ($_SERVER['REQUEST_URI'] == "/sadinsai/public/anadir.php?users/register=true"
 <link rel="stylesheet" href="../styles/anadir.css">
 <link rel="stylesheet" href="../styles/background.css">
 
-<section name="cromaconten">
-    <div class="contencroma">
-        <?php
-        include("../layout/sidebar.php");
-        ?>
-    </div>
-</section>
-
+<?php include "../layout/sidebar.php"?>
 
 <div class="structur-conten">
     <div class="row justify-content-center text-center">

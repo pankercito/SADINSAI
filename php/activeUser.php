@@ -1,30 +1,44 @@
 <?php
-include("conx.php");
+include "conx.php";
+include "class/auditoria.php";
 
-if ($_POST['pin'] != "") {
+if ($_POST['userId'] != "") {
 
     $conn = new Conexion();
+    $auditoria = new Auditoria();
 
     $user = $conn->real_escape($_POST['userId']);
     $radio = $conn->real_escape($_POST['radio']);
 
     switch ($radio) {
         case '1':
-            $sql = $conn->query("UPDATE registro SET active = '$radio' WHERE id_usuario = '$user'");
+            if ($auditoria->registActivUser()) {
 
-            if ($sql == true) {
-                echo "success";
-            }else{
+                $aa = $auditoria->activarUsuario($user);
+
+                if ($aa == true) {
+                    echo "success";
+                } else {
+                    echo "error";
+                }
+            } else {
                 echo "error";
             }
+
             break;
         case '2':
-            $sql = $conn->query("UPDATE registro SET active = '$radio' WHERE id_usuario = '$user'");
-            if ($sql == true) {
-                echo "success.rech";
-            }else{
-                echo "error.rech";
+            if ($auditoria->registActivUser()) {
+                $aa = $auditoria->supenderUsuario($user);
+
+                if ($aa == true) {
+                    echo "success.rech";
+                } else {
+                    echo "error.rech";
+                }
+            } else {
+                echo "error";
             }
+
             break;
         default:
             echo "error";

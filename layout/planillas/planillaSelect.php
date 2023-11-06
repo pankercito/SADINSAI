@@ -2,4 +2,4 @@
 
 $planilla = $_POST['planilla'];
 
-include("planilla-". $planilla.".php");
+include "planilla-". $planilla.".php";

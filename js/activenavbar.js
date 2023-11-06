@@ -20,3 +20,9 @@ $(function () {
         section.addClass('active');
     }
 })
+
+const now = moment();
+const hour = now.hour();
+
+const HorarioLaboral = hour >= "08" && hour <= "17";
+

@@ -1,14 +1,16 @@
 <?php
-include("conx.php");
 
+include "conx.php";
+include "class/auditoria.php";
 
 $conn = new Conexion();
+$auditoria = new Auditoria();
 
 $user = $conn->real_escape($_POST['userId']);
 
+$a = $auditoria->deleleUser($user);
 
-$sql = $conn->query("DELETE FROM registro WHERE id_usuario = '$user'");
-if ($sql == true) {
+if ($a == true) {
     echo "success.dele";
 } else {
     echo "error.dele";

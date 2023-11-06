@@ -106,12 +106,8 @@ $(document).ready(function () {
             cheki.attr('disabled', 'true');
             sing.attr('disabled', 'true');
         }
-
-
     });
 });
-
-
 
 //SWITCHVALIDATION
 $(document).ready(function () {

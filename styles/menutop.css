@@ -32,18 +32,18 @@ a.navbar-brand {
 
 .navbar-brand img {
     /*logo*/
-    margin-top: -2px !important;
+    margin: -2rem 0 0 1rem;
 }
 
 .navbar-nav {
     /*lista de navegacion*/
-    margin-left: -30% !important;
+    margin-left: -15% !important;
 }
 
 @media (max-width: 1400px) and (orientation: landscape) {
     .navbar-nav {
         /*lista de navegacion*/
-        margin-left: -20rem !important;
+        margin-left: -6% !important;
     }
 }
 
@@ -57,7 +57,7 @@ a.navbar-brand {
 @media (max-width: 1200px) and (orientation: landscape) {
     .navbar-nav {
         /*lista de navegacion*/
-        margin-left: -12% !important;
+        margin-left: 0% !important;
     }
 }
 
@@ -97,6 +97,7 @@ ul.nav.nav-list.nav-pills.navbar-right {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     font-weight: var(--font-semibold);
+    transition: all 0.20s;
 }
 
 .nav-link:hover {
@@ -214,6 +215,7 @@ button.btn.btn-outline-success {
 a.nav-link.active:hover {
     background-color: var(--color-hoverbuttom);
     color: #2e2e2eda;
+    transition: all 0.2s;
 }
 
 #result {
@@ -231,6 +233,7 @@ a.nav-link.active:hover {
     flex-wrap: nowrap;
     align-content: center;
 }
+
 #resultList {
     list-style: none;
     padding: 0;
@@ -238,41 +241,54 @@ a.nav-link.active:hover {
     text-align: start;
 }
 
-#resultList li {
-    padding: 10px 15px;
-}
-
-#resultList li:hover {
-    background: #595959;
-    border-radius: 7px;
-}
-
 .searched {
     text-decoration: none;
     font-size: 12px !important;
     color: black;
+    padding: 10px 15px;
+    margin: .2rem 0 .5rem;
+    border-radius: 3px;
 }
 
-.searched:hover{
+.searched:hover {
     color: rgb(184, 245, 179);
+    background: #595959;
+    border-radius: 7px;
+}
+
+a.dropdown-item {
+    transition: all 0.20s;
 }
 
 #adminSetMsj {
     background: #6c6c6c;
     color: white;
     position: absolute;
-    margin: 1.6rem 0rem 0 -7.5rem;
+    margin: 1.3rem 0rem 0 -6.82rem;
     height: 1.5rem;
+    opacity: 0.85;
     font-size: 10px;
     padding: 2px 4px;
 }
 
-#sysAdminSetMsj{
+#sysAdminSetMsj {
     background: #ff6384;
     color: white;
     position: absolute;
-    margin: 1.6rem 0rem 0 -7.5rem;
+    margin: 1.3rem 0rem 0 -6.25rem;
     height: 1.5rem;
+    opacity: 0.85;
+    font-size: 10px;
+    padding: 2px 4px;
+}
+
+#analistSetMsj {
+    background: #6c6c6c;
+    color: white;
+    position: absolute;
+    margin: 1.3rem 0rem 0 -4.95rem;
+    height: 1.5rem;
+    opacity: 0.85;
     font-size: 10px;
     padding: 2px 4px;
 }

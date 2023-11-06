@@ -1,6 +1,8 @@
 <?php
 
-include("adp.php");
+include "adp.php";
+include "class/auditoria.php";
+$auditoria = new Auditoria();
 
 if (isset($_SESSION['subcedula'])) {
     if (isset($_POST["user"]) && ($_POST["pass"]) && ($_POST["pin"])) {
@@ -13,19 +15,21 @@ if (isset($_SESSION['subcedula'])) {
 
         $admincheck = $admincheck + 0;
 
-        $proceso = $conn->query("INSERT INTO registro (ci, user, pass, pin, adp) VALUES ('$cedula ', '$usuario', '$contrasena', '$pin', '$admincheck')");
+        if ($auditoria->registUser()) {
+            $proceso = $conn->query("INSERT INTO registro (ci, user, pass, pin, adp) VALUES ('$cedula ', '$usuario', '$contrasena', '$pin', '$admincheck')");
 
-        unset($_SESSION['subcedula']);
+            unset($_SESSION['subcedula']);
 
-        if (!$proceso) { //verificacion de registro exitosa en la base de datos
-            echo "no se pudo registrar por favor intenta de nuevo <a href='?adminregister=true'>click para registrar de nuevo</a>";
-        } else {
-            echo "registro finalizo correctamente";
+            if (!$proceso) { //verificacion de registro exitosa en la base de datos
+                echo "no se pudo registrar por favor intenta de nuevo <a href='?adminregister=true'>click para registrar de nuevo</a>";
+            } else {
+                echo "registro finalizo correctamente";
+            }
         }
     } else {
         unset($_SESSION['subcedula']);
         echo "no se pudo registrar por favor intenta de nuevo <a href='?adminregister=true'>click para registrar de nuevo</a>";
-    } 
-}else {
+    }
+} else {
     echo "<h6> elija una opcion </h6>";
 }

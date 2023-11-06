@@ -3,88 +3,73 @@
  * Respaldar base de datos de MySQL con PHP
  * Función modificada de: https://stackoverflow.com/a/21284229/5032550
  *
- * Visita: https://parzibyte.me/blog/2018/10/22/script-respaldar-base-de-datos-mysql-php/
  */
 
 // Ejemplo de llamada: exportarTablas("localhost", "root", "123", "foo");
 
-function exportarDb($host, $usuario, $pasword, $nombreDeBaseDeDatos)
+function backup_database($database, $path) 
 {
-    set_time_limit(3000);
-    $tablasARespaldar = [];
-    $mysqli = new mysqli($host, $usuario, $pasword, $nombreDeBaseDeDatos);
-    $mysqli->select_db($nombreDeBaseDeDatos);
-    $mysqli->query("SET NAMES 'utf8'");
-    $tablas = $mysqli->query('SHOW TABLES');
-    while ($fila = $tablas->fetch_row()) {
-        $tablasARespaldar[] = $fila[0];
-    }
-    $contenido = "SET SQL_MODE = \"NO_AUTO_VALUE_ON_ZERO\";\r\nSET time_zone = \"+00:00\";\r\n\r\n\r\n/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;\r\n/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;\r\n/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;\r\n/*!40101 SET NAMES utf8 */;\r\n--\r\n-- Database: `" . $nombreDeBaseDeDatos . "`\r\n--\r\n\r\n\r\n";
-    foreach ($tablasARespaldar as $nombreDeLaTabla) {
-        if (empty($nombreDeLaTabla)) {
-            continue;
+        // Conectarse a la base de datos
+        $link = mysqli_connect("localhost", "root", "", $database);
+        if (!$link) {
+            die("Error al conectar a la base de datos: " . mysqli_error($link));
         }
-        $datosQueContieneLaTabla = $mysqli->query('SELECT * FROM `' . $nombreDeLaTabla . '`');
-        $cantidadDeCampos = $datosQueContieneLaTabla->field_count;
-        $cantidadDeFilas = $mysqli->affected_rows;
-        $esquemaDeTabla = $mysqli->query('SHOW CREATE TABLE ' . $nombreDeLaTabla);
-        $filaDeTabla = $esquemaDeTabla->fetch_row();
-        $contenido .= "\n\n" . $filaDeTabla[1] . ";\n\n";
-        $j;
-        for ($i = 0, $contador = 0; $i < $cantidadDeCampos; $i++, $contador = 0) {
-            while ($fila = $datosQueContieneLaTabla->fetch_row()) {
-                //La primera y cada 100 veces
-                if ($contador % 100 == 0 || $contador == 0) {
-                    $contenido .= "\nINSERT INTO " . $nombreDeLaTabla . " VALUES";
+    
+        // Obtener una lista de todas las tablas
+        $tables = mysqli_query($link, "SHOW TABLES");
+    
+        // Para cada tabla
+        while ($table = mysqli_fetch_assoc($tables)) {
+            // Generar el código SQL para crear la tabla
+            $create_table_sql = "CREATE TABLE `{$table['Tables_in_' . $database]}` (";
+            $fields = mysqli_query($link, "SHOW COLUMNS FROM `{$table['Tables_in_' . $database]}`");
+            while ($field = mysqli_fetch_assoc($fields)) {
+                $create_table_sql .= "`{$field['Field']}` {$field['Type']} {$field['Null']} {$field['Key']} {$field['Default']} COMMENT '{$field['Comment']}'";
+                if ($field['Key'] == "PRI") {
+                    $primary_keys[] = $field['Field'];
                 }
-                
-                $contenido .= "\n(";
-                for ($j = 0; $j < $cantidadDeCampos; $j++) {
-                    $fila[$j] = str_replace("\n", "\\n", mysqli_real_escape_string($mysqli, $fila[$j]));
-                    if (isset($fila[$j])) {
-                        $contenido .= '"' . $fila[$j] . '"';
-                    } else {
-                        $contenido .= '""';
-                    }
-                    if ($j < ($cantidadDeCampos - 1)) {
-                        $contenido .= ',';
-                    }
-                }
-                $contenido .= ")";
-                # Cada 100...
-                if ((($contador + 1) % 100 == 0 && $contador != 0) || $contador + 1 == $cantidadDeFilas) {
-                    $contenido .= ";";
-                } else {
-                    $contenido .= ",";
-                }
-                $contador = $contador + 1;
             }
+            $create_table_sql .= ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+    
+            // Generar el código SQL para insertar los datos de la tabla
+            $insert_data_sql = "INSERT INTO `{$table['Tables_in_' . $database]}` (";
+            $first = true;
+            foreach ($fields as $field) {
+                if ($first) {
+                    $first = false;
+                } else {
+                    $insert_data_sql .= ", ";
+                }
+                $insert_data_sql .= "`{$field['Field']}`";
+            }
+            $insert_data_sql .= ") VALUES ";
+            $rows = mysqli_query($link, "SELECT * FROM `{$table['Tables_in_' . $database]}`");
+            while ($row = mysqli_fetch_assoc($rows)) {
+                $insert_data_sql .= "(";
+                $first = true;
+                foreach ($fields as $field) {
+                    if ($first) {
+                        $first = false;
+                    } else {
+                        $insert_data_sql .= ", ";
+                    }
+                    $insert_data_sql .= '"' . addslashes($row[$field['Field']]) . '"';
+                }
+                $insert_data_sql .= "), ";
+            }
+            $insert_data_sql = substr($insert_data_sql, 0, -2);
+    
+            // Generar el código SQL para crear las llaves foráneas
+            $foreign_keys = mysqli_query($link, "SELECT * FROM information_schema.referential_constraints WHERE table_name = '{$table['Tables_in_' . $database]}'");
+            while ($foreign_key = mysqli_fetch_assoc($foreign_keys)) {
+                $foreign_key_sql = "ALTER TABLE `{$table['Tables_in_' . $database]}` ADD CONSTRAINT `fk_{$foreign_key['constraint_name']}` FOREIGN KEY (`{$foreign_key['column_name']}`) REFERENCES `{$foreign_key['referenced_table_name']}` (`{$foreign_key['referenced_column_name']}`);";
+                $foreign_keys_sql[] = $foreign_key_sql;
+            }
+    
+            // Escribir el código SQL en un archivo
+            file_put_contents($path . "/{$table['Tables_in_' . $database]}.sql");
+    
         }
-        $contenido .= "\n\n\n";
-    }
-    $contenido .= "\r\n\r\n/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;\r\n/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;\r\n/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;";
-
-    # Se guardará dependiendo del directorio, en una carpeta llamada respaldos
-    $carpeta = "../data/respaldos";
-    if (!file_exists($carpeta)) {
-        mkdir($carpeta);
-    }
-
-    # Calcular un ID único
-    $id = uniqid();
-
-    # También la fecha
-    $fecha = date("Y-m-d");
-
-    # Crear un archivo que tendrá un nombre como respaldo_2018-10-22_asd123.sql
-    $nombreDelArchivo = sprintf('%s/respaldo_%s_%s.sql', $carpeta, $fecha, $id);
-
-    #Escribir todo el contenido. Si todo va bien, file_put_contents NO devuelve FALSE
-    return file_put_contents($nombreDelArchivo, $contenido) !== false;
 }
 
-if (exportarDb("localhost", "root", "", "sadinsai") == true ){
- echo "respaldo listo";
-}else{
-    echo "error l respaldar";
-}
+backup_database("sadinsai", "../data/backup");

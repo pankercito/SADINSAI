@@ -1,7 +1,8 @@
 <?php
 
-@include('../conx.php');
-
+if (!class_exists('Conexion')) {
+    include "conx.php";
+}
 $conn = new Conexion();
 
 $sql = $conn->query("SELECT * FROM cargo");

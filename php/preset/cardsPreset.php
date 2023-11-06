@@ -8,7 +8,7 @@ $tipo = $conn->real_escape($_GET['gestion']);
 $sql = $conn->query("SELECT * FROM archidata a 
                               INNER JOIN solicitudes s
                               INNER JOIN registro r
-                              INNER JOIN direccion_direcciones d
+                              INNER JOIN departamentos d
                               ON a.id_archivo = s.id_solicitud
                               AND s.id_emisor = r.id_usuario
                               AND d.id_direccion = a.ubicacion_fis

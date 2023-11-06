@@ -29,6 +29,12 @@ var table = new DataTable('#table', {
     order: [
         [2, 'desc']
     ],
+    columnDefs: [
+        {
+            target: 6,
+            visible: false
+        }
+    ],
     language: {
         "decimal": "",
         "emptyTable": "No hay información",
@@ -51,6 +57,26 @@ var table = new DataTable('#table', {
     },
 });
 
+var usernameEl = $('#estado');
+
+//FILTRO TABLA
+DataTable.ext.search.push(function (settings, data, dataIndex) {
+    var username = data[6]; // use data for the username column
+
+    if (
+        (usernameEl.val() == '' || username.toLowerCase().includes(usernameEl.val().toLowerCase()))
+    ) {
+        return true;
+    }
+
+    return false;
+});
+
+// accion en selector
+$('#estado').on('change', function () {
+    table.draw();
+});
+
 //APR STATES************************************
 function aprStates(idSolis, tipoS) {
 
@@ -63,127 +89,119 @@ function aprStates(idSolis, tipoS) {
     };
 
     var contenido = "no";
-
+    var obj =
+        $.dialog({
+            title: false,
+            closeIcon: false, // hides the close icon.
+            content: `
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border my-3" role="status">
+                    <span class="visually-hidden">procesando...</span>
+                </div>
+            </div>`
+        });
     $.ajax({
         data: parametro,
         url: '../php/viewMerge.php',
         type: 'POST',
-        beforeSend: function () {
-            var obj =
-                $.dialog({
-                    title: false,
-                    closeIcon: false, // hides the close icon.
-                    content: `
-                          <div class="d-flex justify-content-center">
-                                            <div class="spinner-border" role="status">
-                               <span class="visually-hidden">procesando...</span>
-                          </div>
-                          </div>`
-                });
-            //CERRAR EL DIALOG ANTERIOR
-            setTimeout(() => {
-                obj.close();
-            }, 501);
-        },
         error: function (jqXHR, xhr, status, error) {
             var nroERROR = jqXHR.status;
             setTimeout(() => {
+                obj.close();
                 alert("Estatus " + status + nroERROR + xhr + error)
-            }, 500);
+            }, 200);
         },
         success: function (response) {
+            setTimeout(() => {
+                obj.close();
+            }, 200);
+            
             contenido = response;
             // Mostrar el diálogo de confirmación CAMBIO DE ESTATUS
-            setTimeout(() => {
-                $.confirm({
-                    title: '',
-                    content: contenido,
-                    columnClass: 'col-md-8 col-md-offset-4',
-                    buttons: {
-                        aceptar: {
-                            text: 'Aceptar',
-                            action: function () {
-                                let radio = document.querySelector('input[name="editSoli"]:checked');
-                                //PANEL  DE  VERIFICACIONN DE RADIOS 
-                                if (radio.value != 0) {
-                                    // MODAL DE CONFIRMACION
-                                    $.confirm({
-                                        title: '',
-                                        content: '¿Esta seguro de realizar esta operacion?',
-                                        buttons: {
-                                            aceptar: {
-                                                text: 'Sí, Aceptar',
-                                                action: function () {
-                                                    let aRadio = {
-                                                        "radio": radio.value,
-                                                        "idSoli": idSoli,
-                                                        "tipo": tipo
-                                                    };
-                                                    $.ajax({
-                                                        data: aRadio,
-                                                        url: '../php/solicitudMerge.php',
-                                                        type: 'POST',
-                                                        beforeSend: function () {
-                                                            var obj =
-                                                                $.dialog({
-                                                                    title: false,
-                                                                    closeIcon: false, // hides the close icon.
-                                                                    content: `
-                                                                        <div class="d-flex justify-content-center">
-                                                                        <div class="spinner-border" role="status">
-                                                                            <span class="visually-hidden">cargando...</span>
-                                                                        </div>
-                                                                        </div>`
-                                                                });
-                                                            setTimeout(() => {
-                                                                obj.close();
-                                                            }, 501);
-                                                        },
-                                                        error: function () {
-                                                            setTimeout(() => {
-                                                                $.dialog({
-                                                                    title: false, // hides the title.
-                                                                    content: `
-                                                                        <div class="d-flex justify-content-center">
-                                                                        <h6> error al procesar la solicitud </h6>
-                                                                        <i class="bi bi-arrow"></i>
-                                                                        </div>
-                                                                        </div>`
-                                                                });
-                                                            }, 500);
-                                                        },
-                                                        success: function (cEc) {
-                                                            let c = cEc;
-                                                            //PANTALLAS DE SUCCES DE SOLICITUDES
-                                                            if (jeisonXD(c)) {
-                                                                var colon = JSON.parse(c);
-                                                                var locat = colon[0]['redirec'];
-                                                                var conten = colon[0]['estado'];
+            $.confirm({
+                title: '',
+                content: contenido,
+                columnClass: 'col-md-8 col-md-offset-4',
+                buttons: {
+                    aceptar: {
+                        text: 'Aceptar',
+                        action: function () {
+                            let radio = document.querySelector('input[name="editSoli"]:checked');
+                            //PANEL  DE  VERIFICACIONN DE RADIOS 
+                            if (radio.value != 0) {
+                                // MODAL DE CONFIRMACION
+                                $.confirm({
+                                    title: '',
+                                    content: '¿Esta seguro de realizar esta operacion?',
+                                    buttons: {
+                                        aceptar: {
+                                            text: 'Sí, Aceptar',
+                                            action: function () {
+                                                let aRadio = {
+                                                    "radio": radio.value,
+                                                    "idSoli": idSoli,
+                                                    "tipo": tipo
+                                                };
 
-                                                                setTimeout(() => {
-                                                                    if (conten == "succes.personal.ingres" || conten == "succes.personal.edit" || conten == "succes.arch.ingres" || conten == "succes.arch.move") {
-                                                                        $.confirm({
-                                                                            title: 'Se acepto solicitud con exito',
-                                                                            content: false,
-                                                                            buttons: {
-                                                                                d: {
-                                                                                    text: 'ver perfil',
-                                                                                    action: function () {
-                                                                                        location.replace(locat);
-                                                                                    }
-                                                                                },
-                                                                                da: {
-                                                                                    text: 'cerrar',
-                                                                                    action: function () {
-                                                                                        table.ajax.reload(null, false);
-                                                                                    }
-                                                                                }
+                                                var obj = $.dialog({
+                                                    title: false,
+                                                    closeIcon: false, // hides the close icon.
+                                                    content: `
+                                                    <div class="d-flex justify-content-center">
+                                                        <div class="spinner-border my-3" role="status">
+                                                            <span class="visually-hidden">cargando...</span>
+                                                        </div>
+                                                    </div>`
+                                                });
+                                                $.ajax({
+                                                    data: aRadio,
+                                                    url: '../php/solicitudMerge.php',
+                                                    type: 'POST',
+                                                    error: function () {
+                                                        obj.close();
+                                                        $.dialog({
+                                                            title: false, // hides the title.
+                                                            content: `
+                                                            <div class="d-flex justify-content-center">
+                                                                <h6> error al procesar la solicitud </h6>
+                                                                    <i class="bi bi-arrow"></i>
+                                                                </div>
+                                                            </div>`
+                                                        });
+                                                    },
+                                                    success: function (cEc) {
+                                                        let c = cEc;
+                                                        obj.close();
+
+                                                        //PANTALLAS DE SUCCES DE SOLICITUDES
+                                                        if (jeisonXD(c)) {
+                                                            var colon = JSON.parse(c);
+                                                            var locat = colon[0]['redirec'];
+                                                            var conten = colon[0]['estado'];
+
+
+                                                            if (conten == "succes.personal.ingres" || conten == "succes.personal.edit" || conten == "succes.arch.ingres" || conten == "succes.arch.move") {
+                                                                $.confirm({
+                                                                    title: 'Se acepto solicitud con exito',
+                                                                    content: false,
+                                                                    buttons: {
+                                                                        d: {
+                                                                            text: 'ver perfil',
+                                                                            action: function () {
+                                                                                location.replace(locat);
                                                                             }
-                                                                        });
+                                                                        },
+                                                                        da: {
+                                                                            text: 'cerrar',
+                                                                            action: function () {
+                                                                                table.ajax.reload(null, false);
+                                                                            }
+                                                                        }
                                                                     }
-                                                                }, 500);
+                                                                });
+                                                            }
 
-                                                            } else
+                                                        } else
                                                             if (c == "succes.personal.rechazar" || c == "success.personal.edit.rechazar" || c == "success.archivo.eliminar.rechazar" || c == "success.archivo.ingreso") {
                                                                 $.confirm({
                                                                     title: 'se rechazo solicitud con exito',
@@ -211,30 +229,29 @@ function aprStates(idSolis, tipoS) {
                                                                     }
                                                                 });
                                                             }
-                                                        },
-                                                    });
-                                                }
-                                            },
-                                            cerrar: {
-                                                text: 'No, Cerrar',
-                                                action: function () {}
+                                                    },
+                                                });
                                             }
+                                        },
+                                        cerrar: {
+                                            text: 'No, Cerrar',
+                                            action: function () { }
                                         }
-                                    });
-                                } else {
-                                    //no  hace nada
-                                }
-                            }
-                        },
-                        cerrar: {
-                            text: 'Cerrar',
-                            action: function () {
-                                //funcion a realizar
+                                    }
+                                });
+                            } else {
+                                //no  hace nada
                             }
                         }
+                    },
+                    cerrar: {
+                        text: 'Cerrar',
+                        action: function () {
+                            //funcion a realizar
+                        }
                     }
-                })
-            }, 500);;
+                }
+            })
         }
     });
 };
@@ -242,4 +259,4 @@ function aprStates(idSolis, tipoS) {
 // RECARGA DE LA TABLA AUTOMATICA CADA 1M || NUMERO EN MILISEGUNDOS
 setInterval(() => {
     table.ajax.reload(null, false);
-}, 10000);
+}, 30000);

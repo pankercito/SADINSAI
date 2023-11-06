@@ -12,7 +12,7 @@ function nuevoGrafico(canvas, array1, array2, array3, arrayFechas) {
             backgroundColor: "#ff6384",
             tension: 0.4
         }, {
-            label: 'solicitudes realizadas',
+            label: 'gestiones realizadas',
             data: array2,
             borderColor: "#4be9faad",
             backgroundColor: "#3fe8fa",
@@ -25,25 +25,34 @@ function nuevoGrafico(canvas, array1, array2, array3, arrayFechas) {
             tension: 0.5
         }]
     };
+
     const config = {
         type: 'line',
         data: data,
         options: {
-            responsive: true,
+            scales: {
+                y: {
+                    suggestedMin: 0,
+                    ticks: {
+                        // forces step size to be 50 units
+                        stepSize: 1
+                    }
+                }
+            },
             plugins: {
                 legend: {
                     position: 'top',
                 },
                 title: {
                     display: true,
-                    text: 'Registro de volumen de datos' + arrayFechas,
+                    text: 'Volumen de datos ' + arrayFechas,
                     color: '#484848',
                     font: {
                         size: 16,
                         weight: 600,
                     }
                 },
-            }
+            },
         },
     };
 

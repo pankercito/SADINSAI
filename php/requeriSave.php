@@ -1,11 +1,13 @@
 <?php
 
-include("conx.php");
-include("function/criptCodes.php");
+include "conx.php";
+include "class/auditoria.php";
 
 $conn = new Conexion;
+$auditoria = new Auditoria;
 
 if (isset($_POST['cedula'])) {
+
     $tiposarch = [
         1001 => 'Ofertas',
         1002 => 'Curriculum',
@@ -54,10 +56,15 @@ if (isset($_POST['cedula'])) {
         1045 => 'Informes',
     ];
 
-    $cec = $conn->real_escape($_POST['cedula']);
+    $sino = [
+        "no requerido",
+        "requerido"
+    ];
 
+    $cec = $conn->real_escape($_POST['cedula']);
+    $contenido = "";
     $i = 1001;
-    while ($i != 1045) {
+    while ($i < 1046) {
         $var = (isset($_POST[$tiposarch[$i]])) ? "1" : "0";
 
         $update = "UPDATE arch_required SET required_arch = '$var' WHERE id_tipo_arch = '$i' AND ci_required_arch = '$cec'";
@@ -65,27 +72,36 @@ if (isset($_POST['cedula'])) {
         $insert = "INSERT INTO arch_required (ci_required_arch, id_tipo_arch, required_arch) VALUES ('$cec', '$i', '1')";
 
         $verifi = $conn->query("SELECT * FROM arch_required WHERE id_tipo_arch = $i AND ci_required_arch = $cec");
+        $ver = $verifi->fetch_object();
 
         $c = false;
 
         if ($verifi->num_rows > 0) {
-            $upsql = $conn->query($update);
-            $rows = $conn->affected_rows();
-
-            if ($rows > 0) {
+            $upsql = $conn->query($update); 
+            if ($upsql == true) {
                 $c = true;
+                if ($var != $ver->required_arch) {
+                    $contenido .=  "{$tiposarch[$i]}: antes: {$sino[$ver->required_arch]} despues: {$sino[$var]} -- ";
+                }
             }
         } else {
             $inssql = $conn->query($insert);
+            if ($inssql == true) {
+                $contenido .=  "{$tiposarch[$i]}: antes: {$sino[$ver->required_arch]} despues: {$sino[$var]} -- ";
+                $c = true;
+            }
         }
         $i++;
-
     }
-    if ($c == false) {
+
+    if ($c == true) {
         echo "success";
+        $auditoria->registRequerid($cec, $contenido);
     } else {
         if (@$inssql == true) {
             echo "success";
+        } else {
+            echo "error de q";
         }
     }
 }

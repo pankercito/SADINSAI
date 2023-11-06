@@ -11,7 +11,7 @@ if (isset($_SESSION['sesion'])) {
     $s = $_SESSION['sesion'];
 
     if (isset($_SESSION['event'])) {
-        $d = new auditoria();
+        $d = new Auditoria();
         if ($d->sesionClose($s) && outSesion($s)) {
            
             $evento = $_SESSION['event'];

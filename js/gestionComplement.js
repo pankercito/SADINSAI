@@ -141,7 +141,7 @@ function modalcito() {
                                                         $.alert({
                                                             title: false,
                                                             closeIcon: false, // hides the close icon.
-                                                            content: error `<div class="grid text-center" style="row-gap: 0; display: flex; flex-direction: column;">
+                                                            content: error`<div class="grid text-center" style="row-gap: 0; display: flex; flex-direction: column;">
                                                                         <i class="bi-patch-exclamation-fill" style="font-size: 5rem; color: red;"></i>
                                                                         <h6  style="color: red;"> Error</h6>
                                                                         <span class="" style="color: red;" disabled>
@@ -177,7 +177,7 @@ function modalcito() {
                                                             });
                                                         }, 500);
                                                         setTimeout(() => {
-                                                            location.replace("solicitudes.php");
+                                                            location.replace("gestionData.php");
                                                         }, 2500);
                                                     } else {
                                                         $.dialog({
@@ -224,8 +224,7 @@ var tipoDarch = getQueryVariable('gestion');
 // ocultar agregar documentos en el area de planillas
 $(document).ready(function () {
     if (tipoDarch == "1046") {
-        document.getElementById("tittleDoc").innerHTML = "Campos";
+        document.getElementById("tittleDoc").innerHTML = "<h4 class='mb-3'>FORMULARIO</h4>";
         document.title = "SADINSAI | Planillas";
     }
-
 })

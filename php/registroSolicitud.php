@@ -1,12 +1,12 @@
 <?php
 
-include("conx.php");
-include("function/idGenerador.php");
-include("function/criptCodes.php");
-include("function/filesFunctions.php");
-include("function/asignarSolicitud.php");
-include("function/removerAcentos.php");
-include("function/sumarHora.php");
+include "conx.php";
+include "function/idGenerador.php";
+include "function/criptCodes.php";
+include "function/filesFunctions.php";
+include "function/asignarSolicitud.php";
+include "function/removerAcentos.php";
+include "function/sumarHora.php";
 
 $conn = new Conexion;
 
@@ -34,6 +34,7 @@ switch ($tipo) {
         $ciudad = $_POST['ciudad'];
         $sede = $_POST['sede'];
         $cargo = $conn->real_escape($_POST['cargo']);
+        $departament = $conn->real_escape($_POST['departament']);
 
         if ($_POST["name"] != "") {
 
@@ -50,13 +51,13 @@ switch ($tipo) {
             $sqlsoli = $conn->query("INSERT INTO solicitudes (id_solicitud, id_emisor, ci_solicitada,  fecha, apr_estado, tipo) 
                                         VALUES ('$id_solicitud', '$IdEm', '$ciRec', '$fech', '0', 0)");
 
-            $correr = $conn->query("INSERT INTO solicitudes_precarga (id_solicitud_precarga, ci_pre, nombre_pre, apelido_pre, grado_ac_pre, fecha_nac_pre, sexo_pre, id_estado_pre, id_ciudad_pre, id_sede_pre, direccion_pre, email_pre, telefono_pre, cargo_pre) 
-                                                            VALUES ('$id_solicitud', '$ciRec','$taken','$apellido', '$grado ', '$fecha', '$sexo', '$estado', '$ciudad', '$sede', '$direccion', '$email', '$phone', '$cargo')");
+            $correr = $conn->query("INSERT INTO solicitudes_precarga (id_solicitud_precarga, ci_pre, nombre_pre, apelido_pre, grado_ac_pre, fecha_nac_pre, sexo_pre, id_estado_pre, id_ciudad_pre, id_sede_pre, direccion_pre, email_pre, telefono_pre, cargo_pre, departamento_pre) 
+                                                            VALUES ('$id_solicitud', '$ciRec','$taken','$apellido', '$grado ', '$fecha', '$sexo', '$estado', '$ciudad', '$sede', '$direccion', '$email', '$phone', '$cargo', $departament)");
 
-            if (isset($sqlsoli) && isset($correr)) {
+            if ($sqlsoli == true && $correr == true) {
                 $_SESSION["editCI"] = 0;
                 $_SESSION["noti"] = 1;
-                header('location: ../public/solicitudes.php');
+                header('location: ../public/gestionData.php');
             } else {
                 @$conn->query("DELETE FROM `solicitudes` WHERE id_solicitud = $id_solicitud;");
                 echo "Error al registrar el GUID: " . $ciRec;
@@ -78,7 +79,7 @@ switch ($tipo) {
         //precarga
         $taken = $conn->real_escape(strtoupper(cor_acentos($_POST['name'])));
         $apellido = $conn->real_escape(strtoupper(cor_acentos($_POST['apellido'])));
-        $grado = $conn->real_escape(strtoupper(cor_acentos($_POST['grado_academico'])));
+        $grado = trim($conn->real_escape(strtoupper(cor_acentos($_POST['grado_academico']))));
         $sexo = $conn->real_escape(strtoupper(cor_acentos($_POST['sexo'])));
         $fecha = $conn->real_escape($_POST['edad']);
         $email = $conn->real_escape(strtoupper(cor_acentos($_POST['email'])));
@@ -87,7 +88,8 @@ switch ($tipo) {
         $estado = $_POST['estado'];
         $ciudad = $_POST['ciudad'];
         $sede = $_POST['sede'];
-        $cargo = $_POST['cargo'];
+        $cargo = $conn->real_escape($_POST['cargo']);
+        $departament = $conn->real_escape($_POST['departament']);
 
         if ($_POST["name"] != "") {
 
@@ -104,13 +106,13 @@ switch ($tipo) {
             $sqlsoli = $conn->query("INSERT INTO solicitudes (id_solicitud, id_emisor, ci_solicitada,  fecha, apr_estado, tipo) 
                                         VALUES ('$id_solicitud', '$IdEm', '$ciRec', '$fech', '0', 1)");
 
-            $correr = $conn->query("INSERT INTO solicitudes_precarga (id_solicitud_precarga, ci_pre, nombre_pre, apelido_pre, grado_ac_pre, fecha_nac_pre, sexo_pre, id_estado_pre, id_ciudad_pre, id_sede_pre, direccion_pre, email_pre, telefono_pre, cargo_pre) 
-                                                            VALUES ('$id_solicitud', '$ciRec','$taken','$apellido', '$grado ', '$fecha', '$sexo', '$estado', '$ciudad', '$sede', '$direccion', '$email', '$phone', '$cargo')");
+            $correr = $conn->query("INSERT INTO solicitudes_precarga (id_solicitud_precarga, ci_pre, nombre_pre, apelido_pre, grado_ac_pre, fecha_nac_pre, sexo_pre, id_estado_pre, id_ciudad_pre, id_sede_pre, direccion_pre, email_pre, telefono_pre, cargo_pre, departamento_pre) 
+                                                            VALUES ('$id_solicitud', '$ciRec','$taken','$apellido', '$grado ', '$fecha', '$sexo', '$estado', '$ciudad', '$sede', '$direccion', '$email', '$phone', '$cargo', '$departament')");
 
             if (isset($sqlsoli) && isset($correr)) {
                 $_SESSION["editCI"] = 0;
                 $_SESSION["noti"] = 1;
-                header('location: ../public/solicitudes.php');
+                header('location: ../public/gestionData.php');
             } else {
                 @$conn->query("DELETE FROM `solicitudes` WHERE id_solicitud = $id_solicitud;");
                 echo "Error al registrar el GUID: " . $ciRec;
@@ -221,7 +223,7 @@ switch ($tipo) {
                         $_SESSION["noti"] = 1;
 
                         $location[] = [
-                            'redirec' => 'solicitudes.php',
+                            'redirec' => 'gestionData.php',
                             'estado' => 'succes.delete'
                         ];
 

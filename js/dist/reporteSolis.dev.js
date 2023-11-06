@@ -10,6 +10,9 @@ $(document).ready(function () {
       onContentReady: function onContentReady() {
         var selector = $('#selectipo');
         var contentipo = $('#contenOpcion');
+        var fecha = $('#fecha');
+        var self = this;
+        self.buttons.ab.disable();
         selector.on('change', function () {
           $("#selectipo option:selected").each(function () {
             var valor = $(this).val();
@@ -27,6 +30,12 @@ $(document).ready(function () {
               });
             } else {
               contentipo.html("");
+            }
+
+            if (fecha != null) {
+              self.buttons.ab.enable();
+            } else {
+              self.buttons.ab.disable();
             }
           });
         });

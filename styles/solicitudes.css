@@ -17,6 +17,13 @@
     height: 11rem;
 }
 
+a.alert.alert-primary {
+    padding: 12px;
+    margin: 0;
+    font-weight: 700;
+    color: #052c65;
+}
+
 .n-estructure.col-lg-9 {
     padding: 0 0rem 0 2rem;
 }
@@ -45,31 +52,6 @@ input#floatingMotiv {
 .form-floating>label {
     padding: 7px 0 0 7px;
     height: 78%;
-}
-
-div#notificacion {
-    position: fixed;
-    display: flex;
-    float: left;
-    margin: 1rem;
-    background: #ffc107;
-    right: 0;
-    bottom: 0;
-    margin-right: -125rem;
-    font-size: 14px;
-    padding: 10px;
-    font-weight: 600;
-    width: 20rem;
-    z-index: 116;
-    height: 4rem;
-    border-radius: 10px 10px 0;
-    -webkit-transition: all 0.8s;
-    -moz-transition: all 0.8s;
-    -mos-transition: all 0.8s;
-    -o-transition: all 0.8s;
-    transition: all 0.8s;
-    align-items: center;
-    justify-content: center;
 }
 
 a.alert.alert-success {
@@ -110,7 +92,7 @@ span.jconfirm-title {
     margin: 3%;
 }
 
-a.aprState.alert.alert-secondary {
+a.aprState.alert.alert-secondary:not(:disabled) {
     cursor: pointer;
     margin: 0;
 }

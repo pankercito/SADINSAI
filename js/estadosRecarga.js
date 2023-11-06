@@ -2,7 +2,7 @@
 $('#table').DataTable({
     // selects de filtrado en columnas
     initComplete: function () {
-        this.api().columns([0, 1, 6]).every(function () {
+        this.api().columns([0, 1, 5, 6]).every(function () {
             var column = this;
             var select = $('<select class="filterE"><option value=""></option></select>')
                 .appendTo($(column.footer()).empty())
@@ -21,7 +21,6 @@ $('#table').DataTable({
             });
         });
     },
-    autoWidth: false,
     language: {
         "decimal": "",
         "emptyTable": "No hay información",
