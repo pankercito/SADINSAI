@@ -1,6 +1,5 @@
-<?php
-require("../php/adp.php");
-?>
+<?php require "../php/adp.php" ?>
+
 <link rel="stylesheet" href="../styles/regiform.css">
 <div class="conten-regisform">
     <div class="progress " style="height: 3px; width: 30%;">

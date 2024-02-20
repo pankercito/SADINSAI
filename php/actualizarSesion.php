@@ -2,8 +2,8 @@
 
 // Establecer la duración de la sesión
 ini_set('session.cookie_lifetime', 300); // un minuto para pruebas 
-include("conx.php");
-include("function/sesion.php");
+include "class/conx.php";
+include "function/sesion.php";
 
 @session_start();
 
@@ -12,7 +12,7 @@ $conn = new Conexion();
 // REESTABLECER EVENTO EN BDs
 if (isset($_SESSION['event'])) {
     
-    include("function/sumarhora.php");
+    include "function/sumarhora.php";
 
     $na = $_SESSION['sesion'];
     $nueva_hora = hora10();

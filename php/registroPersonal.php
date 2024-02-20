@@ -1,8 +1,8 @@
 <?php
 
-include("conx.php");
+include "class/conx.php";
 
-include("function/removerAcentos.php");
+include "function/removerAcentos.php";
 
 $conn = new Conexion();
 

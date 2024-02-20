@@ -7,7 +7,7 @@
 
     <!--TITULO DE LA PAGINA-->
     <title>
-        <?php require_once('../php/preset/titleHead.php') ?>
+        <?php require_once '../php/preset/titleHead.php' ?>
     </title>
 
     <!--js jQuery -->
@@ -40,6 +40,7 @@
 
     <!-- funciones js  -->
     <script src="../js/nuevoGrafico.js"></script>
+    <script src="../js/verification/input_verify.js"></script>
     <script src="../js/jeisonXD.js"></script>
     <script src="../js/reporteSolis.js"></script>
     <script src="../js/search.js"></script>
@@ -129,17 +130,26 @@
             $.ajax({
                 url: "../php/verificarSolisEstado.php",
                 success: function (c) {
-                    let coci = JSON.parse(c);
+                    if (jeisonXD(c)) {
+                        let coci = JSON.parse(c);
+                        if (coci['carmen']['veri']) {
+                            if (coci['carmen']['totalSolis'] > 0) {
+                                notie.alert({
+                                    type: 2,
+                                    text: "<article>solicitudes pendientes: " + coci['carmen']['totalSolis'] + "<p style=''>las solicitudes se anularan automaticamente en 2 dias sino son atendidas</p></article>",
+                                    time: 3
+                                });
 
-                    if (coci['carmen']['veri']) {
-                        if (coci['carmen']['totalSolis'] > 0) {
-                            notie.alert({
-                                type: 2,
-                                text: "<article>solicitudes pendientes: " + coci['carmen']['totalSolis'] + "<p style=''>las solicitudes se anularan automaticamente en 2 dias sino son atendidas</p></article>",
-                                time: 3
-                            });
-
-                            setTimeout(() => {
+                                setTimeout(() => {
+                                    if (coci['carmen']['totalGestion'] > 0) {
+                                        notie.alert({
+                                            type: 4,
+                                            text: "<article id='gestionSoliData'>Gestion de datos pendientes: " + coci['carmen']['totalGestion'] + "<p style=''>las solicitudes se anularan automaticamente en 3 dias sino son atendidas</p></article>",
+                                            time: 3
+                                        });
+                                    }
+                                }, 2800);
+                            } else {
                                 if (coci['carmen']['totalGestion'] > 0) {
                                     notie.alert({
                                         type: 4,
@@ -147,16 +157,10 @@
                                         time: 3
                                     });
                                 }
-                            }, 2800);
-                        } else {
-                            if (coci['carmen']['totalGestion'] > 0) {
-                                notie.alert({
-                                    type: 4,
-                                    text: "<article id='gestionSoliData'>Gestion de datos pendientes: " + coci['carmen']['totalGestion'] + "<p style=''>las solicitudes se anularan automaticamente en 3 dias sino son atendidas</p></article>",
-                                    time: 3
-                                });
                             }
+
                         }
+                    } else {
 
                     }
                 }

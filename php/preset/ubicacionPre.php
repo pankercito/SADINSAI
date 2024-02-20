@@ -1,11 +1,11 @@
 <?php
 
-include('../php/conx.php');
+include "../php/class/conx.php";
 
 if (isset($_POST["idArch"])) {
 
-    include("../php/function/getESCname.php");
-    include("../php/function/criptCodes.php");
+    include "../php/function/getESCname.php";
+    include "../php/function/criptCodes.php";
 
     $conn = new Conexion();
 

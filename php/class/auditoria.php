@@ -1,10 +1,5 @@
 <?php
 
-
-if (!class_exists('Conexion')) {
-    include "conx.php";
-}
-
 /**
  * Gestion de datos del sistema
  * movimientos
@@ -19,7 +14,6 @@ class Auditoria
     private $idEntrada;
     private $arrayEntrada;
     protected $connec;
-    public $aplicacion;
 
     /**
      * inicializando conexion global
@@ -49,7 +43,7 @@ class Auditoria
      * @param mixed $date_end
      * @return array
      */
-    private function getRangeDate($date_ini, $date_end)
+    public function getRangeDate($date_ini, $date_end)
     {
         $dt_ini = DateTime::createFromFormat("Y-m-d", $date_ini);
         $dt_end = DateTime::createFromFormat("Y-m-d", $date_end);
@@ -64,64 +58,6 @@ class Auditoria
         }
         $range[] = $date_end;
         return $range;
-    }
-
-    /**
-     * Desactivar usuario
-     * @param mixed $user
-     * @return bool
-     */
-    public function supenderUsuario($user, $senha = null)
-    {
-        if ($senha != null) {
-            $si = $this->connec->query("UPDATE registro SET active = 2 WHERE ci = '$senha'");
-        } else {
-            $si = $this->connec->query("UPDATE registro SET active = 2 WHERE id_usuario = '$user'");
-        }
-
-        if ($si) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Activar usuario
-     * @param mixed $user
-     * @return bool
-     */
-    public function activarUsuario($user, $senha = null)
-    {
-        if ($senha != null) { #verificacion por cedula
-            $si = $this->connec->query("UPDATE registro SET active = 1 WHERE ci = '$senha'");
-        } else { #verificacion por id
-            $si = $this->connec->query("UPDATE registro SET active = 1 WHERE id_usuario = '$user'");
-        }
-
-        if ($si) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Eliminar Usuario del Sistema
-     * @param mixed $user
-     * @param mixed $senha
-     * @return bool
-     */
-    public function deleleUser($user, $senha = null)
-    {
-        if ($senha != null) { #eliminacion por cedula
-            $si = $this->connec->query("DELETE FROM registro WHERE ci = '$senha'");
-        } else { #eliminacion por id
-            $si = $this->connec->query("DELETE FROM registro WHERE id_usuario = '$user'");
-        }
-
-        if ($si) {
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -163,544 +99,6 @@ class Auditoria
         } else {
             return false;
         }
-    }
-
-    /**
-     * Comprobar usuarios activos en el sistema
-     * @return  array $result array:[[cedula],[user],[active]]
-     */
-    public function usersActives()
-    {
-        $sql = $this->connec->query("SELECT * FROM registro ORDER BY sesion DESC");
-
-        $row = [];
-        $result = [];
-
-        while ($row = mysqli_fetch_array($sql)) {
-
-            if ($row['adp'] != 2) {
-                $result[] = [
-                    "ci" => encriptar($row['ci']),
-                    "user" => ucfirst(strtolower($row['user'])),
-                    "active" => $row['sesion']
-                ];
-            }
-        }
-
-        return $result;
-    }
-
-    /**
-     * Obtener usuarios en el sistema
-     * @param  string $yo sesion de usuario
-     * @return  array $result array 
-     */
-    public function users($yo)
-    {
-        $regisview = $this->connec->query("SELECT * FROM registro r INNER JOIN personal p ON r.ci = p.ci");
-
-        // verificacion de tipo de usuario
-        $verifi = $this->connec->query("SELECT * FROM registro WHERE id_usuario = '$yo'");
-        $yoadp = $verifi->fetch_object();
-
-        //Si ha resultados
-        if ($regisview->num_rows > 0) {
-
-            $v = [];
-            while ($v = $regisview->fetch_object()) {
-
-                $delete = ($yoadp->adp == 2) ? '<span class="e mx-1"></span><a  onclick="deleteUser(' . $v->id_usuario . ')" class="pencil alert alert-danger"><i class="bi bi-trash"></i></a>' : "";
-
-                $r = ($v->active != 1) ? '<div class="d-inline-flex"><a class="pan alert alert-secondary">desactivado</a><span class="e mx-1"></span><a onclick="gestionUser(' . $v->id_usuario . ')". class="pencil alert alert-warning" ><i class="bi bi-pencil"></i></a>' . $delete . '</div>'
-                    : '<div class="d-inline-flex"><a class="panel alert alert-success">activo</a><span class="e mx-1"></span><a  onclick="gestionUser(' . $v->id_usuario . ')" class="pencil alert alert-warning"><i class="bi bi-pencil"></i></a>' . $delete . '</div>';
-
-
-                $ad = ($v->adp == 1) ? '<i class="admin me-2 bi bi-person-fill-gear"></i>' : '<i class="no-admin me-2 bi bi-person"></i>';
-
-                $g = ($v->adp == 1) ? 'proper' : 'no-proper';
-
-                if ($yo != $v->id_usuario) {
-                    if ($v->adp != 2) {
-                        // Poner los datos en un array en el orden de los campos de la tabla
-                        $data[] = [
-                            "<a class='vrname " . $g . "' onclick=location.replace('perfil.php?perfil=" . encriptar($v->ci) . "&parce=true')>" . $ad . strtoupper(strtolower($v->user)) . "</a>",
-                            ucwords(strtolower($v->nombre)),
-                            ucwords(strtolower($v->apellido)),
-                            $v->ci,
-                            $r
-                        ];
-                    }
-                }
-            }
-            // crear un array con el array de los datos
-            $new_array = ["data" => $data];
-        } else {
-            //Si no hay registros encontrados
-            $data[] = [
-                "error no se",
-                "encuentran",
-                "resultados ",
-                "con los criterios",
-                "de busqueda"
-            ];
-            $new_array = ["data" => $data];
-        }
-
-        return $new_array;
-    }
-
-    /**
-     * Consultas de inicios de sesion por rango de fechas
-     * @param string $range
-     * @return array
-     */
-    public function userStats($dat1, $dat2 = null)
-    {
-        if ($dat2 != null) {
-            // obtenemos recorrido del rango de fechas 
-            $fech = $this->getRangeDate($dat1, $dat2);
-
-            $con = count($fech);
-            $i = 0;
-            $result = [];
-
-            while ($i < $con) {
-                $num = $this->connec->query("SELECT * FROM registro_entrada_salida WHERE id_usuario_init NOT IN (1) AND entradaSalida = 1 AND DATE(fecha) = '" . $fech[$i] . "' GROUP BY id_usuario_init, DATE(fecha)");
-                $f = mysqli_num_rows($num);
-                $result[] = [$f];
-                $i++;
-            }
-        } else {
-            $num = $this->connec->query("SELECT * FROM registro_entrada_salida WHERE id_usuario_init NOT IN (1) AND entradaSalida = 1 AND DATE(fecha) = '$dat1' GROUP BY id_usuario_init, DATE(fecha)");
-            $f = mysqli_num_rows($num);
-            $result[] = [$f];
-        }
-
-        return $result;
-    }
-
-    /**
-     * Consulta la cantidad de inicios diarios de un usuario
-     * @param mixed $fecha
-     * @param mixed $fech2 para rango de fechas
-     * @return array
-     */
-    public function userInixStats($fech = null, $fech2 = null)
-    {
-        $q = $this->connec->query("SELECT * FROM registro WHERE adp NOT IN (2)");
-
-        if ($fech2 != null) {
-            //RANGO DE FECHAS
-            $fech = $this->getRangeDate($fech, $fech2);
-
-            $conu = count($fech);
-            $i = 0;
-            $result = [];
-
-            while ($i < $conu) {
-
-                while ($v = $q->fetch_object()) {
-                    $num = $this->connec->query("SELECT * FROM registro_entrada_salida WHERE id_usuario_init = '$v->id_usuario' AND entradaSalida = 1 AND DATE(fecha) = '" . $fech[$i] . "'");
-                    $f = $num->num_rows;
-
-                    if ($f != 0) {
-                        $result[] = [
-                            "id" => $v->id_usuario,
-                            "user" => strtoupper($v->user),
-                            "count" => $f,
-                            "fecha" => $fech[$i]
-                        ];
-                    }
-                }
-
-                $i++;
-            }
-
-        } else if ($fech != null) {
-            // FECHA SIMPLE
-            $result = [];
-
-            while ($i = $q->fetch_object()) {
-                $num = $this->connec->query("SELECT * FROM registro_entrada_salida WHERE id_usuario_init = '$i->id_usuario' AND entradaSalida = 1 AND DATE(fecha) = '$fech'");
-                $f = $num->num_rows;
-
-                if ($f != 0) {
-                    $result[] = [
-                        "id" => $i->id_usuario,
-                        "user" => strtoupper($i->user),
-                        "count" => $f,
-                        "fecha" => $fech
-                    ];
-                }
-            }
-        } else {
-            // NO FECH
-            $result = [];
-
-            while ($i = $q->fetch_object()) {
-                $num = $this->connec->query("SELECT * FROM registro_entrada_salida WHERE id_usuario_init = '$i->id_usuario' AND entradaSalida = 1");
-                $f = $num->num_rows;
-
-                if ($f != 0) {
-                    $result[] = [
-                        "id" => $i->id_usuario,
-                        "user" => strtoupper($i->user),
-                        "count" => $f,
-                        "fecha" => 'todas'
-                    ];
-                }
-            }
-        }
-        return $result;
-    }
-
-    /**
-     * Comprobar cantidad de solicitudes realizadas por usuarios
-     * @param mixed $fecha
-     * @param mixed $fech2
-     * @return array
-     */
-    public function userSolisStats($fecha = null, $fech2 = null)
-    {
-        $q = $this->connec->query("SELECT * FROM registro WHERE adp NOT IN (2)");
-
-        if ($fech2 != null) {
-            //RANGO DE FECHAS
-            $fech = $this->getRangeDate($fecha, $fech2);
-
-            $con = count($fech);
-            $i = 0;
-            $result = [];
-
-            while ($i < $con) {
-                while ($v = $q->fetch_object()) {
-
-                    $num = $this->connec->query("SELECT * FROM solicitudes WHERE id_emisor = '$v->id_usuario' AND DATE(fecha) = '$fech[$i]'");
-                    $f = $num->num_rows;
-
-                    $result[] = [
-                        "id" => $v->id_usuario,
-                        "user" => strtoupper($v->user),
-                        "count" => $f,
-                        "fecha" => $fech[$i]
-                    ];
-                }
-
-                $i++;
-            }
-        } else if ($fecha != null) {
-            // FECHA SIMPLE
-            $i = [];
-            $result = [];
-
-            while ($i = $q->fetch_object()) {
-                $num = $this->connec->query("SELECT * FROM solicitudes WHERE id_emisor = '$i->id_usuario' AND DATE(fecha) = '$fecha'");
-                $f = $num->num_rows;
-                if ($f != 0) {
-                    $result[] = [
-                        "id" => $i->id_usuario,
-                        "user" => strtoupper($i->user),
-                        "count" => $f,
-                        "fecha" => $fecha
-                    ];
-                }
-            }
-        } else {
-            // NO FECH
-            $i = [];
-            $result = [];
-
-            while ($i = $q->fetch_object()) {
-                $num = $this->connec->query("SELECT * FROM solicitudes WHERE id_emisor  = '$i->id_usuario'");
-                $f = $num->num_rows;
-
-                if ($f != 0) {
-                    $result[] = [
-                        "id" => $i->id_usuario,
-                        "user" => strtoupper($i->user),
-                        "count" => $f,
-                        "fecha" => 'todas'
-                    ];
-                }
-            }
-        }
-        return $result;
-    }
-
-    /**
-     * consulta solicitudes en rango de fechas
-     * @param mixed $dat1
-     * @param mixed $dat2
-     * @return array
-     */
-    public function solicitudStats($dat1, $dat2 = null)
-    {
-        if ($dat2 != null) {
-            // obtenemos recorrido del rango de fechas 
-            $fech = $this->getRangeDate($dat1, $dat2);
-
-            $con = count($fech);
-            $i = 0;
-            $result = [];
-
-            while ($i <= $con - 1) {
-                $num = $this->connec->query("SELECT * FROM solicitudes WHERE DATE(fecha) = '" . $fech[$i] . "'");
-                $f = $num->num_rows;
-
-                $result[] = [$f];
-                $i++;
-            }
-        } else {
-            $num = $this->connec->query("SELECT * FROM solicitudes WHERE DATE(fecha) = '$dat1'");
-            $f = $num->num_rows;
-
-            $result[] = [$f];
-        }
-
-        return $result;
-    }
-
-    /**
-     * CONSULTA POR TIPOS LA CANTIDAD DE SOLICITUDES
-     * @param string $fech
-     * @param string $fech2 || opcional rango de fechas
-     * @return array
-     */
-    public function solicitudDetailstStats($fech, $fech2 = null)
-    {
-        if ($fech2 != null) {
-            //RANGO DE FECHAS
-            $rango = $this->getRangeDate($fech, $fech2);
-
-            $con = count($rango);
-            $i = 0;
-            $result = [];
-
-            while ($i <= $con - 1) {
-
-                $c = 0;
-                while ($c != 4) {
-                    $data = $this->connec->query("SELECT * FROM solicitudes WHERE  tipo = '$c' AND DATE(fecha) = '" . $rango[$i] . "' ");
-                    $total = $data->num_rows;
-                    if ($total != 0) {
-                        $result[] = [
-                            'tipo' => $c,
-                            'count' => $total,
-                            'dia' => $rango[$i]
-                        ];
-                    }
-
-                    $c++;
-                }
-
-                $i++;
-            }
-        } else {
-            //UNA FECHA
-            $result = [];
-            $i = 0;
-
-            while ($i != 4) {
-
-                $data = $this->connec->query("SELECT * FROM solicitudes WHERE DATE(fecha) = '$fech' AND tipo = '$i'");
-                $total = $data->num_rows;
-
-                $result[] = [
-                    'tipo' => $i,
-                    'count' => $total
-                ];
-
-                $i++;
-            }
-
-        }
-        return $result;
-    }
-
-    /**
-     * Consulta de movimientos de Gestiones avanzados
-     * @param mixed $fech
-     * @param mixed $fech2
-     * @param mixed $estado
-     * @return array
-     */
-    function solicitudPrecise($fech = 'dia presente', $fech2 = null, $estado = null)
-    {
-        $estatus = ($estado != null) ? "AND apr_estado  = $estado" : '';
-
-        if ($fech2 != null) {
-            //RANGO DE FECHAS
-            $rango = $this->getRangeDate($fech, $fech2);
-
-            $con = count($rango);
-            $i = 0;
-            $result = [];
-
-            while ($i <= $con - 1) {
-
-                $c = 0;
-                while ($c != 4) {
-
-                    $data = $this->connec->query("SELECT * FROM solicitudes WHERE  tipo = '$c' AND DATE(fecha) = '" . $rango[$i] . "' " . $estatus);
-                    $total = $data->num_rows;
-
-                    if ($total != 0) {
-                        $result[] = [
-                            'tipo' => $c,
-                            'count' => $total,
-                            'dia' => $rango[$i]
-                        ];
-                    }
-
-
-
-                    $c++;
-                }
-
-                $i++;
-            }
-        } else if ($fech != null) {
-            //UNA FECHA
-            $result = [];
-            $i = 0;
-
-            while ($i != 4) {
-                $data = $this->connec->query("SELECT * FROM solicitudes WHERE tipo = '$i'  AND DATE(fecha) = '$fech'" . $estatus);
-                $total = $data->num_rows;
-                if ($total != 0) {
-                    $result[] = [
-                        'tipo' => $i,
-                        'count' => $total,
-                        'dia' => ($fech != 0) ? $fech : 'todas'
-                    ];
-                }
-                $i++;
-            }
-
-        } else {
-            //UNA FECHA
-            $result = [];
-            $i = 0;
-
-            while ($i != 4) {
-
-                $data = $this->connec->query("SELECT * FROM solicitudes WHERE tipo = '$i'" . $estatus);
-                $total = $data->num_rows;
-
-                $result[] = [
-                    'tipo' => $i,
-                    'count' => $total,
-                    'dia' => ($fech != 0) ? $fech : 'todas'
-                ];
-
-                $i++;
-            }
-        }
-        return $result;
-    }
-
-    /**
-     * consulta solicitudes en rango de fechas
-     * @param mixed $dat1
-     * @param mixed $dat2
-     * @return array
-     */
-    public function archivesStats($dat1 = null, $dat2 = null)
-    {
-        if ($dat2 != null) {
-            // obtenemos recorrido del rango de fechas 
-            $fech = $this->getRangeDate($dat1, $dat2);
-
-            $con = count($fech);
-            $i = 0;
-            $result = [];
-
-            while ($i <= $con - 1) {
-                $num = $this->connec->query("SELECT * FROM archidata a INNER JOIN solicitudes s ON a.id_archivo = s.id_solicitud WHERE s.tipo = '2' AND s.apr_estado = 1 AND DATE(s.fecha) = '" . $fech[$i] . "'");
-                $f = mysqli_num_rows($num);
-                $result[] = [$f];
-                $i++;
-            }
-        } else if ($dat1 != null) {
-            $num = $this->connec->query("SELECT * FROM archidata a INNER JOIN solicitudes s ON a.id_archivo = s.id_solicitud WHERE s.tipo = '2' AND s.apr_estado = 1 AND DATE(s.fecha) = '$dat1'");
-            $f = mysqli_num_rows($num);
-            $result[] = [$f];
-        } else {
-            $num = $this->connec->query("SELECT * FROM archidata a INNER JOIN solicitudes s ON a.id_archivo = s.id_solicitud WHERE s.tipo = '2' AND s.apr_estado = 1");
-            $f = mysqli_num_rows($num);
-            $result[] = ["total" => $f];
-        }
-        return $result;
-    }
-
-    public function archivesDetailsStats($fech = null, $fech2 = null, $estatus = null)
-    {
-        $estado = ($estatus != 0) ? " AND a.delete_arch = '1'" : " AND a.delete_arch = '0'";
-
-        if ($fech2 != null) {
-            //RANGO DE FECHAS
-            $rango = $this->getRangeDate($fech, $fech2);
-
-            $con = count($rango);
-            $i = 0;
-            $result = [];
-
-            while ($i <= $con - 1) {
-                $c = 1001;
-                while ($c < 1045) {
-
-                    $data = $this->connec->query("SELECT * FROM archidata a INNER JOIN solicitudes s ON a.id_archivo = s.id_solicitud WHERE a.tipo_arch = '$c' AND s.tipo = '2'  AND DATE(fecha) = '" . $rango[$i] . "'" . $estado);
-                    $fetch = $data->fetch_object();
-                    $total = $data->num_rows;
-
-                    if ($total != 0) {
-                        $result[] = [
-                            'tipo' => $fetch->tipo_arch,
-                            'count' => $total,
-                            'dia' => $rango[$i]
-                        ];
-                    }
-
-                    $c++;
-                }
-
-                $i++;
-            }
-
-        } else if ($fech != null) {
-            //UNA FECHA
-            $i = 1001;
-            while ($i < 1045) {
-                $data = $this->connec->query("SELECT * FROM archidata a INNER JOIN solicitudes s ON a.id_archivo = s.id_solicitud WHERE a.tipo_arch = '$i' AND s.tipo = '2' " . $estado . " AND DATE(fecha) = '$fech' ");
-                $fetch = $data->fetch_object();
-                $total = $data->num_rows;
-                if ($total > 0) {
-                    $result[] = [
-                        'tipo' => $i,
-                        'count' => $total,
-                        'dia' => $fech,
-                    ];
-                }
-                $i++;
-            }
-        } else {
-            $i = 1001;
-            while ($i < 1045) {
-                $data = $this->connec->query("SELECT * FROM archidata a INNER JOIN solicitudes s ON a.id_archivo = s.id_solicitud WHERE  a.tipo_arch = '$i'  AND s.tipo = '2' " . $estado);
-                $total = $data->num_rows;
-                $fetch = $data->fetch_object();
-
-                if ($total != 0) {
-                    $result[] = [
-                        'tipo' => $i,
-                        'count' => $total,
-                        'dia' => "total"
-                    ];
-                }
-                $i++;
-            }
-        }
-        return $result;
     }
 
     /**
@@ -883,9 +281,9 @@ class Auditoria
     {
         @session_start();
 
-        $ID = $_SESSION['sesion'];
-        $user = $this->connec->real_escape($_POST['userId']);
-        $radio = $this->connec->real_escape($_POST['radio']);
+        $ID = $_SESSION['sesion'] ?? null;
+        @$user = $this->connec->real_escape($_POST['userId']);
+        @$radio = $this->connec->real_escape($_POST['radio']);
 
 
         $registro = $this->connec->query("SELECT * FROM registro WHERE id_usuario = $ID");
@@ -896,7 +294,7 @@ class Auditoria
 
         $a = ($radio == 1) ? 'Activacion de usuario ' : 'Desactivacion de usuario ';
 
-        $d = $a . 'por: ' . $fr->user . ', hacia el usuario: ' . $fc->user;
+        @$d = $a . 'por: ' . $fr->user . ', hacia el usuario: ' . $fc->user;
 
         // Comparamos los elementos de los arrays
 
@@ -912,6 +310,39 @@ class Auditoria
 
     }
 
+    /**
+     * Summary of registDeleteUser
+     * @return void
+     */
+    public function registDeleteUser() : bool
+    {
+        @session_start();
+
+        $ID = $_SESSION['sesion'] ?? null;
+        @$user = $this->connec->real_escape($_POST['userId']);
+        @$radio = $this->connec->real_escape($_POST['radio']);
+
+
+        $registro = $this->connec->query("SELECT * FROM registro WHERE id_usuario = $ID");
+        $registro1 = $this->connec->query("SELECT * FROM registro WHERE id_usuario = $user");
+
+        $fr = $registro->fetch_object(); // usuario activo
+        $fc = $registro1->fetch_object(); // usuario pasivo
+
+        @$d = "Eliminacion de usuario por {$fr->user}. a {$fc->user} - usuario de {$fc->ci}";
+
+        // Comparamos los elementos de los arrays
+
+        $contenido = $this->connec->real_escape($d);
+
+        $inyec = $this->connec->query("INSERT INTO auditoria (id, id_usuario_audi, cambios, tipo_movi, fecha_audi) VALUES ('', '$ID', '$contenido', 6, NOW())");
+
+        if ($inyec == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     /**
      * Resgitro de cambio de ubicacion de archivo para [sadinsai.auditoria]
      * @return bool
@@ -980,7 +411,7 @@ class Auditoria
         }
     }
 
-    public function regisAceptacionSolicitudes($idSoli, $array)
+    public function registRequerid($ci, $data)
     {
         @session_start();
 
@@ -989,83 +420,7 @@ class Auditoria
         $registro = $this->connec->query("SELECT * FROM registro WHERE id_usuario = $ID");
         $fr = $registro->fetch_object();
 
-        $inf = $this->connec->query("SELECT * FROM solicitudes_y_permisos WHERE id_solicitud_permiso = $idSoli");
-        $ci = $inf->fetch_object();
-
-        $nombres = [
-            '1' => "anticipo",
-            '2' => "permiso",
-            '3' => "vacaciones",
-            '4' => "carta de aval",
-            '5' => "licencia de paternidad"
-        ];
-
-        $d = 'Aceptacion de Solicitud de planilla/permiso por ' . $fr->user . '. Id de solicitud: ' . $idSoli . '. Solicitante: ' . $ci->ci_permiso . '. <br> Tipo: ' . $nombres[$ci->tipo_permiso] . ' -- ';
-
-        $cambios = $array;
-
-        // Recorremos la lista de cambios e imprimimos los cambios
-        foreach ($cambios as $clave => $valor) {
-
-            $d .= "{$clave}: {$valor} -- ";
-
-        }
-
-        $contenido = $this->connec->real_escape($d);
-        $inyec = $this->connec->query("INSERT INTO auditoria (id, id_usuario_audi, cambios, tipo_movi, fecha_audi) VALUES ('', '$ID', '$contenido', 9, NOW())");
-
-        if ($inyec == true) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Registro de rechazo de solicitude para [sadinsai.auditoria]
-     * @return bool
-     */
-    public function registSolisRechaz($idSoli)
-    {
-        @session_start();
-
-        $ID = $_SESSION['sesion'];
-
-        $registro = $this->connec->query("SELECT * FROM registro WHERE id_usuario = $ID");
-        $fr = $registro->fetch_object();
-
-        $inf = $this->connec->query("SELECT * FROM solicitudes_y_permisos WHERE id_solicitud_permiso = $idSoli");
-        $ci = $inf->fetch_object();
-
-        $nombres = [
-            '1' => "anticipo",
-            '2' => "permiso",
-            '3' => "vacaciones",
-            '4' => "carta de aval",
-            '5' => "licencia de paternidad"
-        ];
-
-        $d = 'Rechazo de solicitud por ' . $fr->user . '. Id de solicitud: ' . $idSoli . ', dirigida a: ' . $ci->ci_solicitada . '. Tipo: ' . $nombres[$ci->tipo_permiso];
-
-        $contenido = $this->connec->real_escape($d);
-
-        $inyec = $this->connec->query("INSERT INTO auditoria (id, id_usuario_audi, cambios, tipo_movi, fecha_audi) VALUES ('', '$ID', '$contenido', 10, NOW())");
-        if ($inyec == true) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function registRequerid($ci, $data){
-        @session_start();
-
-        $ID = $_SESSION['sesion'];
-
-        $registro = $this->connec->query("SELECT * FROM registro WHERE id_usuario = $ID");
-        $fr = $registro->fetch_object();
-
-        $contenido = "Cambios por {$fr->user}, en los requerimientos de: {$ci} -- ". $data;
+        $contenido = "Cambios por {$fr->user}, en los requerimientos de: {$ci} -- " . $data;
 
         $inyec = $this->connec->query("INSERT INTO auditoria (id, id_usuario_audi, cambios, tipo_movi, fecha_audi) VALUES ('', '$ID', '$contenido', 11, NOW())");
         if ($inyec == true) {

@@ -1,6 +1,8 @@
 <?php
 
-include "conx.php";
+include "class/conx.php";
+include "class/auditoria.php";
+include "class/audiSolis.php";
 include "function/criptCodes.php";
 include "function/filesFunctions.php";
 include "function/sumarhora.php";
@@ -14,9 +16,9 @@ $conn = new Conexion();
 
 switch (@$_POST['tipoSoli']) {
     case 1:
-        $dta = Solicitud::obtenersolicitud($id);
+        $dta = Solicitud::obtenerSolicitud($id);
 
-        $datospln = $dta->DetallePLanillas();
+        $datospln = $dta->detallePLanillas();
 
         $nombres = [
             1 => 'codigo',
@@ -54,20 +56,21 @@ switch (@$_POST['tipoSoli']) {
         ];
 
         foreach ($valores as $key => $value) {
-            $_SESSION[$nombres[$key]] = $datospln[0][$valores[$key]];
+            @$_SESSION[$nombres[$key]] = $datospln[0][$valores[$key]];
         }
 
         echo 1;
 
         break;
     case 2:
+        
         echo 2;
 
         break;
     case 3:
-        $dta = Solicitud::obtenersolicitud($id);
+        $dta = Solicitud::obtenerSolicitud($id);
 
-        $datospln = $dta->DetallePLanillas();
+        $datospln = $dta->detallePLanillas();
 
         $nombres = [
             1 => 'codigo',
@@ -109,15 +112,15 @@ switch (@$_POST['tipoSoli']) {
         ];
 
         foreach ($valores as $key => $value) {
-            $_SESSION[$nombres[$key]] = $datospln[0][$valores[$key]];
+            @$_SESSION[$nombres[$key]] = $datospln[0][$valores[$key]];
         }
 
         echo 3;
         break;
     case 4:
-        $dta = Solicitud::obtenersolicitud($id);
+        $dta = Solicitud::obtenerSolicitud($id);
 
-        $datospln = $dta->DetallePLanillas();
+        $datospln = $dta->detallePLanillas();
 
         $nombres = [
             'inputNames',
@@ -154,7 +157,7 @@ switch (@$_POST['tipoSoli']) {
         ];
 
         foreach ($valores as $key => $value) {
-            $_SESSION[$nombres[$key]] = $datospln[0][$valores[$key]];
+            @$_SESSION[$nombres[$key]] = $datospln[0][$valores[$key]];
         }
 
         echo 4;

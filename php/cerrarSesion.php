@@ -3,9 +3,8 @@
 session_start();
 
 if (isset($_SESSION['sesion'])) {
-    include("conx.php");
-    include("class/auditoria.php");
-    include("function/sesion.php");
+    include "class/classIncludes.php";
+    include "function/sesion.php";
 
     $conn = new Conexion;
     $s = $_SESSION['sesion'];

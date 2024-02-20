@@ -2,10 +2,9 @@
 
 if (isset($_POST["idSoli"])) {
 
-    include('../conx.php');
-    include("../function/getESCname.php");
-    include("../function/criptCodes.php");
-    include("../class/solicitudes.php");
+    include '../class/classIncludes.php';
+    include "../function/getESCname.php";
+    include "../function/criptCodes.php";
 
     $conn = new Conexion();
 
@@ -23,11 +22,11 @@ if (isset($_POST["idSoli"])) {
 
     switch ($tipoSoli) {
         case '1':
-            $ver = Solicitud::ObtenerSolicitud($id);
+            $ver = Solicitud::obtenerSolicitud($id);
 
-            $vear = $ver->Detalles();
+            $vear = $ver->detalles();
 
-            $corgale = $ver->DetallePLanillas();
+            $corgale = $ver->detallePLanillas();
 
             $printcito = $corgale[0];
 
@@ -61,9 +60,9 @@ if (isset($_POST["idSoli"])) {
             <?php
             break;
         case '2':
-            $ver = Solicitud::ObtenerSolicitud($id);
+            $ver = Solicitud::obtenerSolicitud($id);
 
-            $vear = $ver->Detalles();
+            $vear = $ver->detalles();
 
             $printcito = [];
             foreach ($vear as $key => $value) {
@@ -112,9 +111,9 @@ if (isset($_POST["idSoli"])) {
             <?php
             break;
         case '3':
-            $ver = Solicitud::ObtenerSolicitud($id);
+            $ver = Solicitud::obtenerSolicitud($id);
 
-            $vear = $ver->Detalles();
+            $vear = $ver->detalles();
 
             $printcito = [];
             foreach ($vear as $key => $value) {
@@ -163,9 +162,9 @@ if (isset($_POST["idSoli"])) {
             <?php
             break;
         case '4':
-            $ver = Solicitud::ObtenerSolicitud($id);
+            $ver = Solicitud::obtenerSolicitud($id);
 
-            $vear = $ver->Detalles();
+            $vear = $ver->detalles();
 
             $printcito = [];
             foreach ($vear as $key => $value) {
@@ -214,9 +213,9 @@ if (isset($_POST["idSoli"])) {
             <?php
             break;
         case '5':
-            $ver = Solicitud::ObtenerSolicitud($id);
+            $ver = Solicitud::obtenerSolicitud($id);
 
-            $vear = $ver->Detalles();
+            $vear = $ver->detalles();
 
             $printcito = [];
             foreach ($vear as $key => $value) {

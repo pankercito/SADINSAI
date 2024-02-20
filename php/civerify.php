@@ -1,6 +1,6 @@
 <?php
 
-include("conx.php");
+include "class/conx.php";
 
 if (isset($_POST["cedula"])){
 

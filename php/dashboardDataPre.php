@@ -1,10 +1,9 @@
 <?php
 
-include("../php/conx.php");
-include("../php/class/auditoria.php");
-include("../php/function/sumarhora.php");
+include "../php/class/classIncludes.php";
+include "../php/function/sumarhora.php";
 
-$new = new Auditoria();
+$estadistica = new Estadistica();
 
 $dat = rangoFechas(); //rango de fechas semanal automatico
 
@@ -33,11 +32,11 @@ function total($array)
 }
 
 // definimos array de datos 
-$json = $new->userStats($dat['lunes'], $dat['domingo']);
-$promedio_diario1 = total($json) / 7;
-$jsa = $new->solicitudStats($dat['lunes'], $dat['domingo']);
+$json = $estadistica->userStats($dat['lunes'], $dat['domingo']);
+$promedio_diario1 = total($json) / 7 / $estadistica->TotalUsers() * 100;
+$jsa = $estadistica->gestionStats($dat['lunes'], $dat['domingo']);
 $promedio_diario2 = total($jsa) / 7;
-$jsc = $new->archivesStats($dat['lunes'], $dat['domingo']);
+$jsc = $estadistica->archivesStats($dat['lunes'], $dat['domingo']);
 $promedio_diario3 = total($jsc) / 7;
 
 

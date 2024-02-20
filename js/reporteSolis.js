@@ -32,16 +32,13 @@ $(document).ready(function () {
                         } else {
                             contentipo.html("");
                         }
-                        
+
                         if (fecha != null) {
                             self.buttons.ab.enable();
                         } else {
                             self.buttons.ab.disable();
                         }
                     });
-
-                        
-
                 });
             },
             buttons: {
@@ -53,7 +50,7 @@ $(document).ready(function () {
 
                         $.ajax({
                             data: form,
-                            url: '../php/reporteSolis.php',
+                            url: '../php/prepareReporte.php',
                             processData: false,
                             contentType: false,
                             type: 'post',

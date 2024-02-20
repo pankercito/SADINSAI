@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .classErrorInput {
+            border: solid red 1px;
+            box-shadow: 0px 1.5px 2px 1px #ff000059;
+            border-radius: 14;
+        }
+    </style>
+</head>
+
+<body>
+<h1>testing de inputs verification class</h1>
+    <input type="text" name="nombre" id="nombre">
+    <input type="text" name="carol" id="carol">
+    <input type="text" name="juan" id="juan">
+    <input type="int" name="juan" id="pedro">
+
+    <input type="button" id="lc">
+    <button id="this" disabled> active</button>
+</body>
+<script src="input_verify.js"></script>
+
+<script>
+    var boton = document.getElementById('lc');
+
+    boton.addEventListener('click', function () {
+        var name = new VerificarCampo();
+
+        name.add({
+            list: [
+                [document.getElementById('nombre'), 5],
+                [document.getElementById('carol'), 10],
+                [document.getElementById('juan'), 5],
+                [document.getElementById('pedro'), 5],
+            ]
+        });
+
+        name.setBoton(document.getElementById('this'));
+        name.verify();
+    });
+
+</script>
+
+</html>

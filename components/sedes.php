@@ -1,5 +1,5 @@
 <?php require "../php/sesionval.php" ?>
-<?php require("../php/adp.php"); ?>
+<?php require "../php/adp.php" ?>
 
 
 <?php require "../layout/head.php" ?>
@@ -64,26 +64,7 @@ include "../layout/sidebar.php";
                                 <th>DIRECCION</th>
                             </tr>
                         </thead>
-                        <tbody class="table-group-divider">
-                            <?php
-                            $sql = $conn->query("SELECT * FROM sedes s INNER JOIN estados e ON s.id_estado_sed = e.id_estado");
 
-                            $count_results = mysqli_num_rows($sql);
-
-                            if ($count_results !== 0) {
-                                $i = 1;
-                                while ($v = $sql->fetch_object()) {
-                                    //Lista de los usuarios
-                                    echo '<tr class="primary">';
-                                    echo '<td style="border-left: none;">' . $i . '</td>';
-                                    echo '<td style="font-size:18px;">' . ucwords(strtolower($v->estado)) . '</td>';
-                                    echo '<td>' . ucwords(strtolower($v->nombre_sede)) . '</td>';
-                                    echo '<td>' . ucwords(strtolower($v->dir_local)) . '</td>';
-                                    echo '</tr>';
-                                    $i++;
-                                }
-                            } ?>
-                        </tbody>
                     </table>
                 </div>
 
@@ -99,6 +80,10 @@ include "../layout/sidebar.php";
 
 
     var table = $("#table").DataTable({
+        ajax: {
+            url: "../php/preset/sede_add.php",
+            data: 'data',
+        },
         order: [
             [0, 'asc']
         ],
@@ -180,10 +165,10 @@ include "../layout/sidebar.php";
 
                                         notie.alert({
                                             type: 1,
-                                            text: 'Se agrego el cargo correctamente',
+                                            text: 'Se agrego la sede correctamente',
                                             time: 3
                                         });
-                                        
+
                                     }, 400);
                                 } else if (cc == "dupli") {
                                     setTimeout(() => {
@@ -192,7 +177,7 @@ include "../layout/sidebar.php";
 
                                         notie.alert({
                                             type: 3,
-                                            text: 'Cargo duplicado',
+                                            text: 'Sede duplicada',
                                             time: 3
                                         });
                                     }, 400);

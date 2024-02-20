@@ -1,4 +1,4 @@
-<?php include('../php/adp.php') ?>
+<?php include "../php/adp.php" ?>
 <link rel="stylesheet" href="../styles/viewtables.css">
 <div class="registersuser">
 	<table class="user-table table table-striped" id="table">

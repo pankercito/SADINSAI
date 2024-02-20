@@ -1,44 +1,37 @@
 <?php
-include "conx.php";
-include "class/auditoria.php";
+
+include "class/classIncludes.php";
+include "function/getUser.php";
 
 if ($_POST['userId'] != "") {
 
     $conn = new Conexion();
-    $auditoria = new Auditoria();
+    $userID = $conn->real_escape(trim($_POST['userId']));
 
-    $user = $conn->real_escape($_POST['userId']);
+    $ges = new GestionDeUsuarios();
+    $auditoria = $ges->byId($userID);
+
+
     $radio = $conn->real_escape($_POST['radio']);
-
     switch ($radio) {
         case '1':
-            if ($auditoria->registActivUser()) {
 
-                $aa = $auditoria->activarUsuario($user);
+            $aa = $auditoria->activarUsuario();
 
-                if ($aa == true) {
-                    echo "success";
-                } else {
-                    echo "error";
-                }
+            if ($aa == true) {
+                echo "success";
             } else {
                 echo "error";
             }
-
             break;
         case '2':
-            if ($auditoria->registActivUser()) {
-                $aa = $auditoria->supenderUsuario($user);
+            $aa = $auditoria->supenderUsuario();
 
-                if ($aa == true) {
-                    echo "success.rech";
-                } else {
-                    echo "error.rech";
-                }
+            if ($aa == true) {
+                echo "success.rech";
             } else {
-                echo "error";
+                echo "error.rech";
             }
-
             break;
         default:
             echo "error";
@@ -47,4 +40,5 @@ if ($_POST['userId'] != "") {
 } else {
     echo "vacio";
 }
+
 $conn->close();

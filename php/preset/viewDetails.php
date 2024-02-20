@@ -1,10 +1,24 @@
 <?php
 
+function trPrint($vma, $vmc)
+{
+
+    $vmca =
+        '<tr class="imago">
+            <td scope="row"><p class="por fw-bold">' . $vmc . '</p></td>
+            <td></td>
+            <td>' . $vma . '</td>
+        </tr>';
+
+
+    return $vmca;
+}
+
 if (isset($_POST["idSoli"])) {
 
-    include('../conx.php');
-    include("../function/getESCname.php");
-    include("../function/criptCodes.php");
+    include "../class/conx.php";
+    include "../function/getESCname.php";
+    include "../function/criptCodes.php";
 
     $conn = new Conexion();
 
@@ -27,20 +41,6 @@ if (isset($_POST["idSoli"])) {
 
                 $precarInf = mysqli_fetch_array($svp);
                 $n = getNameEsc($precarInf['id_estado_pre'], $precarInf['id_ciudad_pre'], $precarInf['id_sede_pre']);
-
-                function trPrint($vma, $vmc)
-                {
-
-                    $vmca =
-                        '<tr class="imago">
-                            <td scope="row"><p class="por fw-bold">' . $vmc . '</p></td>
-                            <td></td>
-                            <td>' . $vma . '</td>
-                        </tr>';
-
-
-                    return $vmca;
-                }
 
                 ?>
 
@@ -115,26 +115,14 @@ if (isset($_POST["idSoli"])) {
             if ($sv == 1) {
                 $precarInf = mysqli_fetch_array($svp);
                 $n = getNameEsc($precarInf['id_estado_pre'], $precarInf['id_ciudad_pre'], $precarInf['id_sede_pre']);
-                function trPrint($vma, $vmc)
-                {
-
-                    $vmca =
-                        '<tr class="imago">
-                            <td></td>
-                            <td scope="row"><p class="por fw-bold">' . $vmc . '</p></td>
-                            <td></td>
-                            <td>' . $vma . '</td>
-                        </tr>';
-
-                    return $vmca;
-                }
+                
                 ?>
 
                 <h4 class="text-star p-2 mx-4">Edicion de datos: Nueva informacion</h4>
                 <hr>
                 <div class="dit mx-auto table-responsive">
                     <div class="contenedor col-md-10 mx-auto mt-4">
-                        <?php echo "Dirigido a: " . $precarInf['ci_solicitada']?>
+                        <?php echo "Dirigido a: " . $precarInf['ci_solicitada'] ?>
                         <table class="table table-primary">
                             <thead>
                                 <tr>

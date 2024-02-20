@@ -1,13 +1,12 @@
 <?php
 
-include("../php/conx.php");
-include("../php/class/auditoria.php");
-include("../php/function/sumarhora.php");
+include "../php/class/classIncludes.php";
+include "../php/function/sumarhora.php";
 
-$new = new Auditoria();
+$estadistica = new Estadistica();
 
 // definimos array de datos 
-$json = $new->solicitudDetailstStats(date('Y-m-d'));
+$json = $estadistica->gestionDetailstStats(date('Y-m-d'));
 
 // enviamos los datos como caden json
 echo json_encode($json);

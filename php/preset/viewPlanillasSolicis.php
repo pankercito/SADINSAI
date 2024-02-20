@@ -1,15 +1,11 @@
 <?php
 
-include '../conx.php';
+include '../class/classIncludes.php';
 include "../function/criptCodes.php";
-include "../class/solicitudes.php";
 
 session_start();
 
-$yo = $_SESSION['sesion'];
-
-
-$a = Solicitud::ObtenerSolicitud();
+$a = Solicitud::obtenerSolicitud();
 
 $coro = $a->allSolicitudes();
 
@@ -19,6 +15,7 @@ $apr = [
     "3" => "alert alert-danger",
     "4" => "alert alert-primary",
 ];
+
 $aprN = [
     "1" => "pendiente",
     "2" => "aceptada",
@@ -48,7 +45,7 @@ foreach ($coro as $key) {
         $key['tipo_permiso'],
         $key['ci_permiso'],
         $key['fecha_permiso'],
-        ' <a onclick="detallesPlanillas(' . $key['id_solicitud_permiso'] . ', '. $key['tipo_permiso'].')" class="btn btn-success">ver detalles</a> ',
+        ' <a onclick="detallesPlanillas(' . $key['id_solicitud_permiso'] . ', ' . $key['tipo_permiso'] . ')" class="btn btn-success">ver detalles</a> ',
         '<a onclick="' . $disabled . '" class="aprState ' . $apr[$key['estado_permiso']] . '">' . $aprN[$key['estado_permiso']] . '<span style="margin:.5rem;"></span><i class="' . $aprL[$key['estado_permiso']] . '"></i></a>',
         $key['estado_permiso'],
     ];

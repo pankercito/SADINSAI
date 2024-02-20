@@ -1,6 +1,6 @@
 <?php
 
-include("../php/function/getUser.php");
+include "../php/function/getUser.php";
 
 $ci = desencriptar($_GET['carga']);
 $tipo = $conn->real_escape($_GET['gestion']);

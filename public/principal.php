@@ -1,10 +1,10 @@
 <?php require_once "../php/sesionval.php"; ?>
 
-<?php require("../php/adp.php"); ?>
+<?php require "../php/adp.php" ?>
 
-<?php require("../layout/head.php"); ?>
+<?php require "../layout/head.php" ?>
 
-<?php require("../layout/navbar.php"); ?>
+<?php require "../layout/navbar.php" ?>
 
 <link rel="stylesheet" href="../styles/pdashboard.css">
 <script src="../js/prestablecer.js"></script>
@@ -24,9 +24,10 @@
             <div class="principal row mx-1 mb-4 justify-content-center" id="centro">
                 <div class="col">
                     <?php
-                    include('../php/class/auditoria.php');
-
-                    $new = new Auditoria();
+                    include "../php/function/getUser.php";
+                    include "../php/class/classIncludes.php";
+                    $gestion = new GestionDeUsuarios();
+                    $estadistica = new Estadistica;
                     ?>
                     <p style="margin-bottom: 0;">Acciones</p>
                     <button class="pedit pnomina btn btn-primary"
@@ -38,7 +39,7 @@
                         <ul class="userUl col-md-7 mx-auto">
                             <?php
                             //imprime una lista con usuarios activos y no activos
-                            $us = $new->usersActives();
+                            $us = $gestion->usersActives();
                             foreach ($us as $us) {
                                 $dot = ($us['active'] == 1) ? "<i class='bi bi-dot active'></i>" : "<i class='bi bi-dot'></i>";
                                 echo "<li class='user'><a class='aUser' href='perfil.php?perfil=" . $us['ci'] . "'>" . $dot . $us['user'] . " </a></li>";
@@ -82,7 +83,7 @@
                             <table class=" table table-borderless">
                                 <tbody>
                                     <?php
-                                    $r = $new->solicitudDetailstStats(date('y-m-d'));
+                                    $r = $estadistica->gestionDetailstStats(date('y-m-d'));
 
                                     $tipoSolic = [
                                         "0" => "ingreso de personal",
@@ -120,7 +121,7 @@
                                 <tbody>
                                 <tbody>
                                     <?php
-                                    $r = $new->userInixStats(date('Y-m-d'));
+                                    $r = $estadistica->userInixStats(date('Y-m-d'));
 
                                     if (count($r) != 0) {
                                         foreach ($r as $r) {
@@ -178,7 +179,7 @@
                                         return $suma;
                                     }
 
-                                    $d = $new->archivesDetailsStats($dat['lunes'], $dat['domingo']);
+                                    $d = $estadistica->archivesDetailsStats($dat['lunes'], $dat['domingo']);
 
                                     echo '<h6>total de archivos: ' . @total($d) . '</h6>';
 
@@ -190,9 +191,11 @@
 
                                     foreach ($d as $row) {
                                         // Agrega las celdas a la tabla
+                                        $tipo = $row['tipo'];
+                                        
                                         echo "<tr class='text-start ps-4 ms-2'>";
-                                        echo "<td class='px-4 ms-5'>" . $t[$row['tipo']] . "</td>";
-                                        echo "<td>" . $row['count'] . "</td>";
+                                        echo "<td class='px-4 ms-5'>{$t[$tipo]}</td>";
+                                        echo "<td> {$row['count']}</td>";
                                         echo "</tr>";
                                     }
                                     ?>
@@ -275,4 +278,4 @@
     </div>
 </div>
 
-<?php require("../layout/footer.php"); ?>
+<?php require "../layout/footer.php" ?>

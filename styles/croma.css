@@ -30,6 +30,7 @@ img.logito {
     right: 0;
     margin: -1.85% 1rem 0;
 }
+
 .conten-archives {
     background-color: #111112;
     position: absolute;
@@ -97,7 +98,7 @@ p.plistcatg {
     color: var(--font-color-sidebar-base);
     padding: 5px 15px;
     border-radius: 5px;
-    font-size: 104%;
+    font-size: 14px;
     border: none;
     font-weight: var(--font-semibold);
     transition: all 0.20s;
@@ -120,6 +121,7 @@ p.plistcatg {
     border-top-right-radius: 5px;
     transition: all 0.2s;
 }
+
 .dropdown-content a {
     position: relative;
     color: black;
@@ -156,12 +158,18 @@ div#drdown2 {
 }
 
 .plani.nav-link2 {
+    background: none;
+    color: var(--font-color-sidebar-base);
     padding: 5px 15px;
     border-radius: 5px;
+    font-size: 14px;
+    border: none;
+    font-weight: var(--font-semibold);
     transition: all 0.20s;
 }
 
 .plani.nav-link2:hover {
-    background: var(--color-hover-archives);
+    background-color: var(--color-hover-archives);
+    border-radius: 5px;
     color: black;
 }

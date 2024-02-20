@@ -1,6 +1,6 @@
 <?php
 
-include_once("../php/editSet.php");
+include_once "../php/editSet.php";
 
 $datos = array(
     'opcionE' => $SetIdEstado,

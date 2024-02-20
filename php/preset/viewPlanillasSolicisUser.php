@@ -1,15 +1,15 @@
 <?php
 
-include '../conx.php';
+include '../class/classIncludes.php';
 include "../function/criptCodes.php";
-include "../class/solicitudes.php";
 
 session_start();
 
-$yo = $_SESSION['sesion'];
+$yo = $_SESSION['cidelusuario'];
 
+$a = Solicitud::obtenerSolicitud();
 
-$a = Solicitud::ObtenerSolicitud();
+$a->setAgent($yo);
 
 $coro = $a->allSolicitudes();
 
@@ -39,6 +39,22 @@ $tipoSolic = [
     "5" => "recuperacion de contraseña"
 ];
 
+if (!@$coro['Error']) {
+    $data[] = [
+        '',
+        '',
+        '',
+        'no haz realizado acciones',
+        '',
+        '',
+        '',
+    ];
+
+    $verg['data'] = $data;
+
+    echo json_encode($verg);
+    exit;
+}
 
 foreach ($coro as $key) {
 
@@ -47,7 +63,7 @@ foreach ($coro as $key) {
         $key['tipo_permiso'],
         $key['ci_permiso'],
         $key['fecha_permiso'],
-        ' <a onclick="detallesPlanillas(' . $key['id_solicitud_permiso'] . ', '. $key['tipo_permiso'].')" class="btn btn-success">ver detalles</a> ',
+        ' <a onclick="detallesPlanillas(' . $key['id_solicitud_permiso'] . ', ' . $key['tipo_permiso'] . ')" class="btn btn-success">ver detalles</a> ',
         '<a class="aprState ' . $apr[$key['estado_permiso']] . '" disabled>' . $aprN[$key['estado_permiso']] . '<span style="margin:.5rem;"></span><i class="' . $aprL[$key['estado_permiso']] . '"></i></a>',
         $key['estado_permiso'],
     ];

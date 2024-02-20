@@ -8,7 +8,7 @@
  * @return bool
  */
 function moveFile($archivo, $destino, $nombreDelArchivo = 'sin_nombre')
-{   
+{
     // Crear carpeta sino existe
     if (!file_exists($destino)) {
         mkdir($destino, 0777, true);
@@ -25,7 +25,7 @@ function moveFile($archivo, $destino, $nombreDelArchivo = 'sin_nombre')
  * Obtiene la extencion del string introducido
  * _ejemp:_
  * _abc.jpg => return jpg_
- * @param mixed $name nombre del archivo
+ * @param mixed $name nombre del archivo,1-
  * @return mixed extencion del archivo || null = "no_espesificado"
  */
 function extencion($name)
@@ -38,3 +38,4 @@ function extencion($name)
 
     return $extension;
 }
+    

@@ -1,5 +1,5 @@
 <?php
-include "../conx.php";
+include "../class/conx.php";
 $conn = new Conexion();
 
 $sql1 = $conn->query("SELECT * FROM `cargo`");

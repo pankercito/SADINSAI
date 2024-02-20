@@ -3,7 +3,7 @@
 
 <?php
 
-include("../php/preset/cardsPreset.php");
+include "../php/preset/cardsPreset.php";
 
 function reverse($cadena)
 {
@@ -32,7 +32,7 @@ if (1 == $count && $count > 0) {
 
     $fecha = $row['fecha'];
     $note = ($row['nota'] == '') ? "sin nota" : $row['nota'];
-    $userName = '<a href="perfil.php?perfil=' . encriptar($row['ci']) . '">' . getUser($row['id_emisor'], "") . '</a>';
+    $userName = '<a href="perfil.php?perfil=' . encriptar($row['ci']) . '">' . getUserData($row['id_emisor']) . '</a>';
     $c = ($row['size'] / 1024);
     $size = ($c <= 920) ? number_format($c, 2) . "KB" : number_format($c / 1024, 2) . "MB";
 

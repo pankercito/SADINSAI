@@ -1,7 +1,8 @@
 <?php
+
 /**
  * Obtener datos de personal mediante CI
- * ----------- _n o t a_ ------------
+ * ----------- _n o t a_ -----------
  * 
  * string de entrada debe estar codificado
  */
@@ -24,45 +25,34 @@ class Personal
     private $idCiudad;
     private $sede;
     private $idSede;
-    private $Cargo;
+    private $cargo;
     private $idCargo;
-    private $connec;
+    private $conexion;
 
-    /**
-     * Summary of __construct
-     * @param mixed $ci
-     */
     public function __construct($ci)
     {
         $this->ci = $ci;
-        $this->connec = new Conexion();
+        $this->conexion = new Conexion;
         $this->getDatos();
     }
 
-    /**
-     * OBTENER DATOS DEL PERSONAL POR CEDULA
-     * @return void
-     */
     private function getDatos()
     {
-
         $pCi = desencriptar($this->ci);
 
         if (ctype_digit($pCi)) {
+            $consulta = "SELECT * FROM personal p
+                         INNER JOIN estados e ON p.id_estado = e.id_estado
+                         INNER JOIN ciudades c ON p.id_ciudad = c.id_ciudad
+                         INNER JOIN sedes s ON p.sede_id = s.sede_id
+                         INNER JOIN cargo g ON g.id_cargo = p.cargo
+                         INNER JOIN departamentos d ON d.id_direccion = p.departamento
+                         WHERE p.ci = '$pCi'";
 
-            $cnce = $this->connec->query("SELECT * FROM personal p
-                                           INNER JOIN estados e ON p.id_estado = e.id_estado
-                                           INNER JOIN ciudades c ON p.id_ciudad = c.id_ciudad
-                                           INNER JOIN sedes s ON p.sede_id = s.sede_id
-                                           INNER JOIN cargo g ON g.id_cargo = p.cargo
-                                           INNER JOIN departamentos d ON d.id_direccion = p.departamento
+            $sentencia = $this->conexion->query($consulta);
 
-                                           WHERE p.ci = $pCi");
-
-            $count_results = mysqli_num_rows($cnce);
-
-            if ($count_results > 0) {
-                $data = mysqli_fetch_array($cnce);
+            if ($sentencia->num_rows > 0) {
+                $data = $sentencia->fetch_array();
 
                 $this->ci = $data['ci'];
                 $this->nombre = ucwords(strtolower($data['nombre']));
@@ -78,99 +68,70 @@ class Personal
                 $this->idCiudad = $data['id_ciudad'];
                 $this->sede = $data['nombre_sede'];
                 $this->idSede = $data['sede_id'];
-                $this->Cargo = $data['cargo_nombre'];
+                $this->cargo = $data['cargo_nombre'];
                 $this->idCargo = $data['cargo'];
                 $this->sexo = strtolower($data['sexo']);
                 $this->departamento = ucwords(strtolower($data['dir_nombre']));
                 $this->idDepartamento = $data['departamento'];
-
             } else {
-                $this->nombre = "Sin datos";
-                $this->apellido = "Sin datos";
-                $this->telefono = "Sin datos";
-                $this->email = "Sin datos";
-                $this->direccion = "Sin datos";
-                $this->estado = "Sin datos";
-                $this->idEstado = "Sin datos";
-                $this->ciudad = "Sin datos";
-                $this->idCiudad = "Sin datos";
-                $this->sede = "Sin datos";
-                $this->idSede = "Sin datos";
-                $this->Cargo = "Sin datos";
-                $this->iCargo = "Sin datos";
-                $this->fecha = "Sin datos";
-                $this->sexo = "Sin datos";
-                $this->grado = "Sin datos";
-                $this->departamento = "Sin datos";
-                $this->idDepartamento = "Sin datos";
+                $this->setValoresPorDefecto();
             }
         } else {
-            $this->nombre = "Sin datos";
-            $this->apellido = "Sin datos";
-            $this->telefono = "Sin datos";
-            $this->ci = "Sin datos";
-            $this->email = "Sin datos";
-            $this->direccion = "Sin datos";
-            $this->estado = "Sin datos";
-            $this->idEstado = "Sin datos";
-            $this->ciudad = "Sin datos";
-            $this->idCiudad = "Sin datos";
-            $this->sede = "Sin datos";
-            $this->idSede = "Sin datos";
-            $this->Cargo = "Sin datos";
-            $this->iCargo = "Sin datos";
-            $this->fecha = "Sin datos";
-            $this->sexo = "Sin datos";
-            $this->grado = "Sin datos";
-            $this->departamento = "Sin datos";
-            $this->idDepartamento = "Sin datos";
+            $this->setValoresPorDefecto();
         }
-        $this->connec->close();
+
+        $sentencia->close();
+        $this->conexion->close();
     }
 
-    /**
-     * @return string nombre
-     */
+    private function setValoresPorDefecto()
+    {
+        $this->nombre = "Sin datos";
+        $this->apellido = "Sin datos";
+        $this->telefono = "Sin datos";
+        $this->ci = "Sin datos";
+        $this->email = "Sin datos";
+        $this->direccion = "Sin datos";
+        $this->estado = "Sin datos";
+        $this->idEstado = "Sin datos";
+        $this->ciudad = "Sin datos";
+        $this->idCiudad = "Sin datos";
+        $this->sede = "Sin datos";
+        $this->idSede = "Sin datos";
+        $this->cargo = "Sin datos";
+        $this->idCargo = "Sin datos";
+        $this->fecha = "Sin datos";
+        $this->sexo = "Sin datos";
+        $this->grado = "Sin datos";
+        $this->departamento = "Sin datos";
+        $this->idDepartamento = "Sin datos";
+    }
+
     public function getNombre()
     {
         return $this->nombre;
     }
 
-    /**
-     * @return string apellido
-     */
     public function getApellido()
     {
         return $this->apellido;
     }
 
-    /**
-     * @return mixed|string ci desencriptada
-     */
     public function getCi()
     {
         return $this->ci;
     }
 
-    /**
-     * @return mixed|string telefono
-     */
     public function getTelefono()
     {
         return $this->telefono;
     }
 
-    /**
-     * @return string email
-     */
     public function getEmail()
     {
         return $this->email;
     }
 
-    /**
-     * @return string direccion
-     */
     public function getDireccion()
     {
         return $this->direccion;
@@ -183,6 +144,7 @@ class Personal
     {
         return $this->estado;
     }
+
     /**
      * @return mixed|string ID estado
      */
@@ -228,7 +190,7 @@ class Personal
      */
     public function getCargo()
     {
-        return $this->Cargo;
+        return $this->cargo;
     }
     /**
      * @return mixed|string ID cargo
@@ -261,6 +223,15 @@ class Personal
     {
         return $this->fecha;
     }
+    
+    /**
+     * @return mixed
+     */
+    public function getDepartament()
+    {
+        return $this->departamento;
+    }
+
 
     /**
      * @return mixed
@@ -271,12 +242,5 @@ class Personal
 
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDepartament()
-    {
-        return $this->departamento;
-    }
-
+    
 }

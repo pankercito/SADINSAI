@@ -66,7 +66,6 @@ function detallesPlanillas(idSolis, tipoS) {
         "idSoli": idSoli,
         "tipoSoli": tipo,
     };
-    var contenido = "no";
 
     var obj = $.dialog({
         title: false,
@@ -88,7 +87,7 @@ function detallesPlanillas(idSolis, tipoS) {
             alert("Estatus " + nroERROR)
         },
         success: function (response) {
-            contenido = response;
+            var contenido = response;
 
             setTimeout(() => {
                 obj.close();
@@ -96,7 +95,7 @@ function detallesPlanillas(idSolis, tipoS) {
 
             // Mostrar el diálogo de confirmación
             $.confirm({
-                title: '',
+                title: false,
                 content: contenido,
                 columnClass: 'col-md-8 col-md-offset-4',
                 boxWidth: '50%',
@@ -109,7 +108,6 @@ function detallesPlanillas(idSolis, tipoS) {
                 onContentReady: function () {
                     var coco = $("#coco");
                     var self = this;
-
                     // mostrar ocultar boton 
                     if (coco.val() == 2) {
                         self.buttons.printar.show();
@@ -124,13 +122,13 @@ function detallesPlanillas(idSolis, tipoS) {
                                 data: parametro,
                                 url: '../php/preparePlanillas.php',
                                 type: 'POST',
-                                success: function (params) {
-                                    window.open("../pdf/planilla" + params + ".php", "_blank");
+                                success: function (tipo) {
+                                    alert("../pdf/planilla" + tipo + ".php", "_blank");
+                                    window.open("../pdf/planilla" + tipo + ".php", "_blank");
                                 }
                             })
                         }
                     },
-
                     cerrar: {
                         text: 'cerrar',
                         status: false,

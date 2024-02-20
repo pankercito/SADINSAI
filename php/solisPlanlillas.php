@@ -1,7 +1,8 @@
 <?php
 
-include "class/solicitudes.php";
+include 'class/classIncludes.php';
 include "function/idGenerador.php";
+
 session_start();
 
 if (isset($_POST['formtipo'])) {
@@ -51,7 +52,7 @@ if (isset($_POST['formtipo'])) {
                 $a++;
             }
 
-            $siu = Solicitud::CrearSolicitud(Solicitud::de_anticipo, $array, $paraquien);
+            $siu = Solicitud::crearSolicitud(Solicitud::de_anticipo, $array, $paraquien);
 
             break;
         case '2':
@@ -104,7 +105,7 @@ if (isset($_POST['formtipo'])) {
                 $a++;
             }
 
-            $siu = Solicitud::CrearSolicitud(Solicitud::de_vacaciones, $array, $paraquien);
+            $siu = Solicitud::crearSolicitud(Solicitud::de_vacaciones, $array, $paraquien);
             break;
         case '4':
             $data = [
@@ -149,7 +150,7 @@ if (isset($_POST['formtipo'])) {
                 $a++;
             }
 
-            $siu = Solicitud::CrearSolicitud(Solicitud::de_carta_aval, $array, $paraquien);
+            $siu = Solicitud::crearSolicitud(Solicitud::de_carta_aval, $array, $paraquien);
             break;
         case '5':
 
@@ -201,7 +202,7 @@ if (isset($_POST['formtipo'])) {
                 $a++;
             }
 
-            $siu = Solicitud::CrearSolicitud(Solicitud::de_licencia_paternidad, $array, $paraquien);
+            $siu = Solicitud::crearSolicitud(Solicitud::de_licencia_paternidad, $array, $paraquien);
             break;
 
         default:

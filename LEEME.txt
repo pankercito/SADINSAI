@@ -1,0 +1,14 @@
+Pendientes
+    - agregar auditoria a Agregar Sede y Agregar Cargo
+    - ultimos detalles de planilla 2
+
+TERMINADA
+    - Funcion de verificacion para campos del area Solicitudes 
+    - agregar auditoria a DeleteUser
+
+SI TIENES LA BASE DE DATOS RECUERA QUE LOS USUASRIOS SON LOS ANOTADOS ANTES EN EL REALESE (LANZAMIENTO) DE GITHUB
+SOLO DEBES CONFIGURAR EL SERVER PARA QUE SADINSAI QUEDE COMO DIRECTORIO EN EL PUERTO 80 Y YA TE FUNCIONARA TODO
+
+FILE TESTING AREA 
+    - admin
+        - admin@123

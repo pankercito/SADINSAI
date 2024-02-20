@@ -1,5 +1,8 @@
 <?php
-include_once("../php/conx.php");
+
+if (!class_exists('Conexion')) {
+    include "conx.php";
+}
 $conn = new Conexion();
 
 // Preparar la consulta para obtener las ciudades correspondientes al estado seleccionado

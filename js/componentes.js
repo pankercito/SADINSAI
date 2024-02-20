@@ -1,4 +1,3 @@
-
 //cargo table
 var table = $("#table").DataTable({
     order: [
@@ -31,7 +30,6 @@ var table = $("#table").DataTable({
 
 $(document).ready(function () {
     //If user submits the form
-
     $("#agregar").click(function (e) {
         e.preventDefault();
         var input = $("#cargo").val();

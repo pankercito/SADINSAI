@@ -1,10 +1,9 @@
 <?php
 
-include("../../php/conx.php");
-include("../../php/class/auditoria.php");
-include("../../php/function/sumarhora.php");
+include "../../php/class/classIncludes.php";
+include "../../php/function/sumarhora.php";
 
-$conn = new Conexion();
+$conn = new Conexion ;
 
 // SACAR DATOS DE SOLICITUDES
 $colis = $conn->query("SELECT * FROM solicitudes WHERE apr_estado NOT IN (0)");

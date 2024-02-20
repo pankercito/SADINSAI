@@ -1,8 +1,7 @@
 <?php
 
-include("../../php/conx.php");
-include("../../php/class/auditoria.php");
-include("../../php/function/sumarhora.php");
+include "../../php/class/classIncludes.php";
+include "../../php/function/sumarhora.php";
 
 $conn = new Conexion();
 

@@ -89,7 +89,7 @@
                     <?php
                     if ($adpval == 0) {
                         ?>
-                        <a id="help" class="btn" type="button" href="#" target="_blank">
+                        <a id="help" class="btn" type="button" href="../resources/Sadinsai - Manual de usuario.php" target="_blank">
                             <i class="bi bi-question-lg"></i>
                         </a>
                         <?php
@@ -104,11 +104,17 @@
                                     class="estrate bi bi-diagram-3-fill"></i></a>
                             <a class="dropdown-item" href="../components/sedes.php">Sedes <i
                                     class="estrate bi bi-geo-fill"></i></a>
-                            <a class="dropdown-item" href="../private/backRec.php">Respalo <i
-                                    class="estrate bi bi-database-fill-gear"></i></a>
+                            <?php
+                            if ($adpval == 2) {
+                                ?>
+                                <a class="dropdown-item" href="../private/backRec.php">Respalo <i
+                                        class="estrate bi bi-database-fill-gear"></i></a>
+                                <?php
+                            }
+                            ?>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="<?php printf("../resources/sigensai-manual%s.pdf", @$manual)?>" target="_blank">Manual de usuario <i
-                                    class="estrate bi bi-journal-medical"></i></a>
+                            <a class="dropdown-item" href="<?php echo "../resources/Sadinsai - Manual de usuario.pdf"?>"
+                                target="_blank">Manual de usuario <i class="estrate bi bi-journal-medical"></i></a>
                         </div>
                         <?php
                     }

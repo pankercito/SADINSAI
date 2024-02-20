@@ -30,7 +30,7 @@ if ($count > 0) {
         $f = ($q == 1) ? $nameSet : "";
         $fecha = $row['fecha'];
         $note = ($row['nota'] == '') ? "sin nota" : $row['nota'];
-        $userName = '<a href="perfil.php?perfil=' . encriptar($row['ci']) . '">' . getUser($row['id_emisor'], "") . '</a>';
+        $userName = '<a href="perfil.php?perfil=' . encriptar($row['ci']) . '">' . getUserData($row['id_emisor']) . '</a>';
         $c = ($row['size'] / 1024);
         $size = ($c <= 920) ? number_format($c, 2) . "KB" : number_format($c / 1024, 2) . "MB";
 

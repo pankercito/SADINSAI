@@ -1,6 +1,6 @@
 <?php
 
-include "conx.php";
+include "class/conx.php";
 include "function/idGenerador.php";
 include "function/criptCodes.php";
 include "function/filesFunctions.php";

@@ -2,12 +2,10 @@
 
 if (isset($_POST["idSoli"]) && isset($_POST['tipoSoli'])) {
 
-    require("conx.php");
-    include("function/criptCodes.php");
-    include("function/getESCname.php");
-    include("function/removerAcentos.php");
-    include("class/personal.php");
-    include("class/solicitudes.php");
+    include 'class/classIncludes.php';
+    include "function/criptCodes.php";
+    include "function/getESCname.php";
+    include "function/removerAcentos.php";
 
     $conn = new Conexion();
 
@@ -27,9 +25,9 @@ if (isset($_POST["idSoli"]) && isset($_POST['tipoSoli'])) {
 
     switch ($tipoSoli) {
         case '1':
-            $ver = Solicitud::ObtenerSolicitud($id);
+            $ver = Solicitud::obtenerSolicitud($id);
 
-            $corgale = $ver->DetallePLanillas();
+            $corgale = $ver->detallePLanillas();
 
             $printcito = $corgale[0];
 
@@ -100,9 +98,9 @@ if (isset($_POST["idSoli"]) && isset($_POST['tipoSoli'])) {
             <?php
             break;
         case '2':
-            $ver = Solicitud::ObtenerSolicitud($id);
+            $ver = Solicitud::obtenerSolicitud($id);
 
-            $vear = $ver->Detalles();
+            $vear = $ver->detalles();
 
             $printcito = [];
             foreach ($vear as $key => $value) {
@@ -187,9 +185,9 @@ if (isset($_POST["idSoli"]) && isset($_POST['tipoSoli'])) {
             <?php
             break;
         case '3':
-            $ver = Solicitud::ObtenerSolicitud($id);
+            $ver = Solicitud::obtenerSolicitud($id);
 
-            $vear = $ver->Detalles();
+            $vear = $ver->detalles();
 
             $printcito = [];
             foreach ($vear as $key => $value) {
@@ -274,9 +272,9 @@ if (isset($_POST["idSoli"]) && isset($_POST['tipoSoli'])) {
             <?php
             break;
         case '4':
-            $ver = Solicitud::ObtenerSolicitud($id);
+            $ver = Solicitud::obtenerSolicitud($id);
 
-            $vear = $ver->Detalles();
+            $vear = $ver->detalles();
 
             $printcito = [];
             foreach ($vear as $key => $value) {
@@ -361,9 +359,9 @@ if (isset($_POST["idSoli"]) && isset($_POST['tipoSoli'])) {
             <?php
             break;
         case '5':
-            $ver = Solicitud::ObtenerSolicitud($id);
+            $ver = Solicitud::obtenerSolicitud($id);
 
-            $vear = $ver->Detalles();
+            $vear = $ver->detalles();
 
             $printcito = [];
             foreach ($vear as $key => $value) {

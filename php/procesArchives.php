@@ -1,11 +1,11 @@
 <?php
 // Conexión a la base de datos
-include("../php/conx.php");
-include("../php/function/removerAcentos.php");
-include("../php/function/criptCodes.php");
-include("../php/function/idGenerador.php");
-include("../php/function/sumarHora.php");
-include("../php/function/filesFunctions.php");
+include "../php/class/conx.php";
+include "../php/function/removerAcentos.php";
+include "../php/function/criptCodes.php";
+include "../php/function/idGenerador.php";
+include "../php/function/sumarHora.php";
+include "../php/function/filesFunctions.php";
 
 $conn = new Conexion();
 // Escapar los caracteres especiales

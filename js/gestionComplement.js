@@ -19,6 +19,7 @@ form.addEventListener("click", modalcito);
 function modalcito() {
     var ciUser = getQueryVariable('carga');
     var tipoDarch = getQueryVariable('gestion');
+
     rows = {
         "gestion": tipoDarch,
         "carga": ciUser
@@ -224,7 +225,7 @@ var tipoDarch = getQueryVariable('gestion');
 // ocultar agregar documentos en el area de planillas
 $(document).ready(function () {
     if (tipoDarch == "1046") {
-        document.getElementById("tittleDoc").innerHTML = "<h4 class='mb-3'>FORMULARIO</h4>";
         document.title = "SADINSAI | Planillas";
+        document.getElementById("tittleDoc").innerHTML = "<h4 class='mb-3'>FORMULARIO</h4>";
     }
-})
+});

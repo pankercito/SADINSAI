@@ -1,7 +1,7 @@
 <?php
 
-include("conx.php");
-include("function/criptCodes.php");
+include "class/conx.php";
+include "function/criptCodes.php";
 
 if (isset($_POST["ci"])) {
 

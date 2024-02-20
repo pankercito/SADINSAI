@@ -1,18 +1,20 @@
 <?php
 
-require_once("../php/sesionval.php");
+require_once "../php/sesionval.php";
 
 include "../php/class/personal.php";
 
 ?>
 
-<?php require("../layout/head.php"); ?>
+<?php require "../layout/head.php" ?>
 
 <link rel="stylesheet" href="../styles/archives.css">
+
 <script type="text/javascript">
   document.title = "SADINSAI | Archivos";
 </script>
-<?php require("../layout/navbar.php"); ?>
+
+<?php require "../layout/navbar.php" ?>
 
 <?php include '../layout/archives.php' ?>
 
@@ -23,7 +25,7 @@ include "../php/class/personal.php";
         <?php
         if ($_GET['gestion'] == 1046) {
           echo '<style> .acciones{ display: none;}</style>';
-          include('../layout/planillasOpciones.php');
+          include "../layout/planillasOpciones.php";
         }
         ?>
         <div class="acciones">
@@ -61,4 +63,4 @@ include "../php/class/personal.php";
   }
 </style>
 
-<?php require("../layout/footer.php"); ?>
+<?php require "../layout/footer.php" ?>

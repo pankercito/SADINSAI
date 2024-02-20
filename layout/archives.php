@@ -11,7 +11,8 @@
                         <a class="nav-link2" href="gestion.php?gestion=1002&carga=<?php echo comprueba() ?>">Resumen
                             curricular</a>
                         <a class="nav-link2" href="gestion.php?gestion=1003&carga=<?php echo comprueba() ?>">C.I</a>
-                        <a class="nav-link2" href="gestion.php?gestion=1004&carga=<?php echo comprueba() ?>">Solvencia de
+                        <a class="nav-link2" href="gestion.php?gestion=1004&carga=<?php echo comprueba() ?>">Solvencia
+                            de
                             I.S.R</a>
                         <a class="nav-link2" href="gestion.php?gestion=1005&carga=<?php echo comprueba() ?>">Constancia
                             de Naturalizaci&oacute;n</a>
@@ -29,7 +30,8 @@
                         <a class="nav-link2" href="gestion.php?gestion=1008&carga=<?php echo comprueba() ?>">FP-020</a>
                         <a class="nav-link2" href="gestion.php?gestion=1009&carga=<?php echo comprueba() ?>">Evaluacion
                             de requerimientos y resultados del concurso</a>
-                        <a class="nav-link2" href="gestion.php?gestion=1010&carga=<?php echo comprueba() ?>">Ascensos</a>
+                        <a class="nav-link2"
+                            href="gestion.php?gestion=1010&carga=<?php echo comprueba() ?>">Ascensos</a>
                         <a class="nav-link2"
                             href="gestion.php?gestion=1011&carga=<?php echo comprueba() ?>">Transferencias</a>
                         <a class="nav-link2" href="gestion.php?gestion=1012&carga=<?php echo comprueba() ?>">Aumentos de
@@ -50,7 +52,8 @@
                     <button class="dropbtn">Eduación y experiencia</button>
                     <div id="drdown2" class="dropdown-content">
                         <a class="nav-link2" href="gestion.php?gestion=1017&carga=<?php echo comprueba() ?>">Titulos</a>
-                        <a class="nav-link2" href="gestion.php?gestion=1018&carga=<?php echo comprueba() ?>">Comprobantes
+                        <a class="nav-link2"
+                            href="gestion.php?gestion=1018&carga=<?php echo comprueba() ?>">Comprobantes
                             de cursos, talleres</a>
                         <a class="nav-link2" href="gestion.php?gestion=1019&carga=<?php echo comprueba() ?>">Constancia
                             de trabajo</a>
@@ -97,7 +100,8 @@
                             programa alimentaci&oacute;n</a>
                         <a class="nav-link2" href="gestion.php?gestion=1031&carga=<?php echo comprueba() ?>">Forma 14-02
                             I.V.S.S.</a>
-                        <a class="nav-link2" href="gestion.php?gestion=1032&carga=<?php echo comprueba() ?>">Forma 14</a>
+                        <a class="nav-link2" href="gestion.php?gestion=1032&carga=<?php echo comprueba() ?>">Forma
+                            14</a>
                     </div>
                 </div>
             </li>
@@ -151,7 +155,10 @@
                 </div>
             </li>
             <li>
-                <a class="plani nav-link2" href="gestion.php?gestion=1046&carga=<?php echo comprueba() ?>">Solicitudes y permisos</a>
+                <div class="dropdown">
+                    <a class="plani nav-link2"
+                        href="gestion.php?gestion=1046&carga=<?php echo comprueba() ?>">Solicitudes y permisos</a>
+                </div>
             </li>
         </ul>
     </div>

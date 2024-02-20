@@ -2,11 +2,11 @@
 
 if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
 
-    include("function/criptCodes.php");
-    include("function/getESCname.php");
-    include("function/removerAcentos.php");
-    include("class/personal.php");
-    require("conx.php");
+    include "function/criptCodes.php";
+    include "function/getESCname.php";
+    include "function/removerAcentos.php";
+    require "class/conx.php";
+    include "class/personal.php";
 
     $conn = new Conexion();
     $rst = false;

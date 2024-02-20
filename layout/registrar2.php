@@ -1,6 +1,4 @@
-<?php
-require("../php/adp.php");
-?>
+<?php require "../php/adp.php" ?>
 <link rel="stylesheet" href="../styles/regiform.css">
 <script src="../js/userCheck.js"></script>
 <div class="conten-regisform mx-auto">
@@ -13,8 +11,8 @@ require("../php/adp.php");
         <form method="post" action="?adminregister=true" class="mx-auto" name="regisform" id="rgt" require>
             <div class="form-group">
                 <label for="user">usuario</label>
-                <input class="form-control" id="user" type="text" name="user" placeholder="usuario" pattern="[A-Za-z0-9]{1,15}" maxlength="12"
-                    required autocomplete="off">
+                <input class="form-control" id="user" type="text" name="user" placeholder="usuario"
+                    pattern="[A-Za-z0-9]{1,15}" maxlength="12" required autocomplete="off">
                 <small class="form-text" id="msjverify"></small>
             </div>
             <div class="form-group my-3">
@@ -37,7 +35,7 @@ require("../php/adp.php");
             <div class="form-group my-3">
                 <div class="contenSwitch">
                     <div class="form-check form-switch">
-                        <label class="form-check-label" for="flexSwitch">Condecer permiso de Admin</label>
+                        <label class="form-check-label" for="flexSwitch">Asignar como jefe de departamento</label>
                         <input class="form-check-input" name="checkadmin" type="checkbox" id="flexSwitch" value="1"
                             disabled>
                     </div>

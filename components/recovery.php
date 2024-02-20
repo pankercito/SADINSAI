@@ -1,4 +1,4 @@
-<?php require("../layout/head.php"); ?>
+<?php require "../layout/head.php" ?>
 
 <link rel="stylesheet" href="../styles/recovery.css">
 <div class="col row">
@@ -19,4 +19,23 @@
         </div>
     </div>
 </div>
+
+<style>
+    .grid-containerr>div {
+        margin: 1.5rem;
+        background-color: var(--bg-conten-color);
+        text-align: center;
+        padding: 20px 0;
+        border-radius: 10px;
+    }
+
+    .grid-containerr>div .btn {
+        height: 3rem;
+        box-shadow: 0px 2px 0 0px #00000054;
+    }
+
+    label {
+        color: #e7e7e7;
+    }
+</style>
 <script src="../js/recovery.js"></script>

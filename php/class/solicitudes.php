@@ -1,11 +1,14 @@
 <?php
 
-include "auditoria.php";
-
-if (!class_exists('Conexion')) {
-    include "conx.php";
-}
-
+/**
+ * Retorna creacion o obtencion de planilla 
+ * define constantes de tipo
+ * 
+ * ---------------
+ * _metodos_
+ * CrearSolicitud
+ * obtenerSolicitud
+ */
 class Solicitud
 {
     const de_anticipo = 1;
@@ -21,19 +24,23 @@ class Solicitud
      * @param mixed $paraquien ci de solicitante
      * @return CtrSolicitudes
      */
-    public static function CrearSolicitud($tipo, $array, $paraquien)
+    public static function crearSolicitud($tipo, $array, $paraquien)
     {
         return new CtrSolicitudes($tipo, $array, $paraquien);
     }
 
     /**
-     * Devuelve una instancia de ObtSolicitudes
-     * @param mixed $id
+     * Devuelve una instancia de obtSolicitudes
+     * @param mixed $id null para obtener todas las solicitudes del sistema
      * @return ObtSolicitudes
      */
-    public static function ObtenerSolicitud($id = null)
+    public static function obtenerSolicitud($id = null)
     {
-        return new ObtSolicitudes($id);
+        if (is_null($id)) {
+            return new ObtSolicitudes();
+        } else {
+            return new ObtSolicitudes($id);
+        }
     }
 }
 
@@ -100,6 +107,7 @@ class CtrSolicitudes
         }
 
     }
+
 }
 
 /**
@@ -117,6 +125,12 @@ class ObtSolicitudes
     private $id;
 
     /**
+     * Summary of idAgent
+     * @var 
+     */
+    private $idAgent = null;
+
+    /**
      * Summary of conn
      * @var 
      */
@@ -130,18 +144,10 @@ class ObtSolicitudes
      */
     public function __construct($id = null)
     {
-        $this->conn = new Conexion;
-        $this->auditoria = new Auditoria;
-        $this->id = ($id != null) ? $this->conn->real_escape($id) : '';
-    }
 
-    /**
-     * Obtener ID de solicitud
-     * @return
-     */
-    public function getId()
-    {
-        return $this->id;
+        $this->conn = new Conexion;
+        $this->auditoria = new AuditoriaSolicitudes;
+        $this->id = ($id != null) ? $this->conn->real_escape($id) : '';
     }
 
     /**
@@ -155,26 +161,31 @@ class ObtSolicitudes
             throw new Exception("Estas haciendo una llamada no valida, revisa la documentacion", 1);
         }
 
-        $ver = $this->conn->query("SELECT * FROM solicitudes_y_permisos");
+        $option = $this->idAgent == null ? "" : "WHERE ci_permiso = {$this->idAgent}";
+        $ver = $this->conn->query("SELECT * FROM solicitudes_y_permisos" . " {$option}");
         $i = 0;
 
-        while ($variable = mysqli_fetch_assoc($ver)) {
-            @$array[$i];
-            foreach ($variable as $key => $value) {
-                if ($key == 'data_solicitudes') {
-                    $ved = explode(" == ", $value);
-                    foreach ($ved as $keys => $val) {
-                        if ($val != '') {
-                            $vrr[] = $val;
+        if ($ver->num_rows > 0) {
+            while ($variable = mysqli_fetch_assoc($ver)) {
+                @$array[$i];
+                foreach ($variable as $key => $value) {
+                    if ($key == 'data_solicitudes') {
+                        $ved = explode(" == ", $value);
+                        foreach ($ved as $keys => $val) {
+                            if ($val != '') {
+                                $vrr[] = $val;
+                            }
                         }
+                        $array[$i][$key] = $vrr;
+                        unset($vrr);
+                    } else {
+                        $array[$i][$key] = $value;
                     }
-                    $array[$i][$key] = $vrr;
-                    unset($vrr);
-                } else {
-                    $array[$i][$key] = $value;
                 }
+                $i++;
             }
-            $i++;
+        } else {
+            $array = ['error' => true];
         }
 
         return $array;
@@ -185,7 +196,7 @@ class ObtSolicitudes
      * @throws \Exception
      * @return array
      */
-    public function Detalles()
+    public function detalles()
     {
         if ($this->id == null) {
             throw new Exception("Estas haciendo una llamada no valida, cosulta", 1);
@@ -219,13 +230,13 @@ class ObtSolicitudes
      * Summary of DetallePLanillas
      * @return array
      */
-    public function DetallePLanillas()
+    public function detallePLanillas()
     {
         if ($this->id == null) {
             throw new Exception("Estas haciendo una llamada no valida, cosulta", 1);
         }
 
-        $vear = $this->Detalles();
+        $vear = $this->detalles();
         $printcito = [];
         foreach ($vear as $key => $value) {
             foreach ($value as $ky => $le) {
@@ -259,7 +270,7 @@ class ObtSolicitudes
 
         $si = $qr->num_rows;
         if ($si > 0) {
-            $this->auditoria->regisAceptacionSolicitudes($this->id, $this->DetallePLanillas()[0]);
+            $this->auditoria->regisAceptacionSolicitudes($this->id, $this->detallePLanillas()[0]);
 
             $qrt = $this->conn->query("UPDATE solicitudes_y_permisos SET estado_permiso = 2 WHERE id_solicitud_permiso = '$this->id'");
 
@@ -287,7 +298,7 @@ class ObtSolicitudes
 
         if ($si > 0) {
             $this->auditoria->registSolisRechaz($this->id);
-            
+
             $qrt = $this->conn->query("UPDATE solicitudes_y_permisos SET estado_permiso = 3, motivo_permiso = '$motivo' WHERE id_solicitud_permiso = '$this->id'");
 
             if ($qrt) {
@@ -298,5 +309,10 @@ class ObtSolicitudes
         } else {
             return false;
         }
+    }
+
+    public function setAgent($agent)
+    {
+        return $this->idAgent = $agent;
     }
 }

@@ -2,7 +2,7 @@
 
 $archivos = $_GET["gestion"];
 
-include('arrayArchives.php');
+include "arrayArchives.php";
 // Comprobamos si el valor de la opción está en el array
 
 if (array_key_exists($archivos, $direcciones)) {

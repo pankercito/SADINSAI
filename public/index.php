@@ -1,4 +1,4 @@
-<?php require("../layout/head.php"); ?>
+<?php require "../layout/head.php" ?>
 
 <div class="container" id="fore-particles">
     <svg class="moko-404" viewbox="0 0 500 400">

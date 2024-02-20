@@ -1,7 +1,8 @@
 <?php
-include("class/personal.php");
+include "class/personal.php";
 
 if (isset($_GET['perfil'])) {
+    
     $personal = new Personal($_GET['perfil']);
 
     $pCi = $personal->getCi();

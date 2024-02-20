@@ -1,8 +1,8 @@
 <?php
 
-include("../function/getUser.php");
-include("../function/criptCodes.php");
-include("../conx.php");
+include "../class/conx.php";
+include "../function/getUser.php";
+include "../function/criptCodes.php";
 
 session_start();
 
@@ -48,7 +48,7 @@ if ($count_results > 0) {
 
         $data_array[] = [
             $data->id_solicitud,
-            '<a class="lol" href="perfil.php?perfil=' . encriptar($data->ci_solicitada) . '&parce=true">' . strtoupper((getUser($data->id_emisor))) . '</a>',
+            '<a class="lol" href="perfil.php?perfil=' . encriptar($data->ci_solicitada) . '&parce=true">' . strtoupper((getUserData($data->id_emisor))) . '</a>',
             $data->fecha,
             $tipoSolic[$data->tipo],
             '<a onclick="detalles(' . $data->id_solicitud . ',' . $data->tipo . ')" class="viewDetails btn btn"> Ver detalles </a>',

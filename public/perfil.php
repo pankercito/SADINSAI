@@ -1,30 +1,30 @@
-<?php require_once("../php/sesionval.php"); ?>
+<?php require "../php/sesionval.php" ?>
 
-<?php require("../layout/head.php"); ?>
+<?php require "../layout/head.php" ?>
 
-<?php require("../layout/navbar.php"); ?>
+<?php require "../layout/navbar.php" ?>
+
 <script src="../js/requerimientos.js"></script>
 <script src="../js/prestablecer.js"></script>
 
 <!--SALUDO DE BIENVENIDA-->
-<?php include("../layout/sidebar.php"); ?>
-
+<?php include "../layout/sidebar.php" ?>
 
 <div class="estructur-conten">
     <div class="grid-containerr">
         <div class="row">
             <div class="centro col-lg-9" id="centro">
-                <?php require_once("../php/preset/seleccionPerfil.php"); ?>
+                <?php require "../php/preset/seleccionPerfil.php" ?>
             </div>
-            <?php require_once("../layout/editarUsuario.php"); ?>
+            <?php include "../layout/editarUsuario.php" ?>
             <div class="colunma col-md-3 mt-2" id="columna">
                 <p style="color: white; font-weight:500;">acciones</p>
                 <button class="pedit btn btn-primary" id="generar"
-                    onclick="reportePerfil(<?php echo $SetCi ?>)">archivos
-                    faltantes</button>
+                onclick="reportePerfil('<?php echo $SetCi ?>')">archivos
+                faltantes</button>
                 <br>
                 <button class='pedit btn btn-secondary' id="requeri"
-                    onclick="requerido('<?php echo $SetCi ?>')">requerimientos</button>
+                onclick="requerido('<?php echo $SetCi ?>')">requerimientos</button>
                 <br>
                 <button class='pedit btn btn-warning' id="editar">editar datos</button>
             </div>
@@ -68,4 +68,4 @@
 <script src="../js/formRegistroValidacion.js"></script>
 <script src="../js/editUserComplement.js"></script>
 <script src="../js/selectorScript.js"></script>
-<?php require("../layout/footer.php"); ?>
+<?php require "../layout/footer.php" ?>

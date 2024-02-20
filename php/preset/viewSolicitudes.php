@@ -1,8 +1,9 @@
 <?php
 
-include("../function/getUser.php");
-include("../function/criptCodes.php");
-include("../conx.php");
+include "../class/conx.php";
+include "../function/getUser.php";
+include "../function/criptCodes.php";
+
 session_start();
 
 $conn = new Conexion();
@@ -55,5 +56,7 @@ if ($count_results > 0) {
     echo json_encode($new_array);
 } else {
     //Si no hay registros encontrados
-    echo '<h5>no has realizado ninguna solicitud</h5>';
+    $new_array = ["data" => [['','','','no haz realizado ninguna getion','','','']]];
+    // crear el JSON apartir de los arrays
+    echo json_encode($new_array);
 }

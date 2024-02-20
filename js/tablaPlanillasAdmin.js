@@ -8,7 +8,7 @@ var puth = $("#table").DataTable({
             visible: false
         }
     ],
-    order:[
+    order: [
         [3, 'desc']
     ],
     language: {
@@ -91,9 +91,10 @@ function aprPlanillas(idSolis, tipoS) {
             obj.close();
 
             contenido = response;
+
             // Mostrar el diálogo de confirmación CAMBIO DE ESTATUS
             $.confirm({
-                title: '',
+                title: false,
                 onContentReady: function () {
                     var self = $(this);
 
@@ -124,7 +125,7 @@ function aprPlanillas(idSolis, tipoS) {
                         action: function () {
                             let radio = document.querySelector('input[name="editSoli"]:checked');
                             let motivo = document.getElementById("movito").value;
-                            
+
                             if (radio.value != 0) {
                                 $.confirm({
                                     title: '',
@@ -138,16 +139,7 @@ function aprPlanillas(idSolis, tipoS) {
                                                     "idSoli": idSoli,
                                                     "motivo": motivo
                                                 };
-                                                var obj = $.dialog({
-                                                    title: false,
-                                                    closeIcon: false, // hides the close icon.
-                                                    content: `
-                                                    <div class="d-flex justify-content-center">
-                                                        <div class="spinner-border my-3" role="status">
-                                                            <span class="visually-hidden">procesando...</span>
-                                                        </div>
-                                                    </div>`
-                                                });
+                                                obj.open();
                                                 $.ajax({
                                                     data: aRadio,
                                                     url: "../php/planillasAction.php",
@@ -175,7 +167,7 @@ function aprPlanillas(idSolis, tipoS) {
                                         r: {
                                             text: "No, Cancelar",
                                             action: function () {
-
+                                                //funcion a realizar
                                             }
                                         }
                                     }

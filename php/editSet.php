@@ -1,8 +1,8 @@
 <?php
 
-include_once("../php/conx.php");
-include_once("../php/class/personal.php");
-include_once("../php/function/criptCodes.php");
+include_once "../php/class/conx.php";
+include_once "../php/class/personal.php" ;
+include_once "../php/function/criptCodes.php" ;
 
 
 $personal = new Personal($_GET['perfil']);

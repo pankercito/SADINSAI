@@ -39,14 +39,14 @@
                         <i class="bi bi-input-cursor"></i>
                         <input type="password" placeholder="Contrase&ntilde;a" name="passlg" required>
                     </div>
-                    <?php
-                    require("php/preset/fallo.php");
-                    ?>
+                    <?php require "php/preset/fallo.php" ?>
                     <button type="submit" name="login" class="btn btn-link btn-default">iniciar</button>
                 </div>
                 <!-- PAGINA DE RECUPERACION -->
                 <div class="parte-abajo">
                     <a href="components/recovery.php" class="button">olvide mi contrase&ntilde;a</a>
+                    <br>
+                    <a href="components/active_account.php" class="button">activar mi cuenta</a>
                 </div>
             </div>
         </form>
@@ -59,4 +59,5 @@
         </div>
     </section>
 </body>
+
 </html>

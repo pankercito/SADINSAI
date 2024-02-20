@@ -1,18 +1,18 @@
-<?php require_once("../php/sesionval.php"); ?>
+<?php require_once "../php/sesionval.php"?>
 
-<?php require("../layout/head.php"); ?>
+<?php require "../layout/head.php"?>
 
-<?php require("../layout/navbar.php"); ?>
+<?php require "../layout/navbar.php"?>
 
 <link rel="stylesheet" href="../styles/viewtables.css">
 <link rel="stylesheet" href="../styles/nomina.css">
 <link rel="stylesheet" href="../styles/solicitudes.css">
 
 <!--SALUDO DE BIENVENIDA-->
-<?php include("../layout/sidebar.php"); ?>
+<?php include "../layout/sidebar.php" ?>
 
 <!-- notificacion script -->
-<?php include "../php/preset/notificacion.php"; ?>
+<?php include "../php/preset/notificacion.php" ?>
 
 <div class="estructur-solicitudes">
     <div class="grid-containerr">
@@ -68,4 +68,4 @@
 </div>
 <script src="../js/solicitudes.js"></script>
 
-<?php require("../layout/footer.php"); ?>
+<?php require "../layout/footer.php" ?>

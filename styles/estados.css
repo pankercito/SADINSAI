@@ -100,3 +100,8 @@ h5 {
 div#example_info {
   color: #f2f2f2;
 }
+
+a.aStates:hover {
+  text-decoration: underline;
+  color: rgb(128, 190, 103);
+}

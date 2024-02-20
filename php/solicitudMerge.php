@@ -2,17 +2,16 @@
 
 if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
     
-    include "conx.php";
+    include "class/classIncludes.php";
     include "function/criptCodes.php";
     include "function/filesFunctions.php";
     include "function/sumarhora.php";
-    include "class/auditoria.php";
-    include "class/Gestiones.php";
 
     $conn = new Conexion();
-    $merge = new GestioData();
-
+    
     $id = $conn->real_escape($_POST['idSoli']);
+
+    $merge = new GestionData($id);
 
     //identificacion de tipo de solicitud
     switch ($_POST['tipo']) {
@@ -21,7 +20,7 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
             switch ($_POST['radio']) {
                 case 1:
                     // aceptar solicitud 
-                    $add = $merge->addPersonal($id);
+                    $add = $merge->addPersonal();
 
                     if (is_array($add)) {
                         echo json_encode($add);
@@ -34,7 +33,7 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
                 case 2:
                     // rechazar solicitud
 
-                    $recha = $merge->rechazarSoli($id);
+                    $recha = $merge->rechazarSoli();
 
                     if ($recha == true) {
                         echo "succes.personal.rechazar";
@@ -51,7 +50,7 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
             switch ($_POST['radio']) {
                 case 1:
                     // aceptar solicitud 
-                    $edit = $merge->editPersonal($id);
+                    $edit = $merge->editPersonal();
 
                     if (is_array($edit)) {
                         echo json_encode($edit);
@@ -61,7 +60,7 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
                     break;
                 case 2:
                     // rechazar solicitud
-                    $recha = $merge->rechazarSoli($id);
+                    $recha = $merge->rechazarSoli();
 
                     if ($recha == true) {
                         echo 'success.personal.edit.rechazar';
@@ -78,7 +77,7 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
             switch ($_POST['radio']) {
                 case '1': // ACEPTAR SOLICITUD
 
-                    $ingreso = $merge->addArchive($id);
+                    $ingreso = $merge->addArchive();
 
                     if ($ingreso == true) {
                         echo json_encode($ingreso);
@@ -89,7 +88,7 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
 
                 case '2':
                     // rechazar solicitud
-                    $recha = $merge->rechazarSoli($id);
+                    $recha = $merge->rechazarSoli();
 
                     if ($recha == true) {
                         echo 'success.archivo.ingreso';
@@ -107,7 +106,7 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
             switch ($_POST['radio']) {
                 case '1': // ACEPTAR SOLICITUD
 
-                    $change = $merge->deleteArchive($id);
+                    $change = $merge->deleteArchive();
 
                     if (is_array($change)) {
                         echo json_encode($change);
@@ -118,7 +117,7 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
 
                 case '2':
                     // rechazar solicitud
-                    $recha = $merge->rechazarSoli($id);
+                    $recha = $merge->rechazarSoli();
 
                     if ($recha == true) {
                         echo 'success.archivo.eliminar.rechazar';

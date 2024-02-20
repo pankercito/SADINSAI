@@ -1,10 +1,9 @@
 <?php
 
-include "conx.php";
+include 'class/classIncludes.php';
 include "function/criptCodes.php";
 include "function/filesFunctions.php";
 include "function/sumarhora.php";
-include "class/solicitudes.php";
 
 $conn = new Conexion();
 
@@ -12,7 +11,7 @@ $conn = new Conexion();
 
 switch (@$_POST['radio']) {
     case 1:
-        $tn = Solicitud::ObtenerSolicitud($id);
+        $tn = Solicitud::obtenerSolicitud($id);
 
         $no = $tn->aceptarSolicitud(); 
 
@@ -27,7 +26,7 @@ switch (@$_POST['radio']) {
         $motivo = $conn->real_escape($_POST['motivo']);
 
         if ($motivo) {
-            $tn = Solicitud::ObtenerSolicitud($id);
+            $tn = Solicitud::obtenerSolicitud($id);
 
             $no = $tn->rechazarSolicitud($motivo);
 

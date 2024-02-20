@@ -1,6 +1,6 @@
 <?php
 
-include "conx.php";
+include "class/conx.php";
 include "class/auditoria.php";
 
 $conn = new Conexion();

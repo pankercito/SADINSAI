@@ -1,4 +1,4 @@
-<?php include("../php/preset/ubicacionPre.php") ?>
+<?php include "../php/preset/ubicacionPre.php" ?>
 <div class="col-md-11 mx-auto">
     <div class="alert alert-secondary mb-3 mt-3">
         <div class="col">
@@ -27,7 +27,7 @@
             <label for="nDirecion" class="form-label">Direccion</label>
             <select class="form-select form-select-lg" name="ndireccion" id="nDirecion">
                 <option value=""> seleccione una direccion </option>
-                <?php include("../php/preset/opcionesD.php") ?>
+                <?php include "../php/preset/opcionesD.php" ?>
             </select>
         </div>
     </form>

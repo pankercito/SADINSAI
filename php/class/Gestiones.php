@@ -1,15 +1,37 @@
 <?php
 
-class GestioData extends Auditoria
+class GestionData extends Auditoria
 {
 
     /**
+     * Summary of id
+     * @var 
+     */
+    private $id;
+
+    /**
+     * Summary of __construct
+     * @param mixed $id id del usuasrio que esta realizando la gestion
+     * @throws \Exception
+     */
+    public function __construct($id){
+
+        $this->id = $id;
+
+        parent::__construct();
+
+        if ($this->id == ''){
+            throw new Exception("Estas haciendo una llamada no valida, revisa la documentacion", 1);
+        }
+    }
+
+    /**
      * Agrega los datos de precarga a la tabla personal
-     * @param string $id id solicitud
      * @return boolean | array  as array || estado || redirec
      */
-    public function addPersonal($id)
+    public function addPersonal()
     {
+
         $sql = $this->connec->query("SELECT * FROM solicitudes t 
                                               INNER JOIN solicitudes_precarga p ON p.id_solicitud_precarga = t.id_solicitud 
                                               INNER JOIN estados e ON p.id_estado_pre = e.id_estado
@@ -17,7 +39,7 @@ class GestioData extends Auditoria
                                               INNER JOIN sedes s ON p.id_sede_pre = s.sede_id
                                               INNER JOIN cargo g ON  p.cargo_pre = g.id_cargo
                                               INNER JOIN departamentos d ON p.departamento_pre = d.id_direccion
-                                              WHERE t.id_solicitud = $id");
+                                              WHERE t.id_solicitud = $this->id");
 
         if ($sql == true) {
 
@@ -64,7 +86,7 @@ class GestioData extends Auditoria
                     $cake = "error.to.sql";
                 } else {
 
-                    $this->connec->query("UPDATE solicitudes SET apr_estado = '1' WHERE id_solicitud = '$id'");
+                    $this->connec->query("UPDATE solicitudes SET apr_estado = '1' WHERE id_solicitud = '$this->id'");
 
                     $location[] = [
                         'redirec' => 'perfil.php?perfil=' . encriptar($dat['ci_pre']) . '&parce=true',
@@ -81,10 +103,9 @@ class GestioData extends Auditoria
 
     /**
      * Edita los datos de la tabla personal con los datos de Solicitud precarga
-     * @param string $id id solicitud
      * @return boolean | array  as array || estado || redirec
      */
-    public function editPersonal($id)
+    public function editPersonal()
     {
         // aceptar solicitud 
         $sql = $this->connec->query("SELECT * FROM solicitudes t 
@@ -94,7 +115,7 @@ class GestioData extends Auditoria
                                               INNER JOIN sedes s ON p.id_sede_pre = s.sede_id
                                               INNER JOIN cargo g ON  p.cargo_pre = g.id_cargo
                                               INNER JOIN departamentos d ON p.departamento_pre = d.id_direccion
-                                              WHERE t.id_solicitud = $id");
+                                              WHERE t.id_solicitud = $this->id");
         $dat = $sql->fetch_assoc();
 
         $personalData = $this->connec->query("SELECT * FROM personal p
@@ -160,7 +181,7 @@ class GestioData extends Auditoria
                 if ($sql1 != true) {
                     $cake = false;
                 } else {
-                    $sql2 = $this->connec->query("UPDATE solicitudes SET apr_estado = '1' WHERE id_solicitud = '$id'");
+                    $sql2 = $this->connec->query("UPDATE solicitudes SET apr_estado = '1' WHERE id_solicitud = '$this->id'");
                     $location[] = [
                         'redirec' => 'perfil.php?perfil=' . encriptar($dat['ci_pre']) . '&parce=true',
                         'estado' => 'succes.personal.ingres'
@@ -178,12 +199,11 @@ class GestioData extends Auditoria
 
     /**
      * Ingreso de archivo de archivos_precarga a archidata
-     * @param string $id id solicitud
      * @return boolean | array  as array || estado || redirec
      */
-    public function addArchive($id)
+    public function addArchive()
     {
-        $svp = $this->connec->query("SELECT * FROM solicitudes s INNER JOIN solicitudes_archivos_precarga p ON p.id_solicitud_archivo_pre = s.id_solicitud WHERE s.id_solicitud = '$id'");
+        $svp = $this->connec->query("SELECT * FROM solicitudes s INNER JOIN solicitudes_archivos_precarga p ON p.id_solicitud_archivo_pre = s.id_solicitud WHERE s.id_solicitud = '$this->id'");
         $sv = $svp->num_rows;
 
         if ($sv == 1) {
@@ -199,12 +219,12 @@ class GestioData extends Auditoria
 
             if ($this->registArch()) {
                 $sql = $this->connec->query("INSERT INTO archidata (id_archivo, ci_arch, d_archivo, nombre_arch, nota, size, tipo_arch, ubicacion_fis, responsable, delete_arch) 
-                                                            VALUES ('$id', '$ci', '$dire', '$note', '$taken', '$size', '$tipo', 2, 0, 0)");
+                                                            VALUES ('$this->id', '$ci', '$dire', '$note', '$taken', '$size', '$tipo', 2, 0, 0)");
 
                 if ($sql != true) {
                     $cake = false;
                 } else {
-                    $sql2 = $this->connec->query("UPDATE solicitudes SET apr_estado = '1' WHERE id_solicitud = '$id'");
+                    $sql2 = $this->connec->query("UPDATE solicitudes SET apr_estado = '1' WHERE id_solicitud = '$this->id'");
                     $location[] = [
                         'redirec' => 'perfil.php?perfil=' . encriptar($precarInf['ci_arch_pre']) . '&parce=true',
                         'estado' => 'succes.personal.ingres'
@@ -221,12 +241,11 @@ class GestioData extends Auditoria
 
     /**
      * Mover archivos de Data/archives a Data/delete
-     * @param string $id id solicitud
-     * @return boolean | array  as array || estado || redirec
+     * @return bool | array  as array || estado || redirec
      */
-    public function deleteArchive($id)
+    public function deleteArchive()
     {
-        @$x = $this->connec->query("SELECT * FROM solicitudes_eliminacion_arch WHERE id_solicitud_eliminacion = '$id'");
+        @$x = $this->connec->query("SELECT * FROM solicitudes_eliminacion_arch WHERE id_solicitud_eliminacion = '$this->id'");
 
         $idArch = $x->fetch_object()->id_archivo_eliminar;
 
@@ -265,7 +284,7 @@ class GestioData extends Auditoria
 
                     if ($change == true) {
 
-                        $sql2 = $this->connec->query("UPDATE solicitudes SET apr_estado = '1' WHERE id_solicitud = '$id'");
+                        $sql2 = $this->connec->query("UPDATE solicitudes SET apr_estado = '1' WHERE id_solicitud = '$this->id'");
 
                         $location[] = [
                             'redirec' => 'perfil.php?perfil=' . encriptar($arch->ci_arch) . '&parce=true',
@@ -294,15 +313,15 @@ class GestioData extends Auditoria
      * @param string $id id de solicitud
      * @return bool 
      */
-    public function rechazarSoli($id)
+    public function rechazarSoli()
     {
         if ($this->registRechaz() == true) {
             // rechazar solicitud
-            $query = $this->connec->query("SELECT * FROM solicitudes WHERE id_solicitud = '$id'");
+            $query = $this->connec->query("SELECT * FROM solicitudes WHERE id_solicitud = '$this->id'");
 
             if ($query == true) {
 
-                $sql1 = $this->connec->query("UPDATE solicitudes SET apr_estado = '2' WHERE id_solicitud = '$id'");
+                $sql1 = $this->connec->query("UPDATE solicitudes SET apr_estado = '2' WHERE id_solicitud = '$this->id'");
 
                 if ($sql1 == true) {
                     return true;

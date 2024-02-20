@@ -1,5 +1,5 @@
 <?php
-include_once("../php/conx.php");
+include "../php/class/conx.php";
 $conn = new Conexion();
 
 $est = $conn->real_escape($_POST['estado']);

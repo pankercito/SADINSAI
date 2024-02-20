@@ -1,75 +1,58 @@
 <?php
-/**
- * Respaldar base de datos de MySQL con PHP
- * Función modificada de: https://stackoverflow.com/a/21284229/5032550
- *
- */
 
-// Ejemplo de llamada: exportarTablas("localhost", "root", "123", "foo");
-
-function backup_database($database, $path) 
+function backup_database($server, $database, $user, $password, $locacion)
 {
-        // Conectarse a la base de datos
-        $link = mysqli_connect("localhost", "root", "", $database);
-        if (!$link) {
-            die("Error al conectar a la base de datos: " . mysqli_error($link));
+
+    date_default_timezone_set('America/Caracas');
+
+    // Conectamos a la base de datos
+    $conn = new PDO("mysql:host=$server;dbname=$database", $user, $password);
+
+    $dia = date("Y-m-d");
+    $hora = str_replace(":", "_", date("H:i:s"));
+    $dia = str_replace("-", "_", $dia);
+
+    // Creamos un archivo para guardar el respaldo
+    $file = fopen("{$locacion}/respaldo_{$database}_{$dia}_{$hora}.sql", "w");
+
+    $contenido = 'SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";' . "\n" . 'SET time_zone = "+00:00";' . "\n\n\n" . '/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;' . "\n" . '/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;' . "\n" . '/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;' . "\n" . '/*!40101 SET NAMES utf8 */;' . "\n\n" . '-- Database: ' . $database . "\n\n";
+
+    fwrite($file, "$contenido");
+
+    // Recorremos las tablas de la base de datos
+    foreach ($conn->query("SHOW TABLES") as $row) {
+        // Obtenemos el nombre de la tabla
+        $table_name = $row[0];
+
+        // Obtenemos la sentencia CREATE TABLE
+        $create_table = $conn->query("SHOW CREATE TABLE $table_name")->fetch()[1];
+
+        $create_table = preg_replace("/CONSTRAINT `.*?` FOREIGN KEY .*\n/i", "", $create_table);
+
+        // Guardamos la sentencia CREATE TABLE en el archivo
+        fwrite($file, "\n$create_table;\n\n");
+
+        $fields = $conn->query("DESCRIBE $table_name")->fetchAll();
+
+        // Recorremos los datos de la tabla
+        foreach ($conn->query("SELECT * FROM $table_name") as $row) {
+            // Declaramos los campos de la tabla en la declaración INSERT INTO
+            fwrite($file, "INSERT INTO $table_name (");
+            for ($i = 0; $i < count($fields); $i++) {
+                fwrite($file, "{$fields[$i]['Field']},");
+            }
+            fwrite($file, ") VALUES (");
+            for ($i = 0; $i < count($fields); $i++) {
+                fwrite($file, "'{$row[$fields[$i]['Field']]}',");
+            }
+            fwrite($file, ");\n");
         }
-    
-        // Obtener una lista de todas las tablas
-        $tables = mysqli_query($link, "SHOW TABLES");
-    
-        // Para cada tabla
-        while ($table = mysqli_fetch_assoc($tables)) {
-            // Generar el código SQL para crear la tabla
-            $create_table_sql = "CREATE TABLE `{$table['Tables_in_' . $database]}` (";
-            $fields = mysqli_query($link, "SHOW COLUMNS FROM `{$table['Tables_in_' . $database]}`");
-            while ($field = mysqli_fetch_assoc($fields)) {
-                $create_table_sql .= "`{$field['Field']}` {$field['Type']} {$field['Null']} {$field['Key']} {$field['Default']} COMMENT '{$field['Comment']}'";
-                if ($field['Key'] == "PRI") {
-                    $primary_keys[] = $field['Field'];
-                }
-            }
-            $create_table_sql .= ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
-    
-            // Generar el código SQL para insertar los datos de la tabla
-            $insert_data_sql = "INSERT INTO `{$table['Tables_in_' . $database]}` (";
-            $first = true;
-            foreach ($fields as $field) {
-                if ($first) {
-                    $first = false;
-                } else {
-                    $insert_data_sql .= ", ";
-                }
-                $insert_data_sql .= "`{$field['Field']}`";
-            }
-            $insert_data_sql .= ") VALUES ";
-            $rows = mysqli_query($link, "SELECT * FROM `{$table['Tables_in_' . $database]}`");
-            while ($row = mysqli_fetch_assoc($rows)) {
-                $insert_data_sql .= "(";
-                $first = true;
-                foreach ($fields as $field) {
-                    if ($first) {
-                        $first = false;
-                    } else {
-                        $insert_data_sql .= ", ";
-                    }
-                    $insert_data_sql .= '"' . addslashes($row[$field['Field']]) . '"';
-                }
-                $insert_data_sql .= "), ";
-            }
-            $insert_data_sql = substr($insert_data_sql, 0, -2);
-    
-            // Generar el código SQL para crear las llaves foráneas
-            $foreign_keys = mysqli_query($link, "SELECT * FROM information_schema.referential_constraints WHERE table_name = '{$table['Tables_in_' . $database]}'");
-            while ($foreign_key = mysqli_fetch_assoc($foreign_keys)) {
-                $foreign_key_sql = "ALTER TABLE `{$table['Tables_in_' . $database]}` ADD CONSTRAINT `fk_{$foreign_key['constraint_name']}` FOREIGN KEY (`{$foreign_key['column_name']}`) REFERENCES `{$foreign_key['referenced_table_name']}` (`{$foreign_key['referenced_column_name']}`);";
-                $foreign_keys_sql[] = $foreign_key_sql;
-            }
-    
-            // Escribir el código SQL en un archivo
-            file_put_contents($path . "/{$table['Tables_in_' . $database]}.sql");
-    
-        }
+    }
+
+    // Cerramos el archivo
+    fclose($file);
+
+    echo "true";
 }
 
-backup_database("sadinsai", "../data/backup");
+backup_database('localhost', 'sadinsai', 'root', '', '../data/backup');

@@ -30,54 +30,29 @@ include "../layout/sidebar.php";
             <h4 class="mx-auto mb-2 mt-0" style="color: #e7e7e7;">RESPALDOS</h4>
             <hr style="border-color:white;">
             <div class="col-10 mt-5 mx-auto">
-                <table class="table table-primary">
+                <table class="table table-primary" id='table'>
                     <thead>
                         <th>
                             N°
                         </th>
                         <th>
-                            ID
+                            archivo
                         </th>
                         <th>
-                            NOMBRE
-                        </th>
-                        <th>
-                            FECHA DE CREACION
-                        </th>
-                        <th>
-                            PESO
+                            download
                         </th>
                     </thead>
-                    <tbody>
-                        <?php
-
-                        for ($i = 10; $i < 30; $i++) {
-                            ?>
-
-                            <tr>
-                                <td>
-                                    <?php echo $i ?>
-                                </td>
-                                <td>
-                                    <?php echo $i . $i . $i . $i . $i . $i . $i ?>
-                                </td>
-                                <td>respaldo</td>
-                                <td>
-                                    <?php echo "20$i-05-$i" ?>
-                                </td>
-                                <td>$i</td>
-                            </tr>
-                            <?php
-                        }
-
-                        ?>
-                    </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
 <style>
+    a.btn.btn-success {
+        font-size: large;
+        width: 4rem;
+    }
+
     .grid-containerr>div {
         margin: 1.5rem;
         background-color: var(--bg-conten-color);
@@ -98,17 +73,62 @@ include "../layout/sidebar.php";
     label {
         color: #e7e7e7;
     }
+
+    td {
+        vertical-align: -webkit-baseline-middle;
+    }
 </style>
 <script>
+    let table = $('#table').DataTable({
+        ajax: {
+            url: 'RespaldoList.php',
+            data: 'data'
+        },
+        order: [[1, 'des']]
+    });
+
     function respaldar() {
-        $.ajax({
-            url: "../private/backupDB.php",
-            success: function (cc) {
-                $.confirm({
-                    content: cc
-                })
+
+        $.confirm({
+            title: '',
+            content: "<h5 class='text-center'>¿Esta seguro de realizar este Backup? <h5><br><h6 class='text-center'>no podra eliminarlo mas tarde</h6>",
+            buttons: {
+                bue: {
+                    text: "si, estoy seguro",
+                    btnClass: "btn-success",
+                    action: function () {
+                        $.ajax({
+                            url: "../private/backupDB.php",
+                            success: function (cc) {
+                                if (cc == 'true') {
+                                    notie.alert({
+                                        type: 1,
+                                        text: 'Se Realizo el backup correctamente',
+                                        time: 3
+                                    });
+
+                                    table.ajax.reload(null, false);
+
+                                } else {
+                                    notie.alert({
+                                        type: 2,
+                                        text: 'Relizar Backup falló',
+                                        time: 3
+                                    });
+                                }
+
+                            }
+                        });
+                    }
+                },
+                car: {
+                    text: "no, cancelar",
+                    btnClass: "btn-danger",
+                    action: function () {
+                    }
+                }
             }
-        })
+        });
     }
 </script>
 <?php require "../layout/footer.php" ?>

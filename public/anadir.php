@@ -1,22 +1,29 @@
-<?php require_once("../php/sesionval.php"); ?>
+<?php require_once "../php/sesionval.php"; ?>
 
-<?php require("../layout/head.php"); ?>
+<?php require "../layout/head.php"; ?>
 
 <?php
-include("../layout/navbar.php");
+
+include "../layout/navbar.php";
 
 if ($_SERVER['REQUEST_URI'] == "/public/anadir.php") {
-    echo "<style>section.footer.col-lg-12 {
-      position: fixed;
-      bottom: 0;
-   }</style>";
+    echo "
+    <style>
+        section.footer.col-lg-12 {
+            position: fixed;
+            bottom: 0;
+        }    
+    </style>";
 }
 
 if ($_SERVER['REQUEST_URI'] == "/public/anadir.php?users/register=true") {
-    echo "<style>section.footer.col-lg-12 {
+    echo "
+    <style>
+    section.footer.col-lg-12 {
       position: fixed;
       bottom: 0;
-   }</style>";
+    }
+   </style>";
 }
 ?>
 
@@ -24,11 +31,10 @@ if ($_SERVER['REQUEST_URI'] == "/public/anadir.php?users/register=true") {
 <link rel="stylesheet" href="../styles/anadir.css">
 <link rel="stylesheet" href="../styles/background.css">
 
-<?php include "../layout/sidebar.php"?>
+<?php include "../layout/sidebar.php" ?>
 
 <div class="structur-conten">
     <div class="row justify-content-center text-center">
-
         <div class="col-md-3 mx-1">
             <div class="fijo contenido ">
                 <p>acciones</p>
@@ -38,7 +44,7 @@ if ($_SERVER['REQUEST_URI'] == "/public/anadir.php?users/register=true") {
                     </a>
                     <?php
                     if ($adpval == TRUE) {
-                        include('../layout/accsadmin.php');
+                        include "../layout/accsadmin.php";
                     }
                     ?>
                 </div>
@@ -48,13 +54,11 @@ if ($_SERVER['REQUEST_URI'] == "/public/anadir.php?users/register=true") {
             <div class="centro">
                 <div class="contenido">
                     <p>Contenido</p>
-                    <?php
-                    include('../php/preset/seleccionAnadir.php');
-                    ?>
+                    <?php include "../php/preset/seleccionAnadir.php" ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<?php require("../layout/footer.php"); ?>
+<?php require "../layout/footer.php" ?>

@@ -66,9 +66,7 @@
             <label for="Estados">Estado</label>
             <select class="form-select" id="Estados" name="estado">
                 <option value="0">- seleciona un estado-</option>
-                <?php
-                include("../php/preset/stadosForm.php")
-                    ?>
+                <?php include "../php/preset/stadosForm.php" ?>
             </select>
         </div>
         <div class="col">

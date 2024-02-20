@@ -4,32 +4,39 @@ session_start();
 
 if (isset($_POST['login'])) {
 
-    include("conx.php");
-    include("function/criptCodes.php");
-    include("function/sesion.php");
-    include("function/sumarhora.php");
-    include("class/auditoria.php");
+    include "class/classIncludes.php";
+    include "function/criptCodes.php";
+    include "function/sesion.php";
+    include "function/sumarhora.php";
 
-    $usuariolg = $_POST['userlg'];
-    $pass = $_POST['passlg'];
+    $conn = new Conexion;
 
-    $auditoria = new Auditoria();
+    $usuariolg = $conn->real_escape(trim($_POST['userlg']));
+    $pass = $conn->real_escape(trim($_POST['passlg']));
 
-    $conn = new Conexion();
+    $auditoria = new Auditoria;
 
-    $check = $conn->query("SELECT * FROM registro r INNER JOIN personal p ON r.ci = p.ci WHERE user = '$usuariolg'");
-    $nr = mysqli_num_rows($check);
-    $dataview = mysqli_fetch_array($check);
-    $trix = desencriptar($dataview['pass']);
+    $userLogin = new UserModel($usuariolg);
 
-    if ($nr == 1 && $pass == $trix) { //contraseña correcta 
+    if ($userLogin->user == null) {
+        // Contraseña errada2
+        header('location:../index.php?fallo=true');
+        exit;
+    }
+
+    $trix = desencriptar($userLogin->hash);
+
+    $gestionUsuarios = new GestionDeUsuarios($userLogin);
+
+    // si el usuario esta desactivado
+    if ($userLogin->active == 2 || $userLogin->active == 0) {
+        header('location:../index.php?userdes=true');
+        exit;
+    }
+
+    if ($pass == $trix) { //contraseña correcta 
         $resultado = 1;
-
-        if ($dataview['active'] == 2 || $dataview['active'] == 0) {
-            $resultado = 2;
-        }
     } else {
-
         if (!isset($_SESSION['errorContra'])) {
             $_SESSION['errorContra'] = 1;
         }
@@ -39,8 +46,8 @@ if (isset($_POST['login'])) {
         }
 
         if ($_SESSION['errorContra'] == 3 && $_SESSION['errorName'] == $usuariolg) {
-            $auditoria->supenderUsuario($usuariolg);
-            $_SESSION['errorContra'] = 1;
+            $gestionUsuarios->supenderUsuario();
+            $_SESSION['errorContra'] = 0;
             $resultado = 2;
         } else {
             $_SESSION['errorContra']++;
@@ -49,19 +56,17 @@ if (isset($_POST['login'])) {
         }
     }
 
-    echo $_SESSION['errorContra'];
-
     switch ($resultado) {
         case 1: // Contraseña correcta
-            if ($dataview['sesion'] == FALSE) { //no hay sesion activa
-                $_SESSION['userdata'] = '' . ucwords(strtolower($dataview['nombre'])) . ' ' . ucwords(strtolower($dataview['apellido'])) . '';
-                $_SESSION['cidelusuario'] = $dataview['ci'];
-                $_SESSION['sesion'] = $dataview['id_usuario'];
-                $_SESSION['sesioninit'] = $dataview['sesion'];
-                $_SESSION['admincheck'] = $dataview['adp'];
+            if ($userLogin->sesion == FALSE) { //no hay sesion activa
+                $_SESSION['userdata'] = '' . ucwords(strtolower($userLogin->nombre)) . ' ' . ucwords(strtolower($userLogin->apellido)) . '';
+                $_SESSION['cidelusuario'] = $userLogin->ci;
+                $_SESSION['sesion'] = $userLogin->id;
+                $_SESSION['sesioninit'] = $userLogin->sesion;
+                $_SESSION['admincheck'] = $userLogin->adp;
 
-                $id = strval($dataview['id_usuario']);
-                $taken = str_replace(' ', '', strtolower($dataview['nombre']));
+                $id = strval($userLogin->id);
+                $taken = str_replace(' ', '', strtolower($userLogin->nombre . $userLogin->apellido));
                 $_SESSION['event'] = $taken . $id;
                 $event = $taken . $id;
 
@@ -80,20 +85,18 @@ if (isset($_POST['login'])) {
 
                 $_SESSION['LAST_ACTIVITY'] = time();
 
-                $sn = initSesion($dataview['id_usuario']); //variable de inicio de sesion en BD
+                initSesion($userLogin->id); //variable de inicio de sesion en BD
 
                 // Redirecciono al usuario a la página principal del sitio.
                 header("HTTP/1.1 302 Moved Temporarily");
-                if ($dataview['adp'] == 1) {
+                if ($userLogin->adp == 1) {
                     header('location:../public/principal.php');
-                } elseif ($dataview['adp'] == 2) {
+                } elseif ($userLogin->adp == 2) {
                     header('location:../public/sysAdmin.php');
                 } else {
                     header('location:../public/perfil.php?perfil=' . encriptar($_SESSION['cidelusuario']));
-
                 }
-            } else if ($dataview['sesion'] == TRUE) {
-                header("HTTP/1.1 302 Moved Temporarily");
+            } else if ($userLogin->sesion == TRUE) {
                 header('location:../index.php?session-dup=true');
             }
             break;

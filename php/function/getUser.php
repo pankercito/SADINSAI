@@ -3,10 +3,10 @@
 /**
  * Obtener nombre de usuario mediante ID o CI
  * @param string|null $id ID de usuario
- * @param string|null $ci CI de usuario [ es necesario que este encriptada ]
- * @return void nombre de Usuario
+ * @param string|null $ci CI de usuario [ desencriptar antes de agregar ]
+ * @return string datos de Usuario
  */
-function getUser($id = null , $ci = null)
+function getUserData($id = null, $ci = null)
 {
     $conn = new Conexion;
     switch (true) {
@@ -17,11 +17,11 @@ function getUser($id = null , $ci = null)
                 $q = mysqli_fetch_assoc($row);
                 $data = $q['user'];
             } else {
-                $data = "Error al optener Username";
+                $data = "Error al optener data del usuario";
             }
             break;
         case ($id == null):
-            $ci = $conn->real_escape(desencriptar($ci));
+            $ci = $conn->real_escape($ci);
 
             $sql = "SELECT user FROM registro WHERE ci = $ci";
 
@@ -29,10 +29,10 @@ function getUser($id = null , $ci = null)
                 $q = mysqli_fetch_assoc($row);
                 $data = $q['user'];
             } else {
-                $data = "Error al optener Username";
+                $data = "Error al optener data del usuario";
             }
             break;
-        case ($id == null && $ci == null):
+        case ($id == null && $ci == null): 
             echo 'variables vacias';
             break;
 
@@ -43,10 +43,11 @@ function getUser($id = null , $ci = null)
                 $q = mysqli_fetch_assoc($row);
                 $data = $q['user'];
             } else {
-                $data = "Error al optener Username";
+                $data = "Error al optener data del usuario";
             }
-            break;  
+            break;
     }
     $conn->close();
+
     return $data;
 }
