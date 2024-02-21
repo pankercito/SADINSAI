@@ -57,25 +57,67 @@ if (isset($_POST['formtipo'])) {
             break;
         case '2':
 
+
+            $valores = [
+                $_POST['inputNames'],
+                $_POST['ced'],
+                $_POST['fecha'],
+                $_POST['fechaingreso'],
+                $_POST['cargo'],
+                $_POST['adscrito'],
+                $_POST['direccion'],
+                $_POST['diasH'],
+                $_POST['diasC'],
+                $_POST['inicio'],
+                $_POST['regreso'],
+                $_POST['causa'],
+            ];
+
+            $paraquien = $_POST['ced'];
+
+            //array de titulos nombres para guardar
+            $nombres = [
+                'nombre',
+                'cedula',
+                'fecha',
+                'fecha de ingreso',
+                'denominacion de cargo',
+                'unidad de adscripcion',
+                'direccion / oficina',
+                'dias habiles',
+                'dias continuos',
+                'fecha de inicio',
+                'fecha de regreso',
+                'causa',
+            ];
+
+            $a = 0;
+            foreach ($nombres as $key) {
+                $array[$key] = $valores[$a];
+                $a++;
+            }
+
+            $siu = Solicitud::crearSolicitud(Solicitud::de_permiso, $array, $paraquien);
+
             break;
         case '3':
             $data = [
-                @$codigo = $_POST['codigo'],
-                @$fecha = $_POST['fecha'],
-                @$codigoNomina = $_POST['codigoNomina'],
-                @$nombre = $_POST['inputNames'],
-                @$cargo = $_POST['cargo'],
-                @$cedula = $_POST['cin'],
-                @$departament = $_POST['adscrito'],
-                @$unidad = $_POST['unidad'],
-                @$estado = $_POST['ubicacion'],
-                @$fechaingre = $_POST['fechaingreso'],
-                @$tiempo = $_POST['organismos'],
-                @$totaltiem = $_POST['tiempototal'],
-                @$periodo = $_POST['periodo'],
-                @$habiles = $_POST['habiles'],
-                @$cantidad = $_POST['cantidad'],
-                @$incorporacion = $_POST['incorporacion'],
+                $_POST['codigo'],
+                $_POST['fecha'],
+                $_POST['codigoNomina'],
+                $_POST['inputNames'],
+                $_POST['cargo'],
+                $_POST['cin'],
+                $_POST['adscrito'],
+                $_POST['unidad'],
+                $_POST['ubicacion'],
+                $_POST['fechaingreso'],
+                $_POST['organismos'],
+                $_POST['tiempototal'],
+                $_POST['periodo'],
+                $_POST['habiles'],
+                $_POST['cantidad'],
+                $_POST['incorporacion'],
             ];
 
             $paraquien = $_POST['cin'];
@@ -153,7 +195,6 @@ if (isset($_POST['formtipo'])) {
             $siu = Solicitud::crearSolicitud(Solicitud::de_carta_aval, $array, $paraquien);
             break;
         case '5':
-
             $data = [
                 $_POST['codigo'],
                 $_POST['fecha'],

@@ -13,92 +13,65 @@ session_start();
     <div class="col">
         <label for="inputNames" class="col-form-label">Nombres y Apellidos</label>
         <input type="text" class="form-control" name="inputNames" id="inputNames" placeholder="Name" readonly
-        value="<?php echo $_SESSION['getPlanillaNombre'] . ' ' . $_SESSION['getPlanillaApellido'] ?>">
+            value="<?php echo $_SESSION['getPlanillaNombre'] . ' ' . $_SESSION['getPlanillaApellido'] ?>">
     </div>
     <div class="col">
         <label for="ced" class="col-form-label">Cedula</label>
-        <input type="text" class="form-control" name="ced" id="ced" placeholder="Name" readonly value="<?php echo $_SESSION['getPlanillaCI'] ?>">
+        <input type="text" class="form-control" name="ced" id="ced" placeholder="Name" readonly
+            value="<?php echo $_SESSION['getPlanillaCI'] ?>">
     </div>
     <div class="col">
-        <label for="socibioregion" class="col-form-label">Socibioregion</label>
-        <input type="text" class="form-control" name="socibioregion" id="socibioregion" placeholder="Name" value="<?php echo $_SESSION['getPlanillaSede'] ?>" readonly>
+        <label for="fecha" class="col-form-label">fecha</label>
+        <input type="date" class="form-control" name="fecha" id="fecha" value="<?php echo date('Y-m-d') ?>">
+    </div>
+    <div class="col">
+        <label for="fechaingreso" class="col-form-label">Fecha de ingreso</label>
+        <input type="text" class="form-control" name="fechaingreso" id="fechaingreso" placeholder="dd/mm/aa">
     </div>
 </div>
 <div class="mb-3 row col aling-items-baseline mx-2">
     <div class="col">
-        <label for="adscrito" class="col-form-label">Estado</label>
-        <input type="text" class="form-control" name="adscrito" id="adscrito" placeholder="Name" value="<?php echo $_SESSION['getPlanillaEst'] ?>" readonly>
+        <label for="cargo" class="col-form-label">Denominacion de cargo</label>
+        <input type="text" class="form-control" name="cargo" id="cargo" placeholder="Name"
+            value="<?php echo $_SESSION['getPlanillaCargo'] ?>" readonly>
     </div>
     <div class="col">
-        <label for="unidad" class="col-form-label">Telefono</label>
-        <input type="text" class="form-control" name="unidad" id="unidad" placeholder="Name" value="<?php echo $_SESSION['getPlanillaPhon'] ?>" readonly>
+        <label for="adscrito" class="col-form-label">Unidad de adscripcion</label>
+        <input type="text" class="form-control" name="adscrito" id="adscrito" placeholder="Name"
+            value="<?php echo $_SESSION['getPlanillaSede'] ?>" readonly>
     </div>
     <div class="col">
-        <label for="ubicacion" class="col-form-label">Telefono de contacto con clinica</label>
-        <input type="text" class="form-control" name="ubicacion" id="ubicacion" placeholder="Name">
+        <label for="direccion" class="col-form-label">Direccion/oficina</label>
+        <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Name"
+            value="<?php echo $_SESSION['getPlanillaDepart'] ?>" >
     </div>
 </div>
-<div class="col">
-    <h6 class="text-center">
-        DATOS DEL BENIFECIARIOS
-    </h6>
-</div>
+<h6 class="text-center">NUMERO DE DIAS</h6>
 <div class="mb-3 row col align-items-baseline mx-2">
     <div class="col">
-        <label for="fechaingreso" class="col-form-label">Nombre y apellido</label>
-        <input type="text" class="form-control" name="fechaingreso" id="fechaingreso" placeholder="Name">
+        <label for="diasH" class="col-form-label">Días habiles</label>
+        <input type="text" class="form-control" name="diasH" id="diasH" placeholder="Ej: 12 dias">
     </div>
     <div class="col">
-        <label for="fechaingreso" class="col-form-label">cedula</label>
-        <input type="text" class="form-control" name="fechaingreso" id="fechaingreso" placeholder="cedula">
-    </div>
-    <div class="col">
-        <label for="fechaingreso" class="col-form-label">Parentesco</label>
-        <input type="text" class="form-control" name="fechaingreso" id="fechaingreso" placeholder="Ej: hijo">
-    </div>
-    <div class="col">
-        <label for="organismos" class="col-form-label">Documentos a consignar</label>
-        <input type="text" class="form-control" name="organismos" id="organismos" placeholder="Ej: cedula">
+        <label for="diasC" class="col-form-label">Días continuos</label>
+        <input type="text" class="form-control" name="diasC" id="diasC" placeholder="Ej: 12 dias">
     </div>
 </div>
+<h6 class="text-center">FECHAS</h6>
 <div class="mb-3 row col align-items-baseline mx-2">
     <div class="col">
-        <h6 class="col">Origen de:</h6>
-        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-            <input type="radio" class="btn-check" name="origen" id="btncheck1" autocomplete="off">
-            <label class="btn btn-outline-light" for="btncheck1">informe amplio y
-                detallado del médico tratante</label>
-
-            <input type="radio" class="btn-check" name="origen" id="btncheck2" autocomplete="off">
-            <label class="btn btn-outline-light" for="btncheck2">presupuesto vigente</label>
-        </div>
+        <label for="inicio" class="col-form-label">Inicio</label>
+        <input type="date" class="form-control" name="inicio" id="inicio" placeholder="dd-mm-aa">
     </div>
     <div class="col">
-        <h6 class="col">Fotocopias de:</h6>
-        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-            <input type="radio" class="btn-check" name="fotocopia" id="btncheck3" autocomplete="off">
-            <label class="btn btn-outline-light" for="btncheck3">exámenes que diagnostique
-                la enfermedad</label>
-
-            <input type="radio" class="btn-check" name="fotocopia" id="btncheck4" autocomplete="off">
-            <label class="btn btn-outline-light" for="btncheck4">copia de partida de
-                nacimiento de los hijos</label>
-
-            <input type="radio" class="btn-check" name="fotocopia" id="btncheck5" autocomplete="off">
-            <label class="btn btn-outline-light" for="btncheck5">Cedula del beneficiario y
-                trabajador</label>
-
-        </div>
+        <label for="regreso" class="col-form-label">Regreso</label>
+        <input type="date" class="form-control" name="regreso" id="regreso" placeholder="dd-mm-aa">
     </div>
 </div>
+<h6 class="text-center">CAUSA ESPECIFICA</h6>
 <div class="mb-3 row col align-items-baseline mx-2">
     <div class="col">
-        <label for="Diagnostico">Diagnostico</label>
-        <input type="text" name="diagnostico" id="Diagnostico" class="form-control" placeholder="diagnostico">
-    </div>
-    <div class="col">
-        <label for="Observaciones:">Observaciones</label>
-        <input type="text" name="observaciones:" id="Observaciones:" class="form-control" placeholder="observaciones">
+        <input type="text" name="causa" id="causa" class="form-control" placeholder="causa">
     </div>
 </div>
 <div class="col">

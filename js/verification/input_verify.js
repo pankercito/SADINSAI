@@ -2,7 +2,9 @@ class VerificarCampo {
     values = [];
     inputs = [];
     radio = []
+    radioc = false;
     boton;
+
 
     static ErrorInput = 'classErrorInput';
 
@@ -31,11 +33,13 @@ class VerificarCampo {
         let bool = false;
         let finalBool = 0;
 
+        // RECORRER ARRAY DE ELEMENTOS HTML
         this.inputs.forEach(element => {
             let input = element[0];
             let inputValue = input.value;
             let limit = element[1];
 
+            console.log(input);
             if (input.type == 'radio') {
                 // RADIO VALIDATION
                 if (input.checked == true) {
@@ -43,6 +47,8 @@ class VerificarCampo {
                 } else {
                     this.radio.push(false);
                 }
+
+                this.radioc = true;
 
             } else if (inputValue.length >= limit) {
                 this.values.push(true);
@@ -53,13 +59,17 @@ class VerificarCampo {
             }
         });
 
-        if (this.radio.some(element => element === true)) {
-            this.values.push(true);
-        } else {
-            this.values.push(false);
+        if (this.radioc == true) {
+            if (this.radio.some(element => element === true)) {
+                this.values.push(true);
+            } else {
+                this.values.push(false);
+            }
         }
 
-        console.log(this.radio);
+
+
+        console.log('radio' + this.radio);
         console.log(this.values.length);
         console.log(finalBool);
 

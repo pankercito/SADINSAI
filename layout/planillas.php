@@ -18,6 +18,6 @@
     }
 </style>
 
-<div id="planillas" class="mx-auto">
+<div id="planillas" class="mx-auto col">
 
 </div>

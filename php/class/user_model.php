@@ -33,7 +33,7 @@ class UserModel
             $this->active = $mercer->active;
             $this->sesion = $mercer->sesion;
             $this->hash = $mercer->pass;
-            $this->pin = $mercer->pass;
+            $this->pin = $mercer->pin;
         }
     }
 }

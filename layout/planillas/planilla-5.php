@@ -103,7 +103,7 @@ session_start();
     </div>
 </div>
 <div class="col">
-    <input type="text" class="d-none" value="4" name="formtipo">
+    <input type="text" class="d-none" value="5" name="formtipo">
     <?php include "planilla_button.php" ?>
 </div>
 </form>

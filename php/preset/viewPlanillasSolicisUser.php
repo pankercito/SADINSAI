@@ -9,8 +9,6 @@ $yo = $_SESSION['cidelusuario'];
 
 $a = Solicitud::obtenerSolicitud();
 
-$a->setAgent($yo);
-
 $coro = $a->allSolicitudes();
 
 $apr = [
@@ -31,12 +29,13 @@ $aprL = [
     "3" => 'bi bi-person-fill-x',
     "4" => 'bi bi-person-fill-x'
 ];
+
 $tipoSolic = [
-    "1" => "ingreso de personal",
-    "2" => "edicion de datos",
-    "3" => "ingreso de archivo",
-    "4" => "eliminacion de archivo",
-    "5" => "recuperacion de contraseña"
+    "1" => "anticipo",
+    "2" => "permiso",
+    "3" => "vacaciones",
+    "4" => "carta de aval",
+    "5" => "paternidad"
 ];
 
 if (!@$coro['Error']) {
@@ -60,7 +59,7 @@ foreach ($coro as $key) {
 
     $data[] = [
         $key['id_solicitud_permiso'],
-        $key['tipo_permiso'],
+        $tipoSolic[$key['tipo_permiso']],
         $key['ci_permiso'],
         $key['fecha_permiso'],
         ' <a onclick="detallesPlanillas(' . $key['id_solicitud_permiso'] . ', ' . $key['tipo_permiso'] . ')" class="btn btn-success">ver detalles</a> ',

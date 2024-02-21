@@ -161,8 +161,8 @@ class ObtSolicitudes
             throw new Exception("Estas haciendo una llamada no valida, revisa la documentacion", 1);
         }
 
-        $option = $this->idAgent == null ? "" : "WHERE ci_permiso = {$this->idAgent}";
-        $ver = $this->conn->query("SELECT * FROM solicitudes_y_permisos" . " {$option}");
+        $option = $this->idAgent == null ? "" : "WHERE ci_permiso = '{$this->idAgent}'";
+        $ver = $this->conn->query("SELECT * FROM solicitudes_y_permisos " . " {$option}");
         $i = 0;
 
         if ($ver->num_rows > 0) {
@@ -313,6 +313,6 @@ class ObtSolicitudes
 
     public function setAgent($agent)
     {
-        return $this->idAgent = $agent;
+        $this->idAgent = $agent;
     }
 }

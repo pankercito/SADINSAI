@@ -2,26 +2,27 @@
 
 require_once 'fpdf.php';
 
+session_start();
 
-@$codigo = $_POST['codigo'];
-@$fecha = $_POST['fecha'];
-@$codigoNomina = $_POST['codigoNomina'];
-@$nombre = $_POST['inputNames'];
-@$cargo = $_POST['cargo'];
+@$codigo = $_SESSION['codigo'];
+@$fecha = $_SESSION['fecha'];
+@$codigoNomina = $_SESSION['codigoNomina'];
+@$nombre = $_SESSION['inputNames'];
+@$cargo = $_SESSION['cargo'];
 
-@$cedula = $_POST['cin'];
-@$departament = $_POST['adscrito'];
-@$unidad = $_POST['unidad'];
-@$estado = $_POST['ubicacion'];
-@$fechaingre = $_POST['fechaingreso'];
-@$tiempo = $_POST['organismos'];
-@$tiempototal = $_POST['tiempototal'];
-@$observaciones = $_POST['observaciones'];
-@$desde = $_POST['desde'];
-@$hasta = $_POST['hasta'];
-@$cantidad = $_POST['cantidad'];
-@$incorporacion = $_POST['incorporacion'];
-@$licencia = $_POST['licencia'];
+@$cedula = $_SESSION['cin'];
+@$departament = $_SESSION['adscrito'];
+@$unidad = $_SESSION['unidad'];
+@$estado = $_SESSION['ubicacion'];
+@$fechaingre = $_SESSION['fechaingreso'];
+@$tiempo = $_SESSION['organismos'];
+@$tiempototal = $_SESSION['tiempototal'];
+@$observaciones = $_SESSION['observaciones'];
+@$desde = $_SESSION['desde'];
+@$hasta = $_SESSION['hasta'];
+@$cantidad = $_SESSION['cantidad'];
+@$incorporacion = $_SESSION['incorporacion'];
+@$licencia = $_SESSION['licencia'];
 
 $pdf = new FPDF();
 $pdf->AddPage();
@@ -102,7 +103,7 @@ $pdf->Cell(40, 0, @$licencia, 0, 0, 'C');
 // OBSERVA
 $pdf->SetFont('Arial', '', 11);
 $pdf->SetXY(8, 146);
-$pdf->MultiCell(0, 5, @$observaciones, 0, 'C', false);
+$pdf->MultiCell(0, 5, @$observaciones, 0, 'C');
 
 
 $pdf->Output('solicitud_de_vacaciones.pdf', 'I');
