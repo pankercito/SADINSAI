@@ -16,7 +16,7 @@ function planillaSelect(planilla) {
                     let marc = new VerificarCampo();
 
                     $.each(inputs, function (index, input) {
-                        let num = $(input).attr('type') == 'text' ? 5 : 1;
+                        let num = $(input).attr('type') == 'text' ? 3 : 1;
                         num = $(input).attr('type') == 'radio' ? 1 : num;
 
                         if ($(input).attr('class') != 'd-none') {
