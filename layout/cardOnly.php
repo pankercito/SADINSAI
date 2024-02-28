@@ -10,7 +10,7 @@ function reverse($cadena)
     return substr($cadena, strrpos($cadena, '.') + 1);
 }
 
-if (1 == $count && $count > 0) {
+if ($count > 0) {
     $row = $sql->fetch_assoc();
 
     $id = $row['id_archivo'];

@@ -103,22 +103,31 @@ switch ($selector) {
 
         $_SESSION['general'] = true;
 
-        # SOLICITUDES *****************************************************
+        # GESTION *****************************************************
         @$fecha = ($_POST['fecha'] != null) ? $_POST['fecha'] : null;
         @$fecha2 = ($_POST["fecha2"] != null) ? $_POST["fecha2"] : null;
         @$aceptadas = ($_POST["aceptadas"] != null) ? $_POST["aceptadas"] : null;
-        @$rechazadas = ($_POST["rechazadas"] != null) ? $_POST["rechazadas"] : null;
-
 
         if ($aceptadas != null) {
             $estado = $aceptadas;
-        } elseif ($rechazadas != null) {
-            $estado = $rechazadas;
         } else {
             $estado = null;
         }
 
         $data = $auditoria->gestionPrecise($fecha, $fecha2, $estado);
+
+        $_SESSION['reporteGestion'] = $data;
+
+        echo json_encode($_SESSION['reporteGestion']);
+
+        # SOLICITUDES *****************************************************
+        @$fecha = ($_POST['fecha'] != null) ? $_POST['fecha'] : null;
+        @$fecha2 = ($_POST["fecha2"] != null) ? $_POST["fecha2"] : null;
+        @$aceptadas = ($_POST["aceptadas"] != null) ? $_POST["aceptadas"] : null;
+
+        $estado = ($aceptadas != null) ? $aceptadas : null;
+
+        $data = $auditoria->SolisPrecise($fecha, $fecha2, $estado);
 
         $_SESSION['reporteSolis'] = $data;
 
@@ -157,6 +166,7 @@ switch ($selector) {
 
         $data = $auditoria->userGestionStats($fecha, $fecha2);
         $_SESSION['reporteUsersUsers'] = $data;
+        
         echo json_decode($_SESSION['reporteUsersUsers']);
 
         break;

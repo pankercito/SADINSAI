@@ -230,7 +230,7 @@ class Auditoria
         $inf = $this->connec->query("SELECT * FROM solicitudes WHERE id_solicitud = $idSoli");
         $ci = $inf->fetch_object();
 
-        $d = 'Eliminacion de archivos aceptado por ' . $fr->user . '. Id de gestion: ' . $idSoli . '. carpteda de: ' . $ci->ci_solicitada;
+        $d = 'Eliminacion de archivos aceptado por ' . $fr->user . '. Id de gestion: ' . $idSoli . '. carpeta de: ' . $ci->ci_solicitada;
 
         $contenido = $this->connec->real_escape($d);
 

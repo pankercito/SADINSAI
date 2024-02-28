@@ -79,10 +79,11 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
 
                     $ingreso = $merge->addArchive();
 
-                    if ($ingreso == true) {
+                    if ($ingreso[0] == true) {
                         echo json_encode($ingreso);
                     } else {
                         echo "error.arch";
+                        echo $ingreso[1];
                     }
                     break;
 

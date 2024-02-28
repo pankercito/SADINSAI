@@ -14,13 +14,14 @@ class GestionData extends Auditoria
      * @param mixed $id id del usuasrio que esta realizando la gestion
      * @throws \Exception
      */
-    public function __construct($id){
+    public function __construct($id)
+    {
 
         $this->id = $id;
 
         parent::__construct();
 
-        if ($this->id == ''){
+        if ($this->id == '') {
             throw new Exception("Estas haciendo una llamada no valida, revisa la documentacion", 1);
         }
     }
@@ -211,18 +212,20 @@ class GestionData extends Auditoria
 
             $id = $precarInf['id_solicitud_archivo_pre'];
             $ci = $precarInf['ci_arch_pre'];
+            $ciRes = $precarInf['ci_responsable_pre'];
+            $departament = $precarInf['dep_responsable_pre'];
             $dire = $precarInf['d_archivo_pre'];
-            $note = $precarInf['nombre_archivo_pre'];
-            $taken = $precarInf['nota_pre'];
+            $nombrearch = $precarInf['nombre_archivo_pre'];
+            $nota = $precarInf['nota_pre'];
             $size = $precarInf['size_pre'];
             $tipo = $precarInf['tipo_pre'];
 
             if ($this->registArch()) {
                 $sql = $this->connec->query("INSERT INTO archidata (id_archivo, ci_arch, d_archivo, nombre_arch, nota, size, tipo_arch, ubicacion_fis, responsable, delete_arch) 
-                                                            VALUES ('$this->id', '$ci', '$dire', '$note', '$taken', '$size', '$tipo', 2, 0, 0)");
+                                                            VALUES ('$id', '$ci', '$dire', '$nombrearch', '$nota', '$size', '$tipo', '$departament', '$ciRes', 0)");
 
                 if ($sql != true) {
-                    $cake = false;
+                    $cake = [false, $this->connec->error()];
                 } else {
                     $sql2 = $this->connec->query("UPDATE solicitudes SET apr_estado = '1' WHERE id_solicitud = '$this->id'");
                     $location[] = [
@@ -232,9 +235,8 @@ class GestionData extends Auditoria
                     $cake = $location;
                 }
             }
-
         } else {
-            $cake = false;
+            $cake = [false, 'dat'];
         }
         return $cake;
     }
@@ -254,7 +256,7 @@ class GestionData extends Auditoria
         if ($verifi->num_rows == 1) {
 
             // Obtener la ruta de la carpeta
-            $destino = '../data/delete';
+            $destino = '../data/archives/delete';
 
             if (!file_exists($destino)) {
                 mkdir($destino, 0777, true);

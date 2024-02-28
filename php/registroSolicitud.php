@@ -131,7 +131,9 @@ switch ($tipo) {
         $taken = $conn->real_escape($_POST["nameArchive"]);
         $tipeArch = $conn->real_escape($_POST["gestionArch"]);
         $ci = $conn->real_escape(desencriptar($_POST["ciArch"]));
+        $ciRes = $conn->real_escape(desencriptar($_POST["responsable"]));
         $note = $conn->real_escape(cor_acentos($_POST["textArchive"]));
+        $departamento = $conn->real_escape(cor_acentos($_POST["departament"]));
         $carion = $_FILES["inpArch"]["name"];
         $arch = $_FILES["inpArch"]["tmp_name"];
 
@@ -163,8 +165,8 @@ switch ($tipo) {
                                         VALUES ('$id_solicitud', '$IdEm', '$ci', '$fech', '0', '2')");
 
             // Inyección a BD
-            @$sql = $conn->query("INSERT INTO solicitudes_archivos_precarga (id_solicitud_archivo_pre, ci_arch_pre, d_archivo_pre, nombre_archivo_pre, nota_pre, size_pre, tipo_pre) 
-            VALUES ('$id_solicitud', '$ci', '$direccion', '$taken', '$note', '$size', '$tipeArch')");
+            @$sql = $conn->query("INSERT INTO solicitudes_archivos_precarga (id_solicitud_archivo_pre, ci_arch_pre, ci_responsable_pre, dep_responsable_pre, d_archivo_pre, nombre_archivo_pre, nota_pre, size_pre, tipo_pre) 
+            VALUES ('$id_solicitud', '$ci', '$ciRes', '$departamento', '$direccion', '$taken', '$note', '$size', '$tipeArch')");
 
             if ($sqlsoli == true) {
                 if ($sql == true) {

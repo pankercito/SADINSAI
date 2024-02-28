@@ -14,6 +14,16 @@ function trPrint($vma, $vmc)
     return $vmca;
 }
 
+function obtenerExtension($nombreArchivo)
+{
+    $posicionPunto = strrpos($nombreArchivo, '.');
+    if ($posicionPunto === false) {
+        return '';
+    } else {
+        return substr($nombreArchivo, $posicionPunto + 1);
+    }
+}
+
 if (isset($_POST["idSoli"])) {
 
     include "../class/conx.php";
@@ -24,6 +34,7 @@ if (isset($_POST["idSoli"])) {
 
     switch ($_POST['tipoSoli']) {
         case 0:
+            // INGRESO DE PERSONAL
             $subId = $conn->real_escape($_POST["idSoli"]);
 
             $svp = $conn->query("SELECT * FROM solicitudes t 
@@ -100,6 +111,7 @@ if (isset($_POST["idSoli"])) {
             break;
 
         case 1:
+            // EDICION DE DATOS
             $subId = $conn->real_escape($_POST["idSoli"]);
 
             $svp = $conn->query("SELECT * FROM solicitudes t
@@ -115,7 +127,7 @@ if (isset($_POST["idSoli"])) {
             if ($sv == 1) {
                 $precarInf = mysqli_fetch_array($svp);
                 $n = getNameEsc($precarInf['id_estado_pre'], $precarInf['id_ciudad_pre'], $precarInf['id_sede_pre']);
-                
+
                 ?>
 
                 <h4 class="text-star p-2 mx-4">Edicion de datos: Nueva informacion</h4>
@@ -178,7 +190,10 @@ if (isset($_POST["idSoli"])) {
             $svp = $conn->query("SELECT * FROM solicitudes s INNER JOIN solicitudes_archivos_precarga p INNER JOIN tiposarch t ON p.id_solicitud_archivo_pre = s.id_solicitud AND t.id_tipo = p.tipo_pre WHERE s.id_solicitud = '$subId'");
             $sv = mysqli_num_rows($svp);
 
-            $precarInf = mysqli_fetch_assoc($svp);
+            $precarInf = $svp->fetch_assoc();
+
+            $DOC = obtenerExtension($precarInf['nombre_archivo_pre']) != 'pdf' ? 'd-none' : '';
+            $iDOC = obtenerExtension($precarInf['nombre_archivo_pre']) == 'pdf' ? 'd-none' : '';
 
             @$tipoArch = $precarInf['nombre_tipo_arch'];
 
@@ -193,7 +208,7 @@ if (isset($_POST["idSoli"])) {
                 <hr>
                 <div class="editConten row mx-auto mt-4 col-md-8">
                     <div class="dit">
-                        <div class="caram">
+                        <div class="caram justify-content-center">
                             <div class="row">
                                 <div class="btn-toolbar d-grid gap-1" role="toolbar" aria-label="Toolbar">
                                     <div class="btn-group" role="group" aria-label="Button Group">
@@ -223,7 +238,10 @@ if (isset($_POST["idSoli"])) {
                                 </div>
 
                             </div>
-                            <img class="mx-auto" src="<?php echo $precarInf['d_archivo_pre'] ?>" alt="Some text" width="200px">
+                            <img class="<?php echo $iDOC ?>" src="<?php echo $precarInf['d_archivo_pre'] ?>" alt="Some text"
+                                width="200px">
+                            <embed class="<?php echo $DOC ?>" type="application/pdf" src="<?php echo $precarInf['d_archivo_pre'] ?>"
+                                width="200px">
                         </div>
                     </div>
                     <style>
@@ -250,7 +268,10 @@ if (isset($_POST["idSoli"])) {
             $svp = $conn->query("SELECT * FROM solicitudes s INNER JOIN solicitudes_archivos_precarga p INNER JOIN tiposarch t ON p.id_solicitud_archivo_pre = s.id_solicitud AND t.id_tipo = p.tipo_pre WHERE s.id_solicitud = '$subId'");
             $sv = mysqli_num_rows($svp);
 
-            $precarInf = mysqli_fetch_assoc($svp);
+            $precarInf = $svp->fetch_assoc();
+
+            $DOC = obtenerExtension($precarInf['nombre_archivo_pre']) != 'pdf' ? 'd-none' : '';
+            $iDOC = obtenerExtension($precarInf['nombre_archivo_pre']) == 'pdf' ? 'd-none' : '';
 
             @$tipoArch = $precarInf['nombre_tipo_arch'];
 
@@ -294,7 +315,10 @@ if (isset($_POST["idSoli"])) {
                                     </div>
                                 </div>
                             </div>
-                            <img class="mx-auto" src="<?php echo $precarInf['d_archivo_pre'] ?>" alt="Some text" width="200px">
+                            <img class="<?php echo $iDOC ?>" src="<?php echo $precarInf['d_archivo_pre'] ?>" alt="Some text"
+                                width="200px">
+                            <embed class="<?php echo $DOC ?>" type="application/pdf" src="<?php echo $precarInf['d_archivo_pre'] ?>"
+                                width="200px">
                         </div>
                     </div>
                     <style>

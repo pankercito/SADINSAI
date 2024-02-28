@@ -38,21 +38,33 @@ function modalcito() {
         success: function (respuesta) {
             // modal de documentForm
             $.confirm({
-                title: "nuevo documento",
+                title: "Nuevo Documento",
                 content: respuesta,
-                columnClass: 'col-md-8 col-md-offset-8 col-xs-4 col-xs-offset-8',
+                columnClass: 'col-md-11 col-11',
+                onOpenBefore: function () {
+                    this.buttons.d.disable();
+                },
                 onContentReady: function () {
-                    const inputFile = document.getElementById('inpArch');
-                    const inputText = document.getElementById('nameArchive');
+                    const inputFile = document.getElementById('arch');
+                    const inputText = document.getElementById('archName');
+                    const inputPerson = document.getElementById('Responsable');
+                    const inputPersonDnone = document.getElementById('Presponsable');
+                    const resultDnone = document.getElementById('PersonDi');
+
+                    //BUSQUEDA DE PESONAL   
+                    inputPerson.addEventListener('keyup', (e) => {
+                        PersonalAsig(inputPerson, resultDnone, inputPersonDnone);
+                    });
 
                     // Nombre del archivo en input name automaticamente y tamaño a 2mb
                     inputFile.addEventListener('change', (e) => {
                         const img = document.getElementById('docImg');
+                        const pdf = document.getElementById('docPdf');
                         const file = e.target.files[0];
                         const dar = file.name.split('.').pop();
 
                         // alerta de limite 
-                        if (file.size > 2097152) { // 2 MB
+                        if (file.size > 2097152) { // 2 MB en bits
                             alert("El archivo PDF/imagen no debe exceder los 2 MB.");
                             inputFile.value = "";
                             inputText.value = "";
@@ -62,7 +74,17 @@ function modalcito() {
                             const read = new FileReader(e);
 
                             read.onload = function (e) {
-                                img.src = e.target.result;
+                                if (dar == 'pdf') {
+                                    img.src = "";
+                                    img.classList.add("d-none");
+                                    pdf.classList.remove("d-none");
+                                    pdf.src = e.target.result;
+                                } else {
+                                    pdf.src = "";
+                                    pdf.classList.add = "d-none";
+                                    img.classList.remove = "d-none";
+                                    img.src = e.target.result;
+                                }
                             }
                             read.readAsDataURL(file);
 
@@ -79,13 +101,24 @@ function modalcito() {
 
                     var self = this;
 
-                    // desactivar boton enviar
-                    this.buttons.d.disable();
-
-                    // colores de verificacion y activacion de input password 
-                    this.$content.find('#inpArch').change(function () {
+                    // ACTIVAR INPUT
+                    this.$content.find('#caro input').change(function () {
                         // activar boton de procesar 
-                        if (self.$content.find('#inpArch').val() != "") {
+                        if (self.$content.find('#arch').val() != "" &&
+                            self.$content.find('#departament').val() != 0 &&
+                            self.$content.find('#Responsable').val() == localStorage.getItem('valorInput')) {
+                            self.buttons.d.enable();
+                        } else {
+                            self.buttons.d.disable();
+                        }
+                    });
+
+
+                    // ACTIVAR INPUT Código para el select
+                    this.$content.find('#caro #departament').change(function () {
+                        if (self.$content.find('#arch').val() != "" &&
+                            self.$content.find('#departament').val() != 0 &&
+                            self.$content.find('#Responsable').val() == localStorage.getItem('valorInput')) {
                             self.buttons.d.enable();
                         } else {
                             self.buttons.d.disable();
@@ -97,6 +130,8 @@ function modalcito() {
                         text: "procesar",
                         btnClass: "btn-green",
                         action: function () {
+
+                            localStorage.removeItem('valorInput');
 
                             const form = document.getElementById('caro');
 
@@ -229,3 +264,64 @@ $(document).ready(function () {
         document.getElementById("tittleDoc").innerHTML = "<h4 class='mb-3'>FORMULARIO</h4>";
     }
 });
+
+//filtro de busqueda de estados
+function PersonalAsig(inpat, resultDiv, inputValAsig) {
+
+    let input = inpat; //id del input de busqueda;
+    let inputDnone = inputValAsig; //id del input de busqueda;
+    let divResult = resultDiv; //donde mostrar rsultados de la busqueda;
+
+    let keys = new FormData();
+
+    keys.append("keys", input.value);
+
+
+
+    if (input.value.length > 0) {
+        $.ajax({
+            data: keys,
+            processData: false,
+            contentType: false,
+            url: "../php/searchPerson.php",
+            type: "post",
+            success: function (params) {
+                divResult.classList.remove("d-none");
+
+                if (jeisonXD(params)) {
+
+                    let newlist = JSON.parse(params);
+
+                    divResult.innerHTML = "";
+
+                    newlist.forEach(element => {
+                        let elemetos = `<a onclick="items('${element['nombre']} ${element['apellido']}', '${element['ci']}')" class="nav-link mt-2 p-2">${element['nombre']} ${element['apellido']}</a>`;
+                        divResult.innerHTML += elemetos;
+                    });
+
+                } else {
+                    divResult.innerHTML = "sin resultados";
+                }
+            }
+        });
+    } else {
+        divResult.classList.add("d-none");
+        divResult.innerHTML = "";
+    }
+
+    input.addEventListener("blur", function () {
+        setTimeout(() => {
+            divResult.classList.add("d-none");
+        }, 100);
+    });
+}
+
+function items(val, valu) {
+    const inputPerson = document.getElementById('Responsable');
+    const inputPersonDnone = document.getElementById('Presponsable');
+
+    localStorage.setItem("valorInput", val);
+
+    inputPersonDnone.value = valu;
+    inputPerson.value = val;
+}

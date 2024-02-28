@@ -1,5 +1,16 @@
 <?php
 
+
+function obtenerExtension($nombreArchivo)
+{
+    $posicionPunto = strrpos($nombreArchivo, '.');
+    if ($posicionPunto === false) {
+        return '';
+    } else {
+        return substr($nombreArchivo, $posicionPunto + 1);
+    }
+}
+
 if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
 
     include "function/criptCodes.php";
@@ -300,15 +311,18 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
             // ingreso de archivos
             $subId = $conn->real_escape($_POST["idSoli"]);
 
-            $svp = $conn->query("SELECT * FROM solicitudes s INNER JOIN solicitudes_archivos_precarga p INNER JOIN tiposarch t ON p.id_solicitud_archivo_pre = s.id_solicitud AND t.id_tipo = p.tipo_pre WHERE s.id_solicitud = '$subId'");
+            $svp = $conn->query("SELECT * FROM solicitudes s INNER JOIN solicitudes_archivos_precarga p INNER JOIN tiposarch t INNER JOIN departamentos d ON p.id_solicitud_archivo_pre = s.id_solicitud AND p.dep_responsable_pre = d.id_direccion AND t.id_tipo = p.tipo_pre WHERE s.id_solicitud = '$subId'");
             $sv = mysqli_num_rows($svp);
 
             $precarInf = mysqli_fetch_array($svp);
 
-            $tipoArch = $precarInf['nombre_tipo_arch'];
+            $DOC = obtenerExtension($precarInf['nombre_archivo_pre']) != 'pdf' ? 'd-none' : '';
+            $iDOC = obtenerExtension($precarInf['nombre_archivo_pre']) == 'pdf' ? 'd-none' : '';
 
+            $tipoArch = $precarInf['nombre_tipo_arch'];
             $nota = ($precarInf['nota_pre'] == "") ? "sin nota" : $precarInf['nota_pre'];
             $c = $precarInf['size_pre'] / 1024;
+
             $size = ($c <= 920) ? number_format($c, 2) . "KB" : number_format($c / 1024, 2) . "MB";
 
             if ($sv == 1) {
@@ -352,28 +366,49 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
                                         <button class="btn btn-outline-primary" disabled>Archivo:
                                             <?php echo $tipoArch ?>
                                         </button>
-                                    </div>
-                                    <div class="btn-group" role="group" aria-label="Button Group">
                                         <button class="btn btn-outline-primary" disabled>peso:
                                             <?php echo $size ?>
                                         </button>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Button Group">
+
                                         <button class="btn btn-outline-primary" disabled>requerido:
                                             si
                                         </button>
                                         <button class="btn btn-outline-primary" disabled>nota:
                                             <?php echo $nota ?>
                                         </button>
+                                        <?php
+                                        $dat = new Personal(encriptar($precarInf['ci_responsable_pre']));
+                                        ?>
+                                        <a href="perfil.php?perfil=<?php echo encriptar($dat->getCi()) ?>"
+                                            class="btn btn-outline-primary">
+                                            <?php echo $dat->getCi() . ' ' . $dat->getNombre() . ' ' . $dat->getApellido() ?>
+                                        </a>
+
+                                        <button class="btn btn-outline-primary" disabled>departamento responsable:
+                                            <?php echo $precarInf['dir_nombre'] ?>
+                                        </button>
                                     </div>
                                 </div>
 
                             </div>
-                            <img class="" src="<?php echo $precarInf['d_archivo_pre'] ?>" alt="Some text" width="200px">
+                            <img class="<?php echo $iDOC ?> mt-3" src="<?php echo $precarInf['d_archivo_pre'] ?>" alt="Some text"
+                                width="200px">
+                            <embed class="<?php echo $DOC ?> mt-3" type="application/pdf"
+                                src="<?php echo $precarInf['d_archivo_pre'] ?>" width="200px">
                         </div>
 
                         <style>
                             .dit img {
                                 border-radius: 6px;
                                 margin: 1rem 0;
+                            }
+
+                            embed {
+                                border-radius: 6px;
+                                margin: 1rem 0;
+                                paddin: 1rem 0;
                             }
 
                             .dit.table-responsive {
@@ -402,7 +437,7 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
             }
             break;
         case '3':
-
+            // ELIMINACION DE ARCHIVO
             $id = $conn->real_escape($_POST["idSoli"]);
 
             @$x = $conn->query("SELECT * FROM solicitudes_eliminacion_arch e WHERE id_solicitud_eliminacion = '$id'");
@@ -418,7 +453,10 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
                 $svp = $conn->query("SELECT * FROM solicitudes s INNER JOIN solicitudes_archivos_precarga p INNER JOIN tiposarch t ON p.id_solicitud_archivo_pre = s.id_solicitud AND t.id_tipo = p.tipo_pre WHERE s.id_solicitud = '$id_arch'");
                 $sv = $svp->num_rows;
 
-                $precarInf = mysqli_fetch_array($svp);
+                $precarInf = $svp->fetch_array();
+
+                $DOC = obtenerExtension($precarInf['nombre_archivo_pre']) != 'pdf' ? 'd-none' : '';
+                $iDOC = obtenerExtension($precarInf['nombre_archivo_pre']) == 'pdf' ? 'd-none' : '';
 
                 $tipoArch = $precarInf['nombre_tipo_arch'];
 
@@ -480,7 +518,10 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
                                 </div>
 
                             </div>
-                            <img class="" src="<?php echo $precarInf['d_archivo_pre'] ?>" alt="Some text" width="200px">
+                            <img class="<?php echo $iDOC ?> mt-3" src="<?php echo $precarInf['d_archivo_pre'] ?>" alt="Some text"
+                                width="200px">
+                            <embed class="<?php echo $DOC ?> mt-3" type="application/pdf"
+                                src="<?php echo $precarInf['d_archivo_pre'] ?>" width="200px">
                         </div>
 
                         <style>
