@@ -96,24 +96,12 @@ function aprPlanillas(idSolis, tipoS) {
             $.confirm({
                 title: false,
                 onContentReady: function () {
-                    var self = $(this);
 
-                    $("#pendiente, #aceptar, #rechazar").change(function () {
-                        // Obtener el radio seleccionado
-                        var radio = $(this);
-
-                        // Si el radio seleccionado no es el mismo que el que está controlando el collapse, ocultarlo
-                        if (radio.attr("id") !== "rechazar") {
-                            $("#contentId").hide();
+                    this.$content.find('input[name="editSoli"]').click(function () {
+                        if ($(this).val() == "2") {
+                            $("#collapseRechazar").collapse('show');
                         } else {
-                            $("#contentId").show();
-                            self.buttons.aceptar.disable();
-
-                            $("#movito").input(function () {
-                                if ($("#movito").lenght() > 5) {
-                                    self.buttons.aceptar.enable();
-                                }
-                            });
+                            $("#collapseRechazar").collapse('hide');
                         }
                     });
                 },

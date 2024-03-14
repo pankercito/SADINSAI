@@ -44,7 +44,25 @@ if (isset($_GET["userdes"])) {
              type: 'red',
              icon: 'bi bi-warning',
              typeAnimated: true,
-             content: '<h2 class="text-center mx-auto">Usuario desactivado</h2><br><h5 class="text-center mx-auto pb-3 px-4">comuniquese con el Dir. de Tecnologia</h5>',
+             content: '<h2 class="text-center mx-auto">Usuario desactivado</h2><br><h5 class="text-center mx-auto pb-3 px-4">por favor active su usuario para poder ingresar</h5>',
+         })
+       }, 300);
+    </script>
+    <?php
+}
+
+if (isset($_GET["userinhal"])) {
+    ?>
+
+    <script type="text/javascript">
+       setTimeout(() => {
+         $.dialog({
+             title: '',
+             animation: 'RotateX',
+             type: 'red',
+             icon: 'bi bi-warning',
+             typeAnimated: true,
+             content: '<h2 class="text-center mx-auto">Usuario inhabilidato</h2><br><h5 class="text-center mx-auto pb-3 px-4">comuniquese con el departamento de Tecnologia</h5>',
          })
        }, 300);
     </script>

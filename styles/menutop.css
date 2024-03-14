@@ -131,7 +131,8 @@ ul.nav.nav-list.nav-pills.navbar-right {
 }
 
 .searchito #search {
-    margin: 0 0 0 -2.8rem;
+    margin: 0.45rem 0 0 -2.2rem;
+    font-size: 17px;
 }
 
 .searchito #help {
@@ -268,14 +269,13 @@ a.dropdown-item {
     height: 1.5rem;
     opacity: 0.85;
     font-size: 10px;
-    padding: 2px 4px;
 }
 
 #sysAdminSetMsj {
     background: #ff6384;
     color: white;
     position: absolute;
-    margin: 1.3rem 0rem 0 -6.25rem;
+    margin: 1.3rem 0rem 0 -5.5rem;
     height: 1.5rem;
     opacity: 0.85;
     font-size: 10px;

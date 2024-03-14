@@ -1,22 +1,23 @@
 <?php
 
-include "../class/conx.php";
+include "../preset/presetConfigIncludes.php";
 
-$conn = new Conexion();
+$conn = new Conexion;
+$auditoria = new AuditoriaGeneral;
 
-$cargo = $conn->real_escape(trim($_POST["cargo"]));
+$nombre = $conn->real_escape(trim($_POST["cargo"]));
 
-$verfy = $conn->query("SELECT * FROM cargo WHERE cargo_nombre = '$cargo'");
+$verfy = $conn->query("SELECT * FROM cargo WHERE cargo_nombre = '$nombre'");
 
 $vacie = $verfy->num_rows;
 
 if ($vacie == 0) {
-    $vrfy = $conn->query("INSERT INTO cargo (cargo_nombre) VALUES ('$cargo')");
+    $vrfy = $conn->query("INSERT INTO cargo (cargo_nombre) VALUES ('$nombre')");
     if ($vrfy == true) {
-
-        echo "success";
+        if ($auditoria->nuevoCargo($nombre)) {
+            echo "success";
+        }
     } else {
-
         echo "query.error";
     }
 } else {

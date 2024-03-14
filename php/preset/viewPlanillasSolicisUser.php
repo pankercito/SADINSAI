@@ -1,7 +1,6 @@
 <?php
 
-include '../class/classIncludes.php';
-include "../function/criptCodes.php";
+include "../preset/presetConfigIncludes.php";
 
 session_start();
 
@@ -17,6 +16,7 @@ $apr = [
     "3" => "alert alert-danger",
     "4" => "alert alert-primary",
 ];
+
 $aprN = [
     "1" => "pendiente",
     "2" => "aceptada",

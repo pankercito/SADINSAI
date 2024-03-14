@@ -24,9 +24,7 @@
             <div class="principal row mx-1 mb-4 justify-content-center" id="centro">
                 <div class="col">
                     <?php
-                    include "../php/function/getUser.php";
-                    include "../php/class/classIncludes.php";
-                    $useraudios = new GestionDeUsuarios();
+                    $useraudios = new SystemUser;
                     $estadistica = new Estadistica;
                     ?>
 
@@ -40,10 +38,11 @@
                         <ul class="userUl col-md-7 mx-auto">
                             <?php
                             //imprime una lista con usuarios activos y no activos
-                            $us = $useraudios->usersActives();
+                            $us = $useraudios->usersList();
+
                             foreach ($us as $us) {
-                                $dot = ($us['active'] == 1) ? "<i class='bi bi-dot active'></i>" : "<i class='bi bi-dot'></i>";
-                                echo "<li class='user'><a class='aUser' href='perfil.php?perfil=" . $us['ci'] . "'>" . $dot . $us['user'] . " </a></li>";
+                                $dot = ($us->sesion == 1) ? "<i class='bi bi-dot active'></i>" : "<i class='bi bi-dot'></i>";
+                                echo "<li class='user'><a class='aUser' href='perfil.php?perfil=" . encriptar($us->ci) . "'>" . $dot . $us->usuario . " </a></li>";
                             }
                             ?>
                         </ul>
@@ -57,16 +56,11 @@
                 </div>
                 <div class="col">
                     <div class="bg-color-stats d-flex flex-column justify-content-around alert">
-                        <h5 style="margin-bottom: 0;">informacion extra</h5>
+                        <h5 style="margin-bottom: 0;">promedio general semanal</h5>
                         <hr>
-                        <p id="prom" style="font-size: 14px !important; color: #212529;">promedio semanal de
-                            gestiones realizadas: %s</p>
-                        <p id="prem" style="font-size: 14px !important; color: #212529;">promedio semanal de archivos
-                            agregados: %s
-                        </p>
-                        <p id="prim" style="font-size: 14px !important; color: #212529;">promedio semanal de inicios de
-                            sesion: %s
-                        </p>
+                        <p id="prom" style="font-size: 14px !important; color: #212529;">gestiones realizadas: %s</p>
+                        <p id="prem" style="font-size: 14px !important; color: #212529;">archivos agregados: %s</p>
+                        <p id="prim" style="font-size: 14px !important; color: #212529;">inicios de sesion: %s</p>
                     </div>
                 </div>
             </div>
@@ -84,7 +78,7 @@
                             <table class=" table table-borderless">
                                 <tbody>
                                     <?php
-                                    $r = $estadistica->gestionDetailstStats(date('y-m-d'));
+                                    $r = $estadistica->gestionDetailsStats(date('y-m-d'));
 
                                     $tipoSolic = [
                                         "0" => "ingreso de personal",
@@ -180,11 +174,7 @@
 
                                     echo '<h6>total de archivos: ' . @total($d) . '</h6>';
 
-                                    $r = $conn->query("SELECT * FROM tiposarch");
-
-                                    while ($tori = $r->fetch_object()) {
-                                        $t[$tori->id_tipo] = $tori->nombre_tipo_arch;
-                                    }
+                                    $t = $estadistica->tipoArchivo();
 
                                     foreach ($d as $row) {
                                         // Agrega las celdas a la tabla
@@ -280,19 +270,22 @@
                             <div class="col-8 col-sm-12 mx-1 d-flex mb-3">
                                 <div class="col mx-1">
                                     <datalist id="datalist">
+
+                                    </datalist>
+                                    <label for="list">usuario</label>
+                                    <select type="list" list="datalist" class="form-select" id="list"
+                                        placeholder="Selecciona un usuario">
+                                        <option value="">seleccione un usuario</option>
                                         <?php
 
-                                        $r = $useraudios->usersActives();
+                                        $r = $useraudios->usersList();
 
                                         foreach ($r as $key) {
-                                            echo "<option value='" . strtoupper($key['user']) . "'>" . strtoupper($key['user']) . " </option>";
+                                            echo "<option value='" . strtoupper($key->usuario) . "'>" . strtoupper($key->usuario) . " </option>";
                                         }
 
                                         ?>
-                                    </datalist>
-                                    <label for="list">usuario</label>
-                                    <input type="list" list="datalist" class="form-select" id="list"
-                                        placeholder="Selecciona un usuario">
+                                    </select>
 
                                 </div>
                                 <div class="col mx-1">
@@ -301,17 +294,21 @@
                                         <option value="">seleccione un tipo</option>
                                         <?php
                                         $tipoMovi = [
-                                            "1" => "ingreso de personal",
-                                            "2" => "edicion de datos",
-                                            "3" => "ingreso de archivo",
-                                            "4" => "eliminacion de archivo",
-                                            '5' => 'registro de usuario',
-                                            '6' => 'activación/desactivación de usuario',
-                                            '7' => 'cambio de locacion de archivo',
-                                            '8' => 'rezacho de gestion',
-                                            '9' => 'aceptacion de solicitud',
-                                            '10' => 'rezacho de solicitud',
-                                            '11' => 'requerimientos'
+                                            "",
+                                            "ingreso de personal",
+                                            "edicion de datos",
+                                            "ingreso de archivo",
+                                            "eliminacion de archivo",
+                                            'registro de usuario',
+                                            'activación/desactivación de usuario',
+                                            'cambio de locacion de archivo',
+                                            'rezacho de gestion',
+                                            'aceptacion de solicitud',
+                                            'rezacho de solicitud',
+                                            'requerimientos',
+                                            'nueva sede',
+                                            'nuevo cargo',
+                                            'creacion de solicitud',
                                         ];
 
                                         foreach ($tipoMovi as $key => $value) {
@@ -350,24 +347,20 @@
                                 </thead>
                                 <tbody>
                                     <?php
-
-                                    $precarInf = $conn->query("SELECT * FROM auditoria a INNER JOIN registro r ON r.id_usuario = a.id_usuario_audi  ORDER BY fecha_audi DESC");
+                                    $registros = new registroAuditoria;
 
                                     $i = 1;
-                                    while ($d = $precarInf->fetch_object()) {
+                                    foreach ($registros->auditsList() as $d) {
                                         if (!empty($d)) {
                                             echo '<tr class="">';
                                             echo '<td>' . $i++ . '</td>';
-                                            echo '<td>' . $d->user . '</td>';
-                                            echo '<td>' . $tipoMovi[$d->tipo_movi] . '</td>';
+                                            echo '<td>' . $d->usuario . '</td>';
+                                            echo '<td>' . $tipoMovi[$d->tipo] . '</td>';
                                             echo '<td>' . $cambios = (strpos($d->cambios, " -- ") != false) ? substr($d->cambios, 0, strpos($d->cambios, " -- ")) . '...' : $d->cambios . '</td>';
                                             $dis = (strpos($d->cambios, "--") == false) ? 'disabled' : '';
                                             echo '<td> <a class="btn btn-success ' . $dis . '" ' . $dis . ' onclick="detalleMovi(' . $d->id . ')">detalle</a> </td>';
-                                            echo '<td>' . date('Y-m-d H:i', strtotime($d->fecha_audi)) . '</td>';
+                                            echo '<td>' . date('Y-m-d H:i', strtotime($d->fecha)) . '</td>';
                                             echo '</tr>';
-
-                                        } else {
-                                            echo '<h6>no hay registros</h6>';
                                         }
                                     }
                                     ?>
@@ -377,6 +370,7 @@
                             <script type="text/javascript">
 
                                 $(document).ready(function () {
+                                    $('.form-select').select2();
                                     // Create date inputs
                                     var minDate = new DateTime('#min', {
                                         format: 'YYYY-MM-DD HH:MM',
@@ -469,7 +463,7 @@
                                     ],
                                     language: {
                                         "decimal": "",
-                                        "emptyTable": "No hay información",
+                                        "emptyTable": "no hay información",
                                         "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
                                         "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
                                         "infoFiltered": "(Filtrado de _MAX_ total entradas)",
@@ -534,4 +528,6 @@
             <script src="../resources/import/Chart/chart.umd.js"></script>
             <script src="../js/dashboard.js"></script>
         </div>
-        <?php require "../layout/footer.php" ?>
+    </div>
+</div>
+<?php require "../layout/footer.php" ?>

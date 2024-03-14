@@ -1,11 +1,8 @@
 <?php
 
-include "../php/class/conx.php";
+include "../php/configIncludes.php";
 
 if (isset($_POST["idArch"])) {
-
-    include "../php/function/getESCname.php";
-    include "../php/function/criptCodes.php";
 
     $conn = new Conexion();
 
@@ -21,7 +18,12 @@ if (isset($_POST["idArch"])) {
     $data = $sql->fetch_object();
 
     $UbicacionA = $data->dir_nombre;
-    $responsable = ($data->responsable == '' || $data->responsable == '0') ? $data->dir_nombre : $data->responsable;
+
+    $e = new Empleado(getUserHash(null, $data->responsable));
+
+    $nombre = ucwords("$e->nombre $e->apellido | $e->ci");
+
+    $responsable = ($data->responsable == '') ? $data->dir_nombre : $nombre;
 
 }else {
     $UbicacionA = "error no data";

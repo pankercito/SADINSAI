@@ -1,12 +1,6 @@
 <?php
 
-include "class/conx.php";
-include "function/idGenerador.php";
-include "function/criptCodes.php";
-include "function/filesFunctions.php";
-include "function/asignarSolicitud.php";
-include "function/removerAcentos.php";
-include "function/sumarHora.php";
+include "../php/configIncludes.php";
 
 $conn = new Conexion;
 
@@ -33,7 +27,7 @@ switch ($tipo) {
         $estado = $_POST['estado'];
         $ciudad = $_POST['ciudad'];
         $sede = $_POST['sede'];
-        $cargo = $conn->real_escape($_POST['cargo']);
+        $nombre = $conn->real_escape($_POST['cargo']);
         $departament = $conn->real_escape($_POST['departament']);
 
         if ($_POST["name"] != "") {
@@ -52,7 +46,7 @@ switch ($tipo) {
                                         VALUES ('$id_solicitud', '$IdEm', '$ciRec', '$fech', '0', 0)");
 
             $correr = $conn->query("INSERT INTO solicitudes_precarga (id_solicitud_precarga, ci_pre, nombre_pre, apelido_pre, grado_ac_pre, fecha_nac_pre, sexo_pre, id_estado_pre, id_ciudad_pre, id_sede_pre, direccion_pre, email_pre, telefono_pre, cargo_pre, departamento_pre) 
-                                                            VALUES ('$id_solicitud', '$ciRec','$taken','$apellido', '$grado ', '$fecha', '$sexo', '$estado', '$ciudad', '$sede', '$direccion', '$email', '$phone', '$cargo', $departament)");
+                                                            VALUES ('$id_solicitud', '$ciRec','$taken','$apellido', '$grado ', '$fecha', '$sexo', '$estado', '$ciudad', '$sede', '$direccion', '$email', '$phone', '$nombre', $departament)");
 
             if ($sqlsoli == true && $correr == true) {
                 $_SESSION["editCI"] = 0;
@@ -88,7 +82,7 @@ switch ($tipo) {
         $estado = $_POST['estado'];
         $ciudad = $_POST['ciudad'];
         $sede = $_POST['sede'];
-        $cargo = $conn->real_escape($_POST['cargo']);
+        $nombre = $conn->real_escape($_POST['cargo']);
         $departament = $conn->real_escape($_POST['departament']);
 
         if ($_POST["name"] != "") {
@@ -107,7 +101,7 @@ switch ($tipo) {
                                         VALUES ('$id_solicitud', '$IdEm', '$ciRec', '$fech', '0', 1)");
 
             $correr = $conn->query("INSERT INTO solicitudes_precarga (id_solicitud_precarga, ci_pre, nombre_pre, apelido_pre, grado_ac_pre, fecha_nac_pre, sexo_pre, id_estado_pre, id_ciudad_pre, id_sede_pre, direccion_pre, email_pre, telefono_pre, cargo_pre, departamento_pre) 
-                                                            VALUES ('$id_solicitud', '$ciRec','$taken','$apellido', '$grado ', '$fecha', '$sexo', '$estado', '$ciudad', '$sede', '$direccion', '$email', '$phone', '$cargo', '$departament')");
+                                                            VALUES ('$id_solicitud', '$ciRec','$taken','$apellido', '$grado ', '$fecha', '$sexo', '$estado', '$ciudad', '$sede', '$direccion', '$email', '$phone', '$nombre', '$departament')");
 
             if (isset($sqlsoli) && isset($correr)) {
                 $_SESSION["editCI"] = 0;

@@ -30,7 +30,7 @@
                         value="<?php echo $SetGrado ?>">
                     <div class="col row">
                         <label>sexo
-                            <?php 
+                            <?php
                             $noes = $SetSexo == 'no especificado' ? 'checked' : '';
                             $feme = $SetSexo == 'femenino' ? 'checked' : '';
                             $masc = $SetSexo == 'masculino' ? 'checked' : '';
@@ -39,7 +39,7 @@
                                 style="margin: 0 0 0 -3rem;">
                                 <input type="radio" class="btn-check" name="sexo" id="btncheck1" autocomplete="off"
                                     value="no especificado" <?php echo $noes ?>>
-                                <label class="radiohead btn btn-outline-secondary" for="btncheck1" >no
+                                <label class="radiohead btn btn-outline-secondary" for="btncheck1">no
                                     especificado</label>
                                 <input type="radio" class="btn-check" name="sexo" id="btncheck2" autocomplete="off"
                                     value="femenino" <?php echo $feme ?>>

@@ -1,27 +1,31 @@
 <?php
 
-include "class/classIncludes.php";
-include "function/getUser.php";
-include "function/criptCodes.php";
+include "../php/configIncludes.php";
 
-$conn = new Conexion();
+if ($_POST['ci'] != "") {
+    session_start();
 
-$userCi = trim($conn->real_escape($_POST['ci']));
+    $conn = new Conexion();
+    $userCi = trim($conn->real_escape($_POST['ci']));
+    $user = new User(getUserHash(null, $userCi));
 
-if ($userCi != "") {
-
-    $user = new UserModel(getUserData(null, $userCi));
-    $auditoria = new GestionDeUsuarios($user);
+    $_SESSION['sesion'] = $user->getUserId();
+    $gestionDeUsuario = new UserUseCase($user);
 
     switch ($user->active) {
-        case '1':
+        case 1:
             echo 'active';
             break;
+        case 2:
+            echo 'inhabilited';
+            break;
         default:
-            if ($auditoria->activarUsuario()) {
+            if ($gestionDeUsuario->activarUsuario()) {
                 echo "success";
             }
             break;
     }
 
+    session_destroy();
+    session_unset();
 }

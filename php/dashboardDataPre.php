@@ -1,7 +1,6 @@
 <?php
 
-include "../php/class/classIncludes.php";
-include "../php/function/sumarhora.php";
+include "../php/configIncludes.php";
 
 $estadistica = new Estadistica();
 
@@ -33,11 +32,11 @@ function total($array)
 
 // definimos array de datos 
 $json = $estadistica->userStats($dat['lunes'], $dat['domingo']);
-$promedio_diario1 = total($json) / 7 / $estadistica->TotalUsers() * 100;
+$promedio_diario1 = total($json) / 7 / $estadistica->totalUsers() * 100;
 $jsa = $estadistica->gestionStats($dat['lunes'], $dat['domingo']);
-$promedio_diario2 = total($jsa) / 7;
+$promedio_diario2 = total($jsa) / 7 * 100;
 $jsc = $estadistica->archivesStats($dat['lunes'], $dat['domingo']);
-$promedio_diario3 = total($jsc) / 7;
+$promedio_diario3 = total($jsc) / 7 * 100;
 
 
 // limitamos los promedios a 2 caracteres despues de la coma

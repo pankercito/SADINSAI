@@ -1,15 +1,30 @@
 <?php
 
+// PARAMETROS DE BASE DE DATOS
+const HOST = 'localhost';
+const USUARIO = 'root';
+const PASS = '';
+const BASEDATA = 'sadinsai';
+
 /**
  * inicializa conexion con base de datos
  */
 class Conexion
 {
-    protected $connec;
+    private $connec;
 
     public function __construct()
     {
-        $this->connec = new mysqli("localhost", "root", "", "sadinsai");
+        try {
+            $this->connec = new mysqli(HOST, USUARIO, PASS, BASEDATA);
+            if (mysqli_connect_errno()) {
+                throw new Exception("Failed to connect to MySQL: " . mysqli_connect_error());
+            }
+        } catch (Exception $e) {
+            echo "Connection error: " . $e->getMessage();
+            // Add error handling based on your application logic (e.g., log the error, display a message to the user)
+            exit(); // Terminate script execution to avoid further issues
+        }
     }
 
     /**
@@ -43,6 +58,10 @@ class Conexion
         return mysqli_close($this->connec);
     }
 
+    /**
+     * Summary of error
+     * @return string
+     */
     public function error()
     {
         return mysqli_error($this->connec);
@@ -52,6 +71,7 @@ class Conexion
     /**
      * Devuelve numero de filas afectadas por la ultima consulta
      * @return int|string
+
      */
     public function affected_rows()
     {

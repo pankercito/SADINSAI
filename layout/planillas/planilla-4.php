@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <h6>CARTA DE AVAL</h6>
 <hr>
 <?php include 'planillas_config.php' ?>

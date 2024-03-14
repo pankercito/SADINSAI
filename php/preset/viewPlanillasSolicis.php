@@ -1,7 +1,6 @@
 <?php
 
-include '../class/classIncludes.php';
-include "../function/criptCodes.php";
+include "../preset/presetConfigIncludes.php";
 
 session_start();
 

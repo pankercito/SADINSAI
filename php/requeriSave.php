@@ -1,10 +1,8 @@
 <?php
-
-include "class/conx.php";
-include "class/auditoria.php";
+include "../php/configIncludes.php";
 
 $conn = new Conexion;
-$auditoria = new Auditoria;
+$gestionDeUsuario = new AuditoriaGeneral;
 
 if (isset($_POST['cedula'])) {
 
@@ -61,9 +59,10 @@ if (isset($_POST['cedula'])) {
         "requerido"
     ];
 
-    $cec = $conn->real_escape($_POST['cedula']);
+    $cec = $conn->real_escape(desencriptar($_POST['cedula']));
     $contenido = "";
     $i = 1001;
+
     while ($i < 1046) {
         $var = (isset($_POST[$tiposarch[$i]])) ? "1" : "0";
 
@@ -74,20 +73,20 @@ if (isset($_POST['cedula'])) {
         $verifi = $conn->query("SELECT * FROM arch_required WHERE id_tipo_arch = $i AND ci_required_arch = $cec");
         $ver = $verifi->fetch_object();
 
-        $c = false;
+        $c = [];
 
         if ($verifi->num_rows > 0) {
             $upsql = $conn->query($update); 
             if ($upsql == true) {
                 $c = true;
                 if ($var != $ver->required_arch) {
-                    $contenido .=  "{$tiposarch[$i]}: antes: {$sino[$ver->required_arch]} despues: {$sino[$var]} -- ";
+                    @$contenido .=  "{$tiposarch[$i]}: antes: {$sino[$ver->required_arch]} despues: {$sino[$var]} -- ";
                 }
             }
         } else {
             $inssql = $conn->query($insert);
             if ($inssql == true) {
-                $contenido .=  "{$tiposarch[$i]}: antes: {$sino[$ver->required_arch]} despues: {$sino[$var]} -- ";
+                @$contenido .=  "{$tiposarch[$i]}: antes: {$sino[$ver->required_arch]} despues: {$sino[$var]} -- ";
                 $c = true;
             }
         }
@@ -96,7 +95,7 @@ if (isset($_POST['cedula'])) {
 
     if ($c == true) {
         echo "success";
-        $auditoria->registRequerid($cec, $contenido);
+        $gestionDeUsuario->cambioDeRequerimientos($cec, $contenido);
     } else {
         if (@$inssql == true) {
             echo "success";

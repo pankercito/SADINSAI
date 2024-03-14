@@ -28,6 +28,6 @@ if ($sql == true) {
     foreach ($pre as $text) {
         $text = replaceArrows($text);
 
-        echo "<p class='panel-color'>".ucwords(strtolower($text)) . "</p>";
+        echo "<p class='panel-color'>" . ucwords(strtolower($text)) . "</p>";
     }
 }

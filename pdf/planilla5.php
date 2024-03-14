@@ -8,7 +8,7 @@ session_start();
 @$fecha = $_SESSION['fecha'];
 @$codigoNomina = $_SESSION['codigoNomina'];
 @$nombre = $_SESSION['inputNames'];
-@$cargo = $_SESSION['cargo'];
+@$nombre = $_SESSION['cargo'];
 
 @$cedula = $_SESSION['cin'];
 @$departament = $_SESSION['adscrito'];
@@ -59,7 +59,7 @@ $pdf->SetXY(58, 75.5);
 $pdf->Cell(25, 0, @$cedula, 0, 0, 'C');
 
 $pdf->SetXY(95, 75);
-$pdf->Cell(25, 0, @$cargo, 0, 0, 'C');
+$pdf->Cell(25, 0, @$nombre, 0, 0, 'C');
 
 $pdf->SetXY(124, 70.5);
 $pdf->MultiCell(35, 5, @$departament, 0, 'C');

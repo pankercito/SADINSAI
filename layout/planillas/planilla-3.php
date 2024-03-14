@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <h6>SOLICITUD DE VACACIONES</h6>
 <hr>
 <?php include 'planillas_config.php' ?>
@@ -58,15 +55,15 @@ session_start();
     </div>
     <div class="col">
         <label for="fechaingreso" class="col-form-label">fecha de ingreso al insai</label>
-        <input type="date" class="form-control" name="fechaingreso" id="fechaingreso" placeholder="Name">
+        <input type="date" class="form-control" name="fechaingreso" id="fechaingreso" placeholder="a-m-d">
     </div>
     <div class="col">
         <label for="organismos" class="col-form-label">tiempo de servicio en otros organismos publicos</label>
-        <input type="text" class="form-control" name="organismos" id="organismos" placeholder="Name">
+        <input type="text" class="form-control" name="organismos" id="organismos" placeholder="a-m-d">
     </div>
     <div class="col">
         <label for="tiempototal" class="col-form-label">total de tiempo en la administracion publica</label>
-        <input type="text" class="form-control" name="tiempototal" id="tiempototal" placeholder="Name">
+        <input type="text" class="form-control" name="tiempototal" id="tiempototal" placeholder="Ej: 1 año">
     </div>
 </div>
 

@@ -13,11 +13,7 @@ function obtenerExtension($nombreArchivo)
 
 if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
 
-    include "function/criptCodes.php";
-    include "function/getESCname.php";
-    include "function/removerAcentos.php";
-    require "class/conx.php";
-    include "class/personal.php";
+    include "../php/configIncludes.php";
 
     $conn = new Conexion();
     $rst = false;
@@ -60,6 +56,7 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
                 //Lista DE MUESTREO DE DATOS QUE INGRESARAN
                 ?>
                 <h4 class="" style="margin: 0 0 1.2rem 6%;">Ingreso de personal</h4>
+                <hr>
                 <div class="editConten row col-md-8">
                     <div class="col-md-8">
                         <form action="../php/personalMerge.php" class="formgroup" id="soliMerge" method="POST">
@@ -80,7 +77,7 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
                     </div>
                     <div class="dit table-responsive">
                         <div class="contenedor">
-                            <table class="table table-bordered">
+                            <table class="table table">
                                 <thead>
                                     <tr>
                                         <th>Campo</th>
@@ -168,21 +165,22 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
             $precarInf = $saralo->fetch_assoc();
 
             // data vieja
-            $personal = new Personal(encriptar($precarInf['ci_pre']));
+            $personal = new Empleado(encriptar($precarInf['ci_pre']));
+            $personaldetails = $personal->getDetails();
 
-            $pName = $personal->getNombre();
-            $pApellido = $personal->getApellido();
-            $pCi = $personal->getCi();
-            $pPhone = $personal->getTelefono();
-            $pSexo = $personal->getSexo();
-            $pGrado = $personal->getGrado();
-            $pEmail = $personal->getEmail();
-            $pDireccion = $personal->getDireccion();
-            $pStado = $personal->getEstado();
-            $pCiudad = $personal->getCiudad();
-            $pSede = $personal->getSede();
-            $pCargo = $personal->getCargo();
-            $pDepart = $personal->getDepartament();
+            $pName = ucwords($personal->nombre);
+            $pApellido = ucwords($personal->apellido);
+            $pCi = $personal->ci;
+            $pPhone = $personaldetails->telefono;
+            $pSexo = $personaldetails->sexo;
+            $pGrado = $personaldetails->grado;
+            $pEmail = $personaldetails->email;
+            $pDireccion = $personaldetails->direccion;
+            $pStado = $personaldetails->estado;
+            $pCiudad = $personaldetails->ciudad;
+            $pSede = $personaldetails->sede;
+            $pCargo = $personaldetails->cargo;
+            $pDepart = $personaldetails->departamento;
 
             /**
              * Imprimir informes si los datos de entrada son diferentes
@@ -211,14 +209,14 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
                 return $vmca;
             }
 
-
             if ($sv == 1) {
 
                 $ecs = getNameEsc($precarInf['id_estado_pre'], $precarInf['id_ciudad_pre'], $precarInf['id_sede_pre']);
 
                 //Lista DE MUESTREO DE CAMBIOS
                 ?>
-                <h4 class="" style="margin: 0 0 1.2rem 6%;">Cambios a Realizar</h4>
+                <h4 class="" style="margin: 0 0 1.2rem 6%;">Edicion de datos</h4>
+                <hr>
                 <div class="editConten row col-md-8">
                     <div class="col-md-8">
                         <form action="../php/personalMerge.php" class="formgroup" id="soliMerge" method="POST">
@@ -239,9 +237,11 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
                     </div>
                     <div class="dit table-responsive">
                         <h6 class="">
-                            <p class="">edicion de datos de <a href="perfil.php?perfil=<?php echo encriptar($precarInf['ci_pre']) ?>">
-                                    <?php echo $precarInf['ci_pre'] ?>
-                                </a></p>
+                            <p class="">edicion de datos para
+                                <a href="perfil.php?perfil=<?php echo encriptar($precarInf['ci_pre']) ?>">
+                                    <?php echo "$pName $pApellido" ?>
+                                </a>
+                            </p>
                         </h6>
                         <style>
                             .dit.table-responsive {
@@ -265,9 +265,9 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
                             <thead>
                                 <tr>
                                     <th scope="col">campo</th>
-                                    <th scope="col">antes</th>
+                                    <th scope="col">datos actuales</th>
                                     <th scope="col"></th>
-                                    <th scope="col">despues</th>
+                                    <th scope="col">cambios a realizar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -323,6 +323,9 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
             $nota = ($precarInf['nota_pre'] == "") ? "sin nota" : $precarInf['nota_pre'];
             $c = $precarInf['size_pre'] / 1024;
 
+
+            $dat = new Empleado(encriptar($precarInf['ci_arch_pre']));
+
             $size = ($c <= 920) ? number_format($c, 2) . "KB" : number_format($c / 1024, 2) . "MB";
 
             if ($sv == 1) {
@@ -330,6 +333,7 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
                 //Lista DE MUESTREO DE CAMBIOS
                 ?>
                 <h4 class="" style="margin: 0 0 1.2rem 6%;">Ingreso de archivos</h4>
+                <hr>
                 <div class="editConten row col-md-8">
                     <div class="col-md-8">
                         <form action="../php/personalMerge.php" class="formgroup" id="soliMerge" method="POST">
@@ -353,8 +357,8 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
                             <h6 class="">
                                 <p style="font-size:15px;">subida de datos en el folder de: <a
                                         style="color: darkcyan; text-decoration: none;"
-                                        href="perfil.php?perfil=<?php echo encriptar($precarInf['ci_arch_pre']) ?>">
-                                        <?php echo $precarInf['ci_arch_pre'] ?>
+                                        href="perfil.php?perfil=<?php echo encriptar($dat->ci) ?>">
+                                        <?php echo "$dat->nombre $dat->apellido " ?>
                                     </a></p>
                             </h6>
                             <div class="row">
@@ -378,12 +382,8 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
                                         <button class="btn btn-outline-primary" disabled>nota:
                                             <?php echo $nota ?>
                                         </button>
-                                        <?php
-                                        $dat = new Personal(encriptar($precarInf['ci_responsable_pre']));
-                                        ?>
-                                        <a href="perfil.php?perfil=<?php echo encriptar($dat->getCi()) ?>"
-                                            class="btn btn-outline-primary">
-                                            <?php echo $dat->getCi() . ' ' . $dat->getNombre() . ' ' . $dat->getApellido() ?>
+                                        <a href="perfil.php?perfil=<?php echo encriptar($dat->ci) ?>" class="btn btn-outline-primary">
+                                            <?php echo $dat->ci . ' ' . $dat->nombre . ' ' . $dat->apellido ?>
                                         </a>
 
                                         <button class="btn btn-outline-primary" disabled>departamento responsable:
@@ -391,24 +391,25 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
                                         </button>
                                     </div>
                                 </div>
-
                             </div>
-                            <img class="<?php echo $iDOC ?> mt-3" src="<?php echo $precarInf['d_archivo_pre'] ?>" alt="Some text"
-                                width="200px">
-                            <embed class="<?php echo $DOC ?> mt-3" type="application/pdf"
-                                src="<?php echo $precarInf['d_archivo_pre'] ?>" width="200px">
+
+                            <div class="my-4 row mx-auto justify-content-center">
+                                <img class="<?php echo $iDOC ?>" src="<?php echo $precarInf['d_archivo_pre'] ?>" alt="Some text"
+                                    width="200px">
+                                <embed class="<?php echo $DOC ?>" type="application/pdf" src="<?php echo $precarInf['d_archivo_pre'] ?>"
+                                    width="200px">
+                            </div>
                         </div>
 
                         <style>
                             .dit img {
                                 border-radius: 6px;
                                 margin: 1rem 0;
+                                aspect-ratio: 19/10;
                             }
 
-                            embed {
-                                border-radius: 6px;
-                                margin: 1rem 0;
-                                paddin: 1rem 0;
+                            .dit embed {
+                                aspect-ratio: 19/10;
                             }
 
                             .dit.table-responsive {
@@ -453,15 +454,17 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
                 $svp = $conn->query("SELECT * FROM solicitudes s INNER JOIN solicitudes_archivos_precarga p INNER JOIN tiposarch t ON p.id_solicitud_archivo_pre = s.id_solicitud AND t.id_tipo = p.tipo_pre WHERE s.id_solicitud = '$id_arch'");
                 $sv = $svp->num_rows;
 
-                $precarInf = $svp->fetch_array();
+                $precarInf = mysqli_fetch_array($svp);
 
                 $DOC = obtenerExtension($precarInf['nombre_archivo_pre']) != 'pdf' ? 'd-none' : '';
                 $iDOC = obtenerExtension($precarInf['nombre_archivo_pre']) == 'pdf' ? 'd-none' : '';
 
                 $tipoArch = $precarInf['nombre_tipo_arch'];
-
                 $nota = ($precarInf['nota_pre'] == "") ? "sin nota" : $precarInf['nota_pre'];
                 $c = $precarInf['size_pre'] / 1024;
+
+                $dat = new Empleado(encriptar($precarInf['ci_arch_pre']));
+
                 $size = ($c <= 920) ? number_format($c, 2) . "KB" : number_format($c / 1024, 2) . "MB";
 
 
@@ -489,39 +492,50 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
                     <div class="dit table-responsive">
                         <div class="">
                             <h6 class="">
-                                <p style="font-size:15px;">datos del folder de: <a style="color: darkcyan; text-decoration: none;"
-                                        href="perfil.php?perfil=<?php echo encriptar($precarInf['ci_arch_pre']) ?>">
-                                        <?php echo $precarInf['ci_arch_pre'] ?>
+                                <p style="font-size:15px;">eliminacion de datos en el folder de: <a
+                                        style="color: darkcyan; text-decoration: none;"
+                                        href="perfil.php?perfil=<?php echo encriptar($dat->ci) ?>">
+                                        <?php echo "$dat->nombre $dat->apellido " ?>
                                     </a></p>
                             </h6>
                             <div class="row">
                                 <div class="btn-toolbar d-grid gap-1" role="toolbar" aria-label="Toolbar">
                                     <div class="btn-group" role="group" aria-label="Button Group">
-                                        <button class="btn btn-outline-primary" disabled>nombre del archivo:
+                                        <button class="btn btn-outline-danger" disabled>nombre del archivo:
                                             <?php echo $precarInf['nombre_archivo_pre'] ?>
                                         </button>
-                                        <button class="btn btn-outline-primary" disabled>Archivo:
+                                        <button class="btn btn-outline-danger" disabled>Archivo:
                                             <?php echo $tipoArch ?>
+                                        </button>
+                                        <button class="btn btn-outline-danger" disabled>peso:
+                                            <?php echo $size ?>
                                         </button>
                                     </div>
                                     <div class="btn-group" role="group" aria-label="Button Group">
-                                        <button class="btn btn-outline-primary" disabled>peso:
-                                            <?php echo $size ?>
-                                        </button>
-                                        <button class="btn btn-outline-primary" disabled>requerido:
+
+                                        <button class="btn btn-outline-danger" disabled>requerido:
                                             si
                                         </button>
-                                        <button class="btn btn-outline-primary" disabled>nota:
+                                        <button class="btn btn-outline-danger" disabled>nota:
                                             <?php echo $nota ?>
+                                        </button>
+                                        <a href="perfil.php?perfil=<?php echo encriptar($dat->ci) ?>" class="btn btn-outline-danger">
+                                            <?php echo $dat->ci . ' ' . $dat->nombre . ' ' . $dat->apellido ?>
+                                        </a>
+
+                                        <button class="btn btn-outline-danger" disabled>departamento responsable:
+                                            <?php echo $precarInf['nombre_tipo_arch'] ?>
                                         </button>
                                     </div>
                                 </div>
-
                             </div>
-                            <img class="<?php echo $iDOC ?> mt-3" src="<?php echo $precarInf['d_archivo_pre'] ?>" alt="Some text"
-                                width="200px">
-                            <embed class="<?php echo $DOC ?> mt-3" type="application/pdf"
-                                src="<?php echo $precarInf['d_archivo_pre'] ?>" width="200px">
+
+                            <div class="my-4 row mx-auto justify-content-center">
+                                <img class="<?php echo $iDOC ?>" src="<?php echo $precarInf['d_archivo_pre'] ?>" alt="Some text"
+                                    width="200px">
+                                <embed class="<?php echo $DOC ?>" type="application/pdf" src="<?php echo $precarInf['d_archivo_pre'] ?>"
+                                    width="200px">
+                            </div>
                         </div>
 
                         <style>
@@ -554,9 +568,6 @@ if (isset($_POST["idSoli"]) && isset($_POST['receptor'])) {
             } else {
                 echo "el archivo no existe o ya fue eliminado";
             }
-            break;
-        default:
-            # code...
             break;
     }
 }

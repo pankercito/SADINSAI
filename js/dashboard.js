@@ -5,7 +5,7 @@ const promedioG = document.querySelector('#gestionesProm');
 
 // GRAFICO PRINCIPAL DE LINEAS
 $.ajax({
-    url: "../php/dashboardDataPre.php",
+    url: "../php/dashboardDataPre.php", 
     success: function (response) {
         if (jeisonXD(response)) {
             var colon = JSON.parse(response);
@@ -16,9 +16,9 @@ $.ajax({
 
             const f = colon[3]["lunes"] + " - " + colon[3]["domingo"];
 
-            document.getElementById('prom').innerHTML = 'promedio semanal de gestiones realizadas: ' + colon[5] + '% ';
-            document.getElementById('prem').innerHTML = 'promedio semanal ingresos archivos agregados: ' + colon[6] + '% ';
-            document.getElementById('prim').innerHTML = 'promedio semanal inicios de sesion: ' + colon[4] + '% ';
+            document.getElementById('prom').innerHTML = 'gestiones realizadas: ' + colon[5] + '% ';
+            document.getElementById('prem').innerHTML = 'agregados: ' + colon[6] + '% ';
+            document.getElementById('prim').innerHTML = 'inicios de sesion: ' + colon[4] + '% ';
 
             nuevoGrafico(dashboard, us, dos, tri, f);
 
@@ -28,9 +28,9 @@ $.ajax({
     }
 });
 
-// GRAFICO DE SOLICITUDES DE PIE
+// GRAFICO DE GESTIONES DE PIE
 $.ajax({
-    url: "../php/dashboardSolicitudesPre.php",
+    url: "../php/dashboardGestionesPre.php",
     success: function (response) {
         if (response != null) {
             var colon = JSON.parse(response);
@@ -53,9 +53,9 @@ $.ajax({
                     data: [us, dos, tri, four],
                     backgroundColor: [
                         '#f9c940',
-                        '#ff6384',
+                        '#d7d7d7',
                         '#3fe8f4',
-                        '#efefef'
+                        '#ff6384',
                     ],
                     hoverOffset: 4,
                 }]

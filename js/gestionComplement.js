@@ -17,12 +17,23 @@ const form = document.getElementById("newDoc");
 form.addEventListener("click", modalcito);
 
 function modalcito() {
-    var ciUser = getQueryVariable('carga');
-    var tipoDarch = getQueryVariable('gestion');
+    var obj = $.dialog({
+        title: false,
+        closeIcon: false, // hides the close icon.
+        content: `
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border my-3" role="status">
+                <span class="visually-hidden">procesando...</span>
+            </div>
+        </div>`
+    });
+
+    var ciUser = getQueryVariable('c');
+    var tipoDarch = getQueryVariable('g');
 
     rows = {
-        "gestion": tipoDarch,
-        "carga": ciUser
+        "g": tipoDarch,
+        "c": ciUser
     }
 
     $.ajax({
@@ -30,12 +41,17 @@ function modalcito() {
         url: "../layout/documentForm.php",
         type: "get",
         error: function (error) {
+
+            obj.close();
+
             $.alert({
                 title: "error al cargar datos",
                 content: "Hubo un error: " + error
             });
         },
         success: function (respuesta) {
+            obj.close();
+
             // modal de documentForm
             $.confirm({
                 title: "Nuevo Documento",
@@ -49,6 +65,7 @@ function modalcito() {
                     const inputText = document.getElementById('archName');
                     const inputPerson = document.getElementById('Responsable');
                     const inputPersonDnone = document.getElementById('Presponsable');
+                    let buutt = document.getElementById('veroff');
                     const resultDnone = document.getElementById('PersonDi');
 
                     //BUSQUEDA DE PESONAL   
@@ -113,6 +130,16 @@ function modalcito() {
                         }
                     });
 
+                    this.$content.find('#veroff').click(function () {
+                        // activar boton de procesar 
+                        if (self.$content.find('#arch').val() != "" &&
+                            self.$content.find('#departament').val() != 0 &&
+                            self.$content.find('#Responsable').val() == localStorage.getItem('valorInput')) {
+                            self.buttons.d.enable();
+                        } else {
+                            self.buttons.d.disable();
+                        }
+                    });
 
                     // ACTIVAR INPUT Código para el select
                     this.$content.find('#caro #departament').change(function () {
@@ -147,6 +174,18 @@ function modalcito() {
                                         text: "subir",
                                         btnClass: "btn-green",
                                         action: function () {
+                                            var obj =
+                                                $.dialog({
+                                                    title: false,
+                                                    closeIcon: false, // hides the close icon.
+                                                    content: `
+                                                                    <div class="d-flex justify-content-center">
+                                                                                        <div class="spinner-border" role="status">
+                                                                        <span class="visually-hidden">Redirigiendo...</span>
+                                                                    </div>
+                                                                    </div>`
+                                                });
+
                                             // Enviamos el formulario por Ajax
                                             $.ajax({
                                                 data: formData,
@@ -154,23 +193,6 @@ function modalcito() {
                                                 contentType: false,
                                                 url: "../php/registroSolicitud.php",
                                                 type: "POST",
-                                                beforeSend: function () {
-                                                    var obj =
-                                                        $.dialog({
-                                                            title: false,
-                                                            closeIcon: false, // hides the close icon.
-                                                            content: `
-                                                                    <div class="d-flex justify-content-center">
-                                                                                        <div class="spinner-border" role="status">
-                                                                        <span class="visually-hidden">Redirigiendo...</span>
-                                                                    </div>
-                                                                    </div>`
-                                                        });
-                                                    //CERRAR EL DIALOG ANTERIOR
-                                                    setTimeout(() => {
-                                                        obj.close();
-                                                    }, 501);
-                                                },
                                                 error: function (error) {
                                                     // MENSAJE SUCCES
                                                     setTimeout(() => {
@@ -195,6 +217,7 @@ function modalcito() {
                                                     // Si la respuesta es exitosa, imprimimos el mensaje de éxito 
                                                     var dataT = data;
 
+                                                    obj.close();
                                                     if (dataT == "success") {
                                                         // MENSAJE SUCCES
                                                         setTimeout(() => {
@@ -211,7 +234,7 @@ function modalcito() {
                                                                         </div>
                                                                         </div>`,
                                                             });
-                                                        }, 500);
+                                                        }, 400);
                                                         setTimeout(() => {
                                                             location.replace("gestionData.php");
                                                         }, 2500);
@@ -265,24 +288,18 @@ $(document).ready(function () {
     }
 });
 
-//filtro de busqueda de estados
+//filtro de busqueda de personal
 function PersonalAsig(inpat, resultDiv, inputValAsig) {
 
     let input = inpat; //id del input de busqueda;
     let inputDnone = inputValAsig; //id del input de busqueda;
     let divResult = resultDiv; //donde mostrar rsultados de la busqueda;
 
-    let keys = new FormData();
-
-    keys.append("keys", input.value);
-
-
+    let keys = { "keys": input.value };
 
     if (input.value.length > 0) {
         $.ajax({
             data: keys,
-            processData: false,
-            contentType: false,
             url: "../php/searchPerson.php",
             type: "post",
             success: function (params) {
@@ -295,7 +312,7 @@ function PersonalAsig(inpat, resultDiv, inputValAsig) {
                     divResult.innerHTML = "";
 
                     newlist.forEach(element => {
-                        let elemetos = `<a onclick="items('${element['nombre']} ${element['apellido']}', '${element['ci']}')" class="nav-link mt-2 p-2">${element['nombre']} ${element['apellido']}</a>`;
+                        let elemetos = `<a onclick="itemsB('${element['nombre']} ${element['apellido']}', '${element['ci']}')" class="nav-link mt-2 p-2">${element['nombre']} ${element['apellido']}</a>`;
                         divResult.innerHTML += elemetos;
                     });
 
@@ -312,11 +329,12 @@ function PersonalAsig(inpat, resultDiv, inputValAsig) {
     input.addEventListener("blur", function () {
         setTimeout(() => {
             divResult.classList.add("d-none");
-        }, 100);
+        }, 400);
     });
 }
 
-function items(val, valu) {
+
+function itemsB(val, valu) {
     const inputPerson = document.getElementById('Responsable');
     const inputPersonDnone = document.getElementById('Presponsable');
 

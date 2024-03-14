@@ -1,103 +1,87 @@
 <?php
 
 session_start();
+include "../php/configIncludes.php";
 
 if (isset($_POST['login'])) {
-
-    include "class/classIncludes.php";
-    include "function/criptCodes.php";
-    include "function/sesion.php";
-    include "function/sumarhora.php";
 
     $conn = new Conexion;
 
     $usuariolg = $conn->real_escape(trim($_POST['userlg']));
     $pass = $conn->real_escape(trim($_POST['passlg']));
 
-    $auditoria = new Auditoria;
+    @$userLogin = new User(getUserHash(null, null, $usuariolg));
 
-    $userLogin = new UserModel($usuariolg);
-
-    if ($userLogin->user == null) {
-        // Contraseña errada2
+    if ($userLogin->usuario == null) {
+        // Contraseña errada
         header('location:../index.php?fallo=true');
         exit;
     }
 
-    $trix = desencriptar($userLogin->hash);
+    $userCase = new UserUseCase($userLogin);
 
-    $gestionUsuarios = new GestionDeUsuarios($userLogin);
+    switch ($userCase->validarUsuario($pass, $usuariolg)) {
+        case 1:
+            // Contraseña correcta
+            switch ($userLogin->sesion) {
+                case false:
+                    $_SESSION['userdata'] = ucwords("{$userLogin->nombre} {$userLogin->apellido}");
+                    $_SESSION['cidelusuario'] = $userLogin->ci;
+                    $_SESSION['sesion'] = $userLogin->getUserId();
+                    $_SESSION['admincheck'] = $userLogin->adp;
+                    $_SESSION['event'] = str_replace(" ", '', "{$userLogin->nombre}{$userLogin->apellido}{$userLogin->ci}");
+                    $event = $_SESSION['event'];
 
-    // si el usuario esta desactivado
-    if ($userLogin->active == 2 || $userLogin->active == 0) {
-        header('location:../index.php?userdes=true');
-        exit;
-    }
+                    $nueva_hora = hora10();
 
-    if ($pass == $trix) { //contraseña correcta 
-        $resultado = 1;
-    } else {
-        if (!isset($_SESSION['errorContra'])) {
-            $_SESSION['errorContra'] = 1;
-        }
+                    $_SESSION['LAST_ACTIVITY'] = time(); 
 
-        if ($_SESSION['errorName'] != $usuariolg) {
-            $_SESSION['errorContra'] = 1;
-        }
+                    $gestionDeUsuario = new UserAuditoria();
 
-        if ($_SESSION['errorContra'] == 3 && $_SESSION['errorName'] == $usuariolg) {
-            $gestionUsuarios->supenderUsuario();
-            $_SESSION['errorContra'] = 0;
-            $resultado = 2;
-        } else {
-            $_SESSION['errorContra']++;
-            $_SESSION['errorName'] = $usuariolg;
-            $resultado = 3;
-        }
-    }
+                    if ($gestionDeUsuario->inicioDeSesion()) {
+                        // eliminar evento de inicio en la base de datos si ya existe
+                        $delevent = "DROP EVENT IF EXISTS $event";
+                        $conn->query($delevent);
 
-    switch ($resultado) {
-        case 1: // Contraseña correcta
-            if ($userLogin->sesion == FALSE) { //no hay sesion activa
-                $_SESSION['userdata'] = '' . ucwords(strtolower($userLogin->nombre)) . ' ' . ucwords(strtolower($userLogin->apellido)) . '';
-                $_SESSION['cidelusuario'] = $userLogin->ci;
-                $_SESSION['sesion'] = $userLogin->id;
-                $_SESSION['sesioninit'] = $userLogin->sesion;
-                $_SESSION['admincheck'] = $userLogin->adp;
+                        //variable de inicio de sesion en BD
+                        if ($userCase->inicioDeSesion()) {
+                            $_SESSION['sesioninit'] = $userLogin->sesion;
+                        } else {
+                            throw new Exception("Error iniciando sesion usercase", 1);
+                        }
 
-                $id = strval($userLogin->id);
-                $taken = str_replace(' ', '', strtolower($userLogin->nombre . $userLogin->apellido));
-                $_SESSION['event'] = $taken . $id;
-                $event = $taken . $id;
+                        //encender eventos en la base de datos
+                        $eventOn = $conn->query("SET GLOBAL event_scheduler='ON'");
 
-                $nueva_hora = hora10();
+                        $crtevent = "CREATE EVENT $event ON SCHEDULE AT '$nueva_hora' DO UPDATE registro SET sesion = '0' WHERE id_usuario = '{$userLogin->getUserId()}'";
+                        $bdEvent = $conn->query($crtevent);
 
-                if ($auditoria->sesionInit($id)) {
-                    $delevent = "DROP EVENT IF EXISTS $event";
-                    $conn->query($delevent);
+                        if (!$bdEvent) {
+                            echo $conn->error();
+                            echo $bdEvent;
+                            throw new Exception("Error guardando el evento", 1);
+                        }
+                    } else {
+                        throw new Exception("Error iniciando sesion", 1);
+                    }
 
-                    //encender eventos en la base de datos
-                    @$eventOn = $conn->query("SET GLOBAL event_scheduler='ON'");
-
-                    $event = "CREATE EVENT $event ON SCHEDULE AT '$nueva_hora' DO UPDATE registro r SET sesion = '0' WHERE r.id_usuario = '$id'";
-                    $conn->query($event);
-                }
-
-                $_SESSION['LAST_ACTIVITY'] = time();
-
-                initSesion($userLogin->id); //variable de inicio de sesion en BD
-
-                // Redirecciono al usuario a la página principal del sitio.
-                header("HTTP/1.1 302 Moved Temporarily");
-                if ($userLogin->adp == 1) {
-                    header('location:../public/principal.php');
-                } elseif ($userLogin->adp == 2) {
-                    header('location:../public/sysAdmin.php');
-                } else {
-                    header('location:../public/perfil.php?perfil=' . encriptar($_SESSION['cidelusuario']));
-                }
-            } else if ($userLogin->sesion == TRUE) {
-                header('location:../index.php?session-dup=true');
+                    // Redirecciono al usuario a la página principal del sitio.
+                    header("HTTP/1.1 302 Moved Temporarily");
+                    switch ($userLogin->adp) {
+                        case 1:
+                            header('location:../public/principal.php');
+                            break;
+                        case 2:
+                            header('location:../public/sysAdmin.php');
+                            break;
+                        default:
+                            header('location:../public/perfil.php?perfil=' . encriptar($userLogin->ci));
+                            break;
+                    }
+                    break;
+                default:
+                    header('location:../index.php?session-dup=true');
+                    break;
             }
             break;
         case 2: // Usuario deshabilitado

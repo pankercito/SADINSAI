@@ -1,20 +1,15 @@
 <?php
 
-
-include "class/conx.php";
-include "function/getUser.php";
-include "class/auditoria.php";
-include "class/user_model.php";
-include "class/gestionUsuarios.php";
+include "../php/configIncludes.php";
 
 $conn = new Conexion();
 
 $id = $conn->real_escape(trim($_POST['userId']));
 
-$ges = new GestionDeUsuarios();
-$auditoria = $ges->byId($id);
+$ges = new User(getUserHash($id));
+$gestionDeUsuario = new UserUseCase($ges);
 
-$a = $auditoria->deleteUser();
+$a = $gestionDeUsuario->eliminarUsuario();
 
 if ($a == true) {
     echo "success.dele";

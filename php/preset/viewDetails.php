@@ -26,9 +26,7 @@ function obtenerExtension($nombreArchivo)
 
 if (isset($_POST["idSoli"])) {
 
-    include "../class/conx.php";
-    include "../function/getESCname.php";
-    include "../function/criptCodes.php";
+    include "../preset/presetConfigIncludes.php";
 
     $conn = new Conexion();
 
@@ -134,14 +132,16 @@ if (isset($_POST["idSoli"])) {
                 <hr>
                 <div class="dit mx-auto table-responsive">
                     <div class="contenedor col-md-10 mx-auto mt-4">
-                        <?php echo "Dirigido a: " . $precarInf['ci_solicitada'] ?>
-                        <table class="table table-primary">
+                        <h6>
+                            <?php echo "Dirigido a: " . $precarInf['ci_solicitada'] ?>
+                        </h6>
+                        <hr>
+                        <table class="table table">
                             <thead>
                                 <tr>
-                                    <th></th>
                                     <th>CAMPO</th>
                                     <th></th>
-                                    <th>ACTUALIZADO A</th>
+                                    <th>NUEVA INFORMACION</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -238,16 +238,22 @@ if (isset($_POST["idSoli"])) {
                                 </div>
 
                             </div>
-                            <img class="<?php echo $iDOC ?>" src="<?php echo $precarInf['d_archivo_pre'] ?>" alt="Some text"
-                                width="200px">
-                            <embed class="<?php echo $DOC ?>" type="application/pdf" src="<?php echo $precarInf['d_archivo_pre'] ?>"
-                                width="200px">
+                            <div class="my-4 row mx-auto justify-content-center">
+                                <img class="<?php echo $iDOC ?>" src="<?php echo $precarInf['d_archivo_pre'] ?>" alt="Some text"
+                                    width="200px">
+                                <embed class="<?php echo $DOC ?>" type="application/pdf" src="<?php echo $precarInf['d_archivo_pre'] ?>"
+                                    width="200px">
+                            </div>
                         </div>
                     </div>
                     <style>
                         .dit img {
                             border-radius: 6px;
                             margin: 1rem 0;
+                        }
+
+                        .dit embed {
+                            aspect-ratio: 19/10;
                         }
                     </style>
                 </div>
@@ -315,16 +321,22 @@ if (isset($_POST["idSoli"])) {
                                     </div>
                                 </div>
                             </div>
-                            <img class="<?php echo $iDOC ?>" src="<?php echo $precarInf['d_archivo_pre'] ?>" alt="Some text"
-                                width="200px">
-                            <embed class="<?php echo $DOC ?>" type="application/pdf" src="<?php echo $precarInf['d_archivo_pre'] ?>"
-                                width="200px">
+                            <div class="my-4 row mx-auto justify-content-center">
+                                <img class="<?php echo $iDOC ?>" src="<?php echo $precarInf['d_archivo_pre'] ?>" alt="Some text"
+                                    width="200px">
+                                <embed class="<?php echo $DOC ?>" type="application/pdf" src="<?php echo $precarInf['d_archivo_pre'] ?>"
+                                    width="200px">
+                            </div>
                         </div>
                     </div>
                     <style>
                         .dit img {
                             border-radius: 6px;
                             margin: 1rem 0;
+                        }
+
+                        .dit embed {
+                            aspect-ratio: 19/10;
                         }
                     </style>
                 </div>

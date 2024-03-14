@@ -1,18 +1,20 @@
 <?php
 
-require "class/conx.php";
-require "function/criptCodes.php";
+require "../php/class/conx.php";
+require "../php/function/searchin.php";
 
 $conn = new Conexion;
 
-$keys = $conn->real_escape($_POST["keys"]);
+@$keys = $conn->real_escape(trim($_POST["keys"]));
 
-$searching = $conn->query("SELECT ci, nombre, apellido FROM personal WHERE ci LIKE               '$keys%' OR nombre LIKE '$keys%' OR apellido LIKE '$keys%' LIMIT 0, 6");
+$searching = searching($keys, $conn);
 
-while ($v = $searching->fetch_object()) {
-    $export[] = [
-        '<li class="nav-item"><a class="nav-link collapsed searched" href="../public/perfil.php?perfil=' . encriptar($v->ci) . '&parce=true">' . $v->ci . ' | ' . ucfirst(strtolower($v->nombre)) . ' ' . ucfirst(strtolower($v->apellido)) . '</a></li>'
-    ];
+if (is_array($searching)) {
+    foreach ($searching as $v) {
+        $export[] = [
+            '<li class="nav-item"><a class="nav-link collapsed searched" href="../public/perfil.php?perfil=' . $v['ci'] . '&parce=true">' . desencriptar($v['ci']) . ' | ' . ucfirst(strtolower($v['nombre'])) . ' ' . ucfirst(strtolower($v['apellido'])) . '</a></li>'
+        ];
+    }
 }
 
-echo json_encode($export);
+echo json_encode(@$export);

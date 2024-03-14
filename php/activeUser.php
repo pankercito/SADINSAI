@@ -1,22 +1,19 @@
 <?php
 
-include "class/classIncludes.php";
-include "function/getUser.php";
+include "../php/configIncludes.php";
 
 if ($_POST['userId'] != "") {
 
     $conn = new Conexion();
     $userID = $conn->real_escape(trim($_POST['userId']));
 
-    $ges = new GestionDeUsuarios();
-    $auditoria = $ges->byId($userID);
-
+    $gestionDeUsuario = new UserUseCase(new User(getUserHash($userID)));
 
     $radio = $conn->real_escape($_POST['radio']);
     switch ($radio) {
         case '1':
 
-            $aa = $auditoria->activarUsuario();
+            $aa = $gestionDeUsuario->activarUsuario();
 
             if ($aa == true) {
                 echo "success";
@@ -25,7 +22,7 @@ if ($_POST['userId'] != "") {
             }
             break;
         case '2':
-            $aa = $auditoria->supenderUsuario();
+            $aa = $gestionDeUsuario->desactivarUsuario();
 
             if ($aa == true) {
                 echo "success.rech";

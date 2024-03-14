@@ -2,10 +2,7 @@
 
 <?php require "../layout/head.php"; ?>
 
-<?php
-include "../php/function/removerAcentos.php";
-require "../layout/navbar.php";
-?>
+<?php require "../layout/navbar.php"; ?>
 
 <link rel="stylesheet" href="../styles/estados.css">
 <link rel="stylesheet" href="../styles/viewtables.css">
@@ -16,8 +13,8 @@ require "../layout/navbar.php";
 <div class="estructur-conten">
     <div class="grid-containerr">
         <div class="col-md-12">
-        <h4 class="mx-auto mb-2" style="color: #e7e7e7;">PERSONAL DE LA EMPRESA</h4>
-                <hr style="border-color:white;">
+            <h4 class="mx-auto mb-2" style="color: #e7e7e7;">PERSONAL DE LA EMPRESA</h4>
+            <hr style="border-color:white;">
             <div class="sot mx-auto">
                 <table id="table" class="table table-striped ">
                     <thead>

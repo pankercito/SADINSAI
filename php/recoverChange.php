@@ -1,31 +1,27 @@
 <?php
 
-include "class/conx.php";
-include "function/criptCodes.php";
+include "../php/configIncludes.php";
 
 if (isset($_POST["ci"])) {
 
     $conn = new Conexion();
 
-    $ci = $conn->real_escape($_POST["ci"]);
-    $new_pass = encriptar($conn->real_escape($_POST["pass"]));
+    $ci = encriptar($conn->real_escape($_POST["ci"]));
+    $new_pass = $conn->real_escape($_POST["pass"]);
 
-    @$d = $conn->query("SELECT * FROM registro WHERE ci = $ci");
+    $user = new User($ci);
 
-    if ($d->num_rows == 1) {
+    $u = new UserUseCase($user);
 
-        @$u = $conn->query("UPDATE registro SET pass = '$new_pass' WHERE ci = '$ci'");
-
-        if ($u == true) {
-           echo "se cambio la contraseña correctamente";
-        }else{
-           echo "error al cambiar la contraseña";
-        }
-
+    if ($u->cambiarHash($new_pass)) {
+        echo "se cambio la contraseña correctamente";
     } else {
-        echo "error al leer datos";
+        echo "error al cambiar la contraseña";
     }
 
 } else {
     echo "nollego";
 }
+
+session_unset();
+session_destroy();

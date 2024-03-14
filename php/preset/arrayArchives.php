@@ -1,6 +1,8 @@
 <?php
 
-$direcciones = array();
+// Array de datos para CARD SELECTOR
+
+$direcciones = [];
  
 for($i = 1001; $i < 1047; $i++ ){
     $opcion = $i;

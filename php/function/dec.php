@@ -8,8 +8,8 @@
  */
 function comprueba(){
     $res = null;
-    if (array_key_exists('perfil', $_GET) or array_key_exists('carga', $_GET)) {
-        $res = $_GET['perfil'] ?? $_GET['carga'];
+    if (array_key_exists('perfil', $_GET) or array_key_exists('c', $_GET)) {
+        $res = $_GET['perfil'] ?? $_GET['c'];
     }
     return $res;
 }

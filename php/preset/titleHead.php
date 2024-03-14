@@ -1,9 +1,5 @@
 <?php
 
-include "statesHead.php";
-
-include "../php/function/fHead.php";
-
 // Guardar el nombre de los URL *Direccion* => *Nombre que tendra*
 $titles = [
     '/public/perfil.php' => 'Perfil',
@@ -22,7 +18,12 @@ $titles = [
     '/components/cargos.php' => 'Cargos',
     '/components/sedes.php' => 'Sedes',
     '/components/recovery.php' => 'Recuperacion de contraseña',
+    '/components/active_account.php' => 'Activar Usuario',
 ];
+
+if (!function_exists('encabezado')) {
+    include "../php/function/fHead.php";
+}
 
 // URL actual sin los parámetros GET
 $actUrl = strtok($_SERVER['REQUEST_URI'], '?');

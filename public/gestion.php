@@ -1,10 +1,4 @@
-<?php
-
-require_once "../php/sesionval.php";
-
-include "../php/class/personal.php";
-
-?>
+<?php require_once "../php/sesionval.php"; ?>
 
 <?php require "../layout/head.php" ?>
 
@@ -23,8 +17,14 @@ include "../php/class/personal.php";
     <div class="row">
       <div class="act col-lg-2">
         <?php
-        if ($_GET['gestion'] == 1046) {
-          echo '<style> .acciones{ display: none;}</style>';
+        if ($_GET['g'] == 1046) {
+          ?>
+          <style>
+            .acciones {
+              display: none;
+            }
+          </style>
+          <?php
           include "../layout/planillasOpciones.php";
         }
         ?>
@@ -38,17 +38,30 @@ include "../php/class/personal.php";
       <div class="archives-conten col-lg-10">
         <h4 id="tittleDoc">
           <?php
-          $ver = new Personal($_GET['carga']);
-          $get = $_GET['gestion'];
+          $conn = new Conexion;
+          $ver = new Empleado($conn->real_escape($_GET['c']));
+          $get = $conn->real_escape($_GET['g']);
+
           $pero = $conn->query("SELECT nombre_tipo_arch FROM `tiposarch` WHERE id_tipo ='$get'");
-          echo $pero->fetch_object()->nombre_tipo_arch . " de " . $ver->getNombre() . ' ' . $ver->getApellido();
+
+          if ($pero->num_rows > 0) {
+            echo $pero->fetch_object()->nombre_tipo_arch . " de " . $ver->nombre . ' ' . $ver->apellido;
+          }else {
+            echo "FORMULARIO";
+          }
           ?>
         </h4>
         <hr style="border-color: #e7e7e7;">
         <div class="cards d-flex" style="flex-wrap: wrap;">
           <?php
-          include_once "../php/preset/cardSelector.php"
-            ?>
+
+          include_once "../php/preset/cardSelector.php";
+
+          if ($_GET['g'] == 1046) {
+            include "../layout/planillas.php";
+          }
+
+          ?>
         </div>
       </div>
     </div>

@@ -1,29 +1,46 @@
 <?php
-
-class GestionData extends Auditoria
+/**
+ * Gestion General de Informacion del sistema
+ * 
+ * gestiona:
+ * - archivos de personal
+ * - ingreso de personal
+ * - edicion de datos del personal
+ * - eliminacion de archivos del pesonal
+ */
+class Gestiones
 {
-
     /**
-     * Summary of id
+     * Id de la solicitud de gestion
      * @var 
      */
     private $id;
+    /**
+     * Summary of auditoria
+     * @var 
+     */
+    private $auditoria;
+    /**
+     * Summary of connec
+     * @var 
+     */
+    private $connec;
 
     /**
-     * Summary of __construct
-     * @param mixed $id id del usuasrio que esta realizando la gestion
-     * @throws \Exception
+     * @param mixed $id id de la gestion
+     * @throws Exception
      */
     public function __construct($id)
     {
-
-        $this->id = $id;
-
-        parent::__construct();
-
-        if ($this->id == '') {
+        if ($id == null) {
             throw new Exception("Estas haciendo una llamada no valida, revisa la documentacion", 1);
         }
+
+        $this->id = $id;
+        @session_start();
+
+        $this->auditoria = new GestionesAuditoria();
+        $this->connec = new Conexion;
     }
 
     /**
@@ -32,7 +49,6 @@ class GestionData extends Auditoria
      */
     public function addPersonal()
     {
-
         $sql = $this->connec->query("SELECT * FROM solicitudes t 
                                               INNER JOIN solicitudes_precarga p ON p.id_solicitud_precarga = t.id_solicitud 
                                               INNER JOIN estados e ON p.id_estado_pre = e.id_estado
@@ -42,62 +58,64 @@ class GestionData extends Auditoria
                                               INNER JOIN departamentos d ON p.departamento_pre = d.id_direccion
                                               WHERE t.id_solicitud = $this->id");
 
-        if ($sql == true) {
+        switch ($sql) {
+            case true:
+                $dat = $sql->fetch_assoc();
 
-            $dat = $sql->fetch_assoc();
+                $ci = $dat['ci_pre'];
+                $nombre = $dat['nombre_pre'];
+                $apellido = $dat['apelido_pre'];
+                $grado = $dat['grado_ac_pre'];
+                $fecha = $dat['fecha_nac_pre'];
+                $sexo = $dat['sexo_pre'];
+                $estado = $dat['id_estado_pre'];
+                $ciudad = $dat['id_ciudad_pre'];
+                $sede = $dat['id_sede_pre'];
+                $dirr = $dat['direccion_pre'];
+                $mail = $dat['email_pre'];
+                $celp = $dat['telefono_pre'];
+                $cargo = $dat['cargo_pre'];
+                $departament = $dat['departamento_pre'];
 
-            $ci = $dat['ci_pre'];
-            $nombre = $dat['nombre_pre'];
-            $apellido = $dat['apelido_pre'];
-            $grado = $dat['grado_ac_pre'];
-            $fecha = $dat['fecha_nac_pre'];
-            $sexo = $dat['sexo_pre'];
-            $estado = $dat['id_estado_pre'];
-            $ciudad = $dat['id_ciudad_pre'];
-            $sede = $dat['id_sede_pre'];
-            $dirr = $dat['direccion_pre'];
-            $mail = $dat['email_pre'];
-            $celp = $dat['telefono_pre'];
-            $cargo = $dat['cargo_pre'];
-            $departament = $dat['departamento_pre'];
+                $array = [
+                    'ci' => $dat['ci_pre'],
+                    'nombre' => $dat['nombre_pre'],
+                    'apellido' => $dat['apelido_pre'],
+                    'grado' => $dat['grado_ac_pre'],
+                    'fecha' => $dat['fecha_nac_pre'],
+                    'sexo' => $dat['sexo_pre'],
+                    'estado' => $dat['estado'],
+                    'ciudad' => $dat['ciudad'],
+                    'sede' => $dat['nombre_sede'],
+                    'direccion' => $dat['direccion_pre'],
+                    'email' => $dat['email_pre'],
+                    'telefono' => $dat['telefono_pre'],
+                    'cargo' => $dat['cargo_nombre'],
+                    'departamento' => $dat['dir_nombre']
+                ];
 
-            $array = [
-                'ci' => $dat['ci_pre'],
-                'nombre' => $dat['nombre_pre'],
-                'apellido' => $dat['apelido_pre'],
-                'grado' => $dat['grado_ac_pre'],
-                'fecha' => $dat['fecha_nac_pre'],
-                'sexo' => $dat['sexo_pre'],
-                'estado' => $dat['estado'],
-                'ciudad' => $dat['ciudad'],
-                'sede' => $dat['nombre_sede'],
-                'direccion' => $dat['direccion_pre'],
-                'email' => $dat['email_pre'],
-                'telefono' => $dat['telefono_pre'],
-                'cargo' => $dat['cargo_nombre'],
-                'departamento' => $dat['dir_nombre']
-            ];
+                if ($this->auditoria->ingresoDePersonal($array)) { // REGISTRO DE MOVIMIENTO
 
-            if ($this->registIngres($array)) { // REGISTRO DE MOVIMIENTO
-
-                $sql1 = $this->connec->query("INSERT INTO personal (ci, nombre,apellido, grado_ac, fecha_nac, sexo, id_estado, id_ciudad ,sede_id,direccion, email, telefono, cargo, departamento)
+                    $sql1 = $this->connec->query("INSERT INTO personal (ci, nombre,apellido, grado_ac, fecha_nac, sexo, id_estado, id_ciudad ,sede_id,direccion, email, telefono, cargo, departamento)
                                                  VALUES ('$ci', '$nombre', '$apellido', '$grado', '$fecha', '$sexo', '$estado', '$ciudad', '$sede', '$dirr', '$mail', '$celp',' $cargo', '$departament')");
 
-                if ($sql1 != true) {
-                    $cake = "error.to.sql";
-                } else {
+                    if ($sql1 != true) {
+                        $cake = "error.to.sql";
+                    } else {
 
-                    $this->connec->query("UPDATE solicitudes SET apr_estado = '1' WHERE id_solicitud = '$this->id'");
+                        $this->connec->query("UPDATE solicitudes SET apr_estado = '1' WHERE id_solicitud = '$this->id'");
 
-                    $location[] = [
-                        'redirec' => 'perfil.php?perfil=' . encriptar($dat['ci_pre']) . '&parce=true',
-                        'estado' => 'succes.personal.ingres'
-                    ];
-                    $cake = $location;
+                        $location[] = [
+                            'redirec' => 'perfil.php?perfil=' . encriptar($dat['ci_pre']) . '&parce=true',
+                            'estado' => 'succes.personal.ingres'
+                        ];
+                        $cake = $location;
+                    }
                 }
-            }
-        } else {
-            $cake = false;
+                break;
+            default:
+                $cake = false;
+                break;
         }
         return $cake;
     }
@@ -128,44 +146,44 @@ class GestionData extends Auditoria
                                                        WHERE ci = '{$dat['ci_pre']}'");
         $dat2 = $personalData->fetch_assoc();
 
-        if ($sql == true) {
+        switch ($sql) {
+            case true:
+                $arry2 = [
+                    'ci' => trim($dat['ci_solicitada']),
+                    'nombre' => trim($dat['nombre_pre']),
+                    'apellido' => trim($dat['apelido_pre']),
+                    'grado' => trim($dat['grado_ac_pre']),
+                    'nacimiento' => trim($dat['fecha_nac_pre']),
+                    'sexo' => trim($dat['sexo_pre']),
+                    'estado' => trim($dat['estado']),
+                    'ciudad' => trim($dat['ciudad']),
+                    'sede' => trim($dat['nombre_sede']),
+                    'direccion' => trim($dat['direccion_pre']),
+                    'email' => trim($dat['email_pre']),
+                    'telefono' => trim($dat['telefono_pre']),
+                    'cargo' => trim($dat['cargo_nombre']),
+                    'departamento' => trim($dat['dir_nombre'])
+                ];
 
-            $arry2 = [
-                'ci' => trim($dat['ci_solicitada']),
-                'nombre' => trim($dat['nombre_pre']),
-                'apellido' => trim($dat['apelido_pre']),
-                'grado' => trim($dat['grado_ac_pre']),
-                'nacimiento' => trim($dat['fecha_nac_pre']),
-                'sexo' => trim($dat['sexo_pre']),
-                'estado' => trim($dat['estado']),
-                'ciudad' => trim($dat['ciudad']),
-                'sede' => trim($dat['nombre_sede']),
-                'direccion' => trim($dat['direccion_pre']),
-                'email' => trim($dat['email_pre']),
-                'telefono' => trim($dat['telefono_pre']),
-                'cargo' => trim($dat['cargo_nombre']),
-                'departamento' => trim($dat['dir_nombre'])
-            ];
+                $arry1 = [
+                    'ci' => trim($dat2['ci']),
+                    'nombre' => trim($dat2['nombre']),
+                    'apellido' => trim($dat2['apellido']),
+                    'grado' => trim($dat2['grado_ac']),
+                    'nacimiento' => trim($dat2['fecha_nac']),
+                    'sexo' => trim($dat2['sexo']),
+                    'estado' => trim($dat2['estado']),
+                    'ciudad' => trim($dat2['ciudad']),
+                    'sede' => trim($dat2['nombre_sede']),
+                    'direccion' => trim($dat2['direccion']),
+                    'email' => trim($dat2['email']),
+                    'telefono' => trim($dat2['telefono']),
+                    'cargo' => trim($dat2['cargo_nombre']),
+                    'departamento' => trim($dat2['dir_nombre'])
+                ];
 
-            $arry1 = [
-                'ci' => trim($dat2['ci']),
-                'nombre' => trim($dat2['nombre']),
-                'apellido' => trim($dat2['apellido']),
-                'grado' => trim($dat2['grado_ac']),
-                'nacimiento' => trim($dat2['fecha_nac']),
-                'sexo' => trim($dat2['sexo']),
-                'estado' => trim($dat2['estado']),
-                'ciudad' => trim($dat2['ciudad']),
-                'sede' => trim($dat2['nombre_sede']),
-                'direccion' => trim($dat2['direccion']),
-                'email' => trim($dat2['email']),
-                'telefono' => trim($dat2['telefono']),
-                'cargo' => trim($dat2['cargo_nombre']),
-                'departamento' => trim($dat2['dir_nombre'])
-            ];
-
-            if ($this->registChange($arry1, $arry2)) {
-                $sql1 = $this->connec->query("UPDATE personal SET nombre = '{$dat['nombre_pre']}', 
+                if ($this->auditoria->edicionDePersonal($arry1, $arry2)) {
+                    $sql1 = $this->connec->query("UPDATE personal SET nombre = '{$dat['nombre_pre']}', 
                                                       apellido = '{$dat['apelido_pre']}',
                                                       grado_ac = '{$dat['grado_ac_pre']}',
                                                       fecha_nac = '{$dat['fecha_nac_pre']}',
@@ -179,21 +197,21 @@ class GestionData extends Auditoria
                                                       cargo = '{$dat['cargo_pre']}',
                                                       departamento = '{$dat['cargo_pre']}'
                                                       WHERE ci = '{$dat['ci_pre']}'");
-                if ($sql1 != true) {
-                    $cake = false;
-                } else {
-                    $sql2 = $this->connec->query("UPDATE solicitudes SET apr_estado = '1' WHERE id_solicitud = '$this->id'");
-                    $location[] = [
-                        'redirec' => 'perfil.php?perfil=' . encriptar($dat['ci_pre']) . '&parce=true',
-                        'estado' => 'succes.personal.ingres'
-                    ];
-                    $cake = $location;
+                    if ($sql1 != true) {
+                        $cake = false;
+                    } else {
+                        $sql2 = $this->connec->query("UPDATE solicitudes SET apr_estado = '1' WHERE id_solicitud = '$this->id'");
+                        $location[] = [
+                            'redirec' => 'perfil.php?perfil=' . encriptar($dat['ci_pre']) . '&parce=true',
+                            'estado' => 'succes.personal.ingres'
+                        ];
+                        $cake = $location;
+                    }
                 }
-            }
-
-
-        } else {
-            $cake = false;
+                break;
+            default:
+                $cake = false;
+                break;
         }
         return $cake;
     }
@@ -207,36 +225,39 @@ class GestionData extends Auditoria
         $svp = $this->connec->query("SELECT * FROM solicitudes s INNER JOIN solicitudes_archivos_precarga p ON p.id_solicitud_archivo_pre = s.id_solicitud WHERE s.id_solicitud = '$this->id'");
         $sv = $svp->num_rows;
 
-        if ($sv == 1) {
-            $precarInf = $svp->fetch_assoc();
+        switch ($sv) {
+            case 1:
+                $precarInf = $svp->fetch_assoc();
 
-            $id = $precarInf['id_solicitud_archivo_pre'];
-            $ci = $precarInf['ci_arch_pre'];
-            $ciRes = $precarInf['ci_responsable_pre'];
-            $departament = $precarInf['dep_responsable_pre'];
-            $dire = $precarInf['d_archivo_pre'];
-            $nombrearch = $precarInf['nombre_archivo_pre'];
-            $nota = $precarInf['nota_pre'];
-            $size = $precarInf['size_pre'];
-            $tipo = $precarInf['tipo_pre'];
+                $id = $precarInf['id_solicitud_archivo_pre'];
+                $ci = $precarInf['ci_arch_pre'];
+                $ciRes = $precarInf['ci_responsable_pre'];
+                $departament = $precarInf['dep_responsable_pre'];
+                $dire = $precarInf['d_archivo_pre'];
+                $nombrearch = $precarInf['nombre_archivo_pre'];
+                $nota = $precarInf['nota_pre'];
+                $size = $precarInf['size_pre'];
+                $tipo = $precarInf['tipo_pre'];
 
-            if ($this->registArch()) {
-                $sql = $this->connec->query("INSERT INTO archidata (id_archivo, ci_arch, d_archivo, nombre_arch, nota, size, tipo_arch, ubicacion_fis, responsable, delete_arch) 
+                if ($this->auditoria->ingresoDeArchivo()) {
+                    $sql = $this->connec->query("INSERT INTO archidata (id_archivo, ci_arch, d_archivo, nombre_arch, nota, size, tipo_arch, ubicacion_fis, responsable, delete_arch) 
                                                             VALUES ('$id', '$ci', '$dire', '$nombrearch', '$nota', '$size', '$tipo', '$departament', '$ciRes', 0)");
 
-                if ($sql != true) {
-                    $cake = [false, $this->connec->error()];
-                } else {
-                    $sql2 = $this->connec->query("UPDATE solicitudes SET apr_estado = '1' WHERE id_solicitud = '$this->id'");
-                    $location[] = [
-                        'redirec' => 'perfil.php?perfil=' . encriptar($precarInf['ci_arch_pre']) . '&parce=true',
-                        'estado' => 'succes.personal.ingres'
-                    ];
-                    $cake = $location;
+                    if ($sql != true) {
+                        $cake = [false, $this->connec->error()];
+                    } else {
+                        $sql2 = $this->connec->query("UPDATE solicitudes SET apr_estado = '1' WHERE id_solicitud = '$this->id'");
+                        $location[] = [
+                            'redirec' => 'perfil.php?perfil=' . encriptar($precarInf['ci_arch_pre']) . '&parce=true',
+                            'estado' => 'succes.personal.ingres'
+                        ];
+                        $cake = $location;
+                    }
                 }
-            }
-        } else {
-            $cake = [false, 'dat'];
+                break;
+            default:
+                $cake = [false, 'dat'];
+                break;
         }
         return $cake;
     }
@@ -253,58 +274,61 @@ class GestionData extends Auditoria
 
         $verifi = $this->connec->query("SELECT * FROM archidata WHERE id_archivo = $idArch AND delete_arch = 0");
 
-        if ($verifi->num_rows == 1) {
+        $ver = $verifi->num_rows;
 
-            // Obtener la ruta de la carpeta
-            $destino = '../data/archives/delete';
+        switch ($ver) {
+            case 1:
+                $destino = '../data/archives/delete';
 
-            if (!file_exists($destino)) {
-                mkdir($destino, 0777, true);
-            }
+                if (!file_exists($destino)) {
+                    mkdir($destino, 0777, true);
+                }
 
-            $id_arch = $verifi->fetch_object()->id_archivo;
+                $id_arch = $verifi->fetch_object()->id_archivo;
 
-            $svp = $this->connec->query("SELECT * FROM archidata WHERE id_archivo = '$id_arch'");
-            $arch = $svp->fetch_object();
+                $svp = $this->connec->query("SELECT * FROM archidata WHERE id_archivo = '$id_arch'");
+                $arch = $svp->fetch_object();
 
-            $archivo = $arch->d_archivo;
-            $nombreArch = $arch->nombre_arch;
+                $archivo = $arch->d_archivo;
+                $nombreArch = $arch->nombre_arch;
 
-            if ($this->registArchDel()) {
-                // Mover archivos 
-                copy($archivo, $destino . '/' . $id_arch . '==' . $nombreArch);
-                unlink($archivo);
+                if ($this->auditoria->eliminacionDeArchivo()) {
+                    // Mover archivos 
+                    copy($archivo, $destino . '/' . $id_arch . '==' . $nombreArch);
+                    unlink($archivo);
 
-                // comprobacion
-                if (file_exists($destino . '/' . $id_arch . '==' . $nombreArch)) { //mover archivos a la ruta espesifica
+                    // comprobacion
+                    if (file_exists($destino . '/' . $id_arch . '==' . $nombreArch)) { //mover archivos a la ruta espesifica
 
-                    // Variables de archivos
-                    $newDir = $destino . "/" . $id_arch . '==' . $nombreArch;
+                        // Variables de archivos
+                        $newDir = $destino . "/" . $id_arch . '==' . $nombreArch;
 
-                    $change = $this->connec->query("UPDATE archidata SET d_archivo = '$newDir', delete_arch = 1 WHERE id_archivo = '$id_arch'");
-                    $change = $this->connec->query("UPDATE solicitudes_archivos_precarga SET d_archivo_pre = '$newDir' WHERE id_solicitud_archivo_pre = '$id_arch'");
+                        $change = $this->connec->query("UPDATE archidata SET d_archivo = '$newDir', delete_arch = 1 WHERE id_archivo = '$id_arch'");
+                        $change = $this->connec->query("UPDATE solicitudes_archivos_precarga SET d_archivo_pre = '$newDir' WHERE id_solicitud_archivo_pre = '$id_arch'");
 
-                    if ($change == true) {
+                        if ($change == true) {
 
-                        $sql2 = $this->connec->query("UPDATE solicitudes SET apr_estado = '1' WHERE id_solicitud = '$this->id'");
+                            $sql2 = $this->connec->query("UPDATE solicitudes SET apr_estado = '1' WHERE id_solicitud = '$this->id'");
 
-                        $location[] = [
-                            'redirec' => 'perfil.php?perfil=' . encriptar($arch->ci_arch) . '&parce=true',
-                            'estado' => 'succes.arch.move'
-                        ];
+                            $location[] = [
+                                'redirec' => 'perfil.php?perfil=' . encriptar($arch->ci_arch) . '&parce=true',
+                                'estado' => 'succes.arch.move'
+                            ];
 
-                        $carmen = $location;
+                            $carmen = $location;
+                        } else {
+                            $carmen = false;
+                        }
                     } else {
                         $carmen = false;
                     }
                 } else {
                     $carmen = false;
                 }
-            } else {
+                break;
+            default:
                 $carmen = false;
-            }
-        } else {
-            $carmen = false;
+                break;
         }
 
         return $carmen;
@@ -315,26 +339,26 @@ class GestionData extends Auditoria
      * @param string $id id de solicitud
      * @return bool 
      */
-    public function rechazarSoli()
+    public function rechazarGestion()
     {
-        if ($this->registRechaz() == true) {
-            // rechazar solicitud
-            $query = $this->connec->query("SELECT * FROM solicitudes WHERE id_solicitud = '$this->id'");
+        switch ($this->auditoria->gestionRechazada()) {
+            case true:
+                $query = $this->connec->query("SELECT * FROM solicitudes WHERE id_solicitud = '$this->id'");
 
-            if ($query == true) {
+                if ($query == true) {
 
-                $sql1 = $this->connec->query("UPDATE solicitudes SET apr_estado = '2' WHERE id_solicitud = '$this->id'");
+                    $sql1 = $this->connec->query("UPDATE solicitudes SET apr_estado = '2' WHERE id_solicitud = '$this->id'");
 
-                if ($sql1 == true) {
-                    return true;
+                    if ($sql1 == true) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 } else {
                     return false;
                 }
-            } else {
+            default:
                 return false;
-            }
-        } else {
-            return false;
         }
     }
 }

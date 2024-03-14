@@ -1,8 +1,9 @@
 <?php
 
 include "adp.php";
-include "class/auditoria.php";
-$auditoria = new Auditoria();
+include "../php/configIncludes.php";
+
+$gestionDeUsuario = new UserAuditoria();
 
 if (isset($_SESSION['subcedula'])) {
     if (isset($_POST["user"]) && ($_POST["pass"]) && ($_POST["pin"])) {
@@ -15,7 +16,7 @@ if (isset($_SESSION['subcedula'])) {
 
         $admincheck = $admincheck + 0;
 
-        if ($auditoria->registUser()) {
+        if ($gestionDeUsuario->registroDeUsuario()) {
             $proceso = $conn->query("INSERT INTO registro (ci, user, pass, pin, adp) VALUES ('$cedula ', '$usuario', '$contrasena', '$pin', '$admincheck')");
 
             unset($_SESSION['subcedula']);

@@ -1,10 +1,18 @@
 function planillaSelect(planilla) {
+    var vermole = document.getElementById("planillas");
+    
+    vermole.innerHTML = `<div class="d-flex justify-content-center">
+                                                            <div class="spinner-border my-3" role="status">
+                                                                <span class="visually-hidden">procesando...</span>
+                                                            </div>
+                                                      </div>`;
+
     $.ajax({
         data: { "planilla": planilla },
         url: "../layout/planillas/planillaSelect.php",
         type: "post",
         success: function (params) {
-            document.getElementById("planillas").innerHTML = params;
+            vermole.innerHTML = params;
 
             $(document).ready(function () {
                 let boton = document.getElementById('verificar');
@@ -34,3 +42,7 @@ function planillaSelect(planilla) {
         }
     })
 }
+
+$(document).ready(function () {
+    $('.noCard').addClass('d-none');
+})

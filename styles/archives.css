@@ -123,3 +123,21 @@ p.plistcatg {
     transform: translateX(3.5rem);
     font-size: small;
 }
+
+div#PersonDi {
+    border: 1px solid #d1d1d1;
+    border-top: 0;
+    padding: 0.5rem;
+    border-radius: 0 0 7px 7px;
+}
+
+a.nav-link.mt-2.p-2 {
+    width: auto;
+    border-radius: 7px;
+    padding: 0.8rem !important;
+}
+
+a.nav-link.mt-2.p-2:hover{
+    background: #cdcdcd;
+    cursor: pointer;
+}

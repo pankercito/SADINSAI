@@ -1,27 +1,24 @@
 <?php
 
-include "class/conx.php";
+include "../php/configIncludes.php";
 
 session_start();
 
 $conn = new Conexion;
 
-if ($_POST["pin"] != "" && $_POST["ci"] != "" ) {
+if ($_POST["pin"] != "" && $_POST["ci"] != "") {
+
+    $user = new User(getUserHash(null, $conn->real_escape($_POST["ci"])));
 
     // Verificación de pin ingresada en la base de datos
     $pin = $conn->real_escape($_POST["pin"]);
 
-    $cei = $conn->real_escape($_POST["ci"]);
-
-    $sql = "SELECT * FROM registro WHERE pin = $pin and ci = $cei ";
-    $result = $conn->query($sql);
-    $conn->close();
-
-    if ($result->num_rows == 1) {
-        echo "pin.success"; //correcto
+    if ($user->getPin() == $pin) {
+        echo "pin.success";
     } else {
-        echo "pin.error"; //no correcto
+        echo "pin.error";
     }
+
 } else {
     echo "false"; //vacio
 }

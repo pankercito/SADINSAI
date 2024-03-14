@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <h6>SOLICITUD DE PERMISO</h6>
 <hr>
 <?php include 'planillas_config.php' ?>
@@ -26,7 +23,7 @@ session_start();
     </div>
     <div class="col">
         <label for="fechaingreso" class="col-form-label">Fecha de ingreso</label>
-        <input type="text" class="form-control" name="fechaingreso" id="fechaingreso" placeholder="dd/mm/aa">
+        <input type="date" class="form-control" name="fechaingreso" id="fechaingreso" placeholder="dd/mm/aa">
     </div>
 </div>
 <div class="mb-3 row col aling-items-baseline mx-2">

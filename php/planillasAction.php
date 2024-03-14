@@ -1,9 +1,6 @@
 <?php
 
-include 'class/classIncludes.php';
-include "function/criptCodes.php";
-include "function/filesFunctions.php";
-include "function/sumarhora.php";
+include "../php/configIncludes.php";
 
 $conn = new Conexion();
 

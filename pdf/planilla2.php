@@ -17,7 +17,7 @@ if (@$fecha != null) {
 }
 
 @$feingreso = $_SESSION['fechaingreso'];
-@$cargo = $_SESSION['cargo'];
+@$nombre = $_SESSION['cargo'];
 @$adscrito = $_SESSION['adscrito'];
 @$direccion = $_SESSION['direccion'];
 @$diasHabiles = $_SESSION['diasH'];
@@ -68,7 +68,7 @@ $pdf->SetXY(160, 65);
 $pdf->Cell(40, 5, @$feingreso, 0, 'C');
 
 $pdf->SetXY(23, 92);
-$pdf->MultiCell(40, 0, @$cargo, 0, 'C');
+$pdf->MultiCell(40, 0, @$nombre, 0, 'C');
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->SetXY(82, 87);
 $pdf->MultiCell(50, 5, @$adscrito, 0, 'C');

@@ -1,16 +1,20 @@
 <?php
-    
-    $personal = new Personal($_GET['carga']);
 
-    $_SESSION['getPlanillaNombre'] = $personal->getNombre();
-    $_SESSION['getPlanillaApellido'] = $personal->getApellido();
-    $_SESSION['getPlanillaCI'] = $personal->getCi();
-    $_SESSION['getPlanillaCargo'] = $personal->getCargo();
-    $_SESSION['getPlanillaDepart'] = $personal->getDepartament();
-    $_SESSION['getPlanillaPhon'] = $personal->getTelefono();
-    $_SESSION['getPlanillaEst'] = $personal->getEstado();
-    $_SESSION['getPlanillaSede'] = $personal->getSede();
+$personal = new Empleado($_GET['c']);
+
+$_SESSION['getPlanillaNombre'] = $personal->nombre;
+$_SESSION['getPlanillaApellido'] = $personal->apellido;
+$_SESSION['getPlanillaCI'] = $personal->ci;
+
+$personal = $personal->getDetails();
+
+$_SESSION['getPlanillaCargo'] = $personal->cargo;
+$_SESSION['getPlanillaDepart'] = $personal->departamento;
+$_SESSION['getPlanillaPhon'] = $personal->telefono;
+$_SESSION['getPlanillaEst'] = $personal->estado;
+$_SESSION['getPlanillaSede'] = $personal->sede;
 ?>
+
 <script src="../js/planillas.js"></script>
 <style>
     .no-color {
@@ -19,5 +23,5 @@
 </style>
 
 <div id="planillas" class="mx-auto col">
-
+    <p>seleccione una planilla</p>
 </div>

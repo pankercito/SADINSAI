@@ -1,7 +1,6 @@
 <?php
 
-include 'class/classIncludes.php';
-include "function/idGenerador.php";
+include '../php/configIncludes.php';
 
 session_start();
 

@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <h6>ANTICIPO</h6>
 <hr>
 <?php include 'planillas_config.php' ?>

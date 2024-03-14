@@ -1,25 +1,15 @@
 <?php
 
-include "../../php/class/classIncludes.php";
-include "../../php/function/sumarhora.php";
+include "../preset/presetConfigIncludes.php";
 
-$conn = new Conexion();
+$n = new Estadistica;
+$p = $n->promedioAceptacionSolicitudes();
 
-// SACAR DATOS DE SOLICITUDES
-$colis = $conn->query("SELECT * FROM solicitudes_y_permisos WHERE estado_permiso NOT IN (1)");
-$colis1 = $conn->query("SELECT * FROM solicitudes_y_permisos WHERE estado_permiso = 2");
-$colis2 = $conn->query("SELECT * FROM solicitudes_y_permisos WHERE estado_permiso = 3");
-$colis3 = $conn->query("SELECT * FROM solicitudes_y_permisos WHERE estado_permiso = 4");
+$aceptadas = $p['aceptadas'];
+$rechazadas = $p['rechazadas'];
+$anulas = $p['anuladas'];
 
-$total = $colis->num_rows;
-
-$aceptadas = $colis1->num_rows;
-$rechazadas = $colis2->num_rows;
-$anulas = $colis3->num_rows;
-
-$aceptadas = number_format($aceptadas / $total * 100, 2);
-$rechazadas = number_format($rechazadas / $total * 100, 2);
-$anulas = number_format($anulas / $total * 100, 2);
+$total = $p['total'];
 
 
 // enviamos los datos como caden json

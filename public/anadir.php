@@ -43,9 +43,13 @@ if ($_SERVER['REQUEST_URI'] == "/public/anadir.php?users/register=true") {
                         <i class="bi bi-person-add"></i> Agregar personal
                     </a>
                     <?php
-                    if ($adpval == TRUE) {
+                    if ($adpval == 2) {
                         include "../layout/accsadmin.php";
                     }
+                    if ($adpval == 1) {
+                        include "../layout/accssrecurs.php";
+                    }
+
                     ?>
                 </div>
             </div>

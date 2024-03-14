@@ -1,23 +1,23 @@
 <?php
-include "class/personal.php";
 
 if (isset($_GET['perfil'])) {
-    
-    $personal = new Personal($_GET['perfil']);
 
-    $pCi = $personal->getCi();
-    $pName = $personal->getNombre() . ' ' . $personal->getApellido();
-    $pSexo = $personal->getSexo();
-    $pGrado = $personal->getGrado();
-    $pFecha = $personal->getFecha();
-    $pPhone = $personal->getTelefono();
-    $pEmail = $personal->getEmail();
-    $pDireccion = $personal->getDireccion();
-    $pStado = $personal->getEstado();
-    $pCiudad = $personal->getCiudad();
-    $pSede = $personal->getSede();
-    $pCargo = $personal->getCargo();
-    $pDepart = $personal->getDepartament();
+    $personal = new Empleado($_GET['perfil']);
+    $pesonaldata = $personal->getDetails();
+
+    $pCi = $personal->ci;
+    $pName = "$personal->nombre $personal->apellido";
+    $pSexo = $pesonaldata->sexo;
+    $pGrado = $pesonaldata->grado;
+    $pFecha = $pesonaldata->fecha;
+    $pPhone = $pesonaldata->telefono;
+    $pEmail = $pesonaldata->email;
+    $pDireccion = $pesonaldata->direccion;
+    $pStado = $pesonaldata->estado;
+    $pCiudad = $pesonaldata->ciudad;
+    $pSede = $pesonaldata->sede;
+    $pCargo = $pesonaldata->cargo;
+    $pDepart = $pesonaldata->departamento;
 } else {
-    echo 'no llego esa mondaa';
+    echo 'error al recibir datos';
 }

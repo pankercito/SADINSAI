@@ -38,8 +38,7 @@ class VerificarCampo {
             let input = element[0];
             let inputValue = input.value;
             let limit = element[1];
-
-            console.log(input);
+            
             if (input.type == 'radio') {
                 // RADIO VALIDATION
                 if (input.checked == true) {
@@ -67,12 +66,6 @@ class VerificarCampo {
             }
         }
 
-
-
-        console.log('radio' + this.radio);
-        console.log(this.values.length);
-        console.log(finalBool);
-
         this.values.forEach(element => {
             finalBool = element == true ? finalBool + 1 : finalBool;
         });
@@ -83,7 +76,6 @@ class VerificarCampo {
 
         if (finalBool == true) {
             this.activar();
-            alert('activado');
         } else {
             this.desactivar();
         }

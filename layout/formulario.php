@@ -41,24 +41,18 @@
             <input class="form-control" type="date" id="Naci" name="naci">
         </div>
     </div>
-    <div class="col row my-3">
+    <div class="col row my-4">
         <div class="col">
             <label for="Grado_Academico">Grado Academico</label>
             <input class="form-control" id="Grado_Academico" name="grado_academico" type="text" maxlength="11">
         </div>
-        <div class="col ">
-            <label for="Depa">Departamento</label>
-            <select class="form-select" id="Depa" name="departament">
-                <option value="">- seleccionar departamento -</option>
-                <?php include "../php/preset/opcionesD.php" ?>
-            </select>
+        <div class="col">
+            <label for="Email">Email</label>
+            <input class="form-control" id="Email" name="email" type="text">
         </div>
         <div class="col">
-            <label for="Cargo">Cargo</label>
-            <select class="form-select" id="Cargo" name="cargo">
-                <option value="">- seleccionar cargo -</option>
-                <?php include "../php/preset/cargosPre.php" ?>
-            </select>
+            <label for="Direccion">Direccion</label>
+            <input class="form-control" id="Direccion" name="direccion" type="text">
         </div>
     </div>
     <div class="col row my-4">
@@ -75,21 +69,28 @@
                 <option value="0">- Seleciona una ciudad -</option>
             </select>
         </div>
+    </div>
+    <h6 class="text-center my-4" style="color: #fafafa">DATOS LABORALES</h6>
+    <div class="col row my-4">
+        <div class="col ">
+            <label for="Depa">Departamento</label>
+            <select class="form-select" id="Depa" name="departament">
+                <option value="">- seleccionar departamento -</option>
+                <?php include "../php/preset/opcionesD.php" ?>
+            </select>
+        </div>
+        <div class="col">
+            <label for="Cargo">Cargo</label>
+            <select class="form-select" id="Cargo" name="cargo">
+                <option value="">- seleccionar cargo -</option>
+                <?php include "../php/preset/cargosPre.php" ?>
+            </select>
+        </div>
         <div class="col">
             <label for="Sede">Sede</label>
             <select class="form-select" id="Sede" name="sede">
                 <option value="0">- selecione su sede-</option>
             </select>
-        </div>
-    </div>
-    <div class="col row my-4">
-        <div class="col">
-            <label for="Email">Email</label>
-            <input class="form-control" id="Email" name="email" type="text">
-        </div>
-        <div class="col">
-            <label for="Direccion">Direccion</label>
-            <input class="form-control" id="Direccion" name="direccion" type="text">
         </div>
     </div>
     <input type="text" class="d-none" id="tipo" name="tipo" value="0">

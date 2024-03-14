@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <h6>LICENCIA DE PATERNIDAD</h6>
 <hr>
 <?php include 'planillas_config.php' ?>

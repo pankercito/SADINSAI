@@ -1,28 +1,26 @@
 <?php
 
-include_once "../php/class/conx.php";
-include_once "../php/class/personal.php" ;
-include_once "../php/function/criptCodes.php" ;
+$personal = new Empleado($_GET['perfil']);
 
+$SetName = $personal->nombre;
+$SetApellido = $personal->apellido;
+$SetCi = $personal->ci;
 
-$personal = new Personal($_GET['perfil']);
+$personal = $personal->getDetails();
 
-$SetName = $personal->getNombre();
-$SetApellido = $personal->getApellido();
-$SetCi = $personal->getCi();
-$SetFecha = $personal->getFecha();
-$SetGrado = $personal->getGrado();
-$SetSexo = $personal->getSexo();
-$SetIdCargo = $personal->getIdCargo();
-$SetCargo = $personal->getCargo();
-$SetPhone = $personal->getTelefono();
-$SetEmail = $personal->getEmail();
-$SetDireccion = $personal->getDireccion();
-$SetEstado = $personal->getEstado();
-$SetIdEstado = $personal->getIdEstado();
-$SetCiudad = $personal->getCiudad();
-$SetIdCiudad = $personal->getIdCiudad();
-$SetSede = $personal->getSede();
-$SetIdSede = $personal->getIdSede();
-$SetDepart = $personal->getDepartament();
-$SetIdDepart = $personal->getIdDepart();
+$SetFecha = $personal->fecha;
+$SetGrado = $personal->grado;
+$SetSexo = $personal->sexo;
+$SetIdCargo = $personal->idCargo;
+$SetCargo = $personal->cargo;
+$SetPhone = $personal->telefono;
+$SetEmail = $personal->email;
+$SetDireccion = $personal->direccion;
+$SetEstado = $personal->estado;
+$SetIdEstado = $personal->idEstado;
+$SetCiudad = $personal->ciudad;
+$SetIdCiudad = $personal->idCiudad;
+$SetSede = $personal->sede;
+$SetIdSede = $personal->idSede;
+$SetDepart = $personal->departamento;
+$SetIdDepart = $personal->idDepartamento;

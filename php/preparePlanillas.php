@@ -1,12 +1,6 @@
 <?php
 
-include "class/conx.php";
-include "class/auditoria.php";
-include "class/audiSolis.php";
-include "function/criptCodes.php";
-include "function/filesFunctions.php";
-include "function/sumarhora.php";
-include "class/solicitudes.php";
+include "../php/configIncludes.php";
 
 session_start();
 

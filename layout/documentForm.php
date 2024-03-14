@@ -1,38 +1,24 @@
 <?php
-include "../php/function/criptCodes.php";
-include "../php/class/classIncludes.php";
 
-function TPname($tipo)
-{
-    $con = new Conexion();
+include "../php/configIncludes.php";
 
-    $x = $con->query("SELECT * FROM tiposarch WHERE id_tipo = '{$tipo}'");
-
-    if ($x->num_rows > 0) {
-
-        $o = $x->fetch_object();
-
-        return $o->nombre_tipo_arch;
-    }
-}
-
-$p = new Personal($_GET['carga']);
+$p = new Empleado($_GET['c']);
 
 ?>
 <div class="romate">
     <form enctype="multipart/form-data" method="post" id="caro">
         <div class="col row mx-auto justify-content-between">
-            <div class="ms-3 col-5">
+            <div class="ms-3 col-5 ">
                 <div class="col row">
                     <label for="ci" class="mt-3">Persona asignada:</label>
-                    <input type="text" id="ci" class="d-none" name="ciArch" value="<?php echo $_GET['carga'] ?>"
+                    <input type="text" id="ci" class="d-none" name="ciArch" value="<?php echo $_GET['c'] ?>" readonly>
+                    <input type="text" class="form-control" value="<?php echo "{$p->nombre} {$p->apellido}" ?>"
                         readonly>
-                    <input type="text" class="form-control"
-                        value="<?php echo "{$p->getNombre()} {$p->getApellido()}" ?>" readonly>
                     <label for="tipo" class="mt-3">tipo de archivo:</label>
-                    <input type="text" id="tipo" class="d-none" name="gestionArch"
-                        value="<?php echo $_GET['gestion'] ?>" readonly>
-                    <input type="text" class="form-control" value="<?php echo TPname($_GET['gestion']) ?>" readonly>
+                    <input type="text" id="tipo" class="d-none" name="gestionArch" value="<?php echo $_GET['g'] ?>"
+                        readonly>
+                    <input type="text" class="form-control" value="<?php echo getNombreTipoArch($_GET['g']) ?>"
+                        readonly>
                 </div>
                 <div class="col row">
                     <label for="nota" class="mt-3">Nota:</label>
@@ -41,10 +27,12 @@ $p = new Personal($_GET['carga']);
                 <div class="col row">
                     <label for="Responsable" class="mt-3">Personal responsable:</label>
                     <input id="Presponsable" name="responsable" class="d-none" value="">
-                    <input id="Responsable" class="form-control" placeholder="Buscar" autocomplete="off">
+                    <input id="Responsable" class="form-control"
+                        placeholder="Buscar, nombre y apellido / cedula de identidad" autocomplete="off">
                     <div class="d-none list-group" id="PersonDi">
                     </div>
                 </div>
+                <button id="veroff" class="btn btn-sm btn-success mt-3 mx-0">verificar personal</button>
                 <div class="col row">
                     <label for="departament" class="form-label mt-3">Departamento responsable:</label>
                     <select class="form-select" name="departament" id="departament">

@@ -1,8 +1,6 @@
 <?php
 
-include "../class/conx.php";
-include "../function/getUser.php";
-include "../function/criptCodes.php";
+include "../preset/presetConfigIncludes.php";
 
 session_start();
 
@@ -19,12 +17,14 @@ $apr = [
     "2" => "alert alert-danger",
     "3" => "alert alert-dark",
 ];
+
 $aprN = [
     "0" => "pendiente",
     "1" => "aceptada",
     "2" => "rechazada",
     "3" => "anulada",
 ];
+
 $tipoSolic = [
     "0" => "ingreso de personal",
     "1" => "edicion de datos",
@@ -42,7 +42,7 @@ if ($count_results > 0) {
 
         $data_array[] = [
             $data->id_solicitud,
-            '<a class="lol" href="perfil.php?perfil=' . encriptar($data->ci_solicitada) . '&parce=true">' . $data->ci_solicitada . '</a>',
+            '<a class="lol" href="perfil.php?perfil=' . encriptar($data->ci_solicitada) . '&parce=true">' . strtoupper($data->user) . '</a>',
             $data->fecha,
             $tipoSolic[$data->tipo],
             '<a onclick="detalles(' . $data->id_solicitud . ',' . $data->tipo . ')" class="viewDetails btn btn"> Ver detalles </a>',
@@ -56,7 +56,7 @@ if ($count_results > 0) {
     echo json_encode($new_array);
 } else {
     //Si no hay registros encontrados
-    $new_array = ["data" => [['','','','no haz realizado ninguna getion','','','']]];
+    $new_array = ["data" => [['', '', '', 'no haz realizado ninguna getion', '', '', '']]];
     // crear el JSON apartir de los arrays
     echo json_encode($new_array);
 }

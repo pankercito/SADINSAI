@@ -20,11 +20,11 @@
             <div class="colunma col-md-3 mt-2" id="columna">
                 <p style="color: white; font-weight:500;">acciones</p>
                 <button class="pedit btn btn-primary" id="generar"
-                onclick="reportePerfil('<?php echo $SetCi ?>')">archivos
+                onclick="reportePerfil('<?php echo encriptar($SetCi) ?>')">archivos
                 faltantes</button>
                 <br>
                 <button class='pedit btn btn-secondary' id="requeri"
-                onclick="requerido('<?php echo $SetCi ?>')">requerimientos</button>
+                onclick="requerido('<?php echo encriptar($SetCi) ?>')">requerimientos</button>
                 <br>
                 <button class='pedit btn btn-warning' id="editar">editar datos</button>
             </div>

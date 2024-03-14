@@ -1,6 +1,6 @@
 <?php
 
-require "class/classIncludes.php";
+require "../php/configIncludes.php";
 
 date_default_timezone_set('America/Caracas');
 
@@ -8,7 +8,7 @@ $selector = $_POST['selectipo'];
 
 @session_start();
 
-$auditoria = new Estadistica();
+$gestionDeUsuario = new Estadistica();
 $conn = new Conexion();
 
 switch ($selector) {
@@ -24,7 +24,7 @@ switch ($selector) {
             $estado = null;
         }
 
-        $data = $auditoria->gestionPrecise($fecha, $fecha2, $estado);
+        $data = $gestionDeUsuario->gestionPrecise($fecha, $fecha2, $estado);
 
         $_SESSION['reporteGestion'] = $data;
 
@@ -39,7 +39,7 @@ switch ($selector) {
 
         $estado = ($aceptadas != null) ? $aceptadas : null;
 
-        $data = $auditoria->SolisPrecise($fecha, $fecha2, $estado);
+        $data = $gestionDeUsuario->solisPrecise($fecha, $fecha2, $estado);
 
         $_SESSION['reporteSolis'] = $data;
 
@@ -65,11 +65,11 @@ switch ($selector) {
             $estado = $eliminadosarchivos;
         }
 
-        $data = $auditoria->archivesDetailsStats($fecha, $fecha2, $estado);
+        $data = $gestionDeUsuario->archivesDetailsStats($fecha, $fecha2, $estado);
 
         $_SESSION['reporteArch'] = $data;
 
-        echo var_dump($_SESSION['reporteArch']);
+        echo json_encode($_SESSION['reporteArch']);
 
         break;
 
@@ -80,30 +80,37 @@ switch ($selector) {
         @$solisrealizadas = ($_POST["solisrealizadas"] != null) ? $_POST["solisrealizadas"] : null;
 
         if ($solisrealizadas == 1) {
-            $data = $auditoria->userInixStats($fecha, $fecha2);
+            $data = $gestionDeUsuario->userInixStats($fecha, $fecha2);
             $_SESSION['reporteUsersInix'] = $data;
             echo json_encode($_SESSION['reporteUsersInix']);
             exit;
         }
 
         if ($solisrealizadas == 2) {
-            $data = $auditoria->userSolisStats($fecha, $fecha2);
+            $data = $gestionDeUsuario->userSolisStats($fecha, $fecha2);
             $_SESSION['reporteSolisUser'] = $data;
             echo json_encode($_SESSION['reporteSolisUser']);
             exit;
         }
 
         if ($solisrealizadas == 3 || $fecha == null) {
-            $data = $auditoria->userGestionStats($fecha, $fecha2);
+            $data = $gestionDeUsuario->userGestionStats($fecha, $fecha2);
             $_SESSION['reporteUsersUsers'] = $data;
             echo json_encode($_SESSION['reporteUsersUsers']);
+            exit;
         }
+
+        $data = $gestionDeUsuario->userInixStats($fecha, $fecha2);
+        $_SESSION['reporteUsersInix'] = $data;
+        echo json_encode($_SESSION['reporteUsersInix']);
+
         break;
     default:
 
         $_SESSION['general'] = true;
 
-        # GESTION *****************************************************
+
+        # GESTIONES*****************************************************
         @$fecha = ($_POST['fecha'] != null) ? $_POST['fecha'] : null;
         @$fecha2 = ($_POST["fecha2"] != null) ? $_POST["fecha2"] : null;
         @$aceptadas = ($_POST["aceptadas"] != null) ? $_POST["aceptadas"] : null;
@@ -114,20 +121,20 @@ switch ($selector) {
             $estado = null;
         }
 
-        $data = $auditoria->gestionPrecise($fecha, $fecha2, $estado);
+        $data = $gestionDeUsuario->gestionPrecise($fecha, $fecha2, $estado);
 
         $_SESSION['reporteGestion'] = $data;
 
         echo json_encode($_SESSION['reporteGestion']);
 
-        # SOLICITUDES *****************************************************
+        # SOLICITUDES*****************************************************
         @$fecha = ($_POST['fecha'] != null) ? $_POST['fecha'] : null;
         @$fecha2 = ($_POST["fecha2"] != null) ? $_POST["fecha2"] : null;
         @$aceptadas = ($_POST["aceptadas"] != null) ? $_POST["aceptadas"] : null;
 
         $estado = ($aceptadas != null) ? $aceptadas : null;
 
-        $data = $auditoria->SolisPrecise($fecha, $fecha2, $estado);
+        $data = $gestionDeUsuario->solisPrecise($fecha, $fecha2, $estado);
 
         $_SESSION['reporteSolis'] = $data;
 
@@ -152,22 +159,42 @@ switch ($selector) {
             $estado = $eliminadosarchivos;
         }
 
-        $data = $auditoria->archivesDetailsStats($fecha, $fecha2, $estado);
+        $data = $gestionDeUsuario->archivesDetailsStats($fecha, $fecha2, $estado);
 
         $_SESSION['reporteArch'] = $data;
 
         echo json_encode($_SESSION['reporteArch']);
 
+        
         # USUARIOS *****************************************************
 
         @$fecha = ($_POST['fecha'] != null) ? $_POST['fecha'] : null;
         @$fecha2 = ($_POST["fecha2"] != null) ? $_POST["fecha2"] : null;
         @$solisrealizadas = ($_POST["solisrealizadas"] != null) ? $_POST["solisrealizadas"] : null;
 
-        $data = $auditoria->userGestionStats($fecha, $fecha2);
-        $_SESSION['reporteUsersUsers'] = $data;
-        
-        echo json_decode($_SESSION['reporteUsersUsers']);
+        if ($solisrealizadas == 1) {
+            $data = $gestionDeUsuario->userInixStats($fecha, $fecha2);
+            $_SESSION['reporteUsersInix'] = $data;
+            echo json_encode($_SESSION['reporteUsersInix']);
+            exit;
+        }
+
+        if ($solisrealizadas == 2) {
+            $data = $gestionDeUsuario->userSolisStats($fecha, $fecha2);
+            $_SESSION['reporteSolisUser'] = $data;
+            echo json_encode($_SESSION['reporteSolisUser']);
+            exit;
+        }
+
+        if ($solisrealizadas == 3 || $fecha == null) {
+            $data = $gestionDeUsuario->userGestionStats($fecha, $fecha2);
+            $_SESSION['reporteUsersUsers'] = $data;
+            echo json_encode($_SESSION['reporteUsersUsers']);
+        }
+
+        $data = $gestionDeUsuario->userInixStats($fecha, $fecha2);
+        $_SESSION['reporteUsersInix'] = $data;
+        echo json_encode($_SESSION['reporteUsersInix']);
 
         break;
 }

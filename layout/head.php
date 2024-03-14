@@ -38,6 +38,10 @@
     <script src="../resources/import/notie/notie.js"></script>
     <link rel="stylesheet" href="../resources/import/notie/notie.css">
 
+    <!-- Select2 -->
+    <script src="../resources/import/Select2/select2.min.js"></script>
+    <link rel="stylesheet" href="../resources/import/select2/Select2.min.css">
+
     <!-- funciones js  -->
     <script src="../js/nuevoGrafico.js"></script>
     <script src="../js/verification/input_verify.js"></script>

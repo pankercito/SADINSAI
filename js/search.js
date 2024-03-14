@@ -2,12 +2,22 @@
 function searching(e) {
 
     let input = document.getElementById("searchbar"); //id del input de busqueda;
-    let lista = document.getElementById("resultList"); //id del input de busqueda;
     let divResult = document.getElementById("result"); //id del input de busqueda;
 
     let keys = new FormData();
 
     keys.append("keys", input.value);
+
+
+
+    divResult.innerHTML = `<div class="d-flex justify-content-center">
+    <div class="spinner-border my-2" role="status">
+        <span class="visually-hidden">procesando...</span>
+    </div>
+</div>`;
+
+
+    divResult.classList.remove("d-none");
 
     if (input.value.length > 0) {
         $.ajax({
@@ -17,7 +27,11 @@ function searching(e) {
             url: "../php/searchBar.php",
             type: "post",
             success: function (params) {
-                divResult.classList.remove("d-none");
+
+                divResult.innerHTML = `<ul id="resultList">
+                </ul>`;
+                
+                let lista = document.getElementById("resultList"); //lista;
 
                 if (jeisonXD(params)) {
 
@@ -33,10 +47,10 @@ function searching(e) {
     } else {
         divResult.classList.add("d-none");
     }
-    
+
     input.addEventListener("blur", function () {
-       setTimeout(() => {
-         divResult.classList.add("d-none");
-       }, 100);
+        setTimeout(() => {
+            divResult.classList.add("d-none");
+        }, 100);
     });
 }

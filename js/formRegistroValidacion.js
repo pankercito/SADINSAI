@@ -4,10 +4,17 @@ const inputCi = document.getElementById('Ci');
 const inputDireccion = document.getElementById('Direccion');
 const inputPhone = document.getElementById('Phone');
 const inputEmail = document.getElementById('Email');
+const inputGrado = document.getElementById('Grado_Academico');
 
 inputEmail.addEventListener('focusout', function () {
   if (!isValidEmail(inputEmail.value)) {
     inputEmail.value = '';
+  }
+});
+
+inputGrado.addEventListener('focusout', function () {
+  if (!isValidName(inputGrado.value)) {
+    inputGrado.value = '';
   }
 });
 

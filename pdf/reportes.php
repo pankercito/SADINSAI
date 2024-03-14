@@ -1,12 +1,8 @@
 <?php
 //peticion de la libreria fpdf
 require_once "fpdf.php";
-require_once "../php/class/conx.php";
-require_once "../php/class/personal.php";
-require_once "../php/function/criptCodes.php";
-require_once "../php/function/getUser.php";
+require_once "../php/configIncludes.php";
 
-date_default_timezone_set('America/Caracas');
 session_start();
 
 /**
@@ -499,6 +495,7 @@ if (isset($_SESSION['general'])) {
     reportArch($pdf);
     reportInixUser($pdf);
 
+    unset($_SESSION['reporteGestion']);
     unset($_SESSION['reporteArch']);
     unset($_SESSION['reporteSolis']);
     unset($_SESSION['reporteUsersUsers']);

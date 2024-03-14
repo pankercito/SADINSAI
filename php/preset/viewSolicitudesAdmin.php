@@ -1,8 +1,6 @@
 <?php
 
-include "../class/conx.php";
-include "../function/getUser.php";
-include "../function/criptCodes.php";
+include "../preset/presetConfigIncludes.php";
 
 session_start();
 
@@ -48,13 +46,12 @@ if ($count_results > 0) {
 
         $data_array[] = [
             $data->id_solicitud,
-            '<a class="lol" href="perfil.php?perfil=' . encriptar($data->ci_solicitada) . '&parce=true">' . strtoupper((getUserData($data->id_emisor))) . '</a>',
+            '<a class="lol" href="perfil.php?perfil=' . encriptar($data->ci_solicitada) . '&parce=true">' . strtoupper($data->user) . '</a>',
             $data->fecha,
             $tipoSolic[$data->tipo],
             '<a onclick="detalles(' . $data->id_solicitud . ',' . $data->tipo . ')" class="viewDetails btn btn"> Ver detalles </a>',
             '<a onclick="' . $disabled . '" class="aprState ' . $apr[$data->apr_estado] . '">' . $aprN[$data->apr_estado] . '<span style="margin:.5rem;"></span><i class="' . $aprL[$data->apr_estado] . '"></i></a>',
             $data->apr_estado
-
         ];
     }
     // crear un array con el array de los datos, importante que esten dentro de : data

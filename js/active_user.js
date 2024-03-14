@@ -92,17 +92,16 @@ $(document).ready(function () {
                                     action: function () {
                                         const form = document.getElementById('activeuser');
 
-                                        var fom = new FormData(form);
-
-                                        fom.append("ci", ci);
+                                        var fom = {
+                                            "ci": ci,
+                                            "radio": 1,
+                                        };
 
                                         // registro con ajax
                                         $.ajax({
                                             data: fom,
                                             url: "../php/active_user.php",
                                             type: "post",
-                                            processData: false,
-                                            contentType: false,
                                             error: function (error) {
                                                 $.confirm({
                                                     title: false, // hides the title.
@@ -171,8 +170,25 @@ $(document).ready(function () {
                                                             }
                                                         });
                                                         break;
-
                                                     default:
+                                                        $.confirm({
+                                                            title: 'este usuario no puede activarse',
+                                                            content: false,
+                                                            buttons: {
+                                                                da: {
+                                                                    text: 'cerrar',
+                                                                    action: function () {
+                                                                        location.reload();
+                                                                    }
+                                                                },
+                                                                rs: {
+                                                                    text: "inicio de sesion",
+                                                                    action: function () {
+                                                                        location.replace("../index.php");
+                                                                    }
+                                                                }
+                                                            }
+                                                        });
                                                         break;
                                                 }
                                             }

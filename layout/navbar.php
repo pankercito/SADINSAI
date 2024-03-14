@@ -18,30 +18,35 @@
                 </script>
 
                 <?php
-                if ($adpval == 1) {
-                    ?>
-                    <script>
-                        // carta de hover
-                        $(".navbar-brand").append('<span id="adminSetMsj" class="btn btn">Jefe de departamento</span>');
-
-                    </script>
-                    <?php
-                } else if ($adpval == 2) {
-                    ?>
+                switch ($adpval) {
+                    case 1:
+                        ?>
                         <script>
                             // carta de hover
-                            $(".navbar-brand").append('<span id="sysAdminSetMsj" class="btn btn">DIR. TECNOLOGIA</span>');
+                            $(".navbar-brand").append('<span id="adminSetMsj" class="btn btn">JEFE DE DEPARTAMENTO</span>');
 
                         </script>
-                    <?php
-                } else {
-                    ?>
+                        <?php
+                        break;
+                    case 2:
+                        ?>
+                        <script>
+                            // carta de hover
+                            $(".navbar-brand").append('<span id="sysAdminSetMsj" class="btn btn">TECNOLOGIA</span>');
+
+                        </script>
+                        <?php
+
+                        break;
+                    default:
+                        ?>
                         <script>
                             // carta de hover
                             $(".navbar-brand").append('<span id="analistSetMsj" class="btn btn">ANALISTA</span>');
 
                         </script>
-                    <?php
+                        <?php
+                        break;
                 }
                 ?>
 
@@ -72,24 +77,23 @@
                 </nav>
                 <form class="searchito d-flex">
                     <!--BARRA DE BUSQUEDA-->
-                    <input id="searchbar" class="form-control" type="search" placeholder="Buscar..." autocomplete="off"
-                        onkeyup="searching()">
-                    </input>
-                    <!--BOTON DE BUSQUEDA-->
-                    <button id="search" class="btn" disabled>
-                        <i class="bi bi-search"></i><!--ICONO-->
-                    </button>
-                    <div id="result" class="resultsearch d-none">
-                        <ul id="resultList">
+                    <div class="container d-flex p-0">
+                        <input id="searchbar" class="form-control" type="search" placeholder="Buscar..."
+                            autocomplete="off" onkeyup="searching()">
+                        </input>
+                        <!--BOTON DE BUSQUEDA-->
+                        <i class="bi bi-search" id="search"></i><!--ICONO-->
+                    </div>
 
-                        </ul>
+                    <div id="result" class="resultsearch d-none">
                     </div>
                     <span class="input-group-text" id="basic-addon1"></span><!--SEPARADOR-->
                     <!--BOTON DE AYUDA-->
                     <?php
                     if ($adpval == 0) {
                         ?>
-                        <a id="help" class="btn" type="button" href="../resources/Sadinsai - Manual de usuario.php" target="_blank">
+                        <a id="help" class="btn" type="button" href="../resources/Sadinsai - Manual de usuario.pdf"
+                            target="_blank">
                             <i class="bi bi-question-lg"></i>
                         </a>
                         <?php
@@ -113,7 +117,7 @@
                             }
                             ?>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="<?php echo "../resources/Sadinsai - Manual de usuario.pdf"?>"
+                            <a class="dropdown-item" href="<?php echo "../resources/Sadinsai - Manual de usuario.pdf" ?>"
                                 target="_blank">Manual de usuario <i class="estrate bi bi-journal-medical"></i></a>
                         </div>
                         <?php
@@ -122,7 +126,7 @@
 
                     <span class="input-group-text" id="basic-addon1"></span><!--SERPARADOR-->
                     <!--BOTO DE CERRAR SESION-->
-                    <a id="close" class="btn" href="../php/cerrarSesion.php">
+                    <a id="close" class="btn" href="../php/cerrarSesion.php" onclick="localStorage.clear()">
                         <i class="bi bi-box-arrow-in-right"> Salir</i><!--ICONO-->
                     </a>
                 </form>

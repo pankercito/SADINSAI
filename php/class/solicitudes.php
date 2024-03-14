@@ -22,11 +22,11 @@ class Solicitud
      * @param mixed $tipo constantes de solicitud solicitud::[tipo_de_solicitud]
      * @param mixed $array datos de solicitud
      * @param mixed $paraquien ci de solicitante
-     * @return CtrSolicitudes
+     * @return CrSolicitudes
      */
     public static function crearSolicitud($tipo, $array, $paraquien)
     {
-        return new CtrSolicitudes($tipo, $array, $paraquien);
+        return new CrSolicitudes($tipo, $array, $paraquien);
     }
 
     /**
@@ -48,29 +48,48 @@ class Solicitud
  * - Crear solicitudes y permisos 
  * - Cargar solicitudes creadas
  */
-class CtrSolicitudes
+class CrSolicitudes
 {
+    /**
+     * Summary of tipo
+     * @var 
+     */
     private $tipo;
+    /**
+     * Summary of data
+     * @var 
+     */
     private $data;
-    private $paraquien;
+    /**
+     * Summary of forWho
+     * @var 
+     */
+    private $forWho;
+
+    private $auditoria;
+
+    /**
+     * Summary of conn
+     * @var 
+     */
     private $conn;
 
     /**
      * Summary of __construct
      * @param mixed $tipo
      * @param mixed $array
-     * @param mixed $paraquien
+     * @param mixed $forWho
      */
     public function __construct($tipo, $array, $paraquien)
     {
         $this->conn = new Conexion;
         $this->tipo = $this->conn->real_escape($tipo);
-        $this->paraquien = $this->conn->real_escape($paraquien);
+        $this->forWho = $this->conn->real_escape($paraquien);
         $this->data = $array;
     }
 
     /**
-     * Carga en la bas de datos la solicitud creada
+     * Carga en la base de datos la solicitud creada
      * @return 
      */
     public function cargar()
@@ -78,9 +97,10 @@ class CtrSolicitudes
         $b = array_keys($this->data);
         $arryData = '';
         foreach ($b as $key) {
-            $arryData .= $key . ": " . $this->data[$key] . " == ";
+            $arryData .= $key . ": " . $this->data[$key] . " -- ";
         }
 
+        //VALIDA ID EN LA BASE DE DATOS
         do {
             $id = generarId();
 
@@ -89,15 +109,18 @@ class CtrSolicitudes
 
         } while ($dan != 0);
 
-        $arryData = $this->conn->real_escape($arryData);
+        $data = $this->conn->real_escape($arryData);
 
         $q = $this->conn->query("INSERT INTO solicitudes_y_permisos (`id_solicitud_permiso`, `tipo_permiso`, `ci_permiso`, `data_solicitudes`, `fecha_permiso`, `estado_permiso`) 
-                                        VALUES ('$id', '$this->tipo', '$this->paraquien', '$arryData', now(), 1)");
+                                        VALUES ('$id', '$this->tipo', '$this->forWho', '$data', now(), 1)");
 
         if ($q == true) {
-            return true;
-        }
-        if ($q != true) {
+            $this->auditoria = new SolicitudesAuditoria($id);
+
+            if ($this->auditoria->creacionDeSolicitudes()) {
+                return true;
+            }
+        } else {
             // Registra el error
             echo error_log($this->conn->error(), 0);
 
@@ -144,10 +167,14 @@ class ObtSolicitudes
      */
     public function __construct($id = null)
     {
-
         $this->conn = new Conexion;
-        $this->auditoria = new AuditoriaSolicitudes;
+
         $this->id = ($id != null) ? $this->conn->real_escape($id) : '';
+
+        if ($id != null) {
+            $this->auditoria = new SolicitudesAuditoria($id);
+        }
+
     }
 
     /**
@@ -170,7 +197,7 @@ class ObtSolicitudes
                 @$array[$i];
                 foreach ($variable as $key => $value) {
                     if ($key == 'data_solicitudes') {
-                        $ved = explode(" == ", $value);
+                        $ved = explode(" -- ", $value);
                         foreach ($ved as $keys => $val) {
                             if ($val != '') {
                                 $vrr[] = $val;
@@ -209,7 +236,7 @@ class ObtSolicitudes
             @$array[$i];
             foreach ($variable as $key => $value) {
                 if ($key == 'data_solicitudes') {
-                    $ved = explode(" == ", $value);
+                    $ved = explode(" -- ", $value);
                     foreach ($ved as $keys => $val) {
                         if ($val != '') {
                             $vrr[] = $val;
@@ -270,7 +297,7 @@ class ObtSolicitudes
 
         $si = $qr->num_rows;
         if ($si > 0) {
-            $this->auditoria->regisAceptacionSolicitudes($this->id, $this->detallePLanillas()[0]);
+            $this->auditoria->aceptacionDeSolicitudes($this->detallePLanillas()[0]);
 
             $qrt = $this->conn->query("UPDATE solicitudes_y_permisos SET estado_permiso = 2 WHERE id_solicitud_permiso = '$this->id'");
 
@@ -297,7 +324,7 @@ class ObtSolicitudes
         $si = $qr->num_rows;
 
         if ($si > 0) {
-            $this->auditoria->registSolisRechaz($this->id);
+            $this->auditoria->rechazoDeSolicitudes();
 
             $qrt = $this->conn->query("UPDATE solicitudes_y_permisos SET estado_permiso = 3, motivo_permiso = '$motivo' WHERE id_solicitud_permiso = '$this->id'");
 
@@ -311,8 +338,4 @@ class ObtSolicitudes
         }
     }
 
-    public function setAgent($agent)
-    {
-        $this->idAgent = $agent;
-    }
 }

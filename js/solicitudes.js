@@ -123,7 +123,6 @@ function detallesPlanillas(idSolis, tipoS) {
                                 url: '../php/preparePlanillas.php',
                                 type: 'POST',
                                 success: function (tipo) {
-                                    alert("../pdf/planilla" + tipo + ".php", "_blank");
                                     window.open("../pdf/planilla" + tipo + ".php", "_blank");
                                 }
                             })

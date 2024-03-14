@@ -1,9 +1,7 @@
 <?php
 
-include "../php/function/getUser.php";
-
-$ci = desencriptar($_GET['carga']);
-$tipo = $conn->real_escape($_GET['gestion']);
+$ci = desencriptar($_GET['c']);
+$tipo = $conn->real_escape($_GET['g']);
 
 $sql = $conn->query("SELECT * FROM archidata a 
                               INNER JOIN solicitudes s
@@ -17,3 +15,4 @@ $sql = $conn->query("SELECT * FROM archidata a
                               AND a.delete_arch = 0");
 
 $count = mysqli_num_rows($sql);
+

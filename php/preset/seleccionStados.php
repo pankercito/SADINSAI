@@ -1,5 +1,7 @@
 <?php
 
+$conn = new Conexion;
+
 $sql = $conn->query("SELECT * FROM sedes s
                                JOIN estados e
                                JOIN personal p

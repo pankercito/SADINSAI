@@ -1,11 +1,10 @@
 <?php
-ini_set('session.cookie_lifetime', 100); //tiempo de la sesion en segundos
+
+session_start();
+
 date_default_timezone_set('America/Caracas');
 
-include "function/criptCodes.php";
-include "function/dec.php";
-include "actualizarSesion.php";
-require "../php/function/adminSet.php";
+include "../php/configIncludes.php";
 
 // Controlo si el usuario ya está logueado en el sistema.
 if (isset($_SESSION['sesioninit'])) {
@@ -13,9 +12,10 @@ if (isset($_SESSION['sesioninit'])) {
     $wname = $_SESSION['userdata'];
     $wci = encriptar($_SESSION['cidelusuario']);
     $adpval = $_SESSION['admincheck'];
+
+    include "../php/actualizarSesion.php";
 } else {
     // Si no está logueado lo redireccion a la página de login.
     header("HTTP/1.1 302 Moved Temporarily");
     header("location: ../php/cerrarSesion.php");
-
 }

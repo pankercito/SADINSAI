@@ -1,17 +1,14 @@
 <?php
 
 if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
-    
-    include "class/classIncludes.php";
-    include "function/criptCodes.php";
-    include "function/filesFunctions.php";
-    include "function/sumarhora.php";
+
+    include "../php/configIncludes.php";
 
     $conn = new Conexion();
-    
+
     $id = $conn->real_escape($_POST['idSoli']);
 
-    $merge = new GestionData($id);
+    $merge = new Gestiones($id);
 
     //identificacion de tipo de solicitud
     switch ($_POST['tipo']) {
@@ -32,8 +29,7 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
 
                 case 2:
                     // rechazar solicitud
-
-                    $recha = $merge->rechazarSoli();
+                    $recha = $merge->rechazarGestion();
 
                     if ($recha == true) {
                         echo "succes.personal.rechazar";
@@ -44,6 +40,7 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
                 default:
                     // Hacer algo en caso de que la variable no sea igual a ninguna de las opciones
                     echo "error.personal.default";
+                    break;
             }
             break;
         case '1': // edicion de personal
@@ -60,7 +57,7 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
                     break;
                 case 2:
                     // rechazar solicitud
-                    $recha = $merge->rechazarSoli();
+                    $recha = $merge->rechazarGestion();
 
                     if ($recha == true) {
                         echo 'success.personal.edit.rechazar';
@@ -71,12 +68,12 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
                 default:
                     // Hacer algo en caso de que la variable no sea igual a ninguna de las opciones
                     echo "ha ocurrido un error por favor intente nuevamente";
+                    break;
             }
             break;
         case '2': // INGRESO DE ARCHIVO
             switch ($_POST['radio']) {
                 case '1': // ACEPTAR SOLICITUD
-
                     $ingreso = $merge->addArchive();
 
                     if ($ingreso[0] == true) {
@@ -86,10 +83,9 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
                         echo $ingreso[1];
                     }
                     break;
-
                 case '2':
                     // rechazar solicitud
-                    $recha = $merge->rechazarSoli();
+                    $recha = $merge->rechazarGestion();
 
                     if ($recha == true) {
                         echo 'success.archivo.ingreso';
@@ -98,15 +94,14 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
                     }
                     break;
                 default:
-                    # code...
+                    // Hacer algo en caso de que la variable no sea igual a ninguna de las opciones
+                    echo "ha ocurrido un error por favor intente nuevamente";
                     break;
-
             }
             break;
         case '3': //eliminacion de archivos
             switch ($_POST['radio']) {
                 case '1': // ACEPTAR SOLICITUD
-
                     $change = $merge->deleteArchive();
 
                     if (is_array($change)) {
@@ -118,7 +113,7 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
 
                 case '2':
                     // rechazar solicitud
-                    $recha = $merge->rechazarSoli();
+                    $recha = $merge->rechazarGestion();
 
                     if ($recha == true) {
                         echo 'success.archivo.eliminar.rechazar';
@@ -126,9 +121,9 @@ if (isset($_POST['radio']) && isset($_POST['idSoli'])) {
                         echo "error.arch.eliminar.rechazar";
                     }
                     break;
-
                 default:
-                    # code...
+                    // Hacer algo en caso de que la variable no sea igual a ninguna de las opciones
+                    echo "ha ocurrido un error por favor intente nuevamente";
                     break;
             }
             break;

@@ -1,14 +1,14 @@
 <?php
 
 include "../php/class/conx.php";
-include "../php/function/removerAcentos.php";
+require "../php/function/criptCodes.php";
 
 $conn = new Conexion();
 
-$ci = $_POST['cedula'];
+$ci = $conn->real_escape(desencriptar($_POST['cedula']));
 
-// VERIFICACION DE REQUERIDO
-$verifi = $conn->query("SELECT * FROM arch_required a JOIN  tiposarch t ON t.id_tipo = a.id_tipo_arch WHERE a.ci_required_arch = '$ci' ");
+// VERIFICACION DE REQUERIMIENTOS
+$verifi = $conn->query("SELECT * FROM arch_required a INNER JOIN tiposarch t ON t.id_tipo = a.id_tipo_arch WHERE a.ci_required_arch = '{$ci}'");
 
 // VERIFICACION DE REQUERIDO
 if ($verifi->num_rows == 0) {
@@ -73,6 +73,7 @@ if ($verifi->num_rows == 0) {
         1044 => 'Suspencion',
         1045 => 'Informes',
     ];
+
     ?>
     <?php
 

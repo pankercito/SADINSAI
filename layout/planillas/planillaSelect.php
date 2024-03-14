@@ -8,6 +8,8 @@
 
 <?php
 
+session_start();
+
 $planilla = $_POST['planilla'];
 
 include "planilla-" . $planilla . ".php";
